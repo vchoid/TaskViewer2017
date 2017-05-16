@@ -13,18 +13,18 @@ public class TestMe {
 
 		String zeile = "";
 		String titel[];
-		BufferedReader datei = null;
+		BufferedReader csvLesen = null;
 
 		
 		
 		try {
 
-			datei = new BufferedReader(new FileReader(new File(
+			csvLesen = new BufferedReader(new FileReader(new File(
 					"C:/java/workspaces/BitgoKV/gokv-client-main/test-output/famv_direct_input_monitoring_20170515131131.csv")));
 			// die Titelzeile in extra Array speichern, damit die Werte aus den
 			// Zeile darunter zugeordnet werden können.
-			titel = datei.readLine().split(";");
-			while (null != (zeile = datei.readLine())) {
+			titel = csvLesen.readLine().split(";");
+			while (null != (zeile = csvLesen.readLine())) {
 				System.out.println(">>>>>>>>>>>>>>>>>>>>>>> Zeile " + j++ + " <<<<<<<<<<<<<<<<<<<<<<<<");
 				String[] mitglied = zeile.split(";");
 				for (int i = 0; i < mitglied.length; i++) {
