@@ -24,9 +24,9 @@ public class testMe {
 			titel = datei.readLine().split(";");
 			while (null != (zeile = datei.readLine())) {
 				System.out.println(">>>>>>>>>>>>>>>>>>>>>>> Zeile " + j++ + " <<<<<<<<<<<<<<<<<<<<<<<<");
-				String[] split = zeile.split(";");
-				for (int i = 0; i < split.length; i++) {
-					System.out.println(titel[i] + ": " + split[i]);
+				String[] mitglied = zeile.split(";");
+				for (int i = 0; i < mitglied.length; i++) {
+					System.out.println(titel[i] + ": " + mitglied[i]);
 				}
 				System.out.println("-----------------------------------");
 			}
