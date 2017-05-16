@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class testMe {
+public class TestMe {
 	static int j = 1;
 
 	public static void main(String[] args) throws IOException {
@@ -15,6 +15,8 @@ public class testMe {
 		String titel[];
 		BufferedReader datei = null;
 
+		
+		
 		try {
 
 			datei = new BufferedReader(new FileReader(new File(
