@@ -32,62 +32,69 @@ public class ReadCSV {
 
 	public static void readCsvFile(String fileName) {
 
-		FileReader fileReader = null;
+		FileReader csvLesen = null;
 		CSVParser csvFileParser = null;
-		
-		
-		//Titelzeile festlegen über die FILE_HEADER Variable
-        CSVFormat csvFileFormat = CSVFormat.DEFAULT.withHeader(FILE_HEADER_MAPPING);
-     
-        try {
-        	
-        	//Aufgaben Liste
-        	String[] tasks = null;
-            
-            //FileReader object starten
-            fileReader = new FileReader(fileName);
-           
-//            System.out.println(fileReader);
-            
-            //CSVParser object starten
-            csvFileParser = new CSVParser(fileReader, csvFileFormat);
-//            System.out.println(csvFileFormat);
-            
-            //Inhalt der .csv-Datei in einer Liste speichern
-            List csvRecords = csvFileParser.getRecords(); 
-//            System.out.println("Zeilenlänge: << " + csvRecords.size() + " >>\n" + csvRecords );
-            
-//          Read the CSV file records starting from the second record to skip the header
-            
-            for (int i = 1; i < csvRecords.size(); i++) {
-            	CSVRecord record = (CSVRecord) csvRecords.get(i);
-            	tasks[i]= (String) csvRecords.get(i);
-            	System.out.println(tasks);
-                    
-            	//Create a new student object and fill his data
-            
-//            	Task task = new Task(record.get(TASK_ID), record.get(TASK_TYPE), record.get(ORDERED_DATE), record.get(MITGLIED_KVNR), record.get(MITGLIED_NAME), record.get(MITGLIED_VORNAME),record.get(MITGLIED_TITEL),record.get(MITGLIED_ZSWORT),record.get(MITGLIED_VSWORT),record.get(MITGLIED_GEB_DAT));
-//                tasks.add(task);	
-			}
-           
-//            //Print the new student list
-//            for (int j = 0; j < tasks.size(); j++) {
-//				System.out.println(tasks.toString());
-//			}
-        } 
-        catch (Exception e) {
-        	System.out.println("Error in CsvFileReader !!!");
-            e.printStackTrace();
-        } finally {
-            try {
-                fileReader.close();
-                csvFileParser.close();
-            } catch (IOException e) {
-            	System.out.println("Error while closing fileReader/csvFileParser !!!");
-                e.printStackTrace();
-            }
-        }
 
-	
+		// Titelzeile festlegen über die FILE_HEADER Variable
+		CSVFormat csvFileFormat = CSVFormat.DEFAULT.withHeader(FILE_HEADER_MAPPING);
+		System.out.println(csvLesen + " --> nach Titelzeile");
+
+		try {
+
+			List tasks = new ArrayList();
+
+			// csv Lesen - starten
+			csvLesen = new FileReader(fileName);
+			System.out.println(csvLesen + " --> nach ini FileReader");
+
+			// csv zergliedern - starten
+			csvFileParser = new CSVParser(csvLesen, csvFileFormat);
+
+			// speichern in einer Liste
+			List<CSVRecord> inhaltsListe = csvFileParser.getRecords();
+			String [] t2 = null;
+
+			
+			for (int i = 0; i < inhaltsListe.size()-1; i++) {
+				tasks.add(inhaltsListe.get(i+1).toString());
+				System.out.print(tasks.size() + ". ");
+				System.out.print("<< " + tasks.getClass() + " >> ");
+				System.out.println(tasks.get(i));
+				for (int j = 0; j < tasks.size(); j++) {
+					
+				}
+
+				// CSVRecord inhaltAusgabe = inhaltsListe.get(i);
+				// Task aufgabe = new Task(inhaltAusgabe.get(TASK_ID),
+				// inhaltAusgabe.get(TASK_TYPE),
+				// inhaltAusgabe.get(ORDERED_DATE),
+				// inhaltAusgabe.get(MITGLIED_KVNR),
+				// inhaltAusgabe.get(MITGLIED_NAME),
+				// inhaltAusgabe.get(MITGLIED_VORNAME),
+				// inhaltAusgabe.get(MITGLIED_TITEL),
+				// inhaltAusgabe.get(MITGLIED_ZSWORT),
+				// inhaltAusgabe.get(MITGLIED_VSWORT),
+				// inhaltAusgabe.get(MITGLIED_GEB_DAT));
+				// tasks.add(aufgabe);
+				// System.out.println(tasks.get(i));
+
+				// System.out.println(tasks.get(1));
+
+			}
+			
+
+		} catch (Exception e) {
+			System.out.println(">> Error im CsvFileReader <<");
+		} finally {
+			try {
+				
+				csvLesen.close();
+				csvFileParser.close();
+			} catch (IOException e) {
+				System.out.println(">>> Error während des Schließen vom fileReader/csvFileParser <<<");
+				e.printStackTrace();
+			}
+		}
+
 	}
 }
