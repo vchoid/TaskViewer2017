@@ -38,7 +38,7 @@ public class ReadCSV {
 		FileReader csvLesen = null;
 		CSVParser csvFileParser = null;
 		String [] inhaltEinerZeileArray = null;
-		String [] header = null;
+		String [] titelZeileArray = null;
 		
 		// Titelzeile festlegen über die FILE_HEADER Variable  ++++++++++++
 		CSVFormat csvFileFormat = CSVFormat.DEFAULT.withHeader(FILE_HEADER_MAPPING);
@@ -60,12 +60,11 @@ public class ReadCSV {
 				System.out.println("+++++++++++++++++ Task " + i + " ++++++++++++++++++++++");
 				// Eine Zeile aufplitten und den Inhalt getrennt in einem Array speichern
 				inhaltEinerZeileArray = zeilenInListe.get(i).get(0).split(";");
-				header = zeilenInListe.get(0).get(0).split(";");
+				titelZeileArray = zeilenInListe.get(0).get(0).split(";");
 				// Inhalt auslesen/ausgeben
 				for (int j = 0; j < inhaltEinerZeileArray.length; j++) {
-					System.out.println(header[j] + ": " + inhaltEinerZeileArray[j]);
+					System.out.println(titelZeileArray[j] + ": " + inhaltEinerZeileArray[j]);
 				}
-				
 			}
 			
 			
