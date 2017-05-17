@@ -2,16 +2,16 @@ package de.gokv.client.reader;
 
 public class Task {
 
-	private String taskId = "gokv_task_id";
-	private String taskType = "gokv_tasktype";
-	private String orderedDate = "gokv_ordered_date";
-	private String kvnr = "mitglied_kvnr";
-	private String name = "mitglied_name";
-	private String vName = "mitglied_vorname";
-	private String titel = "mitglied_titel";
-	private String zsWort = "mitglied_zswort";
-	private String vsWort = "mitglied_vswort";
-	private String gebDat = "mitglied_gebdat";
+	private String taskId;
+	private String taskType;
+	private String orderedDate;
+	private String kvnr;
+	private String name;
+	private String vName;
+	private String titel;
+	private String zsWort;
+	private String vsWort;
+	private String gebDat;
 	
 	
 	public Task(String taskId, String taskType, String orderedDate, String kvnr, String name, String vName,
