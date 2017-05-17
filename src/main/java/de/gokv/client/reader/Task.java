@@ -1,6 +1,6 @@
 package de.gokv.client.reader;
 
-public class CSVTask {
+public class Task {
 
 	private String taskId;
 	private String taskType;
@@ -14,7 +14,7 @@ public class CSVTask {
 	private String gebDat;
 	
 	
-	public CSVTask(String taskId, String taskType, String orderedDate, String kvnr, String name, String vName,
+	public Task(String taskId, String taskType, String orderedDate, String kvnr, String name, String vName,
 			String titel, String zsWort, String vsWort, String gebDat) {
 		super();
 		this.taskId = taskId;
