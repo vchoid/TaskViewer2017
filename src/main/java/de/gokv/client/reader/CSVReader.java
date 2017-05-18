@@ -15,37 +15,36 @@ public class CSVReader {
 	// Attribute +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	public static final String TASK_ID = "gokv_task_id";
 	public static final String TASK_TYPE = "gokv_tasktype";
-
 	public static final String ORDERED_DATE = "gokv_ordered_date";
 	public static final String MITGLIED_KVNR = "mitglied_kvnr";
 	public static final String MITGLIED_NAME = "mitglied_name";
 	public static final String MITGLIED_VORNAME = "mitglied_vorname";
-
 	public static final String MITGLIED_TITEL = "mitglied_titel";
 	public static final String MITGLIED_ZSWORT = "mitglied_zswort";
 	public static final String MITGLIED_VSWORT = "mitglied_vswort";
 	public static final String MITGLIED_GEB_DAT = "mitglied_gebdat";
-
-	private String filePath;
-
+	
+	// Einträge aus der CSV als Liste  +++++++++++++++++++++++++++++++++++
 	private List<CSVRecord> entries = new ArrayList<CSVRecord>();
-
+	
+	// Dateipfad-Abfrage +++++++++++++++++++++++++++++++++++++++++++++++++
+	private String filePath;
 	public CSVReader(String path) {
 		filePath = path;
 	}
 
-	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	// CSV-Datei auslesen ++++++++++++++++++++++++++++++++++++++++++++++++
 	public void readCsvFile() throws ClientException {
 
 		FileReader csvLesen = null;
 		CSVParser csvFileParser = null;
 
-		// Titelzeile festlegen durch automatisches Parsing ++++++++++++
+		// Titelzeile festlegen durch automatisches Parsing ++++++++++++++
 		CSVFormat csvFileFormat = CSVFormat.newFormat(';').withHeader();
 
 		try {
 
-			// csv Lesen - starten ++++++++++++++++++++++++++++++++++++++++
+			// csv Lesen - starten +++++++++++++++++++++++++++++++++++++++
 			csvLesen = new FileReader(filePath);
 
 			// csv zergliedern - starten +++++++++++++++++++++++++++++++++
@@ -53,6 +52,9 @@ public class CSVReader {
 
 			// Eine Zeile aus der CSV in Liste speichern +++++++++++++++++
 			entries = csvFileParser.getRecords();
+			
+			
+			
 
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
