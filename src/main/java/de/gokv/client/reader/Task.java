@@ -1,5 +1,7 @@
 package de.gokv.client.reader;
 
+import org.apache.commons.csv.CSVRecord;
+
 public class Task {
 
 	private String taskId;
@@ -14,9 +16,24 @@ public class Task {
 	private String gebDat;
 	
 	
+	
+	public static Task createTaskFromRecord(CSVRecord record) throws InvalidCSVRecordException{
+		Task t = new Task();
+		
+		//TODO: Do something with record
+		
+		throw new InvalidCSVRecordException("HIER KOMMEN DIE SPALTEN REIN", record.getRecordNumber());
+		
+		//return t;
+	}
+	
+	private Task(){
+		super();
+	}
+	
 	public Task(String taskId, String taskType, String orderedDate, String kvnr, String name, String vName,
 			String titel, String zsWort, String vsWort, String gebDat) {
-		super();
+		this();
 		this.taskId = taskId;
 		this.taskType = taskType;
 		this.orderedDate = orderedDate;

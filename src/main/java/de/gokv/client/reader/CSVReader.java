@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -13,22 +14,24 @@ import org.apache.commons.csv.CSVRecord;
 public class CSVReader {
 
 	// Attribute +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	public static final String TASK_ID = "gokv_task_id";
-	public static final String TASK_TYPE = "gokv_tasktype";
-	public static final String ORDERED_DATE = "gokv_ordered_date";
-	public static final String MITGLIED_KVNR = "mitglied_kvnr";
-	public static final String MITGLIED_NAME = "mitglied_name";
-	public static final String MITGLIED_VORNAME = "mitglied_vorname";
-	public static final String MITGLIED_TITEL = "mitglied_titel";
-	public static final String MITGLIED_ZSWORT = "mitglied_zswort";
-	public static final String MITGLIED_VSWORT = "mitglied_vswort";
-	public static final String MITGLIED_GEB_DAT = "mitglied_gebdat";
-	
-	// Eintr‰ge aus der CSV als Liste  +++++++++++++++++++++++++++++++++++
-	private List<CSVRecord> entries = new ArrayList<CSVRecord>();
-	
+	public static final String COL_TASK_ID = "gokv_task_id";
+	public static final String COL_TASK_TYPE = "gokv_tasktype";
+	public static final String COL_ORDERED_DATE = "gokv_ordered_date";
+	public static final String COL_MITGLIED_KVNR = "mitglied_kvnr";
+	public static final String COL_MITGLIED_NAME = "mitglied_name";
+	public static final String COL_MITGLIED_VORNAME = "mitglied_vorname";
+	public static final String COL_MITGLIED_TITEL = "mitglied_titel";
+	public static final String COL_MITGLIED_ZSWORT = "mitglied_zswort";
+	public static final String COL_MITGLIED_VSWORT = "mitglied_vswort";
+	public static final String COL_MITGLIED_GEB_DAT = "mitglied_gebdat";
+
+	// Eintr‰ge aus der CSV als Liste +++++++++++++++++++++++++++++++++++
+	private List<CSVRecord> invalidEntries = new ArrayList<CSVRecord>();
+	private List<Task> tasks = new ArrayList<Task>();
+
 	// Dateipfad-Abfrage +++++++++++++++++++++++++++++++++++++++++++++++++
 	private String filePath;
+
 	public CSVReader(String path) {
 		filePath = path;
 	}
@@ -50,36 +53,36 @@ public class CSVReader {
 			// csv zergliedern - starten +++++++++++++++++++++++++++++++++
 			csvFileParser = new CSVParser(csvLesen, csvFileFormat);
 
+			// TODO: Use to validate csvFile, check if all required Headers are
+			// present
+			Map<String, Integer> headerMap = csvFileParser.getHeaderMap();
+
 			// Eine Zeile aus der CSV in Liste speichern +++++++++++++++++
-			entries = csvFileParser.getRecords();
-			
-			
-			
+
+			for (CSVRecord csvRecord : csvFileParser.getRecords()) {
+				try {
+					tasks.add(Task.createTaskFromRecord(csvRecord));
+				} catch (InvalidCSVRecordException e) {
+					invalidEntries.add(csvRecord);
+					System.out.println(e.getMessage());
+				}
+			}
 
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			throw new ClientException(e, "Datei " + filePath + "wurde nicht gefunden");
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			throw new ClientException(e, "Es ist ein Fehler beim Lesen der Datei aufgetreten");
 		} finally {
 			try {
-
-				csvLesen.close();
-				csvFileParser.close();
+				if (null != csvLesen)
+					csvLesen.close();
+				if (null != csvFileParser)
+					csvFileParser.close();
 			} catch (IOException e) {
-				System.out.println(">>> Fehler w‰hrend des Schlieﬂens vom fileReader/csvFileParser <<<");
-				e.printStackTrace();
+				// Swallow Exception
 			}
 		}
-
-	}
-
-	public CSVRecord getEntry(int i) {
-		return entries.get(i);
-	}
-
-	public int getEntryCount() {
-		return entries.size();
 	}
 }
+
+// TODO: R¸ckgabe von einer Liste von Task.class Objekten
