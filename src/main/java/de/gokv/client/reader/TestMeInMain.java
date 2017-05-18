@@ -10,8 +10,7 @@ public class TestMeInMain {
 		
 		
 		//	TEST - SYSO ---------------------------------------------
-		System.out.println(csv.getEntry(0));
-		System.out.println(csv.getEntry(1).get(csv.MITGLIED_TITEL));
+		System.out.println();
 		
 		
 		

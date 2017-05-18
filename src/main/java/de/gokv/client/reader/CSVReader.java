@@ -13,7 +13,7 @@ import org.apache.commons.csv.CSVRecord;
 
 public class CSVReader {
 
-	// Attribute +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	// Attribute ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	public static final String COL_TASK_ID = "gokv_task_id";
 	public static final String COL_TASK_TYPE = "gokv_tasktype";
 	public static final String COL_ORDERED_DATE = "gokv_ordered_date";
@@ -25,39 +25,37 @@ public class CSVReader {
 	public static final String COL_MITGLIED_VSWORT = "mitglied_vswort";
 	public static final String COL_MITGLIED_GEB_DAT = "mitglied_gebdat";
 
-	// Einträge aus der CSV als Liste +++++++++++++++++++++++++++++++++++
+	// ungültige Einträge aus CSV +++++++++++++++++++++++++
 	private List<CSVRecord> invalidEntries = new ArrayList<CSVRecord>();
+	// Zeilen in Liste speichern
 	private List<Task> tasks = new ArrayList<Task>();
 
-	// Dateipfad-Abfrage +++++++++++++++++++++++++++++++++++++++++++++++++
+	// Datei-Abfrage - Dateipfad  +++++++++++++++++++++++++++++++++++++++
 	private String filePath;
 
 	public CSVReader(String path) {
 		filePath = path;
 	}
 
-	// CSV-Datei auslesen ++++++++++++++++++++++++++++++++++++++++++++++++
+	// CSV-Datei auslesen +++++++++++++++++++++++++++++++++++++++++++++++
 	public void readCsvFile() throws ClientException {
 
 		FileReader csvLesen = null;
 		CSVParser csvFileParser = null;
 
-		// Titelzeile festlegen durch automatisches Parsing ++++++++++++++
+		// Titelzeile festlegen durch automatisches Parsing +++++++++++++
 		CSVFormat csvFileFormat = CSVFormat.newFormat(';').withHeader();
-
+		
 		try {
-
-			// csv Lesen - starten +++++++++++++++++++++++++++++++++++++++
+			// csv Lesen - starten ++++++++++++++++++++++++++++++++++++++
 			csvLesen = new FileReader(filePath);
 
-			// csv zergliedern - starten +++++++++++++++++++++++++++++++++
+			// csv zergliedern - starten ++++++++++++++++++++++++++++++++
 			csvFileParser = new CSVParser(csvLesen, csvFileFormat);
-
 			// TODO: Use to validate csvFile, check if all required Headers are
 			// present
 			Map<String, Integer> headerMap = csvFileParser.getHeaderMap();
-
-			// Eine Zeile aus der CSV in Liste speichern +++++++++++++++++
+			// Eine Zeile aus der CSV +++++++++++++++++++++++++++++++++++
 
 			for (CSVRecord csvRecord : csvFileParser.getRecords()) {
 				try {
