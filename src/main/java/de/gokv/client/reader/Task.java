@@ -19,8 +19,8 @@ public class Task {
 	
 	public static Task createTaskFromRecord(CSVRecord record) throws InvalidCSVRecordException{
 		Task t = new Task();
-		
-		//TODO: Do something with record
+				
+		//TODO: Objekte hier rein speichern
 		
 		throw new InvalidCSVRecordException("HIER KOMMEN DIE SPALTEN REIN", record.getRecordNumber());
 		

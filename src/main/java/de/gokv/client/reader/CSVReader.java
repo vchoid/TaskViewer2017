@@ -7,13 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.naming.directory.SchemaViolationException;
+
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
 public class CSVReader {
 
-	// Attribute ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	// title column - Titelzeile ++++++++++++++++++++++++++++++++++++++++
 	public static final String COL_TASK_ID = "gokv_task_id";
 	public static final String COL_TASK_TYPE = "gokv_tasktype";
 	public static final String COL_ORDERED_DATE = "gokv_ordered_date";
@@ -25,6 +27,7 @@ public class CSVReader {
 	public static final String COL_MITGLIED_VSWORT = "mitglied_vswort";
 	public static final String COL_MITGLIED_GEB_DAT = "mitglied_gebdat";
 
+	
 	// ungültige Einträge aus CSV +++++++++++++++++++++++++
 	private List<CSVRecord> invalidEntries = new ArrayList<CSVRecord>();
 	// Zeilen in Liste speichern
@@ -43,7 +46,7 @@ public class CSVReader {
 		FileReader csvLesen = null;
 		CSVParser csvFileParser = null;
 
-		// Titelzeile festlegen durch automatisches Parsing +++++++++++++
+		// erste Zeile als Titelzeile festlegen durch automatisches Parsing +++++++++++++
 		CSVFormat csvFileFormat = CSVFormat.newFormat(';').withHeader();
 		
 		try {
@@ -52,24 +55,29 @@ public class CSVReader {
 
 			// csv zergliedern - starten ++++++++++++++++++++++++++++++++
 			csvFileParser = new CSVParser(csvLesen, csvFileFormat);
-			// TODO: Use to validate csvFile, check if all required Headers are
-			// present
+			// TODO: Use to validate csvFile, check if all required Headers are present
+			
 			Map<String, Integer> headerMap = csvFileParser.getHeaderMap();
 			// Eine Zeile aus der CSV +++++++++++++++++++++++++++++++++++
 
 			for (CSVRecord csvRecord : csvFileParser.getRecords()) {
 				try {
 					tasks.add(Task.createTaskFromRecord(csvRecord));
+					
 				} catch (InvalidCSVRecordException e) {
+					
 					invalidEntries.add(csvRecord);
-					System.out.println(e.getMessage());
+//					System.out.println(e.getMessage());
 				}
+				System.out.println(csvRecord);
 			}
 
 		} catch (FileNotFoundException e) {
 			throw new ClientException(e, "Datei " + filePath + "wurde nicht gefunden");
+			
 		} catch (IOException e) {
 			throw new ClientException(e, "Es ist ein Fehler beim Lesen der Datei aufgetreten");
+			
 		} finally {
 			try {
 				if (null != csvLesen)
