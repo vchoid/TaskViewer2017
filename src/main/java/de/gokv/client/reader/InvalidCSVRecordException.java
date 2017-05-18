@@ -2,18 +2,21 @@ package de.gokv.client.reader;
 
 public class InvalidCSVRecordException extends Throwable{
 
-	private String colName;
-	private long line;
+	private String message;
 	
 	public InvalidCSVRecordException(String colName, long line) {
 		super();
-		this.colName = colName;
-		this.line = line;
+		this.message = String.format("Ungültiger Eintrag in Zeile %s: in der Spalte %s", line-1, colName);
+	}
+
+	public InvalidCSVRecordException(IllegalArgumentException e, long line) {
+		super();
+		this.message = String.format("In Zeile %s, trat folgende Meldung auf %s", line, e.getMessage());
 	}
 
 	@Override
 	public String getMessage() {
-		return String.format("Ungültiger Eintrag in Zeile %s: in der Spalte %s", line, colName);
+		return message;
 	}
 	
 }
