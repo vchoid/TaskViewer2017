@@ -5,10 +5,10 @@ public class TestMeInMain {
 	public static void main(String[] args) {
 		
 		// 
-		int eintrag = 3;
-		CSVReader reader = new CSVReader(System.getProperty("user.dir") + "/src/test/resources/famv_direct_input_monitoring_20170515131131.csv");
+		int eintrag = 2;
+		CSVReader reader = new CSVReader(System.getProperty("user.dir") + "/src/test/resources/invalid_famv_direct_input_monitoring_20170515131131.csv");
 		reader.readCsvFile();
-		Task t = reader.getTasks();
+		Task t = reader.getTasks().get(eintrag);
 		
 		
 		//	TEST - SYSO ---------------------------------------------

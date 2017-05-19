@@ -77,9 +77,9 @@ public class CSVReader {
 				}
 			}
 // TODO später entfernen
-//			for (Task task : tasks) {
-//				System.out.println(task);
-//			}
+			for (Task task : tasks) {
+				System.out.println(task);
+			}
 
 		} catch (FileNotFoundException e) {
 			throw new ClientException(e, "Datei " + filePath + "wurde nicht gefunden");

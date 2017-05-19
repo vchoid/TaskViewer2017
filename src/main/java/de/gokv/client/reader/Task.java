@@ -1,6 +1,9 @@
 package de.gokv.client.reader;
 
+import java.util.regex.Pattern;
+
 import org.apache.commons.csv.CSVRecord;
+import org.apache.commons.lang3.StringUtils;
 
 public class Task {
 
@@ -17,9 +20,12 @@ public class Task {
 
 	private static int anzTask = 0;
 
+	
+	
+	
 	public static Task createTaskFromRecord(CSVRecord record) throws InvalidCSVRecordException {
 		Task t = new Task();
-
+		
 		try {
 			t.taskId = record.get(CSVReader.COL_TASK_ID);
 			t.taskType = record.get(CSVReader.COL_TASK_TYPE);
@@ -37,7 +43,7 @@ public class Task {
 
 		// Überprüfung ob Pflichfelder gefüllt sind, wenn nicht Exception werfen
 		// ++++++++++++++++++++++++++++
-		if (t.taskId.isEmpty()) {
+		if (StringUtils.isBlank(t.taskId) || StringUtils.length(t.taskId) != 32 ) {
 
 			throw new InvalidCSVRecordException(CSVReader.COL_TASK_ID, record.getRecordNumber());
 		}
@@ -45,8 +51,7 @@ public class Task {
 
 			throw new InvalidCSVRecordException(CSVReader.COL_TASK_TYPE, record.getRecordNumber());
 		}
-		if (t.orderedDate.isEmpty()) {
-
+		if (StringUtils.isBlank(t.orderedDate)) {
 			throw new InvalidCSVRecordException(CSVReader.COL_ORDERED_DATE, record.getRecordNumber());
 		}
 		if (t.kvnr.isEmpty()) {

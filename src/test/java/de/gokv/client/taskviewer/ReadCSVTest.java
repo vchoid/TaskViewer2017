@@ -21,7 +21,7 @@ public class ReadCSVTest {
 		reader = new CSVReader(System.getProperty("user.dir") + "/src/test/resources/famv_direct_input_monitoring_20170515131131.csv");
 		
 	}
-	
+// überprüft ob die Datei vorhanden ist.
 	@Test(expected=ClientException.class)
 	public void testReadCSVExc(){
 		String filePath = System.getProperty("user.dir") + "/src/test/resources/test.csv";
@@ -34,13 +34,16 @@ public class ReadCSVTest {
 			throw e;
 		}
 	}
-	
+// überprüft ob die Inhalte gelesen werden.
 	@Test
 	public void testReadCSV() {
 		reader.readCsvFile();
+		// geht an Zeile 1 (ignoriert Zeile 0, wegen Header_Mapping)
 		content = reader.getTasks().get(0);
 		
-		Assert.assertEquals(4, reader.getTasks().size());
+		// --> Test anpassen auf die Länge die Zurückgegeben wird.
+		Assert.assertEquals(4, reader.getTasks().size()); 
+		
 		Assert.assertEquals("405750F0395F11E7BED7F726E269B87F", content.getTask_id());
 		Assert.assertEquals("famv_bestand", content.getTasktype());
 		Assert.assertEquals("15.05.2017", content.getOrdered_date());
@@ -52,7 +55,10 @@ public class ReadCSVTest {
 		Assert.assertEquals("06.03.1982", content.getGeb_dat());
 		
 	}
-	
-	
+// überprüft die Korrektheit des Formats in jeder Spalte
+	@Test
+	public void testFormatCSV(){
+		
+	}
 	
 }
