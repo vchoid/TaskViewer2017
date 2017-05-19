@@ -18,13 +18,13 @@ public class ReadCSVTest {
 	
 	@Before
 	public void before() {
-		reader = new CSVReader(System.getProperty("user.dir") + "/src/main/resources/famv_direct_input_monitoring_20170515131131.csv");
+		reader = new CSVReader(System.getProperty("user.dir") + "/src/test/resources/famv_direct_input_monitoring_20170515131131.csv");
 		
 	}
 	
 	@Test(expected=ClientException.class)
 	public void testReadCSVExc(){
-		String filePath = System.getProperty("user.dir") + "/src/test/resources/test2.csv";
+		String filePath = System.getProperty("user.dir") + "/src/test/resources/test.csv";
 		reader = new CSVReader(filePath);
 		try{
 			reader.readCsvFile();
@@ -37,7 +37,6 @@ public class ReadCSVTest {
 	
 	@Test
 	public void testReadCSV() {
-		String filePath = System.getProperty("user.dir") + "/src/main/resources/famv_direct_input_monitoring_20170515131131.csv";
 		reader.readCsvFile();
 		content = reader.getTasks().get(0);
 		

@@ -5,14 +5,15 @@ public class TestMeInMain {
 	public static void main(String[] args) {
 		
 		// 
-		CSVReader reader = new CSVReader("../gokv-client-task-viewer/src/main/resources/famv_direct_input_monitoring_20170515131131.csv");
+		int eintrag = 3;
+		CSVReader reader = new CSVReader(System.getProperty("user.dir") + "/src/test/resources/famv_direct_input_monitoring_20170515131131.csv");
 		reader.readCsvFile();
-		Task t = reader.getTasks().get(0);
-		System.out.println(t.getGeb_dat());
+		Task t = reader.getTasks().get(eintrag);
 		
 		
 		//	TEST - SYSO ---------------------------------------------
-		
+		System.out.println("Es gibt " + reader.getTasks().size() + " Einträge.");
+		System.out.println(">> Eintrag " + (reader.getTasks().indexOf(t)+1) + " << \n" + reader.COL_MITGLIED_GEB_DAT + ":" + t.getGeb_dat());
 		
 		
 		
