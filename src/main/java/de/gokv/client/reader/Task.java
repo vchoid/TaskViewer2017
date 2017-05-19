@@ -26,10 +26,13 @@ public class Task {
 	public static Task createTaskFromRecord(CSVRecord record) throws InvalidCSVRecordException {
 		Task t = new Task();
 		
+		ValidDate check = new ValidDate();
+				
 		try {
 			t.taskId = record.get(CSVReader.COL_TASK_ID);
 			t.taskType = record.get(CSVReader.COL_TASK_TYPE);
 			t.orderedDate = record.get(CSVReader.COL_ORDERED_DATE);
+			check.validDate(t.orderedDate);
 			t.kvnr = record.get(CSVReader.COL_MITGLIED_KVNR);
 			t.name = record.get(CSVReader.COL_MITGLIED_NAME);
 			t.vName = record.get(CSVReader.COL_MITGLIED_VORNAME);
@@ -37,36 +40,40 @@ public class Task {
 			t.zsWort = record.get(CSVReader.COL_MITGLIED_ZSWORT);
 			t.vsWort = record.get(CSVReader.COL_MITGLIED_VSWORT);
 			t.gebDat = record.get(CSVReader.COL_MITGLIED_GEB_DAT);
+			check.validDate(t.gebDat);
 		} catch (IllegalArgumentException e) {
 			throw new InvalidCSVRecordException(e, record.getRecordNumber());
 		}
 
-		// Überprüfung ob Pflichfelder gefüllt sind, wenn nicht Exception werfen
-		// ++++++++++++++++++++++++++++
+// Überprüfung ob Pflichfelder gefüllt sind oder ..
+		
+		// .. nicht 32 Zeichen lang ist --> TODO überprüfen ob Hexadezimal
 		if (StringUtils.isBlank(t.taskId) || StringUtils.length(t.taskId) != 32 ) {
 
 			throw new InvalidCSVRecordException(CSVReader.COL_TASK_ID, record.getRecordNumber());
 		}
-		if (t.taskType.isEmpty()) {
+		if (StringUtils.isBlank(t.taskType)) {
 
 			throw new InvalidCSVRecordException(CSVReader.COL_TASK_TYPE, record.getRecordNumber());
 		}
-		if (StringUtils.isBlank(t.orderedDate)) {
+		// .. das Datumsformat nicht stimmt
+		if (StringUtils.isBlank(t.orderedDate) || !check.dateCheck) {
 			throw new InvalidCSVRecordException(CSVReader.COL_ORDERED_DATE, record.getRecordNumber());
 		}
-		if (t.kvnr.isEmpty()) {
+		if (StringUtils.isBlank(t.kvnr)) {
 
 			throw new InvalidCSVRecordException(CSVReader.COL_MITGLIED_KVNR, record.getRecordNumber());
 		}
-		if (t.name.isEmpty()) {
+		if (StringUtils.isBlank(t.name)) {
 
 			throw new InvalidCSVRecordException(CSVReader.COL_MITGLIED_NAME, record.getRecordNumber());
 		}
-		if (t.vName.isEmpty()) {
+		if (StringUtils.isBlank(t.vName)) {
 
 			throw new InvalidCSVRecordException(CSVReader.COL_MITGLIED_VORNAME, record.getRecordNumber());
 		}
-		if (t.gebDat.isEmpty()) {
+		// .. das Datumsformat nicht stimmt
+		if (StringUtils.isBlank(t.gebDat) || !check.dateCheck) {
 
 			throw new InvalidCSVRecordException(CSVReader.COL_MITGLIED_GEB_DAT, record.getRecordNumber());
 		}
