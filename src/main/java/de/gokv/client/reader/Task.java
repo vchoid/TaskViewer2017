@@ -93,80 +93,40 @@ public class Task {
 		return taskId;
 	}
 
-	public void setTask_id(String task_id) {
-		this.taskId = task_id;
-	}
-
 	public String getTasktype() {
 		return taskType;
-	}
-
-	public void setTasktype(String tasktype) {
-		this.taskType = tasktype;
 	}
 
 	public String getOrdered_date() {
 		return orderedDate;
 	}
 
-	public void setOrdered_date(String ordered_date) {
-		this.orderedDate = ordered_date;
-	}
-
 	public String getKvnr() {
 		return kvnr;
-	}
-
-	public void setKvnr(String kvnr) {
-		this.kvnr = kvnr;
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public String getVorname() {
 		return vName;
-	}
-
-	public void setVorname(String vorname) {
-		this.vName = vorname;
 	}
 
 	public String getTitel() {
 		return titel;
 	}
 
-	public void setTitel(String titel) {
-		this.titel = titel;
-	}
-
 	public String getZsWort() {
 		return zsWort;
-	}
-
-	public void setZsWort(String zsWort) {
-		this.zsWort = zsWort;
 	}
 
 	public String getVsWort() {
 		return vsWort;
 	}
 
-	public void setVsWort(String vsWort) {
-		this.vsWort = vsWort;
-	}
-
 	public String getGeb_dat() {
 		return gebDat;
-	}
-
-	public void setGeb_dat(String geb_dat) {
-		this.gebDat = geb_dat;
 	}
 
 	@Override

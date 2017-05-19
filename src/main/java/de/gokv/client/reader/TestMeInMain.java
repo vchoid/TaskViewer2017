@@ -8,7 +8,7 @@ public class TestMeInMain {
 		int eintrag = 3;
 		CSVReader reader = new CSVReader(System.getProperty("user.dir") + "/src/test/resources/famv_direct_input_monitoring_20170515131131.csv");
 		reader.readCsvFile();
-		Task t = reader.getTasks().get(eintrag);
+		Task t = reader.getTasks();
 		
 		
 		//	TEST - SYSO ---------------------------------------------
