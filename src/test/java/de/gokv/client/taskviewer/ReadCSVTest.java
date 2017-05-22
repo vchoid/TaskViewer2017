@@ -25,7 +25,7 @@ public class ReadCSVTest {
 // überprüft ob die Datei vorhanden ist.
 	@Test(expected=ClientException.class)
 	public void testReadCSVExc(){
-		String filePath = System.getProperty("user.dir") + "/src/test/resources/test.csv";
+		String filePath = System.getProperty("user.dir") + "/gokv-client-task-viewer/src/test/resources/famv_direct_input_monitoring_20170515131131.csv";
 		reader = new CSVReader(filePath);
 		try{
 			reader.readCsvFile();

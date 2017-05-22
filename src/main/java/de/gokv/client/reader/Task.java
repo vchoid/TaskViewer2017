@@ -22,7 +22,6 @@ public class Task {
 
 	
 	
-	
 	public static Task createTaskFromRecord(CSVRecord record) throws InvalidCSVRecordException {
 		Task t = new Task();
 		
@@ -79,7 +78,7 @@ public class Task {
 			
 			throw new InvalidCSVRecordException(CSVReader.COL_MITGLIED_VORNAME, record.getRecordNumber());
 		}
-
+		
 		return t;
 	}
 
