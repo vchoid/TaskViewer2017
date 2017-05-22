@@ -26,19 +26,20 @@ public class Task {
 	public static Task createTaskFromRecord(CSVRecord record) throws InvalidCSVRecordException {
 		Task t = new Task();
 		
-		ValidDate check = new ValidDate();
-				
+		ValidDate dateFormat = new ValidDate();
+		ValidID idFormat = new ValidID();
+		
 		try {
-			t.taskId = record.get(CSVReader.COL_TASK_ID);
+			t.taskId = idFormat.validID(record.get(CSVReader.COL_TASK_ID));
 			t.taskType = record.get(CSVReader.COL_TASK_TYPE);
-			t.orderedDate = check.validDate(record.get(CSVReader.COL_ORDERED_DATE));
+			t.orderedDate = dateFormat.validDate(record.get(CSVReader.COL_ORDERED_DATE));
 			t.kvnr = record.get(CSVReader.COL_MITGLIED_KVNR);
 			t.name = record.get(CSVReader.COL_MITGLIED_NAME);
 			t.vName = record.get(CSVReader.COL_MITGLIED_VORNAME);
 			t.titel = record.get(CSVReader.COL_MITGLIED_TITEL);
 			t.zsWort = record.get(CSVReader.COL_MITGLIED_ZSWORT);
 			t.vsWort = record.get(CSVReader.COL_MITGLIED_VSWORT);
-			t.gebDat = check.validDate(record.get(CSVReader.COL_MITGLIED_GEB_DAT));
+			t.gebDat = dateFormat.validDate(record.get(CSVReader.COL_MITGLIED_GEB_DAT));
 			
 		} catch (IllegalArgumentException e) {
 			throw new InvalidCSVRecordException(e, record.getRecordNumber());
@@ -47,7 +48,7 @@ public class Task {
 // Überprüfung ob Pflichfelder gefüllt sind oder ..
 		
 		// .. nicht 32 Zeichen lang ist --> TODO überprüfen ob Hexadezimal
-		if (StringUtils.isBlank(t.taskId) || StringUtils.length(t.taskId) != 32 ) {
+		if (StringUtils.isBlank(t.taskId) || !idFormat.checkID ) {
 
 			throw new InvalidCSVRecordException(CSVReader.COL_TASK_ID, record.getRecordNumber());
 		}
@@ -56,12 +57,12 @@ public class Task {
 			throw new InvalidCSVRecordException(CSVReader.COL_TASK_TYPE, record.getRecordNumber());
 		}
 		// .. das Datumsformat nicht stimmt
-		if (StringUtils.isBlank(t.gebDat) || !check.dateCheck) {
+		if (StringUtils.isBlank(t.gebDat) || !dateFormat.checkDate) {
 			
 			throw new InvalidCSVRecordException(CSVReader.COL_MITGLIED_GEB_DAT, record.getRecordNumber());
 		}
 		// .. das Datumsformat nicht stimmt
-		if (StringUtils.isBlank(t.orderedDate) || !check.dateCheck) {
+		if (StringUtils.isBlank(t.orderedDate) || !dateFormat.checkDate) {
 			throw new InvalidCSVRecordException(CSVReader.COL_ORDERED_DATE, record.getRecordNumber());
 		}
 		if (StringUtils.isBlank(t.kvnr)) {
