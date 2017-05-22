@@ -32,14 +32,16 @@ public class Task {
 		try {
 			t.taskId = idFormat.validID(record.get(CSVReader.COL_TASK_ID));
 			t.taskType = record.get(CSVReader.COL_TASK_TYPE);
-			t.orderedDate = dateFormat.validDate(record.get(CSVReader.COL_ORDERED_DATE));
+//			dateFormat.validDate(t.getOrdered_date());
+			t.orderedDate = record.get(CSVReader.COL_ORDERED_DATE);
 			t.kvnr = record.get(CSVReader.COL_MITGLIED_KVNR);
 			t.name = record.get(CSVReader.COL_MITGLIED_NAME);
 			t.vName = record.get(CSVReader.COL_MITGLIED_VORNAME);
 			t.titel = record.get(CSVReader.COL_MITGLIED_TITEL);
 			t.zsWort = record.get(CSVReader.COL_MITGLIED_ZSWORT);
 			t.vsWort = record.get(CSVReader.COL_MITGLIED_VSWORT);
-			t.gebDat = dateFormat.validDate(record.get(CSVReader.COL_MITGLIED_GEB_DAT));
+//			dateFormat.validDate(t.gebDat);
+			t.gebDat = record.get(CSVReader.COL_MITGLIED_GEB_DAT);
 			
 		} catch (IllegalArgumentException e) {
 			throw new InvalidCSVRecordException(e, record.getRecordNumber());
@@ -57,12 +59,12 @@ public class Task {
 			throw new InvalidCSVRecordException(CSVReader.COL_TASK_TYPE, record.getRecordNumber());
 		}
 		// .. das Datumsformat nicht stimmt
-		if (StringUtils.isBlank(t.gebDat) || !dateFormat.checkDate) {
+		if (StringUtils.isBlank(t.gebDat) || !dateFormat.validDate(t.gebDat)) {
 			
 			throw new InvalidCSVRecordException(CSVReader.COL_MITGLIED_GEB_DAT, record.getRecordNumber());
 		}
 		// .. das Datumsformat nicht stimmt
-		if (StringUtils.isBlank(t.orderedDate) || !dateFormat.checkDate) {
+		if (StringUtils.isBlank(t.orderedDate) || !dateFormat.validDate(t.getOrdered_date())) {
 			throw new InvalidCSVRecordException(CSVReader.COL_ORDERED_DATE, record.getRecordNumber());
 		}
 		if (StringUtils.isBlank(t.kvnr)) {

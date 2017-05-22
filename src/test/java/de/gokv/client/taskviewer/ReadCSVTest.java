@@ -10,6 +10,7 @@ import org.junit.Assert;
 import de.gokv.client.reader.CSVReader;
 import de.gokv.client.reader.ClientException;
 import de.gokv.client.reader.Task;
+import de.gokv.client.reader.ValidDate;
 
 public class ReadCSVTest {
 	
@@ -55,11 +56,6 @@ public class ReadCSVTest {
 		Assert.assertEquals("06.03.1982", content.getGeb_dat());
 		
 	}
-// überprüft die Korrektheit des Formats in jeder Spalte
-	//Datumsformat überprüfen
-	@Test
-	public void testDateFormat(){
-		
-	}
+
 	
 }
