@@ -39,6 +39,6 @@ public class DateUtil {
 				throw new InvalidDateException(e);
 			}
 		}
-		throw new InvalidDateException("");
+		throw new InvalidDateException("Fehler beim formatieren von String in Date");
 	}
 }

@@ -19,5 +19,12 @@ public class TestMeInMain {
 			gebDat = reader.getTasks().get(i).getGeb_dat();
 			System.out.println(gebDat);
 		}
+		
+		// Id
+		String iD;
+		for (int i = 0; i < reader.getTasks().size(); i++) {
+			iD = reader.getTasks().get(i).getTask_id();
+			System.out.println(iD);
+		}
 	}
 }

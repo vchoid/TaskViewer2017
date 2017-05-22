@@ -144,7 +144,7 @@ public class Task {
 
 	@Override
 	public String toString() {
-		return "\n------------------------------------ " + ++anzTask + ". Task --------------------------------------\n"
+		return "------------------------------------ " + ++anzTask + ". Task --------------------------------------\n"
 				+ "Id: " + taskId + " [Typ: " + taskType + "] erstellt am: " + orderedDate + "\nKVNr.: " + kvnr + "\n"
 				+ "Name: " + titel + name + ", " + vName + "\ngeboren am: " + gebDat + "\nzsWort: " + zsWort
 				+ "\nvsWort: " + vsWort + "\n";
