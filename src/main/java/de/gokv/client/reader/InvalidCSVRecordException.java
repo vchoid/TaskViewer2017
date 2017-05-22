@@ -6,7 +6,7 @@ public class InvalidCSVRecordException extends Throwable{
 	
 	public InvalidCSVRecordException(String colName, long line) {
 		super();
-		this.message = String.format("Ungültiger Eintrag in Zeile << %s >>, in der Spalte < %s >", line-1, colName);
+		this.message = String.format("Ungültiger Eintrag in Zeile << %s >>, in der Spalte < %s >", line, colName);
 	}
 
 	public InvalidCSVRecordException(IllegalArgumentException e, long line) {
