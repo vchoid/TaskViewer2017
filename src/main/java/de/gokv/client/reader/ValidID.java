@@ -19,13 +19,14 @@ public class ValidID {
 				 System.out.println("Nicht 32 Zeichen lang!");
 			}
 
-			Pattern p = Pattern.compile("\\w");
+			Pattern p = Pattern.compile("[A-F0-9]{32}");
 			java.util.regex.Matcher m = p.matcher(id);
 			if (m.find()) {
-				checkID = true;
 				System.out.println("OK");
+				idOK = id;
+				checkID = true;
 			} else {
-				 System.out.println("Entspricht nicht dem RegEx");
+				 System.out.println("Entspricht nicht dem Hexadezimal Format");
 			}
 
 		

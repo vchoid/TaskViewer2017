@@ -47,9 +47,9 @@ public class Task {
 
 // Überprüfung ob Pflichfelder gefüllt sind oder ..
 		
-		// .. nicht 32 Zeichen lang ist --> TODO überprüfen ob Hexadezimal
-		if (StringUtils.isBlank(t.taskId) || !idFormat.checkID ) {
-
+		// .. nicht 32 Zeichen lang ist, entspricht nicht dem Hexadezimalformat
+		if (StringUtils.isBlank(t.taskId) || !idFormat.checkID) {
+			
 			throw new InvalidCSVRecordException(CSVReader.COL_TASK_ID, record.getRecordNumber());
 		}
 		if (StringUtils.isBlank(t.taskType)) {

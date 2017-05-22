@@ -12,10 +12,10 @@ public class TestMeInMain {
 		reader.readCsvFile();
 		Task t = reader.getTasks().get(eintrag);
 
-		// Ausgabe 1
-		System.out.println("Es gibt " + reader.getTasks().size() + " Einträge.");
-		System.out.println(">> Eintrag " + (reader.getTasks().indexOf(t)) + " << \n"
-				+ CSVReader.COL_MITGLIED_GEB_DAT + ": " + t.getGeb_dat());
+//		// Ausgabe 1
+//		System.out.println("Es gibt " + reader.getTasks().size() + " Einträge.");
+//		System.out.println(">> Eintrag " + (reader.getTasks().indexOf(t)) + " << \n"
+//				+ CSVReader.COL_MITGLIED_GEB_DAT + ": " + t.getGeb_dat());
 
 	
 
