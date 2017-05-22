@@ -31,16 +31,15 @@ public class Task {
 		try {
 			t.taskId = record.get(CSVReader.COL_TASK_ID);
 			t.taskType = record.get(CSVReader.COL_TASK_TYPE);
-			t.orderedDate = record.get(CSVReader.COL_ORDERED_DATE);
-			t.orderedDate = check.validDate(t.orderedDate);
+			t.orderedDate = check.validDate(record.get(CSVReader.COL_ORDERED_DATE));
 			t.kvnr = record.get(CSVReader.COL_MITGLIED_KVNR);
 			t.name = record.get(CSVReader.COL_MITGLIED_NAME);
 			t.vName = record.get(CSVReader.COL_MITGLIED_VORNAME);
 			t.titel = record.get(CSVReader.COL_MITGLIED_TITEL);
 			t.zsWort = record.get(CSVReader.COL_MITGLIED_ZSWORT);
 			t.vsWort = record.get(CSVReader.COL_MITGLIED_VSWORT);
-			t.gebDat = record.get(CSVReader.COL_MITGLIED_GEB_DAT);
-			t.gebDat = check.validDate(t.gebDat);
+			t.gebDat = check.validDate(record.get(CSVReader.COL_MITGLIED_GEB_DAT));
+			
 		} catch (IllegalArgumentException e) {
 			throw new InvalidCSVRecordException(e, record.getRecordNumber());
 		}
