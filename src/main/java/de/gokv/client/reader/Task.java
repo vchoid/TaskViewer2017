@@ -147,7 +147,7 @@ public class Task {
 		return "\n------------------------------------ " + ++anzTask + ". Task --------------------------------------\n"
 				+ "Id: " + taskId + " [Typ: " + taskType + "] erstellt am: " + orderedDate + "\nKVNr.: " + kvnr + "\n"
 				+ "Name: " + titel + name + ", " + vName + "\ngeboren am: " + gebDat + "\nzsWort: " + zsWort
-				+ "\nvsWort: " + vsWort;
+				+ "\nvsWort: " + vsWort + "\n";
 	}
 
 //	@Override
