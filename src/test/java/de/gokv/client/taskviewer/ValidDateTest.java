@@ -1,42 +1,42 @@
 package de.gokv.client.taskviewer;
 
-import org.junit.Before;
+import org.junit.Assert;
 import org.junit.Test;
 
-import de.gokv.client.reader.CSVReader;
-import de.gokv.client.reader.ValidDate;
+import de.gokv.client.reader.DateUtil;
 
 public class ValidDateTest {
 
-	private ValidDate testDate = new ValidDate();
-	private CSVReader reader;
 
-	private String orderDate = "";
-	private String gebDate = "";
-
-	@Before
-	public void before() {
-		reader = new CSVReader(System.getProperty("user.dir")
-				+ "/src/test/resources/invalid_famv_direct_input_monitoring_20170515131131.csv");
-		reader.readCsvFile();
+	@Test
+	public void testValidDate() {
+		Assert.assertTrue("", DateUtil.isValidDate("18.03.2015"));
 	}
 
 	@Test
-	public void testGebDate() {
-
-		for (int i = 0; i < reader.getTasks().size(); i++) {
-			gebDate = reader.getTasks().get(i).getGeb_dat();
-			System.out.println(gebDate + " = " + testDate.validDate(gebDate));
-		}
+	public void testInvalidDateSchaltjahr(){
+		Assert.assertFalse("",DateUtil.isValidDate("29.02.2017"));
 	}
-
+	
 	@Test
-	public void testOrderDate() {
-
-		for (int i = 0; i < reader.getTasks().size(); i++) {
-			orderDate = reader.getTasks().get(i).getOrdered_date();
-			System.out.println(orderDate + " = " + testDate.validDate(orderDate));
-		}
+	public void testInvalidDateMonth(){
+		Assert.assertFalse("",DateUtil.isValidDate("29.13.2017"));
+	}
+	
+	@Test
+	public void testValidDateSchaltjahr(){
+		Assert.assertTrue("",DateUtil.isValidDate("29.02.2016"));
+	}
+	
+	@Test
+	public void testInvalidShortDate(){
+		Assert.assertFalse("",DateUtil.isValidDate("28.02.82"));
+	}
+	
+	@Test
+	public void testValidShortDate(){
+		Assert.assertTrue("",DateUtil.isValidDate("28.02.0082"));
 	}
 
+	
 }

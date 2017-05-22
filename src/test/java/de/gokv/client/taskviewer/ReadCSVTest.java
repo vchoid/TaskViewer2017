@@ -10,7 +10,7 @@ import org.junit.Assert;
 import de.gokv.client.reader.CSVReader;
 import de.gokv.client.reader.ClientException;
 import de.gokv.client.reader.Task;
-import de.gokv.client.reader.ValidDate;
+import de.gokv.client.reader.DateUtil;
 
 public class ReadCSVTest {
 	

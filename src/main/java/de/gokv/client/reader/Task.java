@@ -25,7 +25,7 @@ public class Task {
 	public static Task createTaskFromRecord(CSVRecord record) throws InvalidCSVRecordException {
 		Task t = new Task();
 		
-		ValidDate dateFormat = new ValidDate();
+		DateUtil dateFormat = new DateUtil();
 		ValidID idFormat = new ValidID();
 		
 		try {
@@ -56,12 +56,12 @@ public class Task {
 			throw new InvalidCSVRecordException(CSVReader.COL_TASK_TYPE, record.getRecordNumber());
 		}
 		// .. das Datumsformat nicht stimmt
-		if (StringUtils.isBlank(t.gebDat) || !dateFormat.validDate(t.gebDat)) {
+		if (StringUtils.isBlank(t.gebDat) || !dateFormat.isValidDate(t.gebDat)) {
 			
 			throw new InvalidCSVRecordException(CSVReader.COL_MITGLIED_GEB_DAT, record.getRecordNumber());
 		}
 		// .. das Datumsformat nicht stimmt
-		if (StringUtils.isBlank(t.orderedDate) || !dateFormat.validDate(t.getOrdered_date())) {
+		if (StringUtils.isBlank(t.orderedDate) || !dateFormat.isValidDate(t.getOrdered_date())) {
 			throw new InvalidCSVRecordException(CSVReader.COL_ORDERED_DATE, record.getRecordNumber());
 		}
 		if (StringUtils.isBlank(t.kvnr)) {

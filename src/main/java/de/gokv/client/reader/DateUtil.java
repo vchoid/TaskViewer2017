@@ -7,48 +7,38 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Pattern;
 
-public class ValidDate {
+public class DateUtil {
 
-	boolean checkDate = false;
-	String dateOK;
-
-	public boolean validDate(String date) {
-
-		System.out.print("Teste /Datum: " + date + "...");
-
-		// Länge überprüfen
-		if (date.length() != 10) {
-			System.out.println("Nicht 10 Zeichen lang!");
-			checkDate = false;
-		} else {
-			checkDate = true;
-		}
-
-		// String überprfen, ob "ZZ.ZZ.ZZZZ" (Z = Ziffer)
+	private static DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
+	
+	public static boolean isValidDate(String date) {
+		// String überprüfen, ob "ZZ.ZZ.ZZZZ" (Z = Ziffer)
 		Pattern p = Pattern.compile("\\d{2}\\.\\d{2}\\.\\d{4}");
 		java.util.regex.Matcher m = p.matcher(date);
-		if (m.find()) {
-			checkDate = true;
-		} else {
-			System.out.println("Entspricht nicht dem RegEx");
-			checkDate = false;
+		if (!m.matches()) {
+			return false;
 		}
-		
-		if (checkDate) {
+
+		df.setLenient(false);
+		try {
+			df.parse(date);
+		} catch (ParseException e) {
+			return false;
+		}
+
+		return true;
+	}
+	
+	public static Date parseDate(String date) throws InvalidDateException{
+		if(isValidDate(date)){
+			Date d;
 			try {
-
-				DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
-				df.setLenient(false);
-
-				Date d1 = df.parse(date);
-				dateOK = df.format(d1);
-				System.out.println("ok ==> Datumswert ist " + dateOK);
-
+				d = df.parse(date);
+				return d;
 			} catch (ParseException e) {
-				System.out.println("nicht ok!!!");
-				checkDate = false;
+				throw new InvalidDateException(e);
 			}
 		}
-		return checkDate;
+		throw new InvalidDateException("");
 	}
 }
