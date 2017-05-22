@@ -69,12 +69,14 @@ public class Task {
 
 			throw new InvalidCSVRecordException(CSVReader.COL_MITGLIED_KVNR, record.getRecordNumber());
 		}
-		if (StringUtils.isBlank(t.name)) {
-
+		// .. der Nachname Ziffern enthält
+		if (StringUtils.isBlank(t.name) || !StringUtils.containsNone(t.name, "1234567890")) {
+			
 			throw new InvalidCSVRecordException(CSVReader.COL_MITGLIED_NAME, record.getRecordNumber());
 		}
-		if (StringUtils.isBlank(t.vName)) {
-
+		// .. der Vorname Ziffern enthält
+		if (StringUtils.isBlank(t.vName) || !StringUtils.containsNone(t.vName, "1234567890")) {
+			
 			throw new InvalidCSVRecordException(CSVReader.COL_MITGLIED_VORNAME, record.getRecordNumber());
 		}
 

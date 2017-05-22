@@ -12,21 +12,21 @@ public class ValidID {
 	public String validID(String id){
 		
 		
-			 System.out.print("Überprüfe id: " + id + "...");
+//			 System.out.print("Überprüfe id: " + id + "...");
 
 			// Länge überprüfen
 			if (StringUtils.length(id) != 32) {
-				 System.out.println("Nicht 32 Zeichen lang!");
+//				 System.out.println("Nicht 32 Zeichen lang!");
 			}
 
 			Pattern p = Pattern.compile("[A-F0-9]{32}");
 			java.util.regex.Matcher m = p.matcher(id);
 			if (m.find()) {
-				System.out.println("OK");
+//				System.out.println("OK");
 				idOK = id;
 				checkID = true;
 			} else {
-				 System.out.println("Entspricht nicht dem Hexadezimal Format");
+//				 System.out.println("Entspricht nicht dem Hexadezimal Format");
 			}
 
 		
