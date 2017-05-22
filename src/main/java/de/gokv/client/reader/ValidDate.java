@@ -14,23 +14,23 @@ public class ValidDate {
 
 	public boolean validDate(String date) {
 
-		System.out.print("Teste Datum: " + date + "...");
+//		System.out.print("Teste /Datum: " + date + "...");
 
 		// Länge überprüfen
 		if (date.length() != 10) {
-			System.out.println("Nicht 10 Zeichen lang!");
+//			System.out.println("Nicht 10 Zeichen lang!");
 			checkDate = false;
 		} else {
 			checkDate = true;
 		}
 
 		// String überprfen, ob "ZZ.ZZ.ZZZZ" (Z = Ziffer)
-		Pattern p = Pattern.compile("\\d{2}\\.\\d{2}\\.\\d{4}");
+		Pattern p = Pattern.compile("\\d{2}\\.\\d{2}\\.\\d{2}");
 		java.util.regex.Matcher m = p.matcher(date);
 		if (m.find()) {
 			checkDate = true;
 		} else {
-			System.out.println("Entspricht nicht dem RegEx");
+//			System.out.println("Entspricht nicht dem RegEx");
 			checkDate = false;
 		}
 		
@@ -42,10 +42,10 @@ public class ValidDate {
 
 				Date d1 = df.parse(date);
 				dateOK = df.format(d1);
-				System.out.println("ok ==> Datumswert ist " + dateOK);
+//				System.out.println("ok ==> Datumswert ist " + dateOK);
 
 			} catch (ParseException e) {
-				System.out.println("nicht ok!!!");
+//				System.out.println("nicht ok!!!");
 				checkDate = false;
 			}
 		}

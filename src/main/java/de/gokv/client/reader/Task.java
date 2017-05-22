@@ -30,9 +30,8 @@ public class Task {
 		ValidID idFormat = new ValidID();
 		
 		try {
-			t.taskId = idFormat.validID(record.get(CSVReader.COL_TASK_ID));
+			t.taskId = record.get(CSVReader.COL_TASK_ID);
 			t.taskType = record.get(CSVReader.COL_TASK_TYPE);
-//			dateFormat.validDate(t.getOrdered_date());
 			t.orderedDate = record.get(CSVReader.COL_ORDERED_DATE);
 			t.kvnr = record.get(CSVReader.COL_MITGLIED_KVNR);
 			t.name = record.get(CSVReader.COL_MITGLIED_NAME);
@@ -40,7 +39,6 @@ public class Task {
 			t.titel = record.get(CSVReader.COL_MITGLIED_TITEL);
 			t.zsWort = record.get(CSVReader.COL_MITGLIED_ZSWORT);
 			t.vsWort = record.get(CSVReader.COL_MITGLIED_VSWORT);
-//			dateFormat.validDate(t.gebDat);
 			t.gebDat = record.get(CSVReader.COL_MITGLIED_GEB_DAT);
 			
 		} catch (IllegalArgumentException e) {
@@ -50,7 +48,7 @@ public class Task {
 // Überprüfung ob Pflichfelder gefüllt sind oder ..
 		
 		// .. nicht 32 Zeichen lang ist, entspricht nicht dem Hexadezimalformat
-		if (StringUtils.isBlank(t.taskId) || !idFormat.checkID) {
+		if (StringUtils.isBlank(t.taskId) || !idFormat.validID(t.taskId)) {
 			
 			throw new InvalidCSVRecordException(CSVReader.COL_TASK_ID, record.getRecordNumber());
 		}
