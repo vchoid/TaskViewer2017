@@ -15,32 +15,32 @@ public class DateUtilTest {
 
 	@Test
 	public void testValidDate() {
-		Assert.assertTrue("..", DateUtil.isValidDate("18.03.2015"));
+		Assert.assertTrue("gültiges Datum ...OK.", DateUtil.isValidDate("18.03.2015"));
 	}
 
 	@Test
 	public void testInvalidDateSchaltjahr(){
-		Assert.assertFalse("",DateUtil.isValidDate("29.02.2017"));
+		Assert.assertFalse("ungültiges Datum ...OK",DateUtil.isValidDate("29.02.2017"));
 	}
 	
 	@Test
 	public void testInvalidDateMonth(){
-		Assert.assertFalse("",DateUtil.isValidDate("29.13.2017"));
+		Assert.assertFalse("ungültiger Monat ...OK",DateUtil.isValidDate("29.13.2017"));
 	}
 	
 	@Test
 	public void testValidDateSchaltjahr(){
-		Assert.assertTrue("",DateUtil.isValidDate("29.02.2016"));
+		Assert.assertTrue("Schaltjahr ...OK",DateUtil.isValidDate("29.02.2016"));
 	}
 	
 	@Test
 	public void testInvalidShortDate(){
-		Assert.assertFalse("",DateUtil.isValidDate("28.02.82"));
+		Assert.assertFalse("ungültiges kurzes Datum ...OK",DateUtil.isValidDate("28.02.82"));
 	}
 	
 	@Test
 	public void testValidShortDate(){
-		Assert.assertTrue("",DateUtil.isValidDate("28.02.0082"));
+		Assert.assertTrue("valides kurzes Datum ...OK",DateUtil.isValidDate("28.02.0082"));
 	}
 	
 	@Test
@@ -54,7 +54,7 @@ public class DateUtilTest {
 		try {
 			Date date = DateUtil.parseDate("29.02.2017");
 		} catch (InvalidDateException e) {
-			System.out.println("Fehler beim umwandeln des Formats in ein Datumsformat.");
+			System.out.println("Fehler beim umwandeln in ein Datumformat.");
 			throw e;
 		}
 	}
