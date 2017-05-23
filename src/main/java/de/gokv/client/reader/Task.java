@@ -17,7 +17,7 @@ public class Task {
 	private String titel;
 	private String zsWort;
 	private String vsWort;
-	private String gebDat;
+	private Date gebDat;
 
 	private static int anzTask = 0;
 
@@ -36,7 +36,7 @@ public class Task {
 			t.titel = record.get(CSVReader.COL_MITGLIED_TITEL);
 			t.zsWort = record.get(CSVReader.COL_MITGLIED_ZSWORT);
 			t.vsWort = record.get(CSVReader.COL_MITGLIED_VSWORT);
-			t.gebDat = record.get(CSVReader.COL_MITGLIED_GEB_DAT);
+			t.gebDat = DateUtil.parseDate(record.get(CSVReader.COL_MITGLIED_GEB_DAT));
 			
 		} catch (IllegalArgumentException | InvalidDateException e) {
 			throw new InvalidCSVRecordException(e, record.getRecordNumber());
@@ -54,7 +54,7 @@ public class Task {
 			throw new InvalidCSVRecordException(CSVReader.COL_TASK_TYPE, record.getRecordNumber());
 		}
 		// .. das Datumsformat nicht stimmt
-		if (StringUtils.isBlank(t.gebDat) || !DateUtil.isDateValid(t.gebDat)) {
+		if (StringUtils.isBlank(record.get(CSVReader.COL_MITGLIED_GEB_DAT)) || !DateUtil.isDateValid(record.get(CSVReader.COL_MITGLIED_GEB_DAT))) {
 			
 			throw new InvalidCSVRecordException(CSVReader.COL_MITGLIED_GEB_DAT, record.getRecordNumber());
 		}
@@ -121,7 +121,7 @@ public class Task {
 		return vsWort;
 	}
 
-	public String getGeb_dat() {
+	public Date getGeb_dat() {
 		return gebDat;
 	}
 

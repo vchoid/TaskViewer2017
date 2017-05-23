@@ -16,17 +16,18 @@ public class TestMeInMain {
 //			System.out.println(task);
 //		}
 //
-//		// gebDat
-//		String gebDat;
-//		for (int i = 0; i < reader.getTasks().size(); i++) {
-//			gebDat = reader.getTasks().get(i).getGeb_dat();
-//			System.out.println(gebDat);
-//		}
+//		
 		// orderedDate
-		Date oDate;
+//		Date oDate;
+//		for (int i = 0; i < reader.getTasks().size(); i++) {
+//			oDate = reader.getTasks().get(i).getOrdered_date();
+//			System.out.println(oDate.toLocaleString());
+//		}
+		// gebDat
+		Date gDate;
 		for (int i = 0; i < reader.getTasks().size(); i++) {
-			oDate = reader.getTasks().get(i).getOrdered_date();
-			System.out.println(oDate.toLocaleString());
+			gDate = reader.getTasks().get(i).getGeb_dat();
+			System.out.println(gDate.toLocaleString());
 		}
 		
 //		// Id
