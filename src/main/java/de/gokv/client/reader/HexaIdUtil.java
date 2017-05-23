@@ -12,7 +12,6 @@ public class HexaIdUtil {
 		if (m.matches()) {
 			return true;
 		} 
-
 		return false;
 	}
 

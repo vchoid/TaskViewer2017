@@ -25,7 +25,6 @@ public class Task {
 	public static Task createTaskFromRecord(CSVRecord record) throws InvalidCSVRecordException {
 		Task t = new Task();
 		
-				
 		try {
 			t.taskId = record.get(CSVReader.COL_TASK_ID);
 			t.taskType = record.get(CSVReader.COL_TASK_TYPE);

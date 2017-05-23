@@ -1,9 +1,11 @@
 package de.gokv.client.reader;
 
-public class InvalidCSVRecordException extends Throwable{
+public class InvalidCSVRecordException extends Throwable {
+
+	private static final long serialVersionUID = -887930394449075849L;
 
 	private String message;
-	
+
 	public InvalidCSVRecordException(String colName, long line) {
 		super();
 		this.message = String.format("Ungültiger Eintrag in Zeile > %s <, in der Spalte // %s //", line, colName);
@@ -18,5 +20,5 @@ public class InvalidCSVRecordException extends Throwable{
 	public String getMessage() {
 		return message;
 	}
-	
+
 }
