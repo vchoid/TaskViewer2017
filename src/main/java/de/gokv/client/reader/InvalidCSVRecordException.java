@@ -13,13 +13,12 @@ public class InvalidCSVRecordException extends Throwable {
 
 	public InvalidCSVRecordException(IllegalArgumentException e, long line) {
 		super();
-		this.message = String.format("In Zeile %s, trat folgende Meldung auf %s", line, e.getMessage());
+		this.message = String.format("In Zeile %s, trat folgende Meldung auf '%s'", line, e.getMessage());
 	}
 
-	public InvalidCSVRecordException(Throwable e, long recordNumber) {
+	public InvalidCSVRecordException(Throwable e, long line) {
 		super();
-		this.message = String.format("Datumsfehler", recordNumber , e.getMessage());
-		System.out.println(recordNumber);
+		this.message = String.format("In Zeile %s, trat folgende Meldung auf '%s'", line , e.getMessage() );
 	}
 
 	@Override

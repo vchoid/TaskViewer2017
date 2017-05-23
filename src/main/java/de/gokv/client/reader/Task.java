@@ -84,22 +84,7 @@ public class Task {
 		super();
 	}
 
-	// public Task(String taskId, String taskType, String orderedDate, String
-	// kvnr, String name, String vName,
-	// String titel, String zsWort, String vsWort, String gebDat) {
-	// this();
-	// this.taskId = taskId;
-	// this.taskType = taskType;
-	// this.orderedDate = orderedDate;
-	// this.kvnr = kvnr;
-	// this.name = name;
-	// this.vName = vName;
-	// this.titel = titel;
-	// this.zsWort = zsWort;
-	// this.vsWort = vsWort;
-	// this.gebDat = gebDat;
-	// }
-
+	
 	public String getTask_id() {
 		return taskId;
 	}
