@@ -47,13 +47,13 @@ public class ReadCSVTest {
 		
 		Assert.assertEquals("405750F0395F11E7BED7F726E269B87F", content.getTask_id());
 		Assert.assertEquals("famv_bestand", content.getTasktype());
-		Assert.assertEquals("15.05.2017", content.getOrdered_date());
+		Assert.assertEquals("15.05.2017", content.getOrdered_date().toLocaleString().substring(0,10));
 		Assert.assertEquals("Q101084865", content.getKvnr());
 		Assert.assertEquals("KRUPPIO", content.getName());
 		Assert.assertEquals("Ulrich Moritz", content.getVorname());
 		Assert.assertEquals("", content.getZsWort());
 		Assert.assertEquals("", content.getVsWort());
-		Assert.assertEquals("06.03.1982", content.getGeb_dat());
+		Assert.assertEquals("06.03.1982", content.getGeb_dat().toLocaleString().substring(0,10));
 		
 	}
 
