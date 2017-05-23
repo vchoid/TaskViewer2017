@@ -128,8 +128,8 @@ public class Task {
 	@Override
 	public String toString() {
 		return "------------------------------------ " + ++anzTask + ". Task --------------------------------------\n"
-				+ "Id: " + taskId + " [Typ: " + taskType + "] erstellt am: " + orderedDate + "\nKVNr.: " + kvnr + "\n"
-				+ "Name: " + titel + name + ", " + vName + "\ngeboren am: " + gebDat + "\nzsWort: " + zsWort
+				+ "Id: " + taskId + " [Typ: " + taskType + "] erstellt am: " + orderedDate.toLocaleString().substring(0, 10) + "\nKVNr.: " + kvnr + "\n"
+				+ "Name: " + titel + name + ", " + vName + "\ngeboren am: " + gebDat.toLocaleString().substring(0, 10) + "\nzsWort: " + zsWort
 				+ "\nvsWort: " + vsWort + "\n";
 	}
 
