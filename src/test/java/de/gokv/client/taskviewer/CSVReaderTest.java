@@ -10,7 +10,7 @@ import de.gokv.client.reader.CSVReader;
 import de.gokv.client.reader.ClientException;
 import de.gokv.client.reader.Task;
 
-public class ReadCSVTest {
+public class CSVReaderTest {
 	
 	private CSVReader reader;
 	private Task content;
@@ -22,7 +22,7 @@ public class ReadCSVTest {
 	}
 // überprüft ob die Datei vorhanden ist.
 	@Test(expected=ClientException.class)
-	public void testReadCSVExc(){
+	public void testCSVFileReaderException(){
 		String filePath = System.getProperty("user.dir") + "/gokv-client-task-viewer/src/test/resources/famv_direct_input_monitoring_20170515131131.csv";
 		reader = new CSVReader(filePath);
 		try{
@@ -35,7 +35,7 @@ public class ReadCSVTest {
 	}
 // überprüft ob die Inhalte gelesen werden.
 	@Test
-	public void testReadCSV() {
+	public void testCSVReadContent() {
 		reader.readCSVFile();
 		content = reader.getTasks().get(0);
 		Assert.assertEquals(4, reader.getTasks().size()); 
@@ -50,6 +50,7 @@ public class ReadCSVTest {
 		Assert.assertEquals("1982-03-06", content.getGeb_dat().toString());
 	}
 
+	
 	
 	
 }
