@@ -1,8 +1,7 @@
 package de.gokv.client.reader;
 
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.regex.Pattern;
+
 
 import org.apache.commons.csv.CSVRecord;
 import org.apache.commons.lang3.StringUtils;
@@ -129,8 +128,8 @@ public class Task {
 	@Override
 	public String toString() {
 		return "------------------------------------ " + ++anzTask + ". Task --------------------------------------\n"
-				+ "Id: " + taskId + " [Typ: " + taskType + "] erstellt am: " + orderedDate + "\nKVNr.: " + kvnr + "\n"
-				+ "Name: " + titel + name + ", " + vName + "\ngeboren am: " + gebDat + "\nzsWort: " + zsWort
+				+ "Id: " + taskId + " [Typ: " + taskType + "] erstellt am: " + orderedDate.getDayOfMonth() + "." + orderedDate.getMonthValue() + "." + orderedDate.getYear() + "\nKVNr.: " + kvnr + "\n"
+				+ "Name: " + titel + name + ", " + vName + "\ngeboren am: " + gebDat.getDayOfMonth() + "." + gebDat.getMonthValue() + "." + gebDat.getYear() + "\nzsWort: " + zsWort
 				+ "\nvsWort: " + vsWort + "\n";
 	}
 

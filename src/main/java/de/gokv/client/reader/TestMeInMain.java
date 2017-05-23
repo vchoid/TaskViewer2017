@@ -13,11 +13,11 @@ public class TestMeInMain {
 		// int eintrag;
 		CSVReader reader = new CSVReader(System.getProperty("user.dir")
 				+ "/src/test/resources/invalid_famv_direct_input_monitoring_20170515131131.csv");
-		reader.readCsvFile();
+		reader.readCSVFile();
 
-//		for (Task task : reader.getTasks()) {
-//			System.out.println(task);
-//		}
+		for (Task task : reader.getTasks()) {
+			System.out.println(task);
+		}
 
 				
 		// orderedDate

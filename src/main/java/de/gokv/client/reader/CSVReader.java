@@ -5,8 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
+//import java.util.Map;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -40,13 +39,12 @@ public class CSVReader {
 	}
 
 	// CSV-Datei auslesen +++++++++++++++++++++++++++++++++++++++++++++++
-	public void readCsvFile() throws ClientException {
+	public void readCSVFile() throws ClientException {
 
 		FileReader csvLesen = null;
 		CSVParser csvFileParser = null;
 
 		// erste Zeile als Titelzeile festlegen durch automatisches Parsing
-		// +++++++++++++
 		CSVFormat csvFileFormat = CSVFormat.newFormat(';').withHeader();
 
 		try {
@@ -58,10 +56,9 @@ public class CSVReader {
 
 			// TODO: Use to validate csvFile, check if all required Headers are
 			// present
-			Map<String, Integer> headerMap = csvFileParser.getHeaderMap();
+			// Map<String, Integer> headerMap = csvFileParser.getHeaderMap();
 
 			// Eine Zeile aus der CSV +++++++++++++++++++++++++++++++++++
-
 			for (CSVRecord csvRecord : csvFileParser.getRecords()) {
 				try {
 
@@ -75,13 +72,9 @@ public class CSVReader {
 					System.out.println(e.getMessage());
 				}
 			}
-// TODO später entfernen
-//			for (Task task : tasks) {
-//				System.out.println(task);
-//			}
 
 		} catch (FileNotFoundException e) {
-			throw new ClientException(e, "Datei " + filePath + "wurde nicht gefunden");
+			throw new ClientException(e, "Datei " + filePath + " wurde nicht gefunden");
 
 		} catch (IOException e) {
 			throw new ClientException(e, "Es ist ein Fehler beim Lesen der Datei aufgetreten");
