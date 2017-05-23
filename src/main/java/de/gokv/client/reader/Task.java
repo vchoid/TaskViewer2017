@@ -25,9 +25,7 @@ public class Task {
 	public static Task createTaskFromRecord(CSVRecord record) throws InvalidCSVRecordException {
 		Task t = new Task();
 		
-		DateUtil dateFormat = new DateUtil();
-		ValidID idFormat = new ValidID();
-		
+				
 		try {
 			t.taskId = record.get(CSVReader.COL_TASK_ID);
 			t.taskType = record.get(CSVReader.COL_TASK_TYPE);
@@ -47,7 +45,7 @@ public class Task {
 // Überprüfung ob Pflichfelder gefüllt sind oder ..
 		
 		// .. nicht 32 Zeichen lang ist, entspricht nicht dem Hexadezimalformat
-		if (StringUtils.isBlank(t.taskId) || !idFormat.validID(t.taskId)) {
+		if (StringUtils.isBlank(t.taskId) || !HexaIdUtil.isIdValid(t.taskId)) {
 			
 			throw new InvalidCSVRecordException(CSVReader.COL_TASK_ID, record.getRecordNumber());
 		}
@@ -56,12 +54,12 @@ public class Task {
 			throw new InvalidCSVRecordException(CSVReader.COL_TASK_TYPE, record.getRecordNumber());
 		}
 		// .. das Datumsformat nicht stimmt
-		if (StringUtils.isBlank(t.gebDat) || !DateUtil.isValidDate(t.gebDat)) {
+		if (StringUtils.isBlank(t.gebDat) || !DateUtil.isDateValid(t.gebDat)) {
 			
 			throw new InvalidCSVRecordException(CSVReader.COL_MITGLIED_GEB_DAT, record.getRecordNumber());
 		}
 		// .. das Datumsformat nicht stimmt
-		if (StringUtils.isBlank(t.orderedDate) || !DateUtil.isValidDate(t.getOrdered_date())) {
+		if (StringUtils.isBlank(t.orderedDate) || !DateUtil.isDateValid(t.getOrdered_date())) {
 			throw new InvalidCSVRecordException(CSVReader.COL_ORDERED_DATE, record.getRecordNumber());
 		}
 		if (StringUtils.isBlank(t.kvnr)) {

@@ -11,7 +11,7 @@ public class DateUtil {
 
 	private static DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
 	
-	public static boolean isValidDate(String date) {
+	public static boolean isDateValid(String date) {
 		// String überprüfen, ob "ZZ.ZZ.ZZZZ" (Z = Ziffer)
 		Pattern p = Pattern.compile("\\d{2}\\.\\d{2}\\.\\d{4}");
 		java.util.regex.Matcher m = p.matcher(date);
@@ -30,7 +30,7 @@ public class DateUtil {
 	}
 	
 	public static Date parseDate(String date) throws InvalidDateException{
-		if(isValidDate(date)){
+		if(isDateValid(date)){
 			Date d;
 			try {
 				d = df.parse(date);
