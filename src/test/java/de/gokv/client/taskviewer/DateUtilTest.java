@@ -1,5 +1,6 @@
 package de.gokv.client.taskviewer;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import org.junit.Assert;
@@ -42,8 +43,9 @@ public class DateUtilTest {
 
 	@Test
 	public void testParseValidDate() throws InvalidDateException {
-		Date date = DateUtil.parseDate("18.03.1982");
-		Assert.assertEquals("Valides Datum \"18.03.1982\" wurde nicht erfolgreich konvertiert", Date.class, date.getClass());
+		String testDate = "18.03.1982";
+		LocalDate date = DateUtil.parseDate(testDate);
+		Assert.assertEquals("Valides Datum \"18.03.1982\" wurde nicht erfolgreich konvertiert", LocalDate.class, date.getClass());
 	}
 
 	@Test(expected = InvalidDateException.class)

@@ -4,11 +4,15 @@ import java.text.DateFormat;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.regex.Pattern;
 
 public class DateUtil {
 
+	
+	
 	private static DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
 	
 	public static boolean isDateValid(String date) {
@@ -29,12 +33,13 @@ public class DateUtil {
 		return true;
 	}
 	
-	public static Date parseDate(String date) throws InvalidDateException{
+	public static LocalDate parseDate(String date) throws InvalidDateException{
 		if(isDateValid(date)){
-			Date d;
+			Date d = new Date();
 			try {
 				d = df.parse(date);
-				return d;
+				LocalDate dateN = d.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+				return dateN;
 			} catch (ParseException e) {
 				throw new InvalidDateException(e);
 			}

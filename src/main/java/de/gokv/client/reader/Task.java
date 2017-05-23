@@ -1,5 +1,6 @@
 package de.gokv.client.reader;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.regex.Pattern;
 
@@ -10,14 +11,14 @@ public class Task {
 
 	private String taskId;
 	private String taskType;
-	private Date orderedDate;
+	private LocalDate orderedDate;
 	private String kvnr;
 	private String name;
 	private String vName;
 	private String titel;
 	private String zsWort;
 	private String vsWort;
-	private Date gebDat;
+	private LocalDate gebDat;
 
 	private static int anzTask = 0;
 
@@ -93,7 +94,7 @@ public class Task {
 		return taskType;
 	}
 
-	public Date getOrdered_date() {
+	public LocalDate getOrdered_date() {
 		return orderedDate;
 	}
 
@@ -121,15 +122,15 @@ public class Task {
 		return vsWort;
 	}
 
-	public Date getGeb_dat() {
+	public LocalDate getGeb_dat() {
 		return gebDat;
 	}
 
 	@Override
 	public String toString() {
 		return "------------------------------------ " + ++anzTask + ". Task --------------------------------------\n"
-				+ "Id: " + taskId + " [Typ: " + taskType + "] erstellt am: " + orderedDate.toLocaleString().substring(0, 10) + "\nKVNr.: " + kvnr + "\n"
-				+ "Name: " + titel + name + ", " + vName + "\ngeboren am: " + gebDat.toLocaleString().substring(0, 10) + "\nzsWort: " + zsWort
+				+ "Id: " + taskId + " [Typ: " + taskType + "] erstellt am: " + orderedDate + "\nKVNr.: " + kvnr + "\n"
+				+ "Name: " + titel + name + ", " + vName + "\ngeboren am: " + gebDat + "\nzsWort: " + zsWort
 				+ "\nvsWort: " + vsWort + "\n";
 	}
 
