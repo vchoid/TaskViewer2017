@@ -22,7 +22,7 @@ public class DateUtil {
 		if (!m.matches()) {
 			return false;
 		}
-
+		// verhindert: z.B. 29.02.2017 => 01.03.2017
 		df.setLenient(false);
 		try {
 			df.parse(date);
@@ -38,6 +38,7 @@ public class DateUtil {
 			Date d = new Date();
 			try {
 				d = df.parse(date);
+				// Konvertiereen in das neue DateTimeFormat
 				LocalDate dateN = d.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 				return dateN;
 			} catch (ParseException e) {
