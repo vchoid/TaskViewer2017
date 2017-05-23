@@ -16,6 +16,12 @@ public class InvalidCSVRecordException extends Throwable {
 		this.message = String.format("In Zeile %s, trat folgende Meldung auf %s", line, e.getMessage());
 	}
 
+	public InvalidCSVRecordException(Throwable e, long recordNumber) {
+		super();
+		this.message = String.format("Datumsfehler", recordNumber , e.getMessage());
+		System.out.println(recordNumber);
+	}
+
 	@Override
 	public String getMessage() {
 		return message;

@@ -1,5 +1,6 @@
 package de.gokv.client.reader;
 
+import java.util.Date;
 import java.util.regex.Pattern;
 
 import org.apache.commons.csv.CSVRecord;
@@ -9,7 +10,7 @@ public class Task {
 
 	private String taskId;
 	private String taskType;
-	private String orderedDate;
+	private Date orderedDate;
 	private String kvnr;
 	private String name;
 	private String vName;
@@ -28,7 +29,7 @@ public class Task {
 		try {
 			t.taskId = record.get(CSVReader.COL_TASK_ID);
 			t.taskType = record.get(CSVReader.COL_TASK_TYPE);
-			t.orderedDate = record.get(CSVReader.COL_ORDERED_DATE);
+			t.orderedDate = DateUtil.parseDate(record.get(CSVReader.COL_ORDERED_DATE));
 			t.kvnr = record.get(CSVReader.COL_MITGLIED_KVNR);
 			t.name = record.get(CSVReader.COL_MITGLIED_NAME);
 			t.vName = record.get(CSVReader.COL_MITGLIED_VORNAME);
@@ -37,7 +38,7 @@ public class Task {
 			t.vsWort = record.get(CSVReader.COL_MITGLIED_VSWORT);
 			t.gebDat = record.get(CSVReader.COL_MITGLIED_GEB_DAT);
 			
-		} catch (IllegalArgumentException e) {
+		} catch (IllegalArgumentException | InvalidDateException e) {
 			throw new InvalidCSVRecordException(e, record.getRecordNumber());
 		}
 
@@ -58,7 +59,7 @@ public class Task {
 			throw new InvalidCSVRecordException(CSVReader.COL_MITGLIED_GEB_DAT, record.getRecordNumber());
 		}
 		// .. das Datumsformat nicht stimmt
-		if (StringUtils.isBlank(t.orderedDate) || !DateUtil.isDateValid(t.getOrdered_date())) {
+		if (StringUtils.isBlank(record.get(CSVReader.COL_ORDERED_DATE)) || !DateUtil.isDateValid(record.get(CSVReader.COL_ORDERED_DATE))) {
 			throw new InvalidCSVRecordException(CSVReader.COL_ORDERED_DATE, record.getRecordNumber());
 		}
 		if (StringUtils.isBlank(t.kvnr)) {
@@ -107,7 +108,7 @@ public class Task {
 		return taskType;
 	}
 
-	public String getOrdered_date() {
+	public Date getOrdered_date() {
 		return orderedDate;
 	}
 
