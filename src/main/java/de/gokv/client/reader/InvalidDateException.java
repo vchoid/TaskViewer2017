@@ -1,6 +1,7 @@
 package de.gokv.client.reader;
 
 import java.text.ParseException;
+import java.time.format.DateTimeParseException;
 
 public class InvalidDateException extends Throwable {
 
@@ -17,7 +18,7 @@ public class InvalidDateException extends Throwable {
 		this(String.format(message, args));
 	}
 	
-	public InvalidDateException(ParseException e) {
+	public InvalidDateException(DateTimeParseException e) {
 		this(String.format("Datum kann nicht konvertiert werden", e.getMessage()));
 	}
 

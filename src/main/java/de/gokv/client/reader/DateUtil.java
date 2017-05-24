@@ -6,13 +6,20 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.chrono.IsoChronology;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.DateTimeParseException;
+import java.time.format.ResolverStyle;
 import java.util.Date;
 import java.util.regex.Pattern;
 
 public class DateUtil {
 
-	private static DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
-	//
+	// ResolveStyle.STRICT ==> verhindert: z.B. 29.02.2017 => 01.03.2017
+	private static DateTimeFormatter df2 = DateTimeFormatter.ofPattern("dd.MM.uuuu").withResolverStyle(ResolverStyle.STRICT);
+	
+	
 	public static boolean isDateValid(String date) {
 		// String überprüfen, ob "ZZ.ZZ.ZZZZ" (Z = Ziffer)
 		Pattern p = Pattern.compile("\\d{2}\\.\\d{2}\\.\\d{4}");
@@ -20,29 +27,27 @@ public class DateUtil {
 		if (!m.matches()) {
 			return false;
 		}
-		// verhindert: z.B. 29.02.2017 => 01.03.2017
-		df.setLenient(false);
+		
+		
 		try {
-			df.parse(date);
-		} catch (ParseException e) {
+			df2.parse(date);
+			return true;
+		} catch (DateTimeParseException e) {
 			return false;
 		}
 
-		return true;
 	}
 	
-	public static LocalDate parseDate(String date) throws InvalidDateException{
+	public static LocalDate parseDate(String date) throws DateTimeParseException, InvalidDateException{
 		if(isDateValid(date)){
-			Date d = new Date();
+			LocalDate d2;
 			try {
-				d = df.parse(date);
-				// Konvertiereen in das neue DateTimeFormat
-				LocalDate dateN = d.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-				return dateN;
-			} catch (ParseException e) {
+				d2 = LocalDate.parse(date,df2);
+				return d2;
+			} catch (DateTimeParseException e) {
 				throw new InvalidDateException(e);
 			}
 		}
-		throw new InvalidDateException("Fehler beim Formatieren vom String \"%s\" in Date", date);
+		throw new InvalidDateException("Fehler beim Formatieren vom String \"%s\" in ein LocalDate-Format", date);
 	}
 }
