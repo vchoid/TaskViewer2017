@@ -54,7 +54,7 @@ public class DateUtilTest {
 		try {
 			DateUtil.parseDate(date);
 		} catch (InvalidDateException e) {
-			Assert.assertEquals("Invalid Exception Message", String.format("Fehler beim Formatieren vom String \"%s\" in ein LocalDate-Format", date), e.getMessage());
+			Assert.assertEquals("Invalid Exception Message", String.format("Fehler beim Konvertieren vom String \"%s\" in ein LocalDate-Format", date), e.getMessage());
 			throw e;
 		}
 	}

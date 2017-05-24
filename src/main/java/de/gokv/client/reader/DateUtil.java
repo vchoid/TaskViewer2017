@@ -48,6 +48,6 @@ public class DateUtil {
 				throw new InvalidDateException(e);
 			}
 		}
-		throw new InvalidDateException("Fehler beim Formatieren vom String \"%s\" in ein LocalDate-Format", date);
+		throw new InvalidDateException("Fehler beim Konvertieren vom String \"%s\" in ein LocalDate-Format", date);
 	}
 }

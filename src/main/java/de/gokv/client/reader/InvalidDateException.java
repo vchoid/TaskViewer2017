@@ -19,7 +19,7 @@ public class InvalidDateException extends Throwable {
 	}
 	
 	public InvalidDateException(DateTimeParseException e) {
-		this(String.format("Datum kann nicht konvertiert werden", e.getMessage()));
+		this(String.format("Fehler beim Konvertieren vom String \"%s\" in ein LocalDate-Format", e.getMessage()));
 	}
 
 	@Override
