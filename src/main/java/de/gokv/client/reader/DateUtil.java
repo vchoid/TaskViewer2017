@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 public class DateUtil {
 
 	private static DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
-	
+	//
 	public static boolean isDateValid(String date) {
 		// String überprüfen, ob "ZZ.ZZ.ZZZZ" (Z = Ziffer)
 		Pattern p = Pattern.compile("\\d{2}\\.\\d{2}\\.\\d{4}");
