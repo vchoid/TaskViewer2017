@@ -20,6 +20,14 @@ public class Task {
 
 	private static int anzTask = 0;
 
+	//TODO JavaDoc schreiben
+	
+	/**
+	 * 
+	 * @param record
+	 * @return
+	 * @throws InvalidCSVRecordException
+	 */
 	public static Task createTaskFromRecord(CSVRecord record) throws InvalidCSVRecordException {
 
 		Task t = new Task();
