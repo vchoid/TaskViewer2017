@@ -30,12 +30,21 @@ public class DateUtilTest {
 		Assert.assertFalse("...ungültiger Monat", DateUtil.isDateValid("29.13.2017"));
 	}
 
-
 	@Test
-	public void testInvalidShortDate() {
-		Assert.assertFalse("...ungültiges Datumsformat", DateUtil.isDateValid("28.02.82"));
+	public void testInvalidShortYear() {
+		Assert.assertFalse("...ungültiges Datumsformat vom Jahr", DateUtil.isDateValid("28.02.82"));
+	}
+	
+	@Test
+	public void testInvalidShortMonth() {
+		Assert.assertFalse("...ungültiges Datumsformat vom Monat", DateUtil.isDateValid("28.2.1982"));
+	}
+	@Test
+	public void testInvalidShortDay() {
+		Assert.assertFalse("...ungültiges Datumsformat vom Monat", DateUtil.isDateValid("2.2.1982"));
 	}
 
+	
 		@Test
 	public void testParseValidDate() throws InvalidDateException {
 		String testDate = "18.03.1982";
