@@ -68,7 +68,7 @@ public class CSVReader {
 				} catch (InvalidCSVRecordException e) {
 
 					invalidEntries.add(csvRecord);
-					System.err.println("-------------------------------------- " + invalidEntries.size() + ". Fehler --------------------------------------\n " + e.getMessage());
+					System.err.println("\n\n-------------------------------------------------------- Meldung " + invalidEntries.size() + " --------------------------------------------------------\n " + e.getMessage());
 				}						
 			}
 
