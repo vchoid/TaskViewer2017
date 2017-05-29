@@ -22,6 +22,23 @@ public class Task {
 
 	public static Task createTaskFromRecord(CSVRecord record) throws InvalidCSVRecordException {
 
+		Task t = new Task();
+		
+		try {
+			t.gebDat = DateUtil.parseDate(record.get(CSVReader.COL_MITGLIED_GEB_DAT), CSVReader.COL_MITGLIED_GEB_DAT);
+			t.orderedDate = DateUtil.parseDate(record.get(CSVReader.COL_ORDERED_DATE), CSVReader.COL_ORDERED_DATE);
+			t.taskId = record.get(CSVReader.COL_TASK_ID);
+			t.taskType = record.get(CSVReader.COL_TASK_TYPE);
+			t.kvnr = record.get(CSVReader.COL_MITGLIED_KVNR);
+			t.name = record.get(CSVReader.COL_MITGLIED_NAME);
+			t.vName = record.get(CSVReader.COL_MITGLIED_VORNAME);
+			t.titel = record.get(CSVReader.COL_MITGLIED_TITEL);
+			t.zsWort = record.get(CSVReader.COL_MITGLIED_ZSWORT);
+			t.vsWort = record.get(CSVReader.COL_MITGLIED_VSWORT);
+			
+		} catch (IllegalArgumentException | InvalidDateException e) {
+			throw new InvalidCSVRecordException(e, record.getRecordNumber());
+		}
 		// Überprüfung ob Pflichfelder gefüllt sind oder ..
 
 		// .. das Datumsformat nicht stimmt
@@ -56,24 +73,6 @@ public class Task {
 		if (StringUtils.isBlank(record.get(CSVReader.COL_MITGLIED_VORNAME)) || !StringUtils.containsNone(record.get(CSVReader.COL_MITGLIED_VORNAME), "1234567890")) {
 
 			throw new InvalidCSVRecordException(CSVReader.COL_MITGLIED_VORNAME, record.getRecordNumber());
-		}
-		
-		Task t = new Task();
-
-		try {
-			t.gebDat = DateUtil.parseDate(record.get(CSVReader.COL_MITGLIED_GEB_DAT), CSVReader.COL_MITGLIED_GEB_DAT);
-			t.orderedDate = DateUtil.parseDate(record.get(CSVReader.COL_ORDERED_DATE), CSVReader.COL_ORDERED_DATE);
-			t.taskId = record.get(CSVReader.COL_TASK_ID);
-			t.taskType = record.get(CSVReader.COL_TASK_TYPE);
-			t.kvnr = record.get(CSVReader.COL_MITGLIED_KVNR);
-			t.name = record.get(CSVReader.COL_MITGLIED_NAME);
-			t.vName = record.get(CSVReader.COL_MITGLIED_VORNAME);
-			t.titel = record.get(CSVReader.COL_MITGLIED_TITEL);
-			t.zsWort = record.get(CSVReader.COL_MITGLIED_ZSWORT);
-			t.vsWort = record.get(CSVReader.COL_MITGLIED_VSWORT);
-
-		} catch (IllegalArgumentException | InvalidDateException e) {
-			throw new InvalidCSVRecordException(e, record.getRecordNumber());
 		}
 
 		return t;
