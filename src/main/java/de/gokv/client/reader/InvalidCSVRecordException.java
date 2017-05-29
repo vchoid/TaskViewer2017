@@ -8,7 +8,7 @@ public class InvalidCSVRecordException extends Throwable {
 
 	public InvalidCSVRecordException(String colName, long line) {
 		super();
-		this.message = String.format("Ungültiger Eintrag in Zeile > %s <,\n in der Spalte \"%s\"", line, colName);
+		this.message = String.format("In Zeile > %s <, ungültiger Eintrag\n in der Spalte \"%s\"", line, colName);
 	}
 
 	public InvalidCSVRecordException(IllegalArgumentException e, long line) {
