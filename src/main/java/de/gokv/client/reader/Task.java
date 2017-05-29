@@ -62,7 +62,7 @@ public class Task {
 		if (StringUtils.isBlank(record.get(CSVReader.COL_ORDERED_DATE)) || !DateUtil.isDateValid(record.get(CSVReader.COL_ORDERED_DATE))) {
 			throw new InvalidCSVRecordException(CSVReader.COL_ORDERED_DATE, record.getRecordNumber());
 		}
-		if (StringUtils.isBlank(t.kvnr)) {
+		if (StringUtils.isBlank(t.kvnr) || !KVNrUtil.isKVNrValid(record.get(CSVReader.COL_MITGLIED_KVNR))) {
 
 			throw new InvalidCSVRecordException(CSVReader.COL_MITGLIED_KVNR, record.getRecordNumber());
 		}

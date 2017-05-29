@@ -27,18 +27,24 @@ public class TestMeInMain {
 			System.out.println(oDate);
 			
 		}
-//		// gebDat
-//		Date gDate;
-//		for (int i = 0; i < reader.getTasks().size(); i++) {
-//			gDate = reader.getTasks().get(i).getGeb_dat();
-//			System.out.println(gDate.toLocaleString().substring(0, 10));
-//		}
+		// gebDat
+		LocalDate gDate;
+		for (int i = 0; i < reader.getTasks().size(); i++) {
+			gDate = reader.getTasks().get(i).getGeb_dat();
+			System.out.println(gDate);
+		}
 		
-//		// Id
-//		String iD;
-//		for (int i = 0; i < reader.getTasks().size(); i++) {
-//			iD = reader.getTasks().get(i).getTask_id();
-//			System.out.println(iD);
-//		}
+		// Id
+		String iD;
+		for (int i = 0; i < reader.getTasks().size(); i++) {
+			iD = reader.getTasks().get(i).getTask_id();
+			System.out.println(iD);
+		}
+		// KVNr
+		String kvNr;
+		for (int i = 0; i < reader.getTasks().size(); i++) {
+			kvNr = reader.getTasks().get(i).getKvnr();
+			System.out.println(kvNr);
+		}
 	}
 }
