@@ -18,7 +18,11 @@ public class DateUtilTest {
 
 	@Test
 	public void testInvalidDateSchaltjahr() {
-		Assert.assertFalse("...kein Schaltjahr.", DateUtil.isDateValid("29.02.2017"));
+		Assert.assertFalse("...ungültiges Datum, weil es kein Schaltjahr ist.", DateUtil.isDateValid("29.02.2017"));
+	}
+	@Test
+	public void testValidDateSchaltjahr() {
+		Assert.assertTrue("...gültiges Datum im Schaltjahr.", DateUtil.isDateValid("29.02.2016"));
 	}
 
 	@Test
@@ -26,26 +30,17 @@ public class DateUtilTest {
 		Assert.assertFalse("...ungültiger Monat", DateUtil.isDateValid("29.13.2017"));
 	}
 
-	@Test
-	public void testValidDateSchaltjahr() {
-		Assert.assertTrue("...Schaltjahr", DateUtil.isDateValid("29.02.2016"));
-	}
 
 	@Test
 	public void testInvalidShortDate() {
-		Assert.assertFalse("...ungültiges kurzes Datum", DateUtil.isDateValid("28.02.82"));
+		Assert.assertFalse("...ungültiges Datumsformat", DateUtil.isDateValid("28.02.82"));
 	}
 
-//	@Test
-//	public void testValidShortDate() {
-//		Assert.assertTrue("...valides kurzes Datum", DateUtil.isDateValid("28.02.0082"));
-//	}
-
-	@Test
+		@Test
 	public void testParseValidDate() throws InvalidDateException {
 		String testDate = "18.03.1982";
 		LocalDate date = DateUtil.parseDate(testDate);
-		Assert.assertEquals("Valides Datum \"18.03.1982\" wurde nicht erfolgreich konvertiert", LocalDate.class, date.getClass());
+		Assert.assertEquals("Valides Datum \"" + testDate + "\" wurde erfolgreich konvertiert", LocalDate.class, date.getClass());
 	}
 
 	@Test(expected = InvalidDateException.class)

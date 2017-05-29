@@ -15,36 +15,36 @@ public class KVNrutilTest {
 	}
 	
 	@Test
-	public void testInvalidKVNr_char() {
-		Assert.assertFalse("...ungültige KVNr.", KVNrUtil.isKVNrValid("?101084865"));
+	public void testInvalidKVNr_wrongChar() {
+		Assert.assertFalse("...enthält ungültiges Zeichen.", KVNrUtil.isKVNrValid("?101084865"));
 	}
 	@Test
 	public void testInvalidKVNr_twoChars() {
-		Assert.assertFalse("...ungültige KVNr.", KVNrUtil.isKVNrValid("Q10104686Q"));
+		Assert.assertFalse("...enthält mehr als ein Großbuchstabe.", KVNrUtil.isKVNrValid("Q10104686Q"));
 	}
 	@Test
 	public void testInvalidKVNr_NoChars() {
-		Assert.assertFalse("...ungültige KVNr.", KVNrUtil.isKVNrValid("1101045867"));
+		Assert.assertFalse("...enhält keine Buchstaben.", KVNrUtil.isKVNrValid("1101045867"));
 	}
 	@Test
 	public void testInvalidKVNr_withSpace() {
-		Assert.assertFalse("...ungültige KVNr.", KVNrUtil.isKVNrValid("Q1010 45867"));
+		Assert.assertFalse("...ungültiger Leerraum.", KVNrUtil.isKVNrValid("Q1010 45867"));
 	}
 	@Test
 	public void testInvalidKVNr_char_capital() {
-		Assert.assertFalse("...ungültige KVNr.", KVNrUtil.isKVNrValid("q101084865"));
+		Assert.assertFalse("...ungültige Buchstabengröße.", KVNrUtil.isKVNrValid("q101084865"));
 	}
 	@Test
 	public void testInvalidKVNr_wrongCharPos() {
-		Assert.assertFalse("...ungültige KVNr.", KVNrUtil.isKVNrValid("101008486Q"));
+		Assert.assertFalse("...ungültige Position des Buchstabes.", KVNrUtil.isKVNrValid("101008486Q"));
 	}
 	@Test
-	public void testInvalidKVNr_lenght_tooShort() {
-		Assert.assertFalse("...ungültige KVNr.", KVNrUtil.isKVNrValid("Q1084865"));
+	public void testValidKVNr_lenght_tooShort() {
+		Assert.assertFalse("...KVNr ist zu kurz.", KVNrUtil.isKVNrValid("Q1084865"));
 	}
 	@Test
-	public void testInvalidKVNr_lenght_tooLong() {
-		Assert.assertFalse("...ungültige KVNr.", KVNrUtil.isKVNrValid("Q108486555435435435435"));
+	public void testValidKVNr_lenght_tooLong() {
+		Assert.assertFalse("...KVNr ist zu lang.", KVNrUtil.isKVNrValid("Q108486555435435435435"));
 	}
 	
 	

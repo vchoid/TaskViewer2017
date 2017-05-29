@@ -9,32 +9,32 @@ public class HexaIdUtilTest {
 
 	@Test
 	public void testValidHexaId() {
-		Assert.assertTrue("...gültige Id.", HexaIdUtil.isIdValid("405750F0395F11E7BED7F726E269B87F"));
+		Assert.assertTrue("...gültige Id und Hexadezimalzahl.", HexaIdUtil.isIdValid("405750F0395F11E7BED7F726E269B87F"));
 	}
 		
 	@Test
 	public void testInvalidHexaId() {
-		Assert.assertFalse("...ungültige Id.", HexaIdUtil.isIdValid("405750F0395F11E7BED7F726E269B87G"));
+		Assert.assertFalse("...keine gültige Hexadezimalzahl.", HexaIdUtil.isIdValid("405750F0395F11E7BED7F726E269B87G"));
 	}
 	
 	@Test
 	public void testTooLongValidHexaId() {
-		Assert.assertFalse("...gültige Id, aber zu lang.", HexaIdUtil.isIdValid("405750F0395F11E7BED7F726E269B87FFFF"));
+		Assert.assertFalse("...gültige Hexadezimalzahl, aber zu lang.", HexaIdUtil.isIdValid("405750F0395F11E7BED7F726E269B87FFFF"));
 	}
 	
 	@Test
 	public void testTooLongInvalidHexaId() {
-		Assert.assertFalse("...ungültige Id und zu lang.", HexaIdUtil.isIdValid("405750F0395F11E7BED7F726E269B87FFGG"));
+		Assert.assertFalse("...ungültige Hexadezimalzahl und zu lang.", HexaIdUtil.isIdValid("405750F0395F11E7BED7F726E269B87FFGG"));
 	}
 	
 	@Test
 	public void testTooShortValidHexaId() {
-		Assert.assertFalse("...gültige Id, aber zu kurz.", HexaIdUtil.isIdValid("405750F0395F11E7BED7F726E269B"));
+		Assert.assertFalse("...gültige Hexadezimalzahl, aber zu kurz.", HexaIdUtil.isIdValid("405750F0395F11E7BED7F726E269B"));
 	}
 	
 	@Test
 	public void testTooShortInvalidHexaId() {
-		Assert.assertFalse("...ungültige Id und zu kurz.", HexaIdUtil.isIdValid("405750F0395F11E7BED7F726E269G"));
+		Assert.assertFalse("...ungültige Hexadezimalzahl und zu kurz.", HexaIdUtil.isIdValid("405750F0395F11E7BED7F726E269G"));
 	}
 	
 	
