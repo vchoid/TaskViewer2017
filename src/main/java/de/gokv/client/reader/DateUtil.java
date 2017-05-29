@@ -1,17 +1,9 @@
 package de.gokv.client.reader;
 
-import java.text.DateFormat;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.chrono.IsoChronology;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
-import java.util.Date;
 import java.util.regex.Pattern;
 
 public class DateUtil {
