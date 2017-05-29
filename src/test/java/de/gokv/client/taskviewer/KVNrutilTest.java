@@ -2,8 +2,6 @@ package de.gokv.client.taskviewer;
 
 import org.junit.Assert;
 import org.junit.Test;
-
-import de.gokv.client.reader.HexaIdUtil;
 import de.gokv.client.reader.KVNrUtil;
 
 public class KVNrutilTest {
@@ -13,7 +11,6 @@ public class KVNrutilTest {
 	public void testValidKVNr() {
 		Assert.assertTrue("...gültige KVNr.", KVNrUtil.isKVNrValid("Q101084865"));
 	}
-	
 	@Test
 	public void testInvalidKVNr_wrongChar() {
 		Assert.assertFalse("...enthält ungültiges Zeichen.", KVNrUtil.isKVNrValid("?101084865"));
