@@ -82,7 +82,7 @@ public class DateUtil {
 		try {
 			return parseDate(date);
 		} catch (InvalidDateException e) {
-			String msg = String.format("%s %s Der Fehler trat auf in Spalte %s", e.getMessage(), System.lineSeparator(),
+			String msg = String.format("%s in der Spalte \"%s\"", e.getMessage(),
 					columnName);
 			throw new InvalidDateException(msg, date);
 		}
