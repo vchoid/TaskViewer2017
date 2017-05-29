@@ -24,16 +24,16 @@ public class Task {
 		Task t = new Task();
 
 		try {
+			t.gebDat = DateUtil.parseDate(record.get(CSVReader.COL_MITGLIED_GEB_DAT));
+			t.orderedDate = DateUtil.parseDate(record.get(CSVReader.COL_ORDERED_DATE));
 			t.taskId = record.get(CSVReader.COL_TASK_ID);
 			t.taskType = record.get(CSVReader.COL_TASK_TYPE);
-			t.orderedDate = DateUtil.parseDate(record.get(CSVReader.COL_ORDERED_DATE));
 			t.kvnr = record.get(CSVReader.COL_MITGLIED_KVNR);
 			t.name = record.get(CSVReader.COL_MITGLIED_NAME);
 			t.vName = record.get(CSVReader.COL_MITGLIED_VORNAME);
 			t.titel = record.get(CSVReader.COL_MITGLIED_TITEL);
 			t.zsWort = record.get(CSVReader.COL_MITGLIED_ZSWORT);
 			t.vsWort = record.get(CSVReader.COL_MITGLIED_VSWORT);
-			t.gebDat = DateUtil.parseDate(record.get(CSVReader.COL_MITGLIED_GEB_DAT));
 
 		} catch (IllegalArgumentException | InvalidDateException e) {
 			throw new InvalidCSVRecordException(e, record.getRecordNumber());
@@ -41,6 +41,16 @@ public class Task {
 
 		// Überprüfung ob Pflichfelder gefüllt sind oder ..
 
+		// .. das Datumsformat nicht stimmt
+		if (StringUtils.isBlank(record.get(CSVReader.COL_MITGLIED_GEB_DAT))
+				|| !DateUtil.isDateValid(record.get(CSVReader.COL_MITGLIED_GEB_DAT))) {
+			throw new InvalidCSVRecordException(CSVReader.COL_MITGLIED_GEB_DAT, record.getRecordNumber());
+		}
+		// .. das Datumsformat nicht stimmt
+		if (StringUtils.isBlank(record.get(CSVReader.COL_ORDERED_DATE))
+				|| !DateUtil.isDateValid(record.get(CSVReader.COL_ORDERED_DATE))) {
+			throw new InvalidCSVRecordException(CSVReader.COL_ORDERED_DATE, record.getRecordNumber());
+		}
 		// .. nicht 32 Zeichen lang ist, entspricht nicht dem Hexadezimalformat
 		if (StringUtils.isBlank(t.taskId) || !HexaIdUtil.isIdValid(t.taskId)) {
 
@@ -49,17 +59,6 @@ public class Task {
 		if (StringUtils.isBlank(t.taskType)) {
 
 			throw new InvalidCSVRecordException(CSVReader.COL_TASK_TYPE, record.getRecordNumber());
-		}
-		// .. das Datumsformat nicht stimmt
-		if (StringUtils.isBlank(record.get(CSVReader.COL_MITGLIED_GEB_DAT))
-				|| !DateUtil.isDateValid(record.get(CSVReader.COL_MITGLIED_GEB_DAT))) {
-
-			throw new InvalidCSVRecordException(CSVReader.COL_MITGLIED_GEB_DAT, record.getRecordNumber());
-		}
-		// .. das Datumsformat nicht stimmt
-		if (StringUtils.isBlank(record.get(CSVReader.COL_ORDERED_DATE))
-				|| !DateUtil.isDateValid(record.get(CSVReader.COL_ORDERED_DATE))) {
-			throw new InvalidCSVRecordException(CSVReader.COL_ORDERED_DATE, record.getRecordNumber());
 		}
 		if (StringUtils.isBlank(t.kvnr) || !KVNrUtil.isKVNrValid(record.get(CSVReader.COL_MITGLIED_KVNR))) {
 
@@ -125,12 +124,13 @@ public class Task {
 
 	@Override
 	public String toString() {
-		return "______________________________________  " + ++anzTask + ". Task  ______________________________________\n" 
-				+ "Id: " + taskId + " [Typ: " + taskType
-				+ "] erstellt am: " + orderedDate.getDayOfMonth() + "." + orderedDate.getMonthValue() + "."
-				+ orderedDate.getYear() + "        |\nKVNr.: " + kvnr + "\n" + "Name: " + titel + name + ", " + vName
-				+ "\ngeboren am: " + gebDat.getDayOfMonth() + "." + gebDat.getMonthValue() + "." + gebDat.getYear()
-				+ "\nzsWort: " + zsWort + "\nvsWort: \n" + vsWort
+		return "______________________________________  " + ++anzTask
+				+ ". Task  ______________________________________\n"
+				+ "                                                                                       |\n" + "Id: "
+				+ taskId + " [Typ: " + taskType + "] erstellt am: " + orderedDate.getDayOfMonth() + "."
+				+ orderedDate.getMonthValue() + "." + orderedDate.getYear() + "\nKVNr.: " + kvnr + "\n" + "Name: "
+				+ titel + name + ", " + vName + "\ngeboren am: " + gebDat.getDayOfMonth() + "." + gebDat.getMonthValue()
+				+ "." + gebDat.getYear() + "\nzsWort: " + zsWort + "\nvsWort: \n" + vsWort
 				+ "_______________________________________________________________________________________|\n";
 	}
 
