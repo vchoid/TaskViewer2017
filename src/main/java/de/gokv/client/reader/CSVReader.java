@@ -56,7 +56,6 @@ public class CSVReader {
 
 			// TODO: Use to validate csvFile, check if all required Headers are
 			// present
-			// Map<String, Integer> headerMap = csvFileParser.getHeaderMap();
 
 			// Eine Zeile aus der CSV +++++++++++++++++++++++++++++++++++
 			for (CSVRecord csvRecord : csvFileParser.getRecords()) {
@@ -69,7 +68,7 @@ public class CSVReader {
 				} catch (InvalidCSVRecordException e) {
 
 					invalidEntries.add(csvRecord);
-					System.out.println(e.getMessage());
+					System.err.println("++++++++++++++++++++++++++++ " + invalidEntries.size() + ". Fehler ++++++++++++++++++++++++++++\n " + e.getMessage());
 				}
 			}
 
