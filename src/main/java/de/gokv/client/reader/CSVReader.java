@@ -68,8 +68,8 @@ public class CSVReader {
 				} catch (InvalidCSVRecordException e) {
 
 					invalidEntries.add(csvRecord);
-					System.err.println("++++++++++++++++++++++++++++ " + invalidEntries.size() + ". Fehler ++++++++++++++++++++++++++++\n " + e.getMessage());
-				}
+					System.err.println("-------------------------------------- " + invalidEntries.size() + ". Fehler --------------------------------------\n " + e.getMessage());
+				}						
 			}
 
 		} catch (FileNotFoundException e) {

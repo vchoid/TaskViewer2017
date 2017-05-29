@@ -2,7 +2,6 @@ package de.gokv.client.reader;
 
 import java.time.LocalDate;
 
-
 import org.apache.commons.csv.CSVRecord;
 import org.apache.commons.lang3.StringUtils;
 
@@ -21,11 +20,9 @@ public class Task {
 
 	private static int anzTask = 0;
 
-	
-	
 	public static Task createTaskFromRecord(CSVRecord record) throws InvalidCSVRecordException {
 		Task t = new Task();
-		
+
 		try {
 			t.taskId = record.get(CSVReader.COL_TASK_ID);
 			t.taskType = record.get(CSVReader.COL_TASK_TYPE);
@@ -37,16 +34,16 @@ public class Task {
 			t.zsWort = record.get(CSVReader.COL_MITGLIED_ZSWORT);
 			t.vsWort = record.get(CSVReader.COL_MITGLIED_VSWORT);
 			t.gebDat = DateUtil.parseDate(record.get(CSVReader.COL_MITGLIED_GEB_DAT));
-			
+
 		} catch (IllegalArgumentException | InvalidDateException e) {
 			throw new InvalidCSVRecordException(e, record.getRecordNumber());
 		}
 
-// Überprüfung ob Pflichfelder gefüllt sind oder ..
-		
+		// Überprüfung ob Pflichfelder gefüllt sind oder ..
+
 		// .. nicht 32 Zeichen lang ist, entspricht nicht dem Hexadezimalformat
 		if (StringUtils.isBlank(t.taskId) || !HexaIdUtil.isIdValid(t.taskId)) {
-			
+
 			throw new InvalidCSVRecordException(CSVReader.COL_TASK_ID, record.getRecordNumber());
 		}
 		if (StringUtils.isBlank(t.taskType)) {
@@ -54,12 +51,14 @@ public class Task {
 			throw new InvalidCSVRecordException(CSVReader.COL_TASK_TYPE, record.getRecordNumber());
 		}
 		// .. das Datumsformat nicht stimmt
-		if (StringUtils.isBlank(record.get(CSVReader.COL_MITGLIED_GEB_DAT)) || !DateUtil.isDateValid(record.get(CSVReader.COL_MITGLIED_GEB_DAT))) {
-			
+		if (StringUtils.isBlank(record.get(CSVReader.COL_MITGLIED_GEB_DAT))
+				|| !DateUtil.isDateValid(record.get(CSVReader.COL_MITGLIED_GEB_DAT))) {
+
 			throw new InvalidCSVRecordException(CSVReader.COL_MITGLIED_GEB_DAT, record.getRecordNumber());
 		}
 		// .. das Datumsformat nicht stimmt
-		if (StringUtils.isBlank(record.get(CSVReader.COL_ORDERED_DATE)) || !DateUtil.isDateValid(record.get(CSVReader.COL_ORDERED_DATE))) {
+		if (StringUtils.isBlank(record.get(CSVReader.COL_ORDERED_DATE))
+				|| !DateUtil.isDateValid(record.get(CSVReader.COL_ORDERED_DATE))) {
 			throw new InvalidCSVRecordException(CSVReader.COL_ORDERED_DATE, record.getRecordNumber());
 		}
 		if (StringUtils.isBlank(t.kvnr) || !KVNrUtil.isKVNrValid(record.get(CSVReader.COL_MITGLIED_KVNR))) {
@@ -68,15 +67,15 @@ public class Task {
 		}
 		// .. der Nachname Ziffern enthält
 		if (StringUtils.isBlank(t.name) || !StringUtils.containsNone(t.name, "1234567890")) {
-			
+
 			throw new InvalidCSVRecordException(CSVReader.COL_MITGLIED_NAME, record.getRecordNumber());
 		}
 		// .. der Vorname Ziffern enthält
 		if (StringUtils.isBlank(t.vName) || !StringUtils.containsNone(t.vName, "1234567890")) {
-			
+
 			throw new InvalidCSVRecordException(CSVReader.COL_MITGLIED_VORNAME, record.getRecordNumber());
 		}
-		
+
 		return t;
 	}
 
@@ -84,7 +83,6 @@ public class Task {
 		super();
 	}
 
-	
 	public String getTask_id() {
 		return taskId;
 	}
@@ -127,10 +125,13 @@ public class Task {
 
 	@Override
 	public String toString() {
-		return "------------------------------------ " + ++anzTask + ". Task --------------------------------------\n"
-				+ "Id: " + taskId + " [Typ: " + taskType + "] erstellt am: " + orderedDate.getDayOfMonth() + "." + orderedDate.getMonthValue() + "." + orderedDate.getYear() + "\nKVNr.: " + kvnr + "\n"
-				+ "Name: " + titel + name + ", " + vName + "\ngeboren am: " + gebDat.getDayOfMonth() + "." + gebDat.getMonthValue() + "." + gebDat.getYear() + "\nzsWort: " + zsWort
-				+ "\nvsWort: " + vsWort + "\n";
+		return "______________________________________  " + ++anzTask + ". Task  ______________________________________\n" 
+				+ "Id: " + taskId + " [Typ: " + taskType
+				+ "] erstellt am: " + orderedDate.getDayOfMonth() + "." + orderedDate.getMonthValue() + "."
+				+ orderedDate.getYear() + "        |\nKVNr.: " + kvnr + "\n" + "Name: " + titel + name + ", " + vName
+				+ "\ngeboren am: " + gebDat.getDayOfMonth() + "." + gebDat.getMonthValue() + "." + gebDat.getYear()
+				+ "\nzsWort: " + zsWort + "\nvsWort: \n" + vsWort
+				+ "_______________________________________________________________________________________|\n";
 	}
 
 	@Override
