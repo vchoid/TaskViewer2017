@@ -3,7 +3,7 @@ package de.gokv.client.taskviewer;
 import org.junit.Assert;
 import org.junit.Test;
 
-import de.gokv.client.reader.HexaIdUtil;
+import Utils.HexaIdUtil;
 
 public class HexaIdUtilTest {
 

@@ -1,4 +1,4 @@
-package de.gokv.client.reader;
+package Exceptions;
 
 public class InvalidCSVRecordException extends Throwable {
 
@@ -8,7 +8,7 @@ public class InvalidCSVRecordException extends Throwable {
 
 	public InvalidCSVRecordException(String colName, long line) {
 		super();
-		this.message = String.format("In Zeile %s,  %s in Spalte \"%s\"", line, System.lineSeparator(), colName);
+		this.message = String.format("In Zeile %s,  %s in der Spalte \"%s\"", line, System.lineSeparator(), colName);
 	}
 
 	

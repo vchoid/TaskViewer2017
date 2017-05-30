@@ -2,7 +2,8 @@ package de.gokv.client.taskviewer;
 
 import org.junit.Assert;
 import org.junit.Test;
-import de.gokv.client.reader.KVNrUtil;
+
+import Utils.KVNrUtil;
 
 public class KVNrutilTest {
 

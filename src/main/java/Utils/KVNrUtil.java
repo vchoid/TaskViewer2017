@@ -1,4 +1,4 @@
-package de.gokv.client.reader;
+package Utils;
 
 import java.util.regex.Pattern;
 

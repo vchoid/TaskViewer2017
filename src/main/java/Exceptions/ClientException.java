@@ -1,4 +1,4 @@
-package de.gokv.client.reader;
+package Exceptions;
 
 public class ClientException extends RuntimeException {
 	
@@ -9,7 +9,7 @@ public class ClientException extends RuntimeException {
 
 	public ClientException(Throwable e, String message) {
 		this.cause = e;
-		this.message = message;
+		this.message = "-> Client Exception: " + message;
 	}
 	
 	public Throwable getCause() {

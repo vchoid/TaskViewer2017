@@ -1,10 +1,12 @@
-package de.gokv.client.reader;
+package Utils;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 import java.util.regex.Pattern;
+
+import Exceptions.InvalidDateException;
 
 /**
  * Beinhaltet diverse Methoden zum Umgang mit Datums-Objekten und deren
@@ -82,7 +84,7 @@ public class DateUtil {
 		try {
 			return parseDate(date);
 		} catch (InvalidDateException e) {
-			String msg = String.format("%s %s in Spalte \"%s\"", e.getMessage(), System.lineSeparator(),
+			String msg = String.format("%s %s in der Spalte \"%s\"", e.getMessage(), System.lineSeparator(),
 					columnName);
 			throw new InvalidDateException(msg, date);
 		}

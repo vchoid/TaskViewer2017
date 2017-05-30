@@ -6,8 +6,8 @@ import java.time.LocalDate;
 import org.junit.Assert;
 import org.junit.Test;
 
-import de.gokv.client.reader.DateUtil;
-import de.gokv.client.reader.InvalidDateException;
+import Exceptions.InvalidDateException;
+import Utils.DateUtil;
 
 public class DateUtilTest {
 

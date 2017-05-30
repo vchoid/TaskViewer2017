@@ -5,6 +5,12 @@ import java.time.LocalDate;
 import org.apache.commons.csv.CSVRecord;
 import org.apache.commons.lang3.StringUtils;
 
+import Exceptions.InvalidCSVRecordException;
+import Exceptions.InvalidDateException;
+import Utils.DateUtil;
+import Utils.HexaIdUtil;
+import Utils.KVNrUtil;
+
 public class Task {
 
 	private String taskId;
@@ -142,47 +148,47 @@ public class Task {
 				+ "_______________________________________________________________________________________|\n";
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((kvnr == null) ? 0 : kvnr.hashCode());
-		result = prime * result + ((orderedDate == null) ? 0 : orderedDate.hashCode());
-		result = prime * result + ((taskId == null) ? 0 : taskId.hashCode());
-		result = prime * result + ((taskType == null) ? 0 : taskType.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Task other = (Task) obj;
-		if (kvnr == null) {
-			if (other.kvnr != null)
-				return false;
-		} else if (!kvnr.equals(other.kvnr))
-			return false;
-		if (orderedDate == null) {
-			if (other.orderedDate != null)
-				return false;
-		} else if (!orderedDate.equals(other.orderedDate))
-			return false;
-		if (taskId == null) {
-			if (other.taskId != null)
-				return false;
-		} else if (!taskId.equals(other.taskId))
-			return false;
-		if (taskType == null) {
-			if (other.taskType != null)
-				return false;
-		} else if (!taskType.equals(other.taskType))
-			return false;
-		return true;
-	}
+//	@Override
+//	public int hashCode() {
+//		final int prime = 31;
+//		int result = 1;
+//		result = prime * result + ((kvnr == null) ? 0 : kvnr.hashCode());
+//		result = prime * result + ((orderedDate == null) ? 0 : orderedDate.hashCode());
+//		result = prime * result + ((taskId == null) ? 0 : taskId.hashCode());
+//		result = prime * result + ((taskType == null) ? 0 : taskType.hashCode());
+//		return result;
+//	}
+//
+//	@Override
+//	public boolean equals(Object obj) {
+//		if (this == obj)
+//			return true;
+//		if (obj == null)
+//			return false;
+//		if (getClass() != obj.getClass())
+//			return false;
+//		Task other = (Task) obj;
+//		if (kvnr == null) {
+//			if (other.kvnr != null)
+//				return false;
+//		} else if (!kvnr.equals(other.kvnr))
+//			return false;
+//		if (orderedDate == null) {
+//			if (other.orderedDate != null)
+//				return false;
+//		} else if (!orderedDate.equals(other.orderedDate))
+//			return false;
+//		if (taskId == null) {
+//			if (other.taskId != null)
+//				return false;
+//		} else if (!taskId.equals(other.taskId))
+//			return false;
+//		if (taskType == null) {
+//			if (other.taskType != null)
+//				return false;
+//		} else if (!taskType.equals(other.taskType))
+//			return false;
+//		return true;
+//	}
 
 }

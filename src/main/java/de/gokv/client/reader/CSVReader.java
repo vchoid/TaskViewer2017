@@ -11,6 +11,9 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
+import Exceptions.ClientException;
+import Exceptions.InvalidCSVRecordException;
+
 public class CSVReader {
 
 	// title column - Titelzeile ++++++++++++++++++++++++++++++++++++++++
@@ -54,8 +57,7 @@ public class CSVReader {
 			// csv zergliedern - starten ++++++++++++++++++++++++++++++++
 			csvFileParser = new CSVParser(csvLesen, csvFileFormat);
 
-			// TODO: Use to validate csvFile, check if all required Headers are
-			// present
+			// TODO: Überprüfen ob alle Header vorhanden sind
 
 			// Eine Zeile aus der CSV +++++++++++++++++++++++++++++++++++
 			for (CSVRecord csvRecord : csvFileParser.getRecords()) {

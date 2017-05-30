@@ -1,4 +1,4 @@
-package de.gokv.client.reader;
+package Exceptions;
 
 
 public class InvalidDateException extends Throwable {
