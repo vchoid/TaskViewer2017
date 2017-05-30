@@ -73,7 +73,6 @@ public class CSVReader {
 
 					invalidEntries.add(csvRecord);
 					System.err.println("\n\n-------------------------------------------------------- Meldung " + invalidEntries.size() + " --------------------------------------------------------\n " + e.getMessage());
-					System.out.println(e);
 				}						
 			}
 
