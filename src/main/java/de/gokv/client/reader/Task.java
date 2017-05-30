@@ -13,16 +13,16 @@ import Utils.KVNrUtil;
 
 public class Task {
 
+	private LocalDate orderedDate;
+	private LocalDate gebDat;
 	private String taskId;
 	private String taskType;
-	private LocalDate orderedDate;
 	private String kvnr;
 	private String name;
 	private String vName;
 	private String titel;
 	private String zsWort;
 	private String vsWort;
-	private LocalDate gebDat;
 
 	private static int anzTask = 0;
 
@@ -148,47 +148,47 @@ public class Task {
 				+ "_______________________________________________________________________________________|\n";
 	}
 
-//	@Override
-//	public int hashCode() {
-//		final int prime = 31;
-//		int result = 1;
-//		result = prime * result + ((kvnr == null) ? 0 : kvnr.hashCode());
-//		result = prime * result + ((orderedDate == null) ? 0 : orderedDate.hashCode());
-//		result = prime * result + ((taskId == null) ? 0 : taskId.hashCode());
-//		result = prime * result + ((taskType == null) ? 0 : taskType.hashCode());
-//		return result;
-//	}
-//
-//	@Override
-//	public boolean equals(Object obj) {
-//		if (this == obj)
-//			return true;
-//		if (obj == null)
-//			return false;
-//		if (getClass() != obj.getClass())
-//			return false;
-//		Task other = (Task) obj;
-//		if (kvnr == null) {
-//			if (other.kvnr != null)
-//				return false;
-//		} else if (!kvnr.equals(other.kvnr))
-//			return false;
-//		if (orderedDate == null) {
-//			if (other.orderedDate != null)
-//				return false;
-//		} else if (!orderedDate.equals(other.orderedDate))
-//			return false;
-//		if (taskId == null) {
-//			if (other.taskId != null)
-//				return false;
-//		} else if (!taskId.equals(other.taskId))
-//			return false;
-//		if (taskType == null) {
-//			if (other.taskType != null)
-//				return false;
-//		} else if (!taskType.equals(other.taskType))
-//			return false;
-//		return true;
-//	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((kvnr == null) ? 0 : kvnr.hashCode());
+		result = prime * result + ((orderedDate == null) ? 0 : orderedDate.hashCode());
+		result = prime * result + ((taskId == null) ? 0 : taskId.hashCode());
+		result = prime * result + ((taskType == null) ? 0 : taskType.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Task other = (Task) obj;
+		if (kvnr == null) {
+			if (other.kvnr != null)
+				return false;
+		} else if (!kvnr.equals(other.kvnr))
+			return false;
+		if (orderedDate == null) {
+			if (other.orderedDate != null)
+				return false;
+		} else if (!orderedDate.equals(other.orderedDate))
+			return false;
+		if (taskId == null) {
+			if (other.taskId != null)
+				return false;
+		} else if (!taskId.equals(other.taskId))
+			return false;
+		if (taskType == null) {
+			if (other.taskType != null)
+				return false;
+		} else if (!taskType.equals(other.taskType))
+			return false;
+		return true;
+	}
 
 }

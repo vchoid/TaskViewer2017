@@ -49,7 +49,7 @@ public class CSVReader {
 
 		// erste Zeile als Titelzeile festlegen durch automatisches Parsing
 		CSVFormat csvFileFormat = CSVFormat.newFormat(';').withHeader();
-
+		
 		try {
 			// csv Lesen - starten ++++++++++++++++++++++++++++++++++++++
 			csvLesen = new FileReader(filePath);
@@ -57,7 +57,8 @@ public class CSVReader {
 			// csv zergliedern - starten ++++++++++++++++++++++++++++++++
 			csvFileParser = new CSVParser(csvLesen, csvFileFormat);
 
-			// TODO: Überprüfen ob alle Header vorhanden sind
+			// TODO: Überprüfung der Header in der CSV
+//			System.out.println(csvFileParser.getHeaderMap());
 
 			// Eine Zeile aus der CSV +++++++++++++++++++++++++++++++++++
 			for (CSVRecord csvRecord : csvFileParser.getRecords()) {
@@ -66,11 +67,13 @@ public class CSVReader {
 					Task oneTaskRow = Task.createTaskFromRecord(csvRecord);
 					if (!tasks.contains(oneTaskRow))
 						tasks.add(oneTaskRow);
+				
 
 				} catch (InvalidCSVRecordException e) {
 
 					invalidEntries.add(csvRecord);
 					System.err.println("\n\n-------------------------------------------------------- Meldung " + invalidEntries.size() + " --------------------------------------------------------\n " + e.getMessage());
+					System.out.println(e);
 				}						
 			}
 
