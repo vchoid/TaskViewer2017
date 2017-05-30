@@ -1,7 +1,6 @@
 package de.gokv.client.reader;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class TestMeInMain {
 
@@ -20,31 +19,31 @@ public class TestMeInMain {
 		}
 
 				
-//		// orderedDate
-//		LocalDate oDate;
-//		for (int i = 0; i < reader.getTasks().size(); i++) {
-//			oDate = reader.getTasks().get(i).getOrdered_date();
-//			System.out.println(oDate);
-//			
-//		}
-//		// gebDat
-//		LocalDate gDate;
-//		for (int i = 0; i < reader.getTasks().size(); i++) {
-//			gDate = reader.getTasks().get(i).getGeb_dat();
-//			System.out.println(gDate);
-//		}
-//		
-//		// Id
-//		String iD;
-//		for (int i = 0; i < reader.getTasks().size(); i++) {
-//			iD = reader.getTasks().get(i).getTask_id();
-//			System.out.println(iD);
-//		}
-//		// KVNr
-//		String kvNr;
-//		for (int i = 0; i < reader.getTasks().size(); i++) {
-//			kvNr = reader.getTasks().get(i).getKvnr();
-//			System.out.println(kvNr);
-//		}
+		// orderedDate
+		LocalDate oDate;
+		for (int i = 0; i < reader.getTasks().size(); i++) {
+			oDate = reader.getTasks().get(i).getOrdered_date();
+			System.out.println(oDate);
+			
+		}
+		// gebDat
+		LocalDate gDate;
+		for (int i = 0; i < reader.getTasks().size(); i++) {
+			gDate = reader.getTasks().get(i).getGeb_dat();
+			System.out.println(gDate);
+		}
+		
+		// Id
+		String iD;
+		for (int i = 0; i < reader.getTasks().size(); i++) {
+			iD = reader.getTasks().get(i).getTask_id();
+			System.out.println(iD);
+		}
+		// KVNr
+		String kvNr;
+		for (int i = 0; i < reader.getTasks().size(); i++) {
+			kvNr = reader.getTasks().get(i).getKvnr();
+			System.out.println(kvNr);
+		}
 	}
 }

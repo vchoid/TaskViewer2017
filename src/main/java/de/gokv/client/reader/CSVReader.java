@@ -31,7 +31,7 @@ public class CSVReader {
 	// ungültige Einträge aus CSV ++++++++++++++++++++++++++++++++++++
 	private List<CSVRecord> invalidEntries = new ArrayList<CSVRecord>();
 
-	// Zeilen in Liste speichern
+	// Zeileninträge in eine Liste speichern
 	private List<Task> tasks = new ArrayList<Task>();
 
 	// Datei-Abfrage - Dateipfad +++++++++++++++++++++++++++++++++++++++
@@ -58,7 +58,7 @@ public class CSVReader {
 			csvFileParser = new CSVParser(csvLesen, csvFileFormat);
 
 			// TODO: Überprüfung der Header in der CSV
-//			System.out.println(csvFileParser.getHeaderMap());
+			System.out.println(csvFileParser.getHeaderMap());
 
 			// Eine Zeile aus der CSV +++++++++++++++++++++++++++++++++++
 			for (CSVRecord csvRecord : csvFileParser.getRecords()) {
