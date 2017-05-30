@@ -1,15 +1,12 @@
 package de.gokv.client.reader;
 
 import java.time.LocalDate;
+import java.util.regex.Pattern;
 
 import org.apache.commons.csv.CSVRecord;
-import org.apache.commons.lang3.StringUtils;
 
 import Exceptions.InvalidCSVRecordException;
 import Exceptions.InvalidDateException;
-import Utils.DateUtil;
-import Utils.HexaIdUtil;
-import Utils.KVNrUtil;
 
 public class Task {
 
@@ -24,10 +21,14 @@ public class Task {
 	private String zsWort;
 	private String vsWort;
 
+	private final static Pattern PATTERN_KVNR = Pattern.compile("[A-Z]{1}[0-9]{9}");
+	private final static Pattern PATTERN_TASKID = Pattern.compile("[A-F0-9]{32}");
+	private final static Pattern PATTERN_ALPHA = Pattern.compile("^[a-zA-Z\\d-\\d \\d.]*");
+
 	private static int anzTask = 0;
 
-	//TODO JavaDoc schreiben
-	
+	// TODO JavaDoc schreiben
+
 	/**
 	 * 
 	 * @param record
@@ -37,56 +38,23 @@ public class Task {
 	public static Task createTaskFromRecord(CSVRecord record) throws InvalidCSVRecordException {
 
 		Task t = new Task();
-		
+
 		try {
-			t.gebDat = DateUtil.parseDate(record.get(CSVReader.COL_MITGLIED_GEB_DAT), CSVReader.COL_MITGLIED_GEB_DAT);
-			t.orderedDate = DateUtil.parseDate(record.get(CSVReader.COL_ORDERED_DATE), CSVReader.COL_ORDERED_DATE);
-			t.taskId = record.get(CSVReader.COL_TASK_ID);
-			t.taskType = record.get(CSVReader.COL_TASK_TYPE);
-			t.kvnr = record.get(CSVReader.COL_MITGLIED_KVNR);
-			t.name = record.get(CSVReader.COL_MITGLIED_NAME);
-			t.vName = record.get(CSVReader.COL_MITGLIED_VORNAME);
-			t.titel = record.get(CSVReader.COL_MITGLIED_TITEL);
-			t.zsWort = record.get(CSVReader.COL_MITGLIED_ZSWORT);
-			t.vsWort = record.get(CSVReader.COL_MITGLIED_VSWORT);
-			
-		} catch (IllegalArgumentException | InvalidDateException e) {
+
+			t.gebDat = CSVReader.getValueAsDate(record, CSVReader.COL_MITGLIED_GEB_DAT, true);
+			t.orderedDate = CSVReader.getValueAsDate(record, CSVReader.COL_ORDERED_DATE, true);
+			t.taskId = CSVReader.getValue(record, CSVReader.COL_TASK_ID, true, PATTERN_TASKID);
+			t.taskType = CSVReader.getValue(record, CSVReader.COL_TASK_TYPE, true);
+			t.kvnr = CSVReader.getValue(record, CSVReader.COL_MITGLIED_KVNR, true, PATTERN_KVNR);
+			t.name = CSVReader.getValue(record, CSVReader.COL_MITGLIED_NAME, true, PATTERN_ALPHA);
+			t.vName = CSVReader.getValue(record, CSVReader.COL_MITGLIED_VORNAME, true, PATTERN_ALPHA);
+
+			t.titel = CSVReader.getValue(record, CSVReader.COL_MITGLIED_TITEL, false, PATTERN_ALPHA);
+			t.zsWort = CSVReader.getValue(record, CSVReader.COL_MITGLIED_ZSWORT, false, PATTERN_ALPHA);
+			t.vsWort = CSVReader.getValue(record, CSVReader.COL_MITGLIED_VSWORT, false, PATTERN_ALPHA);
+
+		} catch (InvalidDateException e) {
 			throw new InvalidCSVRecordException(e, record.getRecordNumber());
-		}
-		// Überprüfung ob Pflichfelder gefüllt sind oder ..
-
-		// .. das Datumsformat nicht stimmt
-		if (StringUtils.isBlank(record.get(CSVReader.COL_MITGLIED_GEB_DAT))
-				|| !DateUtil.isDateValid(record.get(CSVReader.COL_MITGLIED_GEB_DAT))) {
-			throw new InvalidCSVRecordException(CSVReader.COL_MITGLIED_GEB_DAT, record.getRecordNumber());
-		}
-		// .. das Datumsformat nicht stimmt
-		if (StringUtils.isBlank(record.get(CSVReader.COL_ORDERED_DATE))
-				|| !DateUtil.isDateValid(record.get(CSVReader.COL_ORDERED_DATE))) {
-			throw new InvalidCSVRecordException(CSVReader.COL_ORDERED_DATE, record.getRecordNumber());
-		}
-		// .. nicht 32 Zeichen lang ist, entspricht nicht dem Hexadezimalformat
-		if (StringUtils.isBlank(record.get(CSVReader.COL_TASK_ID)) || !HexaIdUtil.isIdValid(record.get(CSVReader.COL_TASK_ID))) {
-
-			throw new InvalidCSVRecordException(CSVReader.COL_TASK_ID, record.getRecordNumber());
-		}
-		if (StringUtils.isBlank(record.get(CSVReader.COL_TASK_TYPE))) {
-
-			throw new InvalidCSVRecordException(CSVReader.COL_TASK_TYPE, record.getRecordNumber());
-		}
-		if (StringUtils.isBlank(record.get(CSVReader.COL_MITGLIED_KVNR)) || !KVNrUtil.isKVNrValid(record.get(CSVReader.COL_MITGLIED_KVNR))) {
-
-			throw new InvalidCSVRecordException(CSVReader.COL_MITGLIED_KVNR, record.getRecordNumber());
-		}
-		// .. der Nachname Ziffern enthält
-		if (StringUtils.isBlank(record.get(CSVReader.COL_MITGLIED_NAME)) || !StringUtils.containsNone(record.get(CSVReader.COL_MITGLIED_NAME), "1234567890")) {
-
-			throw new InvalidCSVRecordException(CSVReader.COL_MITGLIED_NAME, record.getRecordNumber());
-		}
-		// .. der Vorname Ziffern enthält
-		if (StringUtils.isBlank(record.get(CSVReader.COL_MITGLIED_VORNAME)) || !StringUtils.containsNone(record.get(CSVReader.COL_MITGLIED_VORNAME), "1234567890")) {
-
-			throw new InvalidCSVRecordException(CSVReader.COL_MITGLIED_VORNAME, record.getRecordNumber());
 		}
 
 		return t;

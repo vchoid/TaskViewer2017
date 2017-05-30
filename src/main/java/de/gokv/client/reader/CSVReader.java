@@ -3,16 +3,21 @@ package de.gokv.client.reader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 //import java.util.Map;
+import java.util.regex.Pattern;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import org.apache.commons.lang3.StringUtils;
 
 import Exceptions.ClientException;
 import Exceptions.InvalidCSVRecordException;
+import Exceptions.InvalidDateException;
+import Utils.DateUtil;
 
 public class CSVReader {
 
@@ -49,7 +54,7 @@ public class CSVReader {
 
 		// erste Zeile als Titelzeile festlegen durch automatisches Parsing
 		CSVFormat csvFileFormat = CSVFormat.newFormat(';').withHeader();
-		
+
 		try {
 			// csv Lesen - starten ++++++++++++++++++++++++++++++++++++++
 			csvLesen = new FileReader(filePath);
@@ -58,7 +63,7 @@ public class CSVReader {
 			csvFileParser = new CSVParser(csvLesen, csvFileFormat);
 
 			// TODO: Überprüfung der Header in der CSV
-			System.out.println(csvFileParser.getHeaderMap());
+			// System.out.println(csvFileParser.getHeaderMap());
 
 			// Eine Zeile aus der CSV +++++++++++++++++++++++++++++++++++
 			for (CSVRecord csvRecord : csvFileParser.getRecords()) {
@@ -67,13 +72,14 @@ public class CSVReader {
 					Task oneTaskRow = Task.createTaskFromRecord(csvRecord);
 					if (!tasks.contains(oneTaskRow))
 						tasks.add(oneTaskRow);
-				
 
 				} catch (InvalidCSVRecordException e) {
 
 					invalidEntries.add(csvRecord);
-					System.err.println("\n\n-------------------------------------------------------- Meldung " + invalidEntries.size() + " --------------------------------------------------------\n " + e.getMessage());
-				}						
+					System.err.println("\n\n-------------------------------------------------------- Meldung "
+							+ invalidEntries.size() + " --------------------------------------------------------\n "
+							+ e.getMessage());
+				}
 			}
 
 		} catch (FileNotFoundException e) {
@@ -92,6 +98,42 @@ public class CSVReader {
 				// Swallow Exception
 			}
 		}
+	}
+
+	// TODO Methode column isSet()
+
+	public static String getValue(CSVRecord rec, String colName) {
+		String s = "";
+		if (rec.isSet(colName)) {
+			s = rec.get(colName);
+		}
+		return s;
+	}
+
+	public static String getValue(CSVRecord rec, String colName, boolean require) throws InvalidCSVRecordException {
+		String s = getValue(rec, colName);
+
+		if (require && StringUtils.isBlank(s)) {
+			throw new InvalidCSVRecordException(colName, rec.getRecordNumber());
+		}
+		return s;
+	}
+
+	public static String getValue(CSVRecord rec, String colName, boolean require, Pattern pattern)
+			throws InvalidCSVRecordException {
+		String value = getValue(rec, colName, require);
+		if (!pattern.matcher(value).matches())
+			throw new InvalidCSVRecordException(colName, rec.getRecordNumber(),
+					"Der Wert %s ist für das Format %s nicht gültig.", value, pattern.toString());
+		return value;
+	}
+
+	public static LocalDate getValueAsDate(CSVRecord rec, String colName, boolean require)
+			throws InvalidCSVRecordException, InvalidDateException {
+		String s = getValue(rec, colName, require);
+		LocalDate localDate = DateUtil.parseDate(s, colName);
+
+		return localDate;
 	}
 
 	public List<Task> getTasks() {
