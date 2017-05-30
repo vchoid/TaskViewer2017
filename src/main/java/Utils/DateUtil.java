@@ -9,16 +9,21 @@ import java.util.regex.Pattern;
 import Exceptions.InvalidDateException;
 
 /**
- * Beinhaltet diverse Methoden zum Umgang mit Datums-Objekten und deren
- * Umwandlung.
+ * Beinhaltet eine Methode zum Überprüfen des richtigen Formates (DD.MM.YYYY)
+ * und zwei Methoden zum umwandeln von einem String in eine {@link LocalDate}-
+ * Format.
  * 
- * Funktionen:
+ * <p><b>Funktionen:</b>
  * <ul>
- * <li><b>isDateValid(String)</b>: prüft ein Datum auf syntaktische Korrektheit</li>
- * <li><b>parseDate(String)</b>: wandelt einen {@link String} in ein {@link LocalDate} um</li>
- * <li><b>parseDate(String, String)</b>: wandelt einen {@link String} in ein {@link LocalDate} um und gibt den Spaltennamen in der Fehlermeldung zurück</li>
+ * <li><b>isDateValid({@link String})</b>: prüft ein Datum auf syntaktische Korrektheit
+ * </li>
+ * <li><b>parseDate({@link String})</b>: wandelt einen {@link String} in ein
+ * {@link LocalDate} um</li>
+ * <li><b>parseDate({@link String}, {@link String})</b>: wandelt einen {@link String} in ein
+ * {@link LocalDate} um und gibt den Spaltennamen in der Fehlermeldung zurück
+ * </li>
  * </ul>
- * 
+ * </p>
  * @author Christoph Kiank
  * @version 1.0.0
  * @see java.time.LocalDate
@@ -31,8 +36,19 @@ public class DateUtil {
 			.withResolverStyle(ResolverStyle.STRICT);
 
 	/**
+	 * Überprüft ob ein sich String im Datums-Format (dd.mm.yyyy) befindet und
+	 * ins LocalDate-Format umgewandelt werden kann und gibt anschließend ein
+	 * {@link Boolean} zurück.
+	 * 
 	 * @param date
+	 *            {@link String}: Zu konvertierendes Datum im Format TT.MM.JJJJ
 	 * @return
+	 * 		<ul>
+	 *         <li><i>true</i>, wenn der String im korrektem Format vorliegt und
+	 *         gleichzeitig umgewandelt werden kann.</li>
+	 *         <li><i>false</i>, wenn der String im nicht korrektem Format
+	 *         vorliegt oder nicht umgewandelt werden kann.</li>
+	 *         </ul>
 	 */
 	public static boolean isDateValid(String date) {
 		// String überprüfen, ob "ZZ.ZZ.ZZZZ" (Z = Ziffer)
