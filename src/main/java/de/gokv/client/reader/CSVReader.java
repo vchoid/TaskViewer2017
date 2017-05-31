@@ -20,7 +20,23 @@ import exceptions.InvalidDateException;
 import utils.DateUtil;
 
 /**
+ * Eine CSV auslesen und Daten zurückgeben.
  * 
+ * 
+ * <p><b>Funktionen:</b>
+ * <ul>
+ * <li><b>readCSVFile</b>: Ließt die CSV-Datei. Setzt eine Header-Map und versucht den Inhalt einer Reihe in eine Task zu speichern.
+ * </li>
+ * <li><b>getValue({@link CSVRecord}, {@link String})</b>: Holt ein Wert einer Spalte aus der CSV und gibt ihn als String zurück.
+ * </li>
+ * <li><b>getValue({@link CSVRecord}, {@link String}, {@literal boolean})</b>: Holt ein Wert einer Spalte eines Pflichtfeldes aus der CSV und gibt ihn als String zurück.  
+ * </li>
+ * <li><b>getValue({@link CSVRecord}, {@link String}, {@link Pattern}, {@literal boolean})</b>: Holt ein Wert einer Spalte, nach einem bestimmtem Pattern eines Pflichtfeldes aus der CSV und gibt ihn als String zurück.
+ * </li>
+ * <li><b>getValueAsDate({@link CSVRecord}, {@link String}, {@literal boolean}))</b>: Holt ein Wert einer Spalte eines Pflichtfeldes aus der CSV und gibt ihn als LocalDate zurück.
+ * </li>
+ * </ul>
+ * </p>
  * @author Christoph Kiank
  * @version 1.0.0
  * 
@@ -56,6 +72,7 @@ public class CSVReader {
 	// CSV-Datei auslesen +++++++++++++++++++++++++++++++++++++++++++++++
 	/**
 	 * 
+	 * 
 	 * @throws ClientException
 	 */
 	public void readCSVFile() throws ClientException {
@@ -63,7 +80,6 @@ public class CSVReader {
 		FileReader csvLesen = null;
 		CSVParser csvFileParser = null;
 
-		
 		// TODO header Mapping ==> eigene Exception werfen.
 		// erste Zeile als Titelzeile festlegen durch automatisches Parsing
 		CSVFormat csvFileFormat = CSVFormat.newFormat(';').withHeader();
@@ -118,9 +134,9 @@ public class CSVReader {
 	/**
 	 * Holt den Wert aus der CSV-Datei und gibt ihn wieder als String zurück.
 	 * 
-	 * @param rec
-	 * @param colName
-	 * @return
+	 * @param rec CSV-Datei einlesen.
+	 * @param colName Spalte der CSV-Datei
+	 * @return Gibt den Wert von der CSV-Datei-Spalte zurück.
 	 */
 	public static String getValue(CSVRecord rec, String colName) {
 		String s = "";
@@ -136,10 +152,13 @@ public class CSVReader {
 	 * Überprüft ob es sich um ein Pflichfeld handelt und wirft eine Exception,
 	 * wenn dies nicht der Fall ist.
 	 * 
-	 * @param rec	CSV-Datei
-	 * @param colName	Spalte der CSV-Datei
-	 * @param require	<i>true</i> = Pflichtfeld, <i>false</i> = kein Pflichtfeld
-	 * @return Gibt den Wert aus der CSV-
+	 * @param rec
+	 *            CSV-Datei einlesen.
+	 * @param colName
+	 *            Spalte der CSV-Datei
+	 * @param require
+	 *            <i>true</i> = Pflichtfeld, <i>false</i> = kein Pflichtfeld
+	 * @return Gibt den Wert von der CSV-Datei-Spalte zurück.
 	 * @throws InvalidCSVRecordException
 	 */
 	public static String getValue(CSVRecord rec, String colName, boolean require) throws InvalidCSVRecordException {
@@ -152,12 +171,18 @@ public class CSVReader {
 	}
 
 	/**
+	 * Holt den Wert aus der CSV-Datei und gibt ihn wieder als String
+	 * zurück.Überprüft, ob der Wert ein bestimmtes Pattern aufweist, wirft eine
+	 * Exception, wenn dies nicht der Fall ist. Überprüft ob es sich um ein
+	 * Pflichfeld handelt und wirft eine Exception, wenn dies nicht der Fall
+	 * ist.
 	 * 
-	 * @param rec
-	 * @param colName
-	 * @param pattern
-	 * @param require
-	 * @return
+	 * 
+	 * @param rec CSV-Datei einlesen.
+	 * @param colName  Spalte der CSV-Datei
+	 * @param pattern Wert aus der Spalte, auf ein bestimmest Pattern prüfen.
+	 * @param require  <i>true</i> = Pflichtfeld, <i>false</i> = kein Pflichtfeld
+	 * @return Gibt den Wert von der CSV-Datei-Spalte zurück.
 	 * @throws InvalidCSVRecordException
 	 */
 	public static String getValue(CSVRecord rec, String colName, Pattern pattern, boolean require)
@@ -171,10 +196,10 @@ public class CSVReader {
 
 	/**
 	 * 
-	 * @param rec
-	 * @param colName
-	 * @param require
-	 * @return
+	 * @param rec CSV-Datei einlesen.
+	 * @param colName  Spalte der CSV-Datei
+	 * @param require  <i>true</i> = Pflichtfeld, <i>false</i> = kein Pflichtfeld
+	 * @return Gibt den Wert von der CSV-Datei-Spalte zurück.
 	 * @throws InvalidCSVRecordException
 	 * @throws InvalidDateException
 	 */
