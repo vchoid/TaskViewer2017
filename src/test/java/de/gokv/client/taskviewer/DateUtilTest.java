@@ -2,7 +2,6 @@ package de.gokv.client.taskviewer;
 
 import java.time.LocalDate;
 
-
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -17,9 +16,16 @@ public class DateUtilTest {
 	}
 
 	@Test
+	public void testInvalidDateWithChar() {
+		Assert.assertFalse("...ungültiges Datum, weil es ein ungültiges Zeichen enthält.",
+				DateUtil.isDateValid("O9.02.20l7"));
+	}
+
+	@Test
 	public void testInvalidDateSchaltjahr() {
 		Assert.assertFalse("...ungültiges Datum, weil es kein Schaltjahr ist.", DateUtil.isDateValid("29.02.2017"));
 	}
+
 	@Test
 	public void testValidDateSchaltjahr() {
 		Assert.assertTrue("...gültiges Datum im Schaltjahr.", DateUtil.isDateValid("29.02.2016"));
@@ -34,22 +40,23 @@ public class DateUtilTest {
 	public void testInvalidShortYear() {
 		Assert.assertFalse("...ungültiges Datumsformat vom Jahr", DateUtil.isDateValid("28.02.82"));
 	}
-	
+
 	@Test
 	public void testInvalidShortMonth() {
 		Assert.assertFalse("...ungültiges Datumsformat vom Monat", DateUtil.isDateValid("28.2.1982"));
 	}
+
 	@Test
 	public void testInvalidShortDay() {
 		Assert.assertFalse("...ungültiges Datumsformat vom Monat", DateUtil.isDateValid("2.2.1982"));
 	}
 
-	
-		@Test
+	@Test
 	public void testParseValidDate() throws InvalidDateException {
 		String testDate = "18.03.1982";
 		LocalDate date = DateUtil.parseDate(testDate);
-		Assert.assertEquals("Valides Datum \"" + testDate + "\" wurde erfolgreich konvertiert", LocalDate.class, date.getClass());
+		Assert.assertEquals("Valides Datum \"" + testDate + "\" wurde erfolgreich konvertiert", LocalDate.class,
+				date.getClass());
 	}
 
 	@Test(expected = InvalidDateException.class)
@@ -58,7 +65,9 @@ public class DateUtilTest {
 		try {
 			DateUtil.parseDate(date);
 		} catch (InvalidDateException e) {
-			Assert.assertEquals("Invalid Exception Message", String.format("Fehler beim Konvertieren vom String \"%s\" in ein LocalDate-Format", date), e.getMessage());
+			Assert.assertEquals("Invalid Exception Message",
+					String.format("Fehler beim Konvertieren vom String \"%s\" in ein LocalDate-Format", date),
+					e.getMessage());
 			throw e;
 		}
 	}

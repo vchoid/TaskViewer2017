@@ -22,7 +22,7 @@ import utils.DateUtil;
 /**
  * 
  * @author Christoph Kiank
- * @version 0.0.1
+ * @version 1.0.0
  * 
  *
  */
@@ -96,7 +96,7 @@ public class CSVReader {
 			}
 
 		} catch (FileNotFoundException e) {
-			throw new ClientException(e, "Datei " + filePath + " wurde nicht gefunden");
+			throw new ClientException(e.getCause(), "Datei " + filePath + " wurde nicht gefunden");
 
 		} catch (IOException e) {
 			throw new ClientException(e, "Es ist ein Fehler beim Lesen der Datei aufgetreten");
