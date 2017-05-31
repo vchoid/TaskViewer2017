@@ -102,6 +102,12 @@ public class CSVReader {
 
 	// TODO Methode column isSet()
 
+	/**
+	 * 
+	 * @param rec
+	 * @param colName
+	 * @return
+	 */
 	public static String getValue(CSVRecord rec, String colName) {
 		String s = "";
 		if (rec.isSet(colName)) {
@@ -109,7 +115,14 @@ public class CSVReader {
 		}
 		return s;
 	}
-
+	/**
+	 * 
+	 * @param rec
+	 * @param colName
+	 * @param require
+	 * @return
+	 * @throws InvalidCSVRecordException
+	 */
 	public static String getValue(CSVRecord rec, String colName, boolean require) throws InvalidCSVRecordException {
 		String s = getValue(rec, colName);
 
@@ -118,7 +131,15 @@ public class CSVReader {
 		}
 		return s;
 	}
-
+	/**
+	 * 
+	 * @param rec
+	 * @param colName
+	 * @param pattern
+	 * @param require
+	 * @return
+	 * @throws InvalidCSVRecordException
+	 */
 	public static String getValue(CSVRecord rec, String colName, Pattern pattern, boolean require)
 			throws InvalidCSVRecordException {
 		String value = getValue(rec, colName, require);
@@ -127,7 +148,15 @@ public class CSVReader {
 					"Der Wert %s ist für das Format %s nicht gültig.", value, pattern.toString());
 		return value;
 	}
-
+	/**
+	 * 
+	 * @param rec
+	 * @param colName
+	 * @param require
+	 * @return
+	 * @throws InvalidCSVRecordException
+	 * @throws InvalidDateException
+	 */
 	public static LocalDate getValueAsDate(CSVRecord rec, String colName, boolean require)
 			throws InvalidCSVRecordException, InvalidDateException {
 		String s = getValue(rec, colName, require);

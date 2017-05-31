@@ -21,11 +21,11 @@ public class Task {
 	private String zsWort;
 	private String vsWort;
 
+	// Pattern für valide KvNr, TaskId, Namensgebung
 	private final static Pattern PATTERN_KVNR = Pattern.compile("[A-Z]{1}[0-9]{9}");
 	private final static Pattern PATTERN_TASKID = Pattern.compile("[A-F0-9]{32}");
 	private final static Pattern PATTERN_ALPHA = Pattern.compile("^[a-zA-Z\\d-\\d \\d.]*");
-	// private final static Pattern PATTERN_DATE =
-	// Pattern.compile("\\d{2}\\.\\d{2}\\.\\d{4}");
+	// private final static Pattern PATTERN_DATE = Pattern.compile("\\d{2}\\.\\d{2}\\.\\d{4}");
 
 	private static int anzTask = 0;
 

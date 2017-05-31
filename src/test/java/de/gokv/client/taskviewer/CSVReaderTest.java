@@ -1,6 +1,7 @@
 package de.gokv.client.taskviewer;
 
 import java.io.FileNotFoundException;
+import java.util.regex.Pattern;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,36 +14,42 @@ import de.gokv.client.reader.CSVReader;
 import de.gokv.client.reader.Task;
 
 public class CSVReaderTest {
-	
+
 	private CSVReader readerValid;
 	private CSVReader readerInvalid;
 	private Task content;
-	
+
 	@Before
 	public void before() {
-		readerValid = new CSVReader(System.getProperty("user.dir") + "/src/test/resources/famv_direct_input_monitoring_20170515131131.csv");
-		readerInvalid = new CSVReader(System.getProperty("user.dir") + "/src/test/resources/invalid_famv_direct_input_monitoring_20170515131131.csv");
-		
+		readerValid = new CSVReader(
+				System.getProperty("user.dir") + "/src/test/resources/famv_direct_input_monitoring_20170515131131.csv");
+		readerInvalid = new CSVReader(System.getProperty("user.dir")
+				+ "/src/test/resources/invalid_famv_direct_input_monitoring_20170515131131.csv");
+
 	}
-// überprüft ob die Datei vorhanden ist.
-	@Test(expected=ClientException.class)
-	public void testCSVFileReaderException(){
-		String filePath = System.getProperty("user.dir") + "/gokv-client-task-viewer/src/test/resources/famv_direct_input_monitoring_20170515131131.csv";
+
+	// überprüft ob die Datei vorhanden ist.
+	@Test(expected = ClientException.class)
+	public void testCSVFileReaderException() {
+		String filePath = System.getProperty("user.dir")
+				+ "/gokv-client-task-viewer/src/test/resources/famv_direct_input_monitoring_20170515131131.csv";
 		readerValid = new CSVReader(filePath);
-		try{
+		try {
 			readerValid.readCSVFile();
-		}catch(ClientException e){
+		} catch (ClientException e) {
 			Assert.assertEquals("Datei " + filePath + " wurde nicht gefunden", e.getMessage());
 			Assert.assertTrue(e.getCause() instanceof FileNotFoundException);
 			throw e;
 		}
 	}
-// überprüft ob die Inhalte gelesen werden.
+
+	// überprüft ob die Inhalte gelesen werden.
+	
 	@Test
 	public void testCSVReadContent() {
 		readerValid.readCSVFile();
 		content = readerValid.getTasks().get(0);
-		Assert.assertEquals(4, readerValid.getTasks().size()); 
+		Assert.assertEquals(4, readerValid.getTasks().size());
 		Assert.assertEquals("405750F0395F11E7BED7F726E269B87F", content.getTask_id());
 		Assert.assertEquals("famv_bestand", content.getTasktype());
 		Assert.assertEquals("2017-05-15", content.getOrdered_date().toString());
@@ -52,32 +59,33 @@ public class CSVReaderTest {
 		Assert.assertEquals("", content.getZsWort());
 		Assert.assertEquals("", content.getVsWort());
 		Assert.assertEquals("1982-03-06", content.getGeb_dat().toString());
-		
+
 	}
-	
-	
-	
+
 	@Test
-	public void testReadEmptyLine(){
-		readerInvalid.readCSVFile();
-		System.out.println(readerInvalid.getTasks().size());
+	public void testValidHexaId() {
+		
 		
 	}
 	
 	@Test
-	public void testReadLineTooMuchCont(){
-		
+	public void testReadEmptyLine() {
+
 	}
-	
+
 	@Test
-	public void testReadLineTooLittleCont(){
-		
+	public void testReadLineTooMuchCont() {
+
 	}
-	
+
 	@Test
-	public void testReadWrongHeader(){
-		
+	public void testReadLineTooLittleCont() {
+
 	}
-	
-	
+
+	@Test
+	public void testReadWrongHeader() {
+
+	}
+
 }
