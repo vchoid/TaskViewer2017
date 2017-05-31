@@ -33,8 +33,8 @@ public class Task {
 
 	/**
 	 * 
-	 * @param record
-	 * @return
+	 * @param record Aufzeichnung der gelesenen CSV-Datei
+	 * @return Eine Zeile aus der CSV-Datei.
 	 * @throws InvalidCSVRecordException
 	 */
 	public static Task createTaskFromRecord(CSVRecord record) throws InvalidCSVRecordException {
