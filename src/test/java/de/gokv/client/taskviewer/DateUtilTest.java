@@ -6,8 +6,8 @@ import java.time.LocalDate;
 import org.junit.Assert;
 import org.junit.Test;
 
-import Exceptions.InvalidDateException;
-import Utils.DateUtil;
+import exceptions.InvalidDateException;
+import utils.DateUtil;
 
 public class DateUtilTest {
 

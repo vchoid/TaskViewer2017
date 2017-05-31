@@ -5,13 +5,11 @@ import java.util.regex.Pattern;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import Exceptions.ClientException;
-
 import org.junit.Assert;
 
 import de.gokv.client.reader.CSVReader;
 import de.gokv.client.reader.Task;
+import exceptions.ClientException;
 
 public class CSVReaderTest {
 
@@ -31,8 +29,7 @@ public class CSVReaderTest {
 	// überprüft ob die Datei vorhanden ist.
 	@Test(expected = ClientException.class)
 	public void testCSVFileReaderException() {
-		String filePath = System.getProperty("user.dir")
-				+ "/gokv-client-task-viewer/src/test/resources/famv_direct_input_monitoring_20170515131131.csv";
+		String filePath = System.getProperty("user.dir") + "/falscher/test/Pfand/falsche_famv_direct_input_monitoring_20170515131131.csv";
 		readerValid = new CSVReader(filePath);
 		try {
 			readerValid.readCSVFile();

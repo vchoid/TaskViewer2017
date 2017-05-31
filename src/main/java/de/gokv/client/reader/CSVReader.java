@@ -14,10 +14,10 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.apache.commons.lang3.StringUtils;
 
-import Exceptions.ClientException;
-import Exceptions.InvalidCSVRecordException;
-import Exceptions.InvalidDateException;
-import Utils.DateUtil;
+import exceptions.ClientException;
+import exceptions.InvalidCSVRecordException;
+import exceptions.InvalidDateException;
+import utils.DateUtil;
 
 /**
  * 
@@ -63,6 +63,8 @@ public class CSVReader {
 		FileReader csvLesen = null;
 		CSVParser csvFileParser = null;
 
+		
+		// TODO header Mapping ==> eigene Exception werfen.
 		// erste Zeile als Titelzeile festlegen durch automatisches Parsing
 		CSVFormat csvFileFormat = CSVFormat.newFormat(';').withHeader();
 
