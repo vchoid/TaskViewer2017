@@ -23,20 +23,25 @@ import utils.DateUtil;
  * Eine CSV auslesen und Daten zurückgeben.
  * 
  * 
- * <p><b>Funktionen:</b>
+ * <p>
+ * <b>Funktionen:</b>
  * <ul>
- * <li><b>readCSVFile</b>: Ließt die CSV-Datei. Setzt eine Header-Map und versucht den Inhalt einer Reihe in eine Task zu speichern.
- * </li>
- * <li><b>getValue({@link CSVRecord}, {@link String})</b>: Holt ein Wert einer Spalte aus der CSV und gibt ihn als String zurück.
- * </li>
- * <li><b>getValue({@link CSVRecord}, {@link String}, {@literal boolean})</b>: Holt ein Wert einer Spalte eines Pflichtfeldes aus der CSV und gibt ihn als String zurück.  
- * </li>
- * <li><b>getValue({@link CSVRecord}, {@link String}, {@link Pattern}, {@literal boolean})</b>: Holt ein Wert einer Spalte, nach einem bestimmtem Pattern eines Pflichtfeldes aus der CSV und gibt ihn als String zurück.
- * </li>
- * <li><b>getValueAsDate({@link CSVRecord}, {@link String}, {@literal boolean}))</b>: Holt ein Wert einer Spalte eines Pflichtfeldes aus der CSV und gibt ihn als LocalDate zurück.
- * </li>
+ * <li><b>readCSVFile</b>: Ließt die CSV-Datei, setzt eine Header-Map und
+ * versucht den Inhalt einer Reihe in eine Task zu speichern.</li>
+ * <li><b>getValue({@link CSVRecord}, {@link String})</b>: Holt ein Wert einer
+ * Spalte aus der CSV und gibt ihn als String zurück.</li>
+ * <li><b>getValue({@link CSVRecord}, {@link String}, {@literal boolean})</b>:
+ * Holt ein Wert einer Spalte eines Pflichtfeldes aus der CSV und gibt ihn als
+ * String zurück.</li>
+ * <li><b>getValue({@link CSVRecord}, {@link String}, {@link Pattern},
+ * {@literal boolean})</b>: Holt ein Wert einer Spalte, nach einem bestimmtem
+ * Pattern eines Pflichtfeldes aus der CSV und gibt ihn als String zurück.</li>
+ * <li><b>getValueAsDate({@link CSVRecord}, {@link String}, {@literal boolean}
+ * ))</b>: Holt ein Wert einer Spalte eines Pflichtfeldes aus der CSV und gibt
+ * ihn als LocalDate zurück.</li>
  * </ul>
  * </p>
+ * 
  * @author Christoph Kiank
  * @version 1.0.0
  * 
@@ -71,9 +76,18 @@ public class CSVReader {
 
 	// CSV-Datei auslesen +++++++++++++++++++++++++++++++++++++++++++++++
 	/**
+	 * Ließt eine CSV-Datei, setzt die erste Zeile als Header-Map und
+ * versucht den Inhalt einer Reihe in eine Task zu speichern.. Beim Versuch
+	 * fehlerhafte Einträge zu speichern, wird ein
+	 * {@link InvalidCSVRecordException} geworfen und die fehlerhaften Einträge
+	 * in einer weiteren Liste gespeichert.
 	 * 
 	 * 
 	 * @throws ClientException
+	 *             Wird geworfen, wenn die CSV-Datei nicht existiert oder ein
+	 *             Abbruch beim öffnen der Datei passierte.
+	 * @throws InvalidCSVRecordException
+	 *             Wird beim lesen fehlerhafter EInträge geworfen.
 	 */
 	public void readCSVFile() throws ClientException {
 
@@ -134,8 +148,10 @@ public class CSVReader {
 	/**
 	 * Holt den Wert aus der CSV-Datei und gibt ihn wieder als String zurück.
 	 * 
-	 * @param rec CSV-Datei einlesen.
-	 * @param colName Spalte der CSV-Datei
+	 * @param rec
+	 *            CSV-Datei einlesen.
+	 * @param colName
+	 *            Spalte der CSV-Datei
 	 * @return Gibt den Wert von der CSV-Datei-Spalte zurück.
 	 */
 	public static String getValue(CSVRecord rec, String colName) {
@@ -178,10 +194,14 @@ public class CSVReader {
 	 * ist.
 	 * 
 	 * 
-	 * @param rec CSV-Datei einlesen.
-	 * @param colName  Spalte der CSV-Datei
-	 * @param pattern Wert aus der Spalte, auf ein bestimmest Pattern prüfen.
-	 * @param require  <i>true</i> = Pflichtfeld, <i>false</i> = kein Pflichtfeld
+	 * @param rec
+	 *            CSV-Datei einlesen.
+	 * @param colName
+	 *            Spalte der CSV-Datei
+	 * @param pattern
+	 *            Wert aus der Spalte, auf ein bestimmest Pattern prüfen.
+	 * @param require
+	 *            <i>true</i> = Pflichtfeld, <i>false</i> = kein Pflichtfeld
 	 * @return Gibt den Wert von der CSV-Datei-Spalte zurück.
 	 * @throws InvalidCSVRecordException
 	 */
@@ -196,9 +216,12 @@ public class CSVReader {
 
 	/**
 	 * 
-	 * @param rec CSV-Datei einlesen.
-	 * @param colName  Spalte der CSV-Datei
-	 * @param require  <i>true</i> = Pflichtfeld, <i>false</i> = kein Pflichtfeld
+	 * @param rec
+	 *            CSV-Datei einlesen.
+	 * @param colName
+	 *            Spalte der CSV-Datei
+	 * @param require
+	 *            <i>true</i> = Pflichtfeld, <i>false</i> = kein Pflichtfeld
 	 * @return Gibt den Wert von der CSV-Datei-Spalte zurück.
 	 * @throws InvalidCSVRecordException
 	 * @throws InvalidDateException
