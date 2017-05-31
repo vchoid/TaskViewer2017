@@ -65,9 +65,6 @@ public class CSVReaderTest {
 
 	@Test
 	public void testValidIDPattern(){
-		readerInvalid.readCSVFile();
-		System.out.println(oneTask.getTask_id());
-		
 		
 	}
 	

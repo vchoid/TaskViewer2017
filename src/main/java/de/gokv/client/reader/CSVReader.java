@@ -87,7 +87,9 @@ public class CSVReader {
 	 *             Wird geworfen, wenn die CSV-Datei nicht existiert oder ein
 	 *             Abbruch beim öffnen der Datei passierte.
 	 * @throws InvalidCSVRecordException
-	 *             Wird beim lesen fehlerhafter EInträge geworfen.
+	 *             Wird beim lesen fehlerhafter Einträge geworfen.
+	 * 
+	 * 
 	 */
 	public void readCSVFile() throws ClientException {
 
