@@ -4,16 +4,29 @@ import java.time.LocalDate;
 
 public class TestMeInMain {
 
+	private static CSVReader readerValid;
+	private static CSVReader readerInvalid;
 	
 	public static void main(String[] args) {
 
+//		//gültige Einträge in CSV-Datei +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//		readerValid = new CSVReader(
+//				System.getProperty("user.dir") + "/src/test/resources/famv_direct_input_monitoring_20170515131131.csv");
+//		
+//		readerValid.readCSVFile();
+//
+//		for (Task task : readerValid.getTasks()) {
+//			System.out.println(task);
+//		}
 		
-		// int eintrag;
-		CSVReader reader = new CSVReader(System.getProperty("user.dir")
+		
+		// ungültige Einträge in CSV ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		readerInvalid = new CSVReader(System.getProperty("user.dir")
 				+ "/src/test/resources/invalid_famv_direct_input_monitoring_20170515131131.csv");
-		reader.readCSVFile();
+		
+		readerInvalid.readCSVFile();
 
-		for (Task task : reader.getTasks()) {
+		for (Task task : readerInvalid.getTasks()) {
 			System.out.println(task);
 		}
 

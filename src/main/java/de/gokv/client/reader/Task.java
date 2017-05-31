@@ -8,8 +8,16 @@ import org.apache.commons.csv.CSVRecord;
 import exceptions.InvalidCSVRecordException;
 import exceptions.InvalidDateException;
 
+/**
+ * Erzeugt einen Task aus einer validen Zeile einer CSV-Datei.
+ * 
+ * @author Christoph Kiank
+ * @version 1.0.0
+ *
+ */
 public class Task {
-
+	
+	// Header der CSV +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	private LocalDate orderedDate;
 	private LocalDate gebDat;
 	private String taskId;
@@ -21,20 +29,20 @@ public class Task {
 	private String zsWort;
 	private String vsWort;
 
-	// Pattern für valide KvNr, TaskId, Namensgebung
+	// Pattern für valide KvNr, TaskId, Namensgebung +++++++++++++++++++++++++++++++++++++++++++
 	private final static Pattern PATTERN_KVNR = Pattern.compile("[A-Z]{1}[0-9]{9}");
 	private final static Pattern PATTERN_TASKID = Pattern.compile("[A-F0-9]{32}");
 	private final static Pattern PATTERN_NONUMB = Pattern.compile("[^0-9]*");
 	// private final static Pattern PATTERN_DATE = Pattern.compile("\\d{2}\\.\\d{2}\\.\\d{4}");
 
-	private static int anzTask = 0;
+	private static int countTask = 0;
 
-	// TODO JavaDoc schreiben
 
 	/**
+	 * Erzeugt ein Task einer Zeile aus einer CSV_Datei und gibt ihn als {@link Task}-Objekt zurück.
 	 * 
-	 * @param record Aufzeichnung der gelesenen CSV-Datei
-	 * @return Eine Zeile aus der CSV-Datei.
+	 * @param record Inhalt einer Zeile der gelesenen CSV-Datei.
+	 * @return Eine Zeile aus der CSV-Datei als {@link Task}-Objekt.
 	 * @throws InvalidCSVRecordException
 	 */
 	public static Task createTaskFromRecord(CSVRecord record) throws InvalidCSVRecordException {
@@ -61,11 +69,11 @@ public class Task {
 
 		return t;
 	}
-
+	// Konstruktor ++++++++++++++++++++++++++++++++++++++
 	public Task() {
 		super();
 	}
-
+	// Getter +++++++++++++++++++++++++++++++++++++++++++
 	public String getTask_id() {
 		return taskId;
 	}
@@ -108,7 +116,7 @@ public class Task {
 
 	@Override
 	public String toString() {
-		return "______________________________________  " + ++anzTask
+		return "______________________________________  " + ++countTask
 				+ ". Task  ______________________________________\n"
 				+ "                                                                                       |\n" + "Id: "
 				+ taskId + " [Typ: " + taskType + "] erstellt am: " + orderedDate.getDayOfMonth() + "."

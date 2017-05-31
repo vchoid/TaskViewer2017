@@ -61,11 +61,11 @@ public class CSVReader {
 	public static final String COL_MITGLIED_VSWORT = "mitglied_vswort";
 	public static final String COL_MITGLIED_GEB_DAT = "mitglied_gebdat";
 
-	// ungültige Einträge aus CSV ++++++++++++++++++++++++++++++++++++
+	// ungültige Einträge aus der CSV ++++++++++++++++++++++++++++++++++
 	private List<CSVRecord> invalidEntries = new ArrayList<CSVRecord>();
 
-	// Zeileninträge in eine Liste speichern
-	private List<Task> tasks = new ArrayList<Task>();
+	// gültige Einträge aus der CSV
+	private List<Task> validEntries = new ArrayList<Task>();
 
 	// Datei-Abfrage - Dateipfad +++++++++++++++++++++++++++++++++++++++
 	private String filePath;
@@ -91,19 +91,19 @@ public class CSVReader {
 	 */
 	public void readCSVFile() throws ClientException {
 
-		FileReader csvLesen = null;
+		FileReader csvFile = null;
 		CSVParser csvFileParser = null;
 
-		// TODO header Mapping ==> eigene Exception werfen.
+	// TODO header Mapping ==> eigene Exception werfen.
 		// erste Zeile als Titelzeile festlegen durch automatisches Parsing
-		CSVFormat csvFileFormat = CSVFormat.newFormat(';').withHeader();
+		CSVFormat csvHeaderFormat = CSVFormat.newFormat(';').withHeader();
 
 		try {
 			// csv Lesen - starten ++++++++++++++++++++++++++++++++++++++
-			csvLesen = new FileReader(filePath);
+			csvFile = new FileReader(filePath);
 
 			// csv zergliedern - starten ++++++++++++++++++++++++++++++++
-			csvFileParser = new CSVParser(csvLesen, csvFileFormat);
+			csvFileParser = new CSVParser(csvFile, csvHeaderFormat);
 
 			// TODO: Überprüfung der Header in der CSV
 			// System.out.println(csvFileParser.getHeaderMap());
@@ -111,10 +111,10 @@ public class CSVReader {
 			// Eine Zeile aus der CSV +++++++++++++++++++++++++++++++++++
 			for (CSVRecord csvRecord : csvFileParser.getRecords()) {
 				try {
-
-					Task oneTaskRow = Task.createTaskFromRecord(csvRecord);
-					if (!tasks.contains(oneTaskRow))
-						tasks.add(oneTaskRow);
+					
+					Task oneTask_oneRow = Task.createTaskFromRecord(csvRecord);
+					if (!validEntries.contains(oneTask_oneRow))
+						validEntries.add(oneTask_oneRow);
 
 				} catch (InvalidCSVRecordException e) {
 
@@ -126,15 +126,15 @@ public class CSVReader {
 			}
 
 		} catch (FileNotFoundException e) {
-			throw new ClientException(e.getCause(), "Datei " + filePath + " wurde nicht gefunden");
+			throw new ClientException(e, "Datei " + filePath + " wurde nicht gefunden");
 
 		} catch (IOException e) {
 			throw new ClientException(e, "Es ist ein Fehler beim Lesen der Datei aufgetreten");
 
 		} finally {
 			try {
-				if (csvLesen != null)
-					csvLesen.close();
+				if (csvFile != null)
+					csvFile.close();
 				if (csvFileParser != null)
 					csvFileParser.close();
 			} catch (IOException e) {
@@ -235,6 +235,6 @@ public class CSVReader {
 	}
 
 	public List<Task> getTasks() {
-		return tasks;
+		return validEntries;
 	}
 }
