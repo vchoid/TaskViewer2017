@@ -9,7 +9,7 @@ public class ClientException extends RuntimeException {
 
 	public ClientException(Throwable e, String message) {
 		this.cause = e;
-		this.message = "-> Client Exception: " + message;
+		this.message = message;
 	}
 	
 	public Throwable getCause() {
