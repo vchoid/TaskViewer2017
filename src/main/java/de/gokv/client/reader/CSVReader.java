@@ -19,6 +19,13 @@ import Exceptions.InvalidCSVRecordException;
 import Exceptions.InvalidDateException;
 import Utils.DateUtil;
 
+/**
+ * 
+ * @author Christoph Kiank
+ * @version 0.0.1
+ * 
+ *
+ */
 public class CSVReader {
 
 	// title column - Titelzeile ++++++++++++++++++++++++++++++++++++++++
@@ -47,6 +54,10 @@ public class CSVReader {
 	}
 
 	// CSV-Datei auslesen +++++++++++++++++++++++++++++++++++++++++++++++
+	/**
+	 * 
+	 * @throws ClientException
+	 */
 	public void readCSVFile() throws ClientException {
 
 		FileReader csvLesen = null;
@@ -103,6 +114,7 @@ public class CSVReader {
 	// TODO Methode column isSet()
 
 	/**
+	 * Holt den Wert aus der CSV-Datei und gibt ihn wieder als String zurück.
 	 * 
 	 * @param rec
 	 * @param colName
@@ -115,12 +127,17 @@ public class CSVReader {
 		}
 		return s;
 	}
+
 	/**
 	 * 
-	 * @param rec
-	 * @param colName
-	 * @param require
-	 * @return
+	 * Holt den Wert aus der CSV-Datei und gibt ihn wieder als String zurück.
+	 * Überprüft ob es sich um ein Pflichfeld handelt und wirft eine Exception,
+	 * wenn dies nicht der Fall ist.
+	 * 
+	 * @param rec	CSV-Datei
+	 * @param colName	Spalte der CSV-Datei
+	 * @param require	<i>true</i> = Pflichtfeld, <i>false</i> = kein Pflichtfeld
+	 * @return Gibt den Wert aus der CSV-
 	 * @throws InvalidCSVRecordException
 	 */
 	public static String getValue(CSVRecord rec, String colName, boolean require) throws InvalidCSVRecordException {
@@ -131,6 +148,7 @@ public class CSVReader {
 		}
 		return s;
 	}
+
 	/**
 	 * 
 	 * @param rec
@@ -148,6 +166,7 @@ public class CSVReader {
 					"Der Wert %s ist für das Format %s nicht gültig.", value, pattern.toString());
 		return value;
 	}
+
 	/**
 	 * 
 	 * @param rec
@@ -164,8 +183,7 @@ public class CSVReader {
 
 		return localDate;
 	}
-	
-		
+
 	public List<Task> getTasks() {
 		return tasks;
 	}
