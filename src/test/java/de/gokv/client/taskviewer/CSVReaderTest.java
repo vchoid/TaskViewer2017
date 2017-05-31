@@ -59,30 +59,8 @@ public class CSVReaderTest {
 
 	}
 
-	@Test
-	public void testValidHexaId() {
-		
-		
-	}
 	
-	@Test
-	public void testReadEmptyLine() {
-
-	}
-
-	@Test
-	public void testReadLineTooMuchCont() {
-
-	}
-
-	@Test
-	public void testReadLineTooLittleCont() {
-
-	}
-
-	@Test
-	public void testReadWrongHeader() {
-
-	}
+	
+	
 
 }
