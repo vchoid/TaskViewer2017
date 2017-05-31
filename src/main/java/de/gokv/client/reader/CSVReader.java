@@ -119,7 +119,7 @@ public class CSVReader {
 		return s;
 	}
 
-	public static String getValue(CSVRecord rec, String colName, boolean require, Pattern pattern)
+	public static String getValue(CSVRecord rec, String colName, Pattern pattern, boolean require)
 			throws InvalidCSVRecordException {
 		String value = getValue(rec, colName, require);
 		if (!pattern.matcher(value).matches())
@@ -135,7 +135,8 @@ public class CSVReader {
 
 		return localDate;
 	}
-
+	
+		
 	public List<Task> getTasks() {
 		return tasks;
 	}

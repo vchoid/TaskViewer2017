@@ -24,6 +24,8 @@ public class Task {
 	private final static Pattern PATTERN_KVNR = Pattern.compile("[A-Z]{1}[0-9]{9}");
 	private final static Pattern PATTERN_TASKID = Pattern.compile("[A-F0-9]{32}");
 	private final static Pattern PATTERN_ALPHA = Pattern.compile("^[a-zA-Z\\d-\\d \\d.]*");
+	// private final static Pattern PATTERN_DATE =
+	// Pattern.compile("\\d{2}\\.\\d{2}\\.\\d{4}");
 
 	private static int anzTask = 0;
 
@@ -43,15 +45,15 @@ public class Task {
 
 			t.gebDat = CSVReader.getValueAsDate(record, CSVReader.COL_MITGLIED_GEB_DAT, true);
 			t.orderedDate = CSVReader.getValueAsDate(record, CSVReader.COL_ORDERED_DATE, true);
-			t.taskId = CSVReader.getValue(record, CSVReader.COL_TASK_ID, true, PATTERN_TASKID);
+			t.taskId = CSVReader.getValue(record, CSVReader.COL_TASK_ID, PATTERN_TASKID, true);
 			t.taskType = CSVReader.getValue(record, CSVReader.COL_TASK_TYPE, true);
-			t.kvnr = CSVReader.getValue(record, CSVReader.COL_MITGLIED_KVNR, true, PATTERN_KVNR);
-			t.name = CSVReader.getValue(record, CSVReader.COL_MITGLIED_NAME, true, PATTERN_ALPHA);
-			t.vName = CSVReader.getValue(record, CSVReader.COL_MITGLIED_VORNAME, true, PATTERN_ALPHA);
+			t.kvnr = CSVReader.getValue(record, CSVReader.COL_MITGLIED_KVNR, PATTERN_KVNR, true);
+			t.name = CSVReader.getValue(record, CSVReader.COL_MITGLIED_NAME, PATTERN_ALPHA, true);
+			t.vName = CSVReader.getValue(record, CSVReader.COL_MITGLIED_VORNAME, PATTERN_ALPHA, true);
 
-			t.titel = CSVReader.getValue(record, CSVReader.COL_MITGLIED_TITEL, false, PATTERN_ALPHA);
-			t.zsWort = CSVReader.getValue(record, CSVReader.COL_MITGLIED_ZSWORT, false, PATTERN_ALPHA);
-			t.vsWort = CSVReader.getValue(record, CSVReader.COL_MITGLIED_VSWORT, false, PATTERN_ALPHA);
+			t.titel = CSVReader.getValue(record, CSVReader.COL_MITGLIED_TITEL, PATTERN_ALPHA, false);
+			t.zsWort = CSVReader.getValue(record, CSVReader.COL_MITGLIED_ZSWORT, PATTERN_ALPHA, false);
+			t.vsWort = CSVReader.getValue(record, CSVReader.COL_MITGLIED_VSWORT, PATTERN_ALPHA, false);
 
 		} catch (InvalidDateException e) {
 			throw new InvalidCSVRecordException(e, record.getRecordNumber());
