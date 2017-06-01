@@ -1,4 +1,4 @@
-package de.gokv.client.reader;
+package de.gokv.client.taskviewer;
 
 import java.time.LocalDate;
 
@@ -24,11 +24,11 @@ public class TestMeInMain {
 		readerInvalid = new CSVReader(System.getProperty("user.dir")
 				+ "/src/test/resources/invalid_famv_direct_input_monitoring_20170515131131.csv");
 		
-		readerInvalid.readCSVFile();
+//		readerInvalid.readCSVFile();
 
-		for (Task task : readerInvalid.getTasks()) {
-			System.out.println(task);
-		}
+//		for (Task task : readerInvalid.getTasks()) {
+//			System.out.println(task);
+//		}
 
 				
 //		// orderedDate

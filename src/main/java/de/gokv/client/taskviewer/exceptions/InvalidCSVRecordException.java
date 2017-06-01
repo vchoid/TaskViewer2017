@@ -1,4 +1,4 @@
-package exceptions;
+package de.gokv.client.taskviewer.exceptions;
 
 public class InvalidCSVRecordException extends Throwable {
 

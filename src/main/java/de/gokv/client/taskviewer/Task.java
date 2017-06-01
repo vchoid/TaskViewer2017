@@ -1,12 +1,12 @@
-package de.gokv.client.reader;
+package de.gokv.client.taskviewer;
 
 import java.time.LocalDate;
 import java.util.regex.Pattern;
 
 import org.apache.commons.csv.CSVRecord;
 
-import exceptions.InvalidCSVRecordException;
-import exceptions.InvalidDateException;
+import de.gokv.client.taskviewer.exceptions.InvalidCSVRecordException;
+import de.gokv.client.taskviewer.exceptions.InvalidDateException;
 
 /**
  * Erzeugt einen Task aus einer validen Zeile einer CSV-Datei.
@@ -30,9 +30,9 @@ public class Task {
 	private String vsWort;
 
 	// Pattern für valide KvNr, TaskId, Namensgebung +++++++++++++++++++++++++++++++++++++++++++
-	private final static Pattern PATTERN_KVNR = Pattern.compile("[A-Z]{1}[0-9]{9}");
-	private final static Pattern PATTERN_TASKID = Pattern.compile("[A-F0-9]{32}");
-	private final static Pattern PATTERN_NONUMB = Pattern.compile("[^0-9]*");
+	protected final static Pattern PATTERN_KVNR = Pattern.compile("[A-Z]{1}[0-9]{9}");
+	protected final static Pattern PATTERN_TASKID = Pattern.compile("[A-F0-9]{32}");
+	protected final static Pattern PATTERN_NONUMB = Pattern.compile("[^0-9]*");
 	// private final static Pattern PATTERN_DATE = Pattern.compile("\\d{2}\\.\\d{2}\\.\\d{4}");
 
 	private static int countTask = 0;
@@ -53,15 +53,15 @@ public class Task {
 
 			t.gebDat = CSVReader.getValueAsDate(record, CSVReader.COL_MITGLIED_GEB_DAT, true);
 			t.orderedDate = CSVReader.getValueAsDate(record, CSVReader.COL_ORDERED_DATE, true);
-			t.taskId = CSVReader.getValue(record, CSVReader.COL_TASK_ID, PATTERN_TASKID, true);
-			t.taskType = CSVReader.getValue(record, CSVReader.COL_TASK_TYPE, true);
-			t.kvnr = CSVReader.getValue(record, CSVReader.COL_MITGLIED_KVNR, PATTERN_KVNR, true);
-			t.name = CSVReader.getValue(record, CSVReader.COL_MITGLIED_NAME, PATTERN_NONUMB, true);
-			t.vName = CSVReader.getValue(record, CSVReader.COL_MITGLIED_VORNAME, PATTERN_NONUMB, true);
+			t.taskId = CSVReader.getValue(record, CSVReader.COL_TASK_ID, true, PATTERN_TASKID);
+			t.taskType = CSVReader.getValue(record, CSVReader.COL_TASK_TYPE);
+			t.kvnr = CSVReader.getValue(record, CSVReader.COL_MITGLIED_KVNR, true, PATTERN_KVNR);
+			t.name = CSVReader.getValue(record, CSVReader.COL_MITGLIED_NAME, true, PATTERN_NONUMB);
+			t.vName = CSVReader.getValue(record, CSVReader.COL_MITGLIED_VORNAME, true, PATTERN_NONUMB);
 
-			t.titel = CSVReader.getValue(record, CSVReader.COL_MITGLIED_TITEL, PATTERN_NONUMB, false);
-			t.zsWort = CSVReader.getValue(record, CSVReader.COL_MITGLIED_ZSWORT, PATTERN_NONUMB, false);
-			t.vsWort = CSVReader.getValue(record, CSVReader.COL_MITGLIED_VSWORT, PATTERN_NONUMB, false);
+			t.titel = CSVReader.getValue(record, CSVReader.COL_MITGLIED_TITEL, false, PATTERN_NONUMB);
+			t.zsWort = CSVReader.getValue(record, CSVReader.COL_MITGLIED_ZSWORT, false, PATTERN_NONUMB);
+			t.vsWort = CSVReader.getValue(record, CSVReader.COL_MITGLIED_VSWORT, false, PATTERN_NONUMB);
 
 		} catch (InvalidDateException e) {
 			throw new InvalidCSVRecordException(e, record.getRecordNumber());

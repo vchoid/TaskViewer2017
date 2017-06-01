@@ -1,4 +1,4 @@
-package utils;
+package de.gokv.client.taskviewer.utils;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -6,7 +6,7 @@ import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 import java.util.regex.Pattern;
 
-import exceptions.InvalidDateException;
+import de.gokv.client.taskviewer.exceptions.InvalidDateException;
 
 /**
  * Beinhaltet eine Methode zum Überprüfen des richtigen Formates (DD.MM.YYYY)

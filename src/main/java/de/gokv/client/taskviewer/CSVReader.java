@@ -1,4 +1,4 @@
-package de.gokv.client.reader;
+package de.gokv.client.taskviewer;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -14,10 +14,10 @@ import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.apache.commons.lang3.StringUtils;
 
-import exceptions.ClientException;
-import exceptions.InvalidCSVRecordException;
-import exceptions.InvalidDateException;
-import utils.DateUtil;
+import de.gokv.client.taskviewer.exceptions.ClientException;
+import de.gokv.client.taskviewer.exceptions.InvalidCSVRecordException;
+import de.gokv.client.taskviewer.exceptions.InvalidDateException;
+import de.gokv.client.taskviewer.utils.DateUtil;
 
 /**
  * Eine CSV auslesen und Daten zurückgeben.
@@ -61,9 +61,10 @@ public class CSVReader {
 	public static final String COL_MITGLIED_VSWORT = "mitglied_vswort";
 	public static final String COL_MITGLIED_GEB_DAT = "mitglied_gebdat";
 
+		
 	// ungültige Einträge aus der CSV ++++++++++++++++++++++++++++++++++
 	private List<CSVRecord> invalidEntries = new ArrayList<CSVRecord>();
-
+	
 	// gültige Einträge aus der CSV
 	private List<Task> validEntries = new ArrayList<Task>();
 
@@ -207,7 +208,7 @@ public class CSVReader {
 	 * @return Gibt den Wert von der CSV-Datei-Spalte zurück.
 	 * @throws InvalidCSVRecordException
 	 */
-	public static String getValue(CSVRecord rec, String colName, Pattern pattern, boolean require)
+	public static String getValue(CSVRecord rec, String colName, boolean require, Pattern pattern)
 			throws InvalidCSVRecordException {
 		String value = getValue(rec, colName, require);
 		if (!pattern.matcher(value).matches())
@@ -239,4 +240,9 @@ public class CSVReader {
 	public List<Task> getTasks() {
 		return validEntries;
 	}
+
+	public List<CSVRecord> getInvalidEntries() {
+		return invalidEntries;
+	}
+
 }
