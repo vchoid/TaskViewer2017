@@ -5,41 +5,16 @@ import org.junit.Test;
 
 public class TestIdeen {
 
-	@Test
-	public void testValidHexaId() {
-		Assert.assertTrue("...gültige Id und Hexadezimalzahl.",
-				HexaIdUtil.isIdValid("405750F0395F11E7BED7F726E269B87F"));
-	}
 
-	@Test
-	public void testInvalidHexaId() {
-		Assert.assertFalse("...keine gültige Hexadezimalzahl.",
-				HexaIdUtil.isIdValid("405750F0395F11E7BED7F726E269B87G"));
-	}
 
-	@Test
-	public void testTooLongValidHexaId() {
-		Assert.assertFalse("...gültige Hexadezimalzahl, aber zu lang.",
-				HexaIdUtil.isIdValid("405750F0395F11E7BED7F726E269B87FFFF"));
-	}
 
-	@Test
-	public void testTooLongInvalidHexaId() {
-		Assert.assertFalse("...ungültige Hexadezimalzahl und zu lang.",
-				HexaIdUtil.isIdValid("405750F0395F11E7BED7F726E269B87FFGG"));
-	}
 
-	@Test
-	public void testTooShortValidHexaId() {
-		Assert.assertFalse("...gültige Hexadezimalzahl, aber zu kurz.",
-				HexaIdUtil.isIdValid("405750F0395F11E7BED7F726E269B"));
-	}
 
-	@Test
-	public void testTooShortInvalidHexaId() {
-		Assert.assertFalse("...ungültige Hexadezimalzahl und zu kurz.",
-				HexaIdUtil.isIdValid("405750F0395F11E7BED7F726E269G"));
-	}
+//	@Test
+//	public void testTooShortInvalidHexaId() {
+//		Assert.assertFalse("...ungültige Hexadezimalzahl und zu kurz.",
+//				HexaIdUtil.isIdValid("405750F0395F11E7BED7F726E269G"));
+//	}
 
 	@Test
 	// genau 10 Zeichen, Erstes Zeichen ein Großbuchstabe von A-Z, letzten 9
@@ -73,7 +48,7 @@ public class TestIdeen {
 		Assert.assertFalse("...ungültige Buchstabengröße.", KVNrUtil.isKVNrValid("q101084865"));
 	}
 
-	@Test
+l	@Test
 	public void testInvalidKVNr_wrongCharPos() {
 		Assert.assertFalse("...ungültige Position des Buchstabes.", KVNrUtil.isKVNrValid("101008486Q"));
 	}

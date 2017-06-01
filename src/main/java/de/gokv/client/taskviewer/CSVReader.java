@@ -237,7 +237,7 @@ public class CSVReader {
 		return localDate;
 	}
 
-	public List<Task> getTasks() {
+	public List<Task> getValidEntries() {
 		return validEntries;
 	}
 

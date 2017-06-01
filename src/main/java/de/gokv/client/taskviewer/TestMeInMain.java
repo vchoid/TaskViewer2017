@@ -22,9 +22,9 @@ public class TestMeInMain {
 		
 		// ungültige Einträge in CSV ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		readerInvalid = new CSVReader(System.getProperty("user.dir")
-				+ "/src/test/resources/invalid_famv_direct_input_monitoring_20170515131131.csv");
+				+ "/src/test/resources/invalidTaskId_famv_direct_input_monitoring_20170515131131.csv");
 		
-//		readerInvalid.readCSVFile();
+		readerInvalid.readCSVFile();
 
 //		for (Task task : readerInvalid.getTasks()) {
 //			System.out.println(task);
@@ -38,18 +38,18 @@ public class TestMeInMain {
 //			System.out.println(oDate);
 //			
 //		}
-//		// Id
-//		String iD;
-//		for (int i = 0; i < reader.getTasks().size(); i++) {
-//			iD = reader.getTasks().get(i).getTask_id();
-//			System.out.println(iD);
-//		}
-//		// gebDat
-//		LocalDate gDate;
-//		for (int i = 0; i < reader.getTasks().size(); i++) {
-//			gDate = reader.getTasks().get(i).getGeb_dat();
-//			System.out.println(gDate);
-//		}
+		// Id
+		String iD;
+		for (int i = 0; i < readerInvalid.getValidEntries().size(); i++) {
+			iD = readerInvalid.getValidEntries().get(i).getTask_id();
+			System.out.println(iD);
+		}
+		// gebDat
+		LocalDate gDate;
+		for (int i = 0; i < readerInvalid.getValidEntries().size(); i++) {
+			gDate = readerInvalid.getValidEntries().get(i).getGeb_dat();
+			System.out.println(gDate);
+		}
 //		
 //		// KVNr
 //		String kvNr;
