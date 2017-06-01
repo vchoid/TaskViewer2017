@@ -88,9 +88,7 @@ public class CSVReaderTest {
 	// Überprüft, ob eine fehlerhafte TaskId eine Exception wirft.
 	@Test(expected = InvalidCSVRecordException.class)
 	public void testInvalidTaskID() throws InvalidCSVRecordException {
-		
 		getInvalidTaskIdFile();
-		// Record mit Invalider TASKID
 		// ungültige Hexadezimalzahl 				=> 405750F0395F11E7BED7F726E269B87G
 		// ungültige Hexadezimalzahl 				=> 405750F0395F11E7BED7F726E269B87?
 		// ungültige Hexadezimalzahl und zu lang 	=> 405750F0395F11E7BED7F726E269B87FFGG
@@ -98,6 +96,7 @@ public class CSVReaderTest {
 		// gültige Hexadezimalzahl, aber zu kurz	=> 405750F0395F11E7BED7F726E269B
 		// gültige Hexadezimalzahl, aber zu lang	=> 405750F0395F11E7BED7F726E269B87FFFF
 		for (int i = 0; i < reader.getInvalidEntries().size(); i++) {
+			// Record mit Invalider TASKID
 			CSVRecord csvRecord = reader.getInvalidEntries().get(i);
 			try {
 				CSVReader.getValue(csvRecord, CSVReader.COL_TASK_ID, true, Task.PATTERN_TASKID);
@@ -108,17 +107,27 @@ public class CSVReaderTest {
 		}
 	}
 
-//	// Überprüft, ob eine fehlerhafte KVNr eine Exception wirft.
-//	@Test(expected = InvalidCSVRecordException.class)
-//	public void testInvalidKVNr() throws InvalidCSVRecordException {
-//		getInvalidKVNrFile();
-//		// Record mit Invalider KVNr
-//		CSVRecord csvRecord = reader.getInvalidEntries().get(1);
-//		try {
-//			CSVReader.getValue(csvRecord, CSVReader.COL_MITGLIED_KVNR, true, Task.PATTERN_KVNR);
-//		} catch (InvalidCSVRecordException e) {
-//			throw e;
-//		}
-//	}
+	// Überprüft, ob eine fehlerhafte KVNr eine Exception wirft.
+	@Test(expected = InvalidCSVRecordException.class)
+	public void testInvalidKVNr() throws InvalidCSVRecordException {
+		getInvalidKVNrFile();
+		// enthält ungültiges Zeichen			=> ?101084865
+		// enthält mehr als ein Großbuchstabe	=> Q10104686Q
+		// enhält keine Buchstaben				=> 1101045867
+		// ungültiger Leerraum					=> Q1010 45867
+		// ungültige Buchstabengröße			=> q101084865
+		// ungültige Position des Buchstabes	=> 101008486Q
+		// KVNr ist zu kurz						=> Q1084865
+		// KVNr ist zu lang						=> Q108486555435435435435
+		for (int j = 0; j < reader.getInvalidEntries().size(); j++) {
+			// Record mit Invalider KVNr
+			CSVRecord csvRecord = reader.getInvalidEntries().get(j);
+			try {
+				CSVReader.getValue(csvRecord, CSVReader.COL_MITGLIED_KVNR, true, Task.PATTERN_KVNR);
+			} catch (InvalidCSVRecordException e) {
+				throw e;
+			} 
+		}
+	}
 
 }
