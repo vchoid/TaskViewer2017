@@ -11,9 +11,41 @@ import de.gokv.client.taskviewer.exceptions.InvalidDateException;
 /**
  * Erzeugt einen Task aus einer validen Zeile einer CSV-Datei.
  * 
+ * <p>
+ * <b>Konstruktor:</b>
+ * <ul>
+ * <li><b>Task()</b>: ...</li>
+ * 
+ * </ul>
+ * </p>
+ * 
+ *<p>
+ * <b>Methoden:</b>
+ * <ul>
+ * <li><b>{@link #createTaskFromRecord(CSVRecord record)}</b>: ...</li>
+ * 
+ * </ul>
+ * </p>
+ *<p>
+ * <b>Getter-Methoden:</b>
+ * <ul>
+ * <li><b>{@link #getTask_id()} </b>: ...</li>
+ * <li><b>{@link #getTasktype()}</b>: ...</li>
+ * <li><b>{@link #getOrdered_date()}</b>: ...</li>
+ * <li><b>{@link #getKvnr()}</b>: ...</li>
+ * <li><b>{@link #getName()}</b>: ...</li>
+ * <li><b>{@link #getVorname()}</b>: ...</li>
+ * <li><b>{@link #getTitel()}</b>: ...</li>
+ * <li><b>{@link #getZsWort()}</b>: ...</li>
+ * <li><b>{@link #getVsWort()}</b>: ...</li>
+ * <li><b>{@link #getGeb_dat()}</b>: ...</li>
+ * </ul>
+ * </p>
+ * 
+ * 
  * @author Christoph Kiank
  * @version 1.0.0
- *
+ * 
  */
 public class Task {
 	
@@ -50,7 +82,7 @@ public class Task {
 		Task t = new Task();
 
 		try {
-
+			
 			t.gebDat = CSVReader.getValueAsDate(record, CSVReader.COL_MITGLIED_GEB_DAT, true);
 			t.orderedDate = CSVReader.getValueAsDate(record, CSVReader.COL_ORDERED_DATE, true);
 			t.taskId = CSVReader.getValue(record, CSVReader.COL_TASK_ID, true, PATTERN_TASKID);

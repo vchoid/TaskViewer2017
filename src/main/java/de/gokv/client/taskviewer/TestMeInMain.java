@@ -31,19 +31,24 @@ public class TestMeInMain {
 		filePath = "/src/test/resources/invalidTaskId_famv_direct_input_monitoring_20170515131131.csv";
 		getFile(filePath);
 	}
+	private static void getInvalidReqFieldFile() {
+		filePath = "/src/test/resources/invalidReqFields_famv_direct_input_monitoring_20170515131131.csv";
+		getFile(filePath);
+	}
 	
 	public static void main(String[] args) {
 
 		//gültige Einträge in CSV-Datei +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		
-		getValidFile();
-		for (Task task : reader.getValidEntries()) {
-			System.out.println(task);
-		}
+//		getValidFile();
+//		for (Task task : reader.getValidEntries()) {
+//			System.out.println(task);
+//		}
 		
 		
 		// ungültige Einträge in CSV ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-		getInvalidFile();
+//		getInvalidFile();
+		getInvalidReqFieldFile();
 //		getInvalidKVNrFile();
 //		getInvalidTaskIdFile();
 				

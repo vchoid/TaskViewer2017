@@ -20,6 +20,33 @@ import static org.mockito.Mockito.when;
 import de.gokv.client.taskviewer.exceptions.ClientException;
 import de.gokv.client.taskviewer.exceptions.InvalidCSVRecordException;
 
+/**
+ * Testen der CSVReader Klasse
+ * 
+ * <p><b>Methoden:</b>
+ * <ul>
+ * <li><b>{@link #getValidFile()}</b>: ...</li>
+ * <li><b>{@link #getInvalidTaskIdFile()}</b>: ...</li>
+ * <li><b>{@link #getInvalidKVNrFile()}</b>: ...</li>
+ * <li><b>{@link #getNoNumbAllowedFile()}</b>: ...</li>
+ * </ul>
+ * </p>
+ * 
+ * <p><b>Tests:</b>
+ * <ul>
+ * <li><b>{@link #testCSVReaderWrongFileException()}</b>: ...</li>
+ * <li><b>{@link #testCSVReadContent()}</b>: ...</li>
+ * <li><b>{@link #testInvalidTaskID()}</b>: ...</li>
+ * <li><b>{@link #testInvalidKVNr()}</b>: ...</li>
+ * <li><b>{@link #testInvalidNumbInText()}</b>: ...</li>
+ * </ul>
+ * </p>
+ * 
+ * 
+ * @author Christoph Kiank
+ * @version 0.9.8
+ *
+ */
 public class CSVReaderTest {
 
 	private CSVReader reader;
@@ -51,8 +78,9 @@ public class CSVReaderTest {
 		getFile(filePath);
 	}
 
-	// überprüft ob die Datei vorhanden ist und wenn nicht dann ob die geworfene
-	// Exception eine vom Typ FileNotFoundException ist.
+	/**
+	 *  Überprüft ob die Datei vorhanden ist und wenn nicht dann ob die geworfene Exception eine vom Typ FileNotFoundException ist.
+	 */
 	@Test(expected = ClientException.class)
 	public void testCSVReaderWrongFileException() {
 		String wrongfile_wrongPath = System.getProperty("user.dir")
@@ -67,8 +95,9 @@ public class CSVReaderTest {
 		}
 	}
 
-	// überprüft ob die erwarteten Inhalte mit den gelesen Daten aus der CSV
-	// übereinstimmen.
+	/**
+	 *  überprüft ob die erwarteten Inhalte mit den gelesen Daten aus der CSV übereinstimmen.
+	 */
 	@Test
 	public void testCSVReadContent() {
 		getValidFile();
@@ -86,7 +115,10 @@ public class CSVReaderTest {
 
 	}
 
-	// Überprüft, ob eine fehlerhafte TaskId eine Exception wirft.
+	/**
+	 *  Überprüft, ob eine fehlerhafte TaskId eine Exception wirft.
+	 * @throws InvalidCSVRecordException
+	 */
 	@Test(expected = InvalidCSVRecordException.class)
 	public void testInvalidTaskID() throws InvalidCSVRecordException {
 		getInvalidTaskIdFile();
@@ -126,30 +158,38 @@ public class CSVReaderTest {
 
 	}
 
-//	// Überprüft, ob eine fehlerhafte TaskId eine Exception wirft.
-//	@Test(expected = InvalidCSVRecordException.class)
-//	public void testInvalidTaskID2() throws InvalidCSVRecordException {
-//		getInvalidTaskIdFile();
-//		// ungültige Hexadezimalzahl => 			405750F0395F11E7BED7F726E269B87G
-//		// ungültige Hexadezimalzahl => 			405750F0395F11E7BED7F726E269B87?
-//		// ungültige Hexadezimalzahl und zu lang =>	405750F0395F11E7BED7F726E269B87FFGG
-//		// ungültige Hexadezimalzahl und zu kurz =>	405750F0395F11E7BED7F726E269G
-//		// gültige Hexadezimalzahl, aber zu kurz =>	405750F0395F11E7BED7F726E269B
-//		// gültige Hexadezimalzahl, aber zu lang =>	405750F0395F11E7BED7F726E269B87FFFF
-//		for (int i = 0; i < reader.getInvalidEntries().size(); i++) {
-//			// Record mit Invalider TASKID
-//			CSVRecord csvRecord = reader.getInvalidEntries().get(i);
-//			try {
-//				CSVReader.getValue(csvRecord, CSVReader.COL_TASK_ID, true, Task.PATTERN_TASKID);
-//			} catch (InvalidCSVRecordException e) {
-//				Assert.assertTrue(e instanceof InvalidCSVRecordException);
-//				throw e;
-//
-//			}
-//		}
-//	}
+	/**
+	 * Überprüft, ob eine fehlerhafte TaskId eine Exception wirft.
+	 * 
+	 * @throws InvalidCSVRecordException
+	 */
+	@Test(expected = InvalidCSVRecordException.class)
+	public void testInvalidTaskID2() throws InvalidCSVRecordException {
+		getInvalidTaskIdFile();
+		// ungültige Hexadezimalzahl => 			405750F0395F11E7BED7F726E269B87G
+		// ungültige Hexadezimalzahl => 			405750F0395F11E7BED7F726E269B87?
+		// ungültige Hexadezimalzahl und zu lang =>	405750F0395F11E7BED7F726E269B87FFGG
+		// ungültige Hexadezimalzahl und zu kurz =>	405750F0395F11E7BED7F726E269G
+		// gültige Hexadezimalzahl, aber zu kurz =>	405750F0395F11E7BED7F726E269B
+		// gültige Hexadezimalzahl, aber zu lang =>	405750F0395F11E7BED7F726E269B87FFFF
+		for (int i = 0; i < reader.getInvalidEntries().size(); i++) {
+			// Record mit Invalider TASKID
+			CSVRecord csvRecord = reader.getInvalidEntries().get(i);
+			try {
+				CSVReader.getValue(csvRecord, CSVReader.COL_TASK_ID, true, Task.PATTERN_TASKID);
+			} catch (InvalidCSVRecordException e) {
+				Assert.assertTrue(e instanceof InvalidCSVRecordException);
+				throw e;
 
-	// Überprüft, ob eine fehlerhafte KVNr eine Exception wirft.
+			}
+		}
+	}
+
+	/**
+	 * Überprüft, ob eine fehlerhafte KVNr eine Exception wirft.
+	 * 
+	 * @throws InvalidCSVRecordException
+	 */
 	@Test(expected = InvalidCSVRecordException.class)
 	public void testInvalidKVNr() throws InvalidCSVRecordException {
 		getInvalidKVNrFile();
@@ -172,8 +212,10 @@ public class CSVReaderTest {
 		}
 	}
 
-	// Überprüft, ob eine Zahl sich in Namen, Vornamen, zsWort, vsWort, Titel
-	// befindet und eine Exception wirft.
+	/**
+	 *  Überprüft, ob eine Zahl sich in Namen, Vornamen, zsWort, vsWort, Titel befindet und eine Exception wirft.
+	 * @throws InvalidCSVRecordException
+	 */
 	@Test(expected = InvalidCSVRecordException.class)
 	public void testInvalidNumbInText() throws InvalidCSVRecordException {
 		getNoNumbAllowedFile();
@@ -220,5 +262,7 @@ public class CSVReaderTest {
 			throw e;
 		}
 	}
+	//TODO prüfen ob Pflichtfelder erkannt werden und gefüllt sind
+	
 
 }

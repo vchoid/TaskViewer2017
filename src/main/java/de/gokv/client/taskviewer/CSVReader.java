@@ -24,21 +24,20 @@ import de.gokv.client.taskviewer.utils.DateUtil;
  * 
  * 
  * <p>
- * <b>Funktionen:</b>
+ * <b>Methoden:</b>
  * <ul>
- * <li><b>readCSVFile</b>: Ließt die CSV-Datei, setzt eine Header-Map und
- * versucht den Inhalt einer Reihe in eine Task zu speichern.</li>
- * <li><b>getValue({@link CSVRecord}, {@link String})</b>: Holt ein Wert einer
- * Spalte aus der CSV und gibt ihn als String zurück.</li>
- * <li><b>getValue({@link CSVRecord}, {@link String}, {@literal boolean})</b>:
- * Holt ein Wert einer Spalte eines Pflichtfeldes aus der CSV und gibt ihn als
- * String zurück.</li>
- * <li><b>getValue({@link CSVRecord}, {@link String}, {@link Pattern},
- * {@literal boolean})</b>: Holt ein Wert einer Spalte, nach einem bestimmtem
- * Pattern eines Pflichtfeldes aus der CSV und gibt ihn als String zurück.</li>
- * <li><b>getValueAsDate({@link CSVRecord}, {@link String}, {@literal boolean}
- * ))</b>: Holt ein Wert einer Spalte eines Pflichtfeldes aus der CSV und gibt
- * ihn als LocalDate zurück.</li>
+ * <li><b>{@link #readCSVFile}</b>: Ließt die CSV-Datei, setzt eine Header-Map
+ * und versucht den Inhalt einer Reihe in eine Task zu speichern.</li>
+ * <li><b>{@link #getValue(CSVRecord, String)}</b>: Holt ein Wert einer Spalte
+ * aus der CSV und gibt ihn als String zurück.</li>
+ * <li><b>{@link #getValue(CSVRecord, String, boolean)}</b>: Holt ein Wert einer
+ * Spalte eines Pflichtfeldes aus der CSV und gibt ihn als String zurück.</li>
+ * <li><b>{@link #getValue(CSVRecord, String, Pattern, boolean)}</b>: Holt ein
+ * Wert einer Spalte, nach einem bestimmtem Pattern eines Pflichtfeldes aus der
+ * CSV und gibt ihn als String zurück.</li>
+ * <li><b>{@link #getValueAsDate( CSVRecord, String, boolean)}</b>: Holt ein
+ * Wert einer Spalte eines Pflichtfeldes aus der CSV und gibt ihn als LocalDate
+ * zurück.</li>
  * </ul>
  * </p>
  * 
@@ -61,10 +60,9 @@ public class CSVReader {
 	public static final String COL_MITGLIED_VSWORT = "mitglied_vswort";
 	public static final String COL_MITGLIED_GEB_DAT = "mitglied_gebdat";
 
-		
 	// ungültige Einträge aus der CSV ++++++++++++++++++++++++++++++++++
 	private List<CSVRecord> invalidEntries = new ArrayList<CSVRecord>();
-	
+
 	// gültige Einträge aus der CSV
 	private List<Task> validEntries = new ArrayList<Task>();
 
@@ -77,8 +75,8 @@ public class CSVReader {
 
 	// CSV-Datei auslesen +++++++++++++++++++++++++++++++++++++++++++++++
 	/**
-	 * Ließt eine CSV-Datei, setzt die erste Zeile als Header-Map und
- * versucht den Inhalt einer Reihe in eine Task zu speichern.. Beim Versuch
+	 * Ließt eine CSV-Datei, setzt die erste Zeile als Header-Map und versucht
+	 * den Inhalt einer Reihe in eine Task zu speichern.. Beim Versuch
 	 * fehlerhafte Einträge zu speichern, wird ein
 	 * {@link InvalidCSVRecordException} geworfen und die fehlerhaften Einträge
 	 * in einer weiteren Liste gespeichert.
@@ -97,7 +95,7 @@ public class CSVReader {
 		FileReader csvFile = null;
 		CSVParser csvFileParser = null;
 
-	// TODO header Mapping ==> eigene Exception werfen.
+		// TODO header Mapping ==> eigene Exception werfen.
 		// erste Zeile als Titelzeile festlegen durch automatisches Parsing
 		CSVFormat csvHeaderFormat = CSVFormat.newFormat(';').withHeader();
 
@@ -114,7 +112,7 @@ public class CSVReader {
 			// Eine Zeile aus der CSV +++++++++++++++++++++++++++++++++++
 			for (CSVRecord csvRecord : csvFileParser.getRecords()) {
 				try {
-					
+
 					Task oneTask_oneRow = Task.createTaskFromRecord(csvRecord);
 					if (!validEntries.contains(oneTask_oneRow))
 						validEntries.add(oneTask_oneRow);
