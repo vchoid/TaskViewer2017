@@ -10,11 +10,7 @@ public class TestIdeen {
 
 
 
-//	@Test
-//	public void testTooShortInvalidHexaId() {
-//		Assert.assertFalse("...ungültige Hexadezimalzahl und zu kurz.",
-//				HexaIdUtil.isIdValid("405750F0395F11E7BED7F726E269G"));
-//	}
+
 
 	@Test
 	// genau 10 Zeichen, Erstes Zeichen ein Großbuchstabe von A-Z, letzten 9

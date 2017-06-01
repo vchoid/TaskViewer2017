@@ -91,13 +91,14 @@ public class CSVReaderTest {
 		
 		getInvalidTaskIdFile();
 		// Record mit Invalider TASKID
-		// keine gültige Hexadezimalzahl 			=> 405750F0395F11E7BED7F726E269B87G
-		// gültige Hexadezimalzahl, aber zu lang	=> 405750F0395F11E7BED7F726E269B87FFFF
+		// ungültige Hexadezimalzahl 				=> 405750F0395F11E7BED7F726E269B87G
+		// ungültige Hexadezimalzahl 				=> 405750F0395F11E7BED7F726E269B87?
 		// ungültige Hexadezimalzahl und zu lang 	=> 405750F0395F11E7BED7F726E269B87FFGG
-		// gültige Hexadezimalzahl, aber zu kurz	=> 405750F0395F11E7BED7F726E269B
 		// ungültige Hexadezimalzahl und zu kurz	=> 405750F0395F11E7BED7F726E269G
+		// gültige Hexadezimalzahl, aber zu kurz	=> 405750F0395F11E7BED7F726E269B
+		// gültige Hexadezimalzahl, aber zu lang	=> 405750F0395F11E7BED7F726E269B87FFFF
 		for (int i = 0; i < reader.getInvalidEntries().size(); i++) {
-			CSVRecord csvRecord = reader.getInvalidEntries().get(0);
+			CSVRecord csvRecord = reader.getInvalidEntries().get(i);
 			try {
 				CSVReader.getValue(csvRecord, CSVReader.COL_TASK_ID, true, Task.PATTERN_TASKID);
 			} catch (InvalidCSVRecordException e) {
