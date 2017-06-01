@@ -2,60 +2,51 @@ package de.gokv.client.taskviewer;
 
 import java.time.LocalDate;
 
-public class TestMeInMain {
+import org.apache.commons.csv.CSVRecord;
 
-	private static CSVReader readerValid;
-	private static CSVReader readerInvalid;
+public class TestMeInMain {
+	private static CSVReader reader;
+	private static String filePath;
+
+	private static void getFile(String filePath) {
+		reader = new CSVReader(System.getProperty("user.dir") + filePath);
+		reader.readCSVFile();
+	}
+
+	private static void getValidFile() {
+		filePath = "/src/test/resources/famv_direct_input_monitoring_20170515131131.csv";
+		getFile(filePath);
+	}
+	private static void getInvalidFile() {
+		filePath = "/src/test/resources/invalid_famv_direct_input_monitoring_20170515131131.csv";
+		getFile(filePath);
+	}
+
+	private static void getInvalidKVNrFile() {
+		filePath = "/src/test/resources/invalidKVNr_famv_direct_input_monitoring_20170515131131.csv";
+		getFile(filePath);
+	}
+
+	private static void getInvalidTaskIdFile() {
+		filePath = "/src/test/resources/invalidTaskId_famv_direct_input_monitoring_20170515131131.csv";
+		getFile(filePath);
+	}
 	
 	public static void main(String[] args) {
 
-//		//gültige Einträge in CSV-Datei +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//		readerValid = new CSVReader(
-//				System.getProperty("user.dir") + "/src/test/resources/famv_direct_input_monitoring_20170515131131.csv");
-//		
-//		readerValid.readCSVFile();
-//
-//		for (Task task : readerValid.getTasks()) {
-//			System.out.println(task);
-//		}
+		//gültige Einträge in CSV-Datei +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		
+		getValidFile();
+		for (Task task : reader.getValidEntries()) {
+			System.out.println(task);
+		}
 		
 		
 		// ungültige Einträge in CSV ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-		readerInvalid = new CSVReader(System.getProperty("user.dir")
-				+ "/src/test/resources/invalidTaskId_famv_direct_input_monitoring_20170515131131.csv");
-		
-		readerInvalid.readCSVFile();
-
-//		for (Task task : readerInvalid.getTasks()) {
-//			System.out.println(task);
-//		}
-
+		getInvalidFile();
+//		getInvalidKVNrFile();
+//		getInvalidTaskIdFile();
 				
-//		// orderedDate
-//		LocalDate oDate;
-//		for (int i = 0; i < reader.getTasks().size(); i++) {
-//			oDate = reader.getTasks().get(i).getOrdered_date();
-//			System.out.println(oDate);
-//			
-//		}
-		// Id
-		String iD;
-		for (int i = 0; i < readerInvalid.getValidEntries().size(); i++) {
-			iD = readerInvalid.getValidEntries().get(i).getTask_id();
-			System.out.println(iD);
-		}
-		// gebDat
-		LocalDate gDate;
-		for (int i = 0; i < readerInvalid.getValidEntries().size(); i++) {
-			gDate = readerInvalid.getValidEntries().get(i).getGeb_dat();
-			System.out.println(gDate);
-		}
-//		
-//		// KVNr
-//		String kvNr;
-//		for (int i = 0; i < reader.getTasks().size(); i++) {
-//			kvNr = reader.getTasks().get(i).getKvnr();
-//			System.out.println(kvNr);
-//		}
+
 	}
 }
