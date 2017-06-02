@@ -25,20 +25,21 @@ import de.gokv.client.taskviewer.exceptions.InvalidCSVRecordException;
  * 
  * <p><b>Methoden:</b>
  * <ul>
- * <li><b>{@link #getValidFile()}</b>: ...</li>
- * <li><b>{@link #getInvalidTaskIdFile()}</b>: ...</li>
- * <li><b>{@link #getInvalidKVNrFile()}</b>: ...</li>
- * <li><b>{@link #getNoNumbAllowedFile()}</b>: ...</li>
+ * <li><b>{@link #getFile()}</b>: Startet den CSVreader.</li>
+ * <li><b>{@link #getValidFile()}</b>: Gibt den Dateipfad der validen CSV an.</li>
+ * <li><b>{@link #getInvalidTaskIdFile()}</b>: Gibt den Dateipfad der invaliden CSV an, die ungültige Einträge in der TaskId-Spalte haben.</li>
+ * <li><b>{@link #getInvalidKVNrFile()}</b>: Gibt den Dateipfad der invaliden CSV an, die ungültige Einträge in der KvNr-Spalte haben.</li>
+ * <li><b>{@link #getNoNumbAllowedFile()}</b>: Gibt den Dateipfad der invaliden CSV an, die ungültige Zahlen in den Spalten Name, Vorname, Titel, vsWort und zsWort haben.</li>
  * </ul>
  * </p>
  * 
  * <p><b>Tests:</b>
  * <ul>
- * <li><b>{@link #testCSVReaderWrongFileException()}</b>: ...</li>
- * <li><b>{@link #testCSVReadContent()}</b>: ...</li>
- * <li><b>{@link #testInvalidTaskID()}</b>: ...</li>
- * <li><b>{@link #testInvalidKVNr()}</b>: ...</li>
- * <li><b>{@link #testInvalidNumbInText()}</b>: ...</li>
+ * <li><b>{@link #testCSVReaderWrongFileException()}</b>: Überprüft ob die Datei vorhanden ist und wenn nicht dann ob die geworfene Exception eine vom Typ FileNotFoundException ist.</li>
+ * <li><b>{@link #testCSVReadContent()}</b>: Überprüft ob die erwarteten Inhalte mit den gelesen Daten aus der CSV übereinstimmen.</li>
+ * <li><b>{@link #testInvalidTaskID()}</b>: Überprüft, ob eine fehlerhafte TaskId eine Exception wirft.</li>
+ * <li><b>{@link #testInvalidKVNr()}</b>: Überprüft, ob eine fehlerhafte KVNr eine Exception wirft.</li>
+ * <li><b>{@link #testInvalidNumbInText()}</b>: Überprüft, ob eine Zahl sich in Namen, Vornamen, zsWort, vsWort, Titel befindet und eine Exception wirft.</li>
  * </ul>
  * </p>
  * 
@@ -53,26 +54,38 @@ public class CSVReaderTest {
 	private String filePath;
 	private Task oneTask;
 
+	/**
+	 * Startet den CSVreader.
+	 * @param filePath Dateipfad als String.
+	 */
 	private void getFile(String filePath) {
 		reader = new CSVReader(System.getProperty("user.dir") + filePath);
 		reader.readCSVFile();
 	}
-
+	/**
+	 * Gibt den Dateipfad der validen CSV an.
+	 */
 	private void getValidFile() {
 		filePath = "/src/test/resources/famv_direct_input_monitoring_20170515131131.csv";
 		getFile(filePath);
 	}
-
+	/**
+	 * Gibt den Dateipfad der invaliden CSV an, die ungültige Einträge in der TaskId-Spalte haben.
+	 */
 	private void getInvalidTaskIdFile() {
 		filePath = "/src/test/resources/invalidTaskId_famv_direct_input_monitoring_20170515131131.csv";
 		getFile(filePath);
 	}
-
+	/**
+	 * Gibt den Dateipfad der invaliden CSV an, die ungültige Einträge in der KvNr-Spalte haben.
+	 */
 	private void getInvalidKVNrFile() {
 		filePath = "/src/test/resources/invalidKVNr_famv_direct_input_monitoring_20170515131131.csv";
 		getFile(filePath);
 	}
-
+	/**
+	 * Gibt den Dateipfad der invaliden CSV an, die ungültige Zahlen in den Spalten Name, Vorname, Titel, vsWort und zsWort haben.
+	 */
 	private void getNoNumbAllowedFile() {
 		filePath = "/src/test/resources/NoNumbAllowed_famv_direct_input_monitoring_20170515131131.csv";
 		getFile(filePath);
@@ -96,7 +109,7 @@ public class CSVReaderTest {
 	}
 
 	/**
-	 *  überprüft ob die erwarteten Inhalte mit den gelesen Daten aus der CSV übereinstimmen.
+	 *  Überprüft ob die erwarteten Inhalte mit den gelesen Daten aus der CSV übereinstimmen.
 	 */
 	@Test
 	public void testCSVReadContent() {
@@ -115,48 +128,48 @@ public class CSVReaderTest {
 
 	}
 
-	/**
-	 *  Überprüft, ob eine fehlerhafte TaskId eine Exception wirft.
-	 * @throws InvalidCSVRecordException
-	 */
-	@Test(expected = InvalidCSVRecordException.class)
-	public void testInvalidTaskID() throws InvalidCSVRecordException {
-		getInvalidTaskIdFile();
-		// ungültige Hexadezimalzahl => 			405750F0395F11E7BED7F726E269B87G
-		// ungültige Hexadezimalzahl => 			405750F0395F11E7BED7F726E269B87?
-		// ungültige Hexadezimalzahl und zu lang =>	405750F0395F11E7BED7F726E269B87FFGG
-		// ungültige Hexadezimalzahl und zu kurz =>	405750F0395F11E7BED7F726E269G
-		// gültige Hexadezimalzahl, aber zu kurz =>	405750F0395F11E7BED7F726E269B
-		// gültige Hexadezimalzahl, aber zu lang =>	405750F0395F11E7BED7F726E269B87FFFF
-
-		// Record mit Invalider TASKID
-		try {
-			CSVRecord zeile0 = reader.getInvalidEntries().get(0);
-			Assert.assertEquals("405750F0395F11E7BED7F726E269B87G",
-					CSVReader.getValue(zeile0, CSVReader.COL_TASK_ID, true, Task.PATTERN_TASKID));
-			CSVRecord zeile1 = reader.getInvalidEntries().get(1);
-			Assert.assertEquals("405750F0395F11E7BED7F726E269B87?",
-					CSVReader.getValue(zeile1, CSVReader.COL_TASK_ID, true, Task.PATTERN_TASKID));
-			CSVRecord zeile2 = reader.getInvalidEntries().get(2);
-			Assert.assertEquals("405750F0395F11E7BED7F726E269B87FFGG",
-					CSVReader.getValue(zeile2, CSVReader.COL_TASK_ID, true, Task.PATTERN_TASKID));
-			CSVRecord zeile3 = reader.getInvalidEntries().get(3);
-			Assert.assertEquals("405750F0395F11E7BED7F726E269G",
-					CSVReader.getValue(zeile3, CSVReader.COL_TASK_ID, true, Task.PATTERN_TASKID));
-			CSVRecord zeile4 = reader.getInvalidEntries().get(4);
-			Assert.assertEquals("405750F0395F11E7BED7F726E269B",
-					CSVReader.getValue(zeile4, CSVReader.COL_TASK_ID, true, Task.PATTERN_TASKID));
-			CSVRecord zeile5 = reader.getInvalidEntries().get(5);
-			Assert.assertEquals("405750F0395F11E7BED7F726E269B87FFFF",
-					CSVReader.getValue(zeile5, CSVReader.COL_TASK_ID, true, Task.PATTERN_TASKID));
-
-		} catch (InvalidCSVRecordException e) {
-			Assert.assertTrue(e instanceof InvalidCSVRecordException);
-			throw e;
-
-		}
-
-	}
+//	/**
+//	 *  Überprüft, ob eine fehlerhafte TaskId eine Exception wirft.
+//	 * @throws InvalidCSVRecordException
+//	 */
+//	@Test(expected = InvalidCSVRecordException.class)
+//	public void testInvalidTaskID2() throws InvalidCSVRecordException {
+//		getInvalidTaskIdFile();
+//		// ungültige Hexadezimalzahl => 			405750F0395F11E7BED7F726E269B87G
+//		// ungültige Hexadezimalzahl => 			405750F0395F11E7BED7F726E269B87?
+//		// ungültige Hexadezimalzahl und zu lang =>	405750F0395F11E7BED7F726E269B87FFGG
+//		// ungültige Hexadezimalzahl und zu kurz =>	405750F0395F11E7BED7F726E269G
+//		// gültige Hexadezimalzahl, aber zu kurz =>	405750F0395F11E7BED7F726E269B
+//		// gültige Hexadezimalzahl, aber zu lang =>	405750F0395F11E7BED7F726E269B87FFFF
+//
+//		// Record mit Invalider TASKID
+//		try {
+//			CSVRecord zeile0 = reader.getInvalidEntries().get(0);
+//			Assert.assertEquals("405750F0395F11E7BED7F726E269B87G",
+//					CSVReader.getValue(zeile0, CSVReader.COL_TASK_ID, true, Task.PATTERN_TASKID));
+//			CSVRecord zeile1 = reader.getInvalidEntries().get(1);
+//			Assert.assertEquals("405750F0395F11E7BED7F726E269B87?",
+//					CSVReader.getValue(zeile1, CSVReader.COL_TASK_ID, true, Task.PATTERN_TASKID));
+//			CSVRecord zeile2 = reader.getInvalidEntries().get(2);
+//			Assert.assertEquals("405750F0395F11E7BED7F726E269B87FFGG",
+//					CSVReader.getValue(zeile2, CSVReader.COL_TASK_ID, true, Task.PATTERN_TASKID));
+//			CSVRecord zeile3 = reader.getInvalidEntries().get(3);
+//			Assert.assertEquals("405750F0395F11E7BED7F726E269G",
+//					CSVReader.getValue(zeile3, CSVReader.COL_TASK_ID, true, Task.PATTERN_TASKID));
+//			CSVRecord zeile4 = reader.getInvalidEntries().get(4);
+//			Assert.assertEquals("405750F0395F11E7BED7F726E269B",
+//					CSVReader.getValue(zeile4, CSVReader.COL_TASK_ID, true, Task.PATTERN_TASKID));
+//			CSVRecord zeile5 = reader.getInvalidEntries().get(5);
+//			Assert.assertEquals("405750F0395F11E7BED7F726E269B87FFFF",
+//					CSVReader.getValue(zeile5, CSVReader.COL_TASK_ID, true, Task.PATTERN_TASKID));
+//
+//		} catch (InvalidCSVRecordException e) {
+//			Assert.assertTrue(e instanceof InvalidCSVRecordException);
+//			throw e;
+//
+//		}
+//
+//	}
 
 	/**
 	 * Überprüft, ob eine fehlerhafte TaskId eine Exception wirft.
@@ -164,7 +177,7 @@ public class CSVReaderTest {
 	 * @throws InvalidCSVRecordException
 	 */
 	@Test(expected = InvalidCSVRecordException.class)
-	public void testInvalidTaskID2() throws InvalidCSVRecordException {
+	public void testInvalidTaskID() throws InvalidCSVRecordException {
 		getInvalidTaskIdFile();
 		// ungültige Hexadezimalzahl => 			405750F0395F11E7BED7F726E269B87G
 		// ungültige Hexadezimalzahl => 			405750F0395F11E7BED7F726E269B87?
