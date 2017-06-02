@@ -224,7 +224,7 @@ public class CSVReader {
 	 *            Spalte der CSV-Datei
 	 * @param requireField
 	 *            <i>true</i> = Pflichtfeld, <i>false</i> = kein Pflichtfeld
-	 * @return Gibt den Wert von der CSV-Datei-Spalte zurück.
+	 * @return Gibt den Wert aus der Spalte als LocalDate zurück.
 	 * @throws InvalidCSVRecordException
 	 * @throws InvalidDateException
 	 */
