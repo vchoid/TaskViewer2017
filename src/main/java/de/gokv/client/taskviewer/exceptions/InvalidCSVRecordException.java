@@ -7,15 +7,17 @@ import org.apache.commons.csv.CSVRecord;
 
 /**
  * 
- * Wird bei fehlerhaften Einträge in der CSV aufgerufen.
+ * Wird bei fehlerhaften Einträgen in der CSV geworfen.
  * 
  * <p>
  * <b>Kontruktor:</b>
  * <ul>
- * <li><b>{@link #InvalidCSVRecordException(String, long)}</b>: ...</li>
- * <li><b>{@link #InvalidCSVRecordException(Throwable, long)}</b>: ...</li>
- * <li><b>{@link #InvalidCSVRecordException(String, long, String, Object)}</b>: ...</li>
- * 
+ * <li><b>{@link #InvalidCSVRecordException(String, long)}</b>: Gibt den ein Fehler,
+ * an der genauen Stelle (Zeile und Spalte) der CSV zurück.</li>
+ * <li><b>{@link #InvalidCSVRecordException(Throwable, long)}</b>: Gibt den genauen Fehler,
+ * in der Zeile der CSV zurück.</li>
+ * <li><b>{@link #InvalidCSVRecordException(String, long, String, Object)}</b>: Gibt den genauen Fehler,
+ * an der genauen Stelle (Zeile und Spalte) der CSV zurück.</li>
  * </ul>
  * </p>
  * 

@@ -30,9 +30,9 @@ import de.gokv.client.taskviewer.exceptions.InvalidDateException;
  * <b>Getter-Methoden:</b>
  * <ul>
  * <li><b>{@link #getTask_id()} </b>: 		String im <u>Format: [A-F0-9]{32}</u></li>
- * <li><b>{@link #getTasktype()}</b>: 		String im <u>Format: [^0-9]*</u></li></li>
- * <li><b>{@link #getOrdered_date()}</b>: 	{@link LocalDate} im <u>Format: yyy</u> </li>
- * <li><b>{@link #getKvnr()}</b>: ...</li>
+ * <li><b>{@link #getTasktype()}</b>: 		String im <u>Format: [^0-9]*</u></li>
+ * <li><b>{@link #getOrdered_date()}</b>: 	{@link LocalDate} im <u>Format: "dd.MM.yyyy"</u></li>
+ * <li><b>{@link #getKvnr()}</b>: 			String im <u>Format: [A-Z]{1}[0-9]{9}</u></li>
  * <li><b>{@link #getName()}</b>: 			String im <u>Format: [^0-9]*</u></li>
  * <li><b>{@link #getVorname()}</b>: 		String im <u>Format: [^0-9]*</u></li>
  * <li><b>{@link #getTitel()}</b>: 			String im <u>Format: [^0-9]*</u></li>

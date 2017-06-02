@@ -21,25 +21,38 @@ import de.gokv.client.taskviewer.exceptions.ClientException;
 import de.gokv.client.taskviewer.exceptions.InvalidCSVRecordException;
 
 /**
- * Testen der CSVReader Klasse
+ * Testen der {@link CSVReader}-Klasse.
  * 
  * <p><b>Methoden:</b>
  * <ul>
  * <li><b>{@link #getFile()}</b>: Startet den CSVreader.</li>
  * <li><b>{@link #getValidFile()}</b>: Gibt den Dateipfad der validen CSV an.</li>
- * <li><b>{@link #getInvalidTaskIdFile()}</b>: Gibt den Dateipfad der invaliden CSV an, die ungültige Einträge in der TaskId-Spalte haben.</li>
- * <li><b>{@link #getInvalidKVNrFile()}</b>: Gibt den Dateipfad der invaliden CSV an, die ungültige Einträge in der KvNr-Spalte haben.</li>
- * <li><b>{@link #getNoNumbAllowedFile()}</b>: Gibt den Dateipfad der invaliden CSV an, die ungültige Zahlen in den Spalten Name, Vorname, Titel, vsWort und zsWort haben.</li>
+ * <li><b>{@link #getInvalidTaskIdFile()}</b>: Gibt den Dateipfad der invaliden CSV an,
+ * die ungültige Einträge in der TaskId-Spalte haben.</li>
+ * <li><b>{@link #getInvalidKVNrFile()}</b>: Gibt den Dateipfad der invaliden CSV an,
+ * die ungültige Einträge in der KvNr-Spalte haben.</li>
+ * <li><b>{@link #getNoNumbAllowedFile()}</b>: Gibt den Dateipfad der invaliden CSV an,
+ * die ungültige Zahlen in den Spalten Name, Vorname, Titel, vsWort und zsWort haben.</li>
  * </ul>
  * </p>
  * 
  * <p><b>Tests:</b>
  * <ul>
- * <li><b>{@link #testCSVReaderWrongFileException()}</b>: Überprüft ob die Datei vorhanden ist und wenn nicht dann ob die geworfene Exception eine vom Typ FileNotFoundException ist.</li>
- * <li><b>{@link #testCSVReadContent()}</b>: Überprüft ob die erwarteten Inhalte mit den gelesen Daten aus der CSV übereinstimmen.</li>
- * <li><b>{@link #testInvalidTaskID()}</b>: Überprüft, ob eine fehlerhafte TaskId eine Exception wirft.</li>
- * <li><b>{@link #testInvalidKVNr()}</b>: Überprüft, ob eine fehlerhafte KVNr eine Exception wirft.</li>
- * <li><b>{@link #testInvalidNumbInText()}</b>: Überprüft, ob eine Zahl sich in Namen, Vornamen, zsWort, vsWort, Titel befindet und eine Exception wirft.</li>
+ * <li><b>{@link #testCSVReaderWrongFileException()}</b>: Legt ein falschen Pfad oder gibt einen falschen Dateinamen  als String an.
+ *  Erstellt ein neues Objekt von der Klasse {@link CSVReader}.
+ *  Versucht in einem try/catch-Block die CSV-Datei oder den angebenen Pfad zu lesen.
+ *  Überprüft, ob die geworfene {@link ClientException} eine vom Typ {@link FileNotFoundException} ist.</li>
+ * <li><b>{@link #testCSVReadContent()}</b>: Ließt zuerst die valide Datei mit der {@link #getValidFile}-Methode.
+ * Holt sich eine Zeile aus der CSV mit der {@link CSVReader#getValidEntries() getValidEntries}-Methode
+ * und überprüft mit den Getter-Methoden für die einzelnen Spalte, der {@link Task}-Klasse,
+ * ob die erwarteten Inhalte mit den gelesen Daten aus der CSV übereinstimmen.</li>
+ * <li><b>{@link #testInvalidTaskID()}</b>: Ließt zuerst die invalide Datei mit der {@link #getInvalidTaskIdFile()}-Methode.
+ * Überprüft, ob fehlerhafte TaskId-Einträge, eine {@link InvalidCSVRecordException} wirft.</li>
+ * <li><b>{@link #testInvalidKVNr()}</b>:Ließt zuerst die invalide Datei mit der {@link #getInvalidKVNrFile()}-Methode.
+ * Überprüft, ob fehlerhafte KVNr-Einträge, eine {@link InvalidCSVRecordException} wirft.</li>
+ * <li><b>{@link #testInvalidNumbInText()}</b>: Ließt zuerst die invalide Datei mit der {@link #getNoNumbAllowedFile()}-Methode.
+ * Überprüft, ob sich Zahlen in den Spalten Namen, Vornamen, zsWort, vsWort, Titel befinden
+ * und wenn ja ob eine {@link InvalidCSVRecordException} geworfen wird.</li>
  * </ul>
  * </p>
  * 
@@ -70,21 +83,24 @@ public class CSVReaderTest {
 		getFile(filePath);
 	}
 	/**
-	 * Gibt den Dateipfad der invaliden CSV an, die ungültige Einträge in der TaskId-Spalte haben.
+	 * Gibt den Dateipfad der invaliden CSV an,
+	 * die ungültige Einträge in der TaskId-Spalte haben.
 	 */
 	private void getInvalidTaskIdFile() {
 		filePath = "/src/test/resources/invalidTaskId_famv_direct_input_monitoring_20170515131131.csv";
 		getFile(filePath);
 	}
 	/**
-	 * Gibt den Dateipfad der invaliden CSV an, die ungültige Einträge in der KvNr-Spalte haben.
+	 * Gibt den Dateipfad der invaliden CSV an,
+	 * die ungültige Einträge in der KvNr-Spalte haben.
 	 */
 	private void getInvalidKVNrFile() {
 		filePath = "/src/test/resources/invalidKVNr_famv_direct_input_monitoring_20170515131131.csv";
 		getFile(filePath);
 	}
 	/**
-	 * Gibt den Dateipfad der invaliden CSV an, die ungültige Zahlen in den Spalten Name, Vorname, Titel, vsWort und zsWort haben.
+	 * Gibt den Dateipfad der invaliden CSV an,
+	 * die ungültige Zahlen in den Spalten Name, Vorname, Titel, vsWort und zsWort haben.
 	 */
 	private void getNoNumbAllowedFile() {
 		filePath = "/src/test/resources/NoNumbAllowed_famv_direct_input_monitoring_20170515131131.csv";
@@ -92,7 +108,10 @@ public class CSVReaderTest {
 	}
 
 	/**
-	 *  Überprüft ob die Datei vorhanden ist und wenn nicht dann ob die geworfene Exception eine vom Typ FileNotFoundException ist.
+	 *  Legt ein falschen Pfad oder gibt einen falschen Dateinamen  als String an.
+	 *  Erstellt ein neues Objekt von der Klasse {@link CSVReader}.
+	 *  Versucht in einem try/catch-Block die CSV-Datei oder den angebenen Pfad zu lesen.
+	 *  Überprüft, ob die geworfene {@link ClientException} eine vom Typ {@link FileNotFoundException} ist.
 	 */
 	@Test(expected = ClientException.class)
 	public void testCSVReaderWrongFileException() {
@@ -109,7 +128,12 @@ public class CSVReaderTest {
 	}
 
 	/**
-	 *  Überprüft ob die erwarteten Inhalte mit den gelesen Daten aus der CSV übereinstimmen.
+	 *  Ließt zuerst die valide Datei mit der {@link #getValidFile}-Methode.
+	 *  Holt sich eine Zeile aus der CSV mit der {@link CSVReader#getValidEntries() getValidEntries}-Methode
+	 *  und überprüft mit den Getter-Methoden für die einzelnen Spalte, der {@link Task}-Klasse,
+	 *  ob die erwarteten Inhalte mit den gelesen Daten aus der CSV übereinstimmen.
+	 *  @see Task
+	 *  @see CSVReader
 	 */
 	@Test
 	public void testCSVReadContent() {
@@ -129,7 +153,8 @@ public class CSVReaderTest {
 	}
 
 //	/**
-//	 *  Überprüft, ob eine fehlerhafte TaskId eine Exception wirft.
+//	 * Ließt zuerst die invalide Datei mit der {@link #getInvalidTaskIdFile()}-Methode.
+//	 * Überprüft, ob fehlerhafte TaskId-Einträge, eine {@link InvalidCSVRecordException} wirft.
 //	 * @throws InvalidCSVRecordException
 //	 */
 //	@Test(expected = InvalidCSVRecordException.class)
@@ -172,7 +197,8 @@ public class CSVReaderTest {
 //	}
 
 	/**
-	 * Überprüft, ob eine fehlerhafte TaskId eine Exception wirft.
+	 * Ließt zuerst die invalide Datei mit der {@link #getInvalidTaskIdFile()}-Methode.
+	 * Überprüft, ob fehlerhafte TaskId-Einträge, eine {@link InvalidCSVRecordException} wirft.
 	 * 
 	 * @throws InvalidCSVRecordException
 	 */
@@ -199,7 +225,8 @@ public class CSVReaderTest {
 	}
 
 	/**
-	 * Überprüft, ob eine fehlerhafte KVNr eine Exception wirft.
+	 * Ließt zuerst die invalide Datei mit der {@link #getInvalidKVNrFile()}-Methode.
+	 * Überprüft, ob fehlerhafte KVNr-Einträge, eine {@link InvalidCSVRecordException} wirft.
 	 * 
 	 * @throws InvalidCSVRecordException
 	 */
@@ -226,7 +253,9 @@ public class CSVReaderTest {
 	}
 
 	/**
-	 *  Überprüft, ob eine Zahl sich in Namen, Vornamen, zsWort, vsWort, Titel befindet und eine Exception wirft.
+	 * 	Ließt zuerst die invalide Datei mit der {@link #getNoNumbAllowedFile()}-Methode.
+	 *  Überprüft, ob sich Zahlen in den Spalten Namen, Vornamen, zsWort, vsWort, Titel befinden
+	 *  und wenn ja ob eine {@link InvalidCSVRecordException} geworfen wird.
 	 * @throws InvalidCSVRecordException
 	 */
 	@Test(expected = InvalidCSVRecordException.class)
