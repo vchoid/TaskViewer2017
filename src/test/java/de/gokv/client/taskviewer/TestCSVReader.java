@@ -255,7 +255,6 @@ public class TestCSVReader {
 		}
 		
 	}
-	//TODO prüfen ob auf true gesetze Pflichtfelder erkannt werden und wenn nicht ob sie eine Exception werfen.
 	
 	/**
 	 * Ließt zuerst die fehlerhafte Datei mit der {@link #getInvalidReqFieldsFile()}-Methode.
@@ -311,6 +310,9 @@ public class TestCSVReader {
 				} 
 			}
 	}
+	
 	//TODO Prüfen ob bei Leerzeile richtige Exception
+	
+	
 	//TODO Prüfen ob bei parseDate oder isDateValid richtige Exception 
 }

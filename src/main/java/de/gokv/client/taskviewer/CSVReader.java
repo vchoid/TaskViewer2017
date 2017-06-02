@@ -67,7 +67,7 @@ public class CSVReader {
 	private List<Task> validEntries = new ArrayList<Task>();
 
 	// Datei-Abfrage - Dateipfad +++++++++++++++++++++++++++++++++++++++
-	private String filePath;
+	private static String filePath;
 
 	public CSVReader(String path) {
 		filePath = path;
@@ -122,6 +122,7 @@ public class CSVReader {
 					invalidEntries.add(csvRecord);
 					System.err.println("\n\n-------------------------------------------------------- Meldung "
 							+ invalidEntries.size() + " --------------------------------------------------------\n "
+							+ "\nDatei: ../" + filePath.substring(70) + "\n"
 							+ e.getMessage());
 				}
 			}
@@ -234,7 +235,10 @@ public class CSVReader {
 
 		return localDate;
 	}
-
+	public static String getFilePath() {
+		return filePath;
+	}
+	
 	public List<Task> getValidEntries() {
 		return validEntries;
 	}

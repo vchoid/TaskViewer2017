@@ -148,14 +148,15 @@ public class Task {
 
 	@Override
 	public String toString() {
-		return "______________________________________  " + ++countTask
+		return  " _____________________________________  " + ++countTask
 				+ ". Task  ______________________________________\n"
-				+ "                                                                                       |\n" + "Id: "
+				+ "|______________________________________________________________________________________|\n" 
+				+ "\nDatei: ../"+ CSVReader.getFilePath().substring(70) + "\n\n"	
+				+ "Id: "
 				+ taskId + " [Typ: " + taskType + "] erstellt am: " + orderedDate.getDayOfMonth() + "."
 				+ orderedDate.getMonthValue() + "." + orderedDate.getYear() + "\nKVNr.: " + kvnr + "\n" + "Name: "
 				+ titel + name + ", " + vName + "\ngeboren am: " + gebDat.getDayOfMonth() + "." + gebDat.getMonthValue()
-				+ "." + gebDat.getYear() + "\nzsWort: " + zsWort + "\nvsWort: \n" + vsWort
-				+ "_______________________________________________________________________________________|\n";
+				+ "." + gebDat.getYear() + "\nzsWort: " + zsWort + "\nvsWort: \n" + vsWort;
 	}
 
 	@Override
