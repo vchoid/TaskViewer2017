@@ -40,15 +40,15 @@ public class TestMeInMain {
 
 		//gültige Einträge in CSV-Datei +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		
-//		getValidFile();
-//		for (Task task : reader.getValidEntries()) {
-//			System.out.println(task);
-//		}
+		getValidFile();
+		for (Task task : reader.getValidEntries()) {
+			System.out.println(task);
+		}
 		
 		
 		// ungültige Einträge in CSV ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //		getInvalidFile();
-		getInvalidReqFieldFile();
+//		getInvalidReqFieldFile();
 //		getInvalidKVNrFile();
 //		getInvalidTaskIdFile();
 				

@@ -173,15 +173,15 @@ public class CSVReader {
 	 *            CSV-Datei einlesen.
 	 * @param colName
 	 *            Spalte der CSV-Datei
-	 * @param require
+	 * @param requireField
 	 *            <i>true</i> = Pflichtfeld, <i>false</i> = kein Pflichtfeld
 	 * @return Gibt den Wert von der CSV-Datei-Spalte zurück.
 	 * @throws InvalidCSVRecordException
 	 */
-	public static String getValue(CSVRecord rec, String colName, boolean require) throws InvalidCSVRecordException {
+	public static String getValue(CSVRecord rec, String colName, boolean requireField) throws InvalidCSVRecordException {
 		String s = getValue(rec, colName);
 
-		if (require && StringUtils.isBlank(s)) {
+		if (requireField && StringUtils.isBlank(s)) {
 			throw new InvalidCSVRecordException(colName, rec.getRecordNumber());
 		}
 		return s;
@@ -201,14 +201,14 @@ public class CSVReader {
 	 *            Spalte der CSV-Datei
 	 * @param pattern
 	 *            Wert aus der Spalte, auf ein bestimmest Pattern prüfen.
-	 * @param require
+	 * @param requireField
 	 *            <i>true</i> = Pflichtfeld, <i>false</i> = kein Pflichtfeld
 	 * @return Gibt den Wert von der CSV-Datei-Spalte zurück.
 	 * @throws InvalidCSVRecordException
 	 */
-	public static String getValue(CSVRecord rec, String colName, boolean require, Pattern pattern)
+	public static String getValue(CSVRecord rec, String colName, boolean requireField, Pattern pattern)
 			throws InvalidCSVRecordException {
-		String value = getValue(rec, colName, require);
+		String value = getValue(rec, colName, requireField);
 		if (!pattern.matcher(value).matches())
 			throw new InvalidCSVRecordException(colName, rec.getRecordNumber(),
 					"Der Wert %s ist für das Format %s nicht gültig.", value, pattern.toString());
@@ -221,15 +221,15 @@ public class CSVReader {
 	 *            CSV-Datei einlesen.
 	 * @param colName
 	 *            Spalte der CSV-Datei
-	 * @param require
+	 * @param requireField
 	 *            <i>true</i> = Pflichtfeld, <i>false</i> = kein Pflichtfeld
 	 * @return Gibt den Wert von der CSV-Datei-Spalte zurück.
 	 * @throws InvalidCSVRecordException
 	 * @throws InvalidDateException
 	 */
-	public static LocalDate getValueAsDate(CSVRecord rec, String colName, boolean require)
+	public static LocalDate getValueAsDate(CSVRecord rec, String colName, boolean requireField)
 			throws InvalidCSVRecordException, InvalidDateException {
-		String s = getValue(rec, colName, require);
+		String s = getValue(rec, colName, requireField);
 		LocalDate localDate = DateUtil.parseDate(s, colName);
 
 		return localDate;

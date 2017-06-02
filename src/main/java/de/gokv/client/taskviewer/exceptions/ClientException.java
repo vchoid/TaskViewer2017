@@ -38,7 +38,7 @@ public class ClientException extends RuntimeException {
 	 */
 	public ClientException(Throwable e, String message) {
 		this.cause = e;
-		this.message = message;
+		this.message = message + "(ClientException)";
 	}
 	/**
 	 * Holt einen Grund des Fehlers und gibt ihn zurück.
