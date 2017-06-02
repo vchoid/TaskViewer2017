@@ -31,7 +31,7 @@ import de.gokv.client.taskviewer.utils.DateUtil;
  *
  */
 
-public class DateUtilTest {
+public class TestDateUtil {
 
 	/**
 	 *  Test mit der {@link DateUtil#isDateValid(String) isDatevalid}-Methode auf ein gültiges Datum.
