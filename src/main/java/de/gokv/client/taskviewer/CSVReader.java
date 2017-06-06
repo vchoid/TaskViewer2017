@@ -215,7 +215,12 @@ public class CSVReader {
 					"Der Wert %s ist für das Format %s nicht gültig.", value, pattern.toString());
 		return value;
 	}
-
+	/**
+	 * Holt den Wert aus der CSV-Datei und gibt ihn wieder als String zurück.
+	 * Überprüft ob es sich um ein Pflichfeld handelt
+	 * und wirft eine {@link InvalidCSVRecordException}, wenn dies nicht der Fall ist.
+	 * Überprüft ob es sich um ein TaskTyp aus der ArrayList {@link Task#TASK_TYPES TASK_TYPES} handelt.
+	 */
 	public static String getMappedValue(CSVRecord rec, String colName, boolean requireField, ArrayList<String> taskTypeList) throws InvalidCSVRecordException{
 		
 		String value= getValue(rec, colName, requireField);

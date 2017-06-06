@@ -68,6 +68,18 @@ public class Task {
 	protected final static Pattern PATTERN_TASKID = Pattern.compile("[A-F0-9]{32}");
 	protected final static Pattern PATTERN_NONUMB = Pattern.compile("[^0-9]*");
 	// TaskTypes +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	/**
+	 * <p>
+	 * <b>Tasktypen</b>
+	 * <ul>
+	 * <li>famv_bestand</li>
+	 * <li>eka</li>
+	 * <li>unf</li>
+	 * <li>kvv</li>
+	 * 
+	 * </ul>
+	 * </p>
+	 */
 	protected final static ArrayList<String> TASK_TYPES = new ArrayList<String>(Arrays.asList("famv_bestand","eka","unf","kvv"));
 	
 	private static int countTask = 0;

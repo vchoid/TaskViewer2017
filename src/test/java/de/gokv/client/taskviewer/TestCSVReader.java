@@ -76,6 +76,7 @@ public class TestCSVReader {
 	private CSVReader reader;
 	private String filePath;
 	private Task oneTask;
+	private CSVRecord row;
 
 	/**
 	 * Startet den CSVreader.
@@ -204,9 +205,9 @@ public class TestCSVReader {
 		// gültige Hexadezimalzahl, aber zu kurz =>	405750F0395F11E7BED7F726E269B
 		// gültige Hexadezimalzahl, aber zu lang =>	405750F0395F11E7BED7F726E269B87FFFF
 		for (int i = 0; i < reader.getInvalidEntries().size(); i++) {
-			CSVRecord csvRecord = reader.getInvalidEntries().get(i);
+			row = reader.getInvalidEntries().get(i);
 			try {
-				CSVReader.getValue(csvRecord, CSVReader.COL_TASK_ID, true, Task.PATTERN_TASKID);
+				CSVReader.getValue(row, CSVReader.COL_TASK_ID, true, Task.PATTERN_TASKID);
 			} catch (InvalidCSVRecordException e) {
 				Assert.assertTrue(e instanceof InvalidCSVRecordException);
 				throw e;
@@ -233,9 +234,9 @@ public class TestCSVReader {
 		// KVNr ist zu kurz => 						Q1084865
 		// KVNr ist zu lang => 						Q108486555435435435435
 		for (int j = 0; j < reader.getInvalidEntries().size(); j++) {
-			CSVRecord csvRecord = reader.getInvalidEntries().get(j);
+			row = reader.getInvalidEntries().get(j);
 			try {
-				CSVReader.getValue(csvRecord, CSVReader.COL_MITGLIED_KVNR, true, Task.PATTERN_KVNR);
+				CSVReader.getValue(row, CSVReader.COL_MITGLIED_KVNR, true, Task.PATTERN_KVNR);
 			} catch (InvalidCSVRecordException e) {
 				throw e;
 			}
@@ -251,7 +252,7 @@ public class TestCSVReader {
 	@Test(expected = InvalidCSVRecordException.class)
 	public void testInvalidNumbInText() throws InvalidCSVRecordException {
 		getNoNumbAllowedFile();
-		CSVRecord row;
+		
 		
 		for (int i = 0; i < reader.getInvalidEntries().size(); i++) {
 			 row = reader.getInvalidEntries().get(i);
@@ -285,7 +286,7 @@ public class TestCSVReader {
 	public void testInvalidRequiereFields() throws InvalidCSVRecordException {
 		
 		getInvalidReqFieldsFile();
-		CSVRecord row;
+		
 //		 Pflichtfelder sind leer
 		for (int i = 0; i < reader.getInvalidEntries().size(); i++) {
 				row = reader.getInvalidEntries().get(i);
@@ -315,7 +316,7 @@ public class TestCSVReader {
 	public void testInvalidNonRequiereFields() throws InvalidCSVRecordException  {
 		// NonPflichtfelder(Spalten auf false gesetzt) sind leer.
 		getInvalidReqFieldsFile();
-		CSVRecord row;
+		
 			for (int i = 0; i < reader.getInvalidEntries().size(); i++) {
 				row = reader.getInvalidEntries().get(i);
 				try {
@@ -329,6 +330,31 @@ public class TestCSVReader {
 	}
 	
 	// TODO prüfen ob TaskType prüfung fehler wirft
+	/**..
+	 * 
+	 * @throws InvalidCSVRecordException
+	 */
+	@Test
+	public void testValidTaskType() throws InvalidCSVRecordException {
+		getValidFile();
+//		getTaskTypeFile();
+//		getInvalidTaskTypeFile();
+		for (int i = 0; i < reader.getValidEntries().size(); i++) {
+			oneTask = reader.getValidEntries().get(i);
+			Assert.assertEquals(Task.TASK_TYPES.get(i), oneTask.getTasktype());
+//			Assert.assertEquals("famv_bestand", oneTask.getTasktype());
+//			Assert.assertEquals("eka", oneTask.getTasktype());
+//			Assert.assertEquals("unf", oneTask.getTasktype());
+//			Assert.assertEquals("kvv", oneTask.getTasktype());
+		}
+		
+			
+		
+				
+			
+		
+	}
+	
 	
 	//TODO Prüfen ob bei Leerzeile richtige Exception
 	
