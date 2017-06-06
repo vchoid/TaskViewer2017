@@ -311,6 +311,8 @@ public class TestCSVReader {
 			}
 	}
 	
+	// TODO prüfen ob TaskType prüfung fehler wirft
+	
 	//TODO Prüfen ob bei Leerzeile richtige Exception
 	
 	

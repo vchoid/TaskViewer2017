@@ -1,6 +1,5 @@
 package de.gokv.client.taskviewer.utils;
 
-import java.security.DigestException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -41,8 +40,8 @@ public class DateUtil {
 	/**
 	 * Legt ein {@link Pattern} im Format "ZZ.ZZ.ZZZZ" (Z = Ziffer) an.
 	 * Vergleicht mit der {@link Pattern#matcher(CharSequence) matcher()}-Methode,
-	 * ob der Parameter im erwartetden Format vorliegt und eine boolischen Wert zurück.
-	 * Anschließend wird versucht den String in ein LocalDate-Format zu konvertiert und
+	 * ob der Parameter im erwartetem Format vorliegt und gibt ein boolischen Wert zurück.
+	 * Anschließend wird versucht den String in ein LocalDate-Format zu konvertieren und
 	 * gibt ein wieder ein boolischen Wert zurück.
 	 * Bei einem Fehler wird die {@link DateTimeParseException} geworfen.
 	 * 
@@ -52,7 +51,7 @@ public class DateUtil {
 	 * 		<ul>
 	 *         <li><i>true</i>, wenn der String im korrektem Format vorliegt und
 	 *         gleichzeitig umgewandelt werden kann.</li>
-	 *         <li><i>false</i>, wenn der String im nicht korrektem Format
+	 *         <li><i>false</i>, wenn der String nicht im korrektem Format
 	 *         vorliegt oder nicht umgewandelt werden kann.</li>
 	 *         </ul>
 	 */

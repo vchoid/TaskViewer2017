@@ -7,7 +7,7 @@ import org.apache.commons.csv.CSVRecord;
 
 /**
  * 
- * Wird bei fehlerhaften Einträgen in der CSV geworfen.
+ * Wird geworfen, wenn die Werte aus der CSV-Datei fehlerhaft sind.
  * 
  * <p>
  * <b>Kontruktor:</b>

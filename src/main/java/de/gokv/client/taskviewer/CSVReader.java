@@ -221,7 +221,7 @@ public class CSVReader {
 		String value= getValue(rec, colName, requireField);
 		if(!(taskTypeList.contains(value))){
 			throw new InvalidCSVRecordException(colName, rec.getRecordNumber(),
-					"\'%s\' ist kein gültiger Wert %s", value, System.lineSeparator());
+					"\'%s\' ist kein gültiger TaskType %s", value, System.lineSeparator());
 		}
 		 return value;
 		
