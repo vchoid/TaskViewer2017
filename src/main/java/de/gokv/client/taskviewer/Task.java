@@ -65,6 +65,8 @@ public class Task {
 	protected final static Pattern PATTERN_KVNR = Pattern.compile("[A-Z]{1}[0-9]{9}");
 	protected final static Pattern PATTERN_TASKID = Pattern.compile("[A-F0-9]{32}");
 	protected final static Pattern PATTERN_NONUMB = Pattern.compile("[^0-9]*");
+	
+	static final String[] tasktype = {"famv_bestand", "eka", "unf", "kvv"};
 
 	private static int countTask = 0;
 
@@ -89,7 +91,7 @@ public class Task {
 			t.gebDat = CSVReader.getValueAsDate(record, CSVReader.COL_MITGLIED_GEB_DAT, true);
 			t.orderedDate = CSVReader.getValueAsDate(record, CSVReader.COL_ORDERED_DATE, true);
 			t.taskId = CSVReader.getValue(record, CSVReader.COL_TASK_ID, true, PATTERN_TASKID);
-			t.taskType = CSVReader.getValue(record, CSVReader.COL_TASK_TYPE,true, PATTERN_NONUMB, "famv_bestand");
+			t.taskType = CSVReader.getValue(record, CSVReader.COL_TASK_TYPE,true, PATTERN_NONUMB);
 			t.kvnr = CSVReader.getValue(record, CSVReader.COL_MITGLIED_KVNR, true, PATTERN_KVNR);
 			t.name = CSVReader.getValue(record, CSVReader.COL_MITGLIED_NAME, true, PATTERN_NONUMB);
 			t.vName = CSVReader.getValue(record, CSVReader.COL_MITGLIED_VORNAME, true, PATTERN_NONUMB);
