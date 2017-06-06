@@ -270,7 +270,7 @@ public class TestCSVReader {
 		getInvalidReqFieldsFile();
 		CSVRecord row;
 //		 Pflichtfelder sind leer
-		for (int i = 0; i < reader.getValidEntries().size(); i++) {
+		for (int i = 0; i < reader.getInvalidEntries().size(); i++) {
 				row = reader.getInvalidEntries().get(i);
 				try {
 					CSVReader.getValue(row, CSVReader.COL_MITGLIED_GEB_DAT, true);
@@ -299,7 +299,7 @@ public class TestCSVReader {
 		// NonPflichtfelder(Spalten auf false gesetzt) sind leer.
 		getInvalidReqFieldsFile();
 		CSVRecord row;
-			for (int i = 0; i < reader.getValidEntries().size(); i++) {
+			for (int i = 0; i < reader.getInvalidEntries().size(); i++) {
 				row = reader.getInvalidEntries().get(i);
 				try {
 					CSVReader.getValue(row, CSVReader.COL_MITGLIED_TITEL, false, Task.PATTERN_NONUMB);
