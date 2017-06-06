@@ -279,7 +279,7 @@ public class TestCSVReader {
 					CSVReader.getValue(row, CSVReader.COL_MITGLIED_VORNAME, true, Task.PATTERN_NONUMB);
 					CSVReader.getValue(row, CSVReader.COL_ORDERED_DATE, true);
 					CSVReader.getValue(row, CSVReader.COL_TASK_ID, true, Task.PATTERN_TASKID);
-					CSVReader.getValue(row, CSVReader.COL_TASK_TYPE, true, Task.PATTERN_NONUMB);
+					CSVReader.getMappedValue(row, CSVReader.COL_TASK_TYPE, true, Task.TASK_TYPES);
 				} catch (InvalidCSVRecordException e) {
 					throw e;
 				} 

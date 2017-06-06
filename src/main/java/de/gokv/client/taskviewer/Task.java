@@ -1,6 +1,8 @@
 package de.gokv.client.taskviewer;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.regex.Pattern;
 
 import org.apache.commons.csv.CSVRecord;
@@ -67,6 +69,8 @@ public class Task {
 	protected final static Pattern PATTERN_NONUMB = Pattern.compile("[^0-9]*");
 	// private final static Pattern PATTERN_DATE = Pattern.compile("\\d{2}\\.\\d{2}\\.\\d{4}");
 
+	protected final static ArrayList<String> TASK_TYPES = new ArrayList<String>(Arrays.asList("famv_bestand","eka","unf","kvv"));
+	
 	private static int countTask = 0;
 
 
@@ -86,7 +90,7 @@ public class Task {
 			t.gebDat = CSVReader.getValueAsDate(record, CSVReader.COL_MITGLIED_GEB_DAT, true);
 			t.orderedDate = CSVReader.getValueAsDate(record, CSVReader.COL_ORDERED_DATE, true);
 			t.taskId = CSVReader.getValue(record, CSVReader.COL_TASK_ID, true, PATTERN_TASKID);
-			t.taskType = CSVReader.getValue(record, CSVReader.COL_TASK_TYPE);
+			t.taskType = CSVReader.getMappedValue(record, CSVReader.COL_TASK_TYPE, true, TASK_TYPES);
 			t.kvnr = CSVReader.getValue(record, CSVReader.COL_MITGLIED_KVNR, true, PATTERN_KVNR);
 			t.name = CSVReader.getValue(record, CSVReader.COL_MITGLIED_NAME, true, PATTERN_NONUMB);
 			t.vName = CSVReader.getValue(record, CSVReader.COL_MITGLIED_VORNAME, true, PATTERN_NONUMB);
