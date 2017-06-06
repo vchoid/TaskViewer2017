@@ -86,30 +86,31 @@ public class TestCSVReader {
 		reader.readCSVFile();
 	}
 	/**
-	 * Gibt den Dateipfad der validen CSV an.
+	 * Gibt den Dateipfad der CSV-Datei an,
+	 * die mit validen Werten gefüllt ist.
 	 */
 	private void getValidFile() {
 		filePath = "/src/test/resources/famv_direct_input_monitoring_20170515131131.csv";
 		getFile(filePath);
 	}
 	/**
-	 * Gibt den Dateipfad der invaliden CSV an,
-	 * die ungültige Einträge in der TaskId-Spalte haben.
+	 * Gibt den Dateipfad der CSV-Datei an,
+	 * die ungültige Werte in der TaskId-Spalte haben.
 	 */
 	private void getInvalidTaskIdFile() {
 		filePath = "/src/test/resources/invalidTaskId_famv_direct_input_monitoring_20170515131131.csv";
 		getFile(filePath);
 	}
 	/**
-	 * Gibt den Dateipfad der invaliden CSV an,
-	 * die ungültige Einträge in der KvNr-Spalte haben.
+	 * Gibt den Dateipfad der CSV-Datei an,
+	 * die ungültige werte in der KvNr-Spalte haben.
 	 */
 	private void getInvalidKVNrFile() {
 		filePath = "/src/test/resources/invalidKVNr_famv_direct_input_monitoring_20170515131131.csv";
 		getFile(filePath);
 	}
 	/**
-	 * Gibt den Dateipfad der invaliden CSV an,
+	 * Gibt den Dateipfad der CSV-Datei an,
 	 * die ungültige Zahlen in den Spalten Name, Vorname, Titel, vsWort und zsWort haben.
 	 */
 	private void getNoNumbAllowedFile() {
@@ -117,11 +118,27 @@ public class TestCSVReader {
 		getFile(filePath);
 	}
 	/**
-	 * Gibt den Dateipfad der invaliden CSV an,
+	 * Gibt den Dateipfad der CSV-Datei an,
 	 * in der die Pflichtfelder nicht gefüllt sind.
 	 */
 	private void getInvalidReqFieldsFile() {
 		filePath = "/src/test/resources/invalidReqFields_famv_direct_input_monitoring_20170515131131.csv";
+		getFile(filePath);
+	}
+	/**
+	 * Gibt den Dateipfad der CSV-Datei an,
+	 * die valide Werte in der Spalte TaskType hat.
+	 */
+	private void getTaskTypeFile() {
+		filePath = "/src/test/resources/taskTypes_direct_input_monitoring_20170515131131.csv";
+		getFile(filePath);
+	}
+	/**
+	 * Gibt den Dateipfad der CSV-Datei an,
+	 * die ungültige Werte in der Spalte TaskType hat.
+	 */
+	private void getInvalidTaskTypeFile() {
+		filePath = "/src/test/resources/invalid_taskTypes_direct_input_monitoring_20170515131131.csv";
 		getFile(filePath);
 	}
 
