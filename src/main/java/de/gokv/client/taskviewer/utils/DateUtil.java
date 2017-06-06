@@ -1,5 +1,6 @@
 package de.gokv.client.taskviewer.utils;
 
+import java.security.DigestException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -38,9 +39,12 @@ public class DateUtil {
 			.withResolverStyle(ResolverStyle.STRICT);
 
 	/**
-	 * Überprüft ob ein sich String im Datums-Format (dd.mm.yyyy) befindet und
-	 * ins LocalDate-Format umgewandelt werden kann und gibt anschließend ein
-	 * {@link Boolean} zurück.
+	 * Legt ein {@link Pattern} im Format "ZZ.ZZ.ZZZZ" (Z = Ziffer) an.
+	 * Vergleicht mit der {@link Pattern#matcher(CharSequence) matcher()}-Methode,
+	 * ob der Parameter im erwartetden Format vorliegt und eine boolischen Wert zurück.
+	 * Anschließend wird versucht den String in ein LocalDate-Format zu konvertiert und
+	 * gibt ein wieder ein boolischen Wert zurück.
+	 * Bei einem Fehler wird die {@link DateTimeParseException} geworfen.
 	 * 
 	 * @param date
 	 *            {@link String}: Zu konvertierendes Datum im Format TT.MM.JJJJ
@@ -53,7 +57,7 @@ public class DateUtil {
 	 *         </ul>
 	 */
 	public static boolean isDateValid(String date) {
-		// String überprüfen, ob "ZZ.ZZ.ZZZZ" (Z = Ziffer)
+		// String überprüfen, ob 
 		Pattern p = Pattern.compile("\\d{2}\\.\\d{2}\\.\\d{4}");
 		java.util.regex.Matcher m = p.matcher(date);
 		if (!m.matches()) {
@@ -68,12 +72,14 @@ public class DateUtil {
 	}
 
 	/**
-	 * Überprüft einen Text auf syntaktische Korrektheit und wandelt ihn in ein
-	 * Datums-Objekt um
+	 * Überprüft zuerst mit der {@link #isDateValid(String) is DateValid()}-Methode
+	 * ein String auf syntaktische Korrektheit und
+	 * konvertiert ihn zu einem Datums-Objekt um.
+	 * Bei einem Fehler wird {@link InvalidDateException} geworfen.
 	 * 
 	 * @param date
 	 *            {@link String}: Zu konvertierendes Datum im Format TT.MM.JJJJ
-	 * @return Ein {@link LocalDate}-Objekt des zu konvertierenden Strings
+	 * @return Ein {@link LocalDate}-Objekt.
 	 * @throws InvalidDateException
 	 *             ohne Spaltenname
 	 */
@@ -83,12 +89,14 @@ public class DateUtil {
 			d2 = LocalDate.parse(date, df2);
 			return d2;
 		}
-		throw new InvalidDateException("Fehler beim Konvertieren vom String \"%s\" in ein LocalDate-Format", date);
+		throw new InvalidDateException("Fehler beim Konvertieren vom String \'%s\' in ein LocalDate-Format", date);
 	}
 
 	/**
-	 * Überprüft einen Text auf syntaktische Korrektheit und wandelt ihn in ein
-	 * Datums-Objekt um
+	 * Versucht mit der {@link #parseDate(String) parseDate()}-Methode ein Strind
+	 * in ein LocaDate-Format zu konverieren und wirf bei einem Fehler die
+	 * {@link InvalidDateException}, mit der genauen Zeilen- und Spaltenangabe
+	 * in der der Fehler auftrat.
 	 * 
 	 * @param date
 	 *            {@link String}: Zu konvertierendes Datum im Format TT.MM.JJJJ
@@ -102,7 +110,7 @@ public class DateUtil {
 		try {
 			return parseDate(date);
 		} catch (InvalidDateException e) {
-			String msg = String.format("%s %s in der Spalte \"%s\"", e.getMessage(), System.lineSeparator(),
+			String msg = String.format("%s %s in der Spalte \'%s\'", e.getMessage(), System.lineSeparator(),
 					columnName);
 			throw new InvalidDateException(msg, date);
 		}

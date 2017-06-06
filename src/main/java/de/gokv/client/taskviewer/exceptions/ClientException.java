@@ -2,8 +2,8 @@ package de.gokv.client.taskviewer.exceptions;
 
 /**
  * 
- * Wird bei fehlerhaften Dateien, die nicht vom Typ CSV sind geworfen oder bei
- * falschen Dateipfadangaben.
+ * Wird bei fehlerhaften Dateien, die nicht vom Typ CSV sind oder bei
+ * falschen Dateipfadangaben haben geworfen.
  * 
  * <p>
  * <b>Kontruktor:</b>

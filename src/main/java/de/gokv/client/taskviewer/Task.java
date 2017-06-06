@@ -65,13 +65,16 @@ public class Task {
 	protected final static Pattern PATTERN_KVNR = Pattern.compile("[A-Z]{1}[0-9]{9}");
 	protected final static Pattern PATTERN_TASKID = Pattern.compile("[A-F0-9]{32}");
 	protected final static Pattern PATTERN_NONUMB = Pattern.compile("[^0-9]*");
-	// private final static Pattern PATTERN_DATE = Pattern.compile("\\d{2}\\.\\d{2}\\.\\d{4}");
 
 	private static int countTask = 0;
 
 
 	/**
-	 * Erzeugt ein Task einer Zeile aus einer CSV_Datei und gibt ihn als {@link Task}-Objekt zurück.
+	 * Legt eine Variable der Klasse {@link Task} an.
+	 * Holt ein Wert einer Zeile aus der CSV mit der {@link CSVReader#getValue(CSVRecord, String) getValue}-Methode
+	 * oder {@link CSVReader#getValueAsDate(CSVRecord, String, boolean) getValueAsDate}-Methode
+	 * und speichert ihn in einer Variable im passenden Format.
+	 * 
 	 * 
 	 * @param record Inhalt einer Zeile der gelesenen CSV-Datei.
 	 * @return Eine Zeile aus der CSV-Datei als {@link Task}-Objekt.
@@ -86,7 +89,7 @@ public class Task {
 			t.gebDat = CSVReader.getValueAsDate(record, CSVReader.COL_MITGLIED_GEB_DAT, true);
 			t.orderedDate = CSVReader.getValueAsDate(record, CSVReader.COL_ORDERED_DATE, true);
 			t.taskId = CSVReader.getValue(record, CSVReader.COL_TASK_ID, true, PATTERN_TASKID);
-			t.taskType = CSVReader.getValue(record, CSVReader.COL_TASK_TYPE);
+			t.taskType = CSVReader.getValue(record, CSVReader.COL_TASK_TYPE,true, PATTERN_NONUMB, "famv_bestand");
 			t.kvnr = CSVReader.getValue(record, CSVReader.COL_MITGLIED_KVNR, true, PATTERN_KVNR);
 			t.name = CSVReader.getValue(record, CSVReader.COL_MITGLIED_NAME, true, PATTERN_NONUMB);
 			t.vName = CSVReader.getValue(record, CSVReader.COL_MITGLIED_VORNAME, true, PATTERN_NONUMB);

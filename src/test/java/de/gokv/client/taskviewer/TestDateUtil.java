@@ -10,7 +10,9 @@ import de.gokv.client.taskviewer.utils.DateUtil;
 
 
 /**
- *  Testen der {@link DateUtil}-Klasse.
+ * Testen der {@link DateUtil}-Klasse.
+ * Holt Werte aus eine CSV-Datei und überprüft ob, 
+ * erwartete Fehler behandelt werden.
  * 
  * <p><b>Tests:</b>
  * <ul>
@@ -91,7 +93,8 @@ public class TestDateUtil {
 		Assert.assertFalse("...ungültiges Datumsformat vom Tag", DateUtil.isDateValid("2.2.1982"));
 	}
 	/**
-	 *  Test mit der {@link DateUtil#parseDate(String) parseDate}-Methode ob beim parsen eines gültigem Datumformates die {@link InvalidDateException} geworfen wird.
+	 *  Test mit der {@link DateUtil#parseDate(String) parseDate}-Methode,
+	 *  ob beim parsen eines gültigem Datumformates die {@link InvalidDateException} geworfen wird.
 	 */
 	@Test
 	public void testParseValidDate() throws InvalidDateException {
@@ -101,7 +104,8 @@ public class TestDateUtil {
 				date.getClass());
 	}
 	/**
-	 *  Test mit der {@link DateUtil#parseDate(String) parseDate}-Methode ob beim parsen eines ungültigem Datumformates die {@link InvalidDateException} geworfen wird.
+	 *  Test mit der {@link DateUtil#parseDate(String) parseDate}-Methode,
+	 *  ob beim parsen eines ungültigem Datumformates die {@link InvalidDateException} geworfen wird.
 	 */
 	@Test(expected = InvalidDateException.class)
 	public void testParseInvalidDate() throws InvalidDateException {
@@ -109,8 +113,8 @@ public class TestDateUtil {
 		try {
 			DateUtil.parseDate(date);
 		} catch (InvalidDateException e) {
-			Assert.assertEquals("Invalid Exception Message",
-					String.format("Fehler beim Konvertieren vom String \"%s\" in ein LocalDate-Format", date),
+			Assert.assertEquals("Invalid Exception Message: ",
+					String.format("Fehler beim Konvertieren vom String \'%s\' in ein LocalDate-Format", date),
 					e.getMessage());
 			throw e;
 		}

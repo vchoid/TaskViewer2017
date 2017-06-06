@@ -1,8 +1,11 @@
 package de.gokv.client.taskviewer.exceptions;
 
 /**
- * Wird beim parsen eines Strings, falschen Formates in eine LocalDate mit der
- * {@link de.gokv.client.taskviewer.utils.DateUtil#parseDate(String) parseDate} geworfen.
+ * Wird beim parsen eines Strings(falschen Formates)
+ * aus der Klasse {@link de.gokv.client.taskviewer.utils.DateUtil DateUtil}
+ * mit der {@link de.gokv.client.taskviewer.utils.DateUtil#parseDate(String) parseDate()}-Methode
+ * 
+ * in ein LocalDate-Format geworfen.
  * 
  * @author Christoph Kiank
  *
