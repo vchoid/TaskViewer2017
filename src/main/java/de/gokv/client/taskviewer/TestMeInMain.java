@@ -35,12 +35,22 @@ public class TestMeInMain {
 		filePath = "/src/test/resources/invalidReqFields_famv_direct_input_monitoring_20170515131131.csv";
 		getFile(filePath);
 	}
+	private static void getTaskTypesFile() {
+		filePath = "/src/test/resources/taskTypes_direct_input_monitoring_20170515131131.csv";
+		getFile(filePath);
+	}
+	private static void getInvalidTaskTypesFile() {
+		filePath = "/src/test/resources/invalid_taskTypes_direct_input_monitoring_20170515131131.csv";
+		getFile(filePath);
+	}
 	
 	public static void main(String[] args) {
 
 		//gültige Einträge in CSV-Datei +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		
-		getValidFile();
+//		getValidFile();
+//		getTaskTypesFile();
+		getInvalidTaskTypesFile();
 		for (Task task : reader.getValidEntries()) {
 			System.out.println(task);
 		}

@@ -77,7 +77,7 @@ public class CSVReader {
 	/**
 	 * Ließt eine CSV-Datei, setzt die erste Zeile als Header-Map und versucht
 	 * den Inhalt einer Reihe in eine Task zu speichern. Beim Versuch
-	 * fehlerhafte Einträge zu speichern, wird eine
+	 * fehlerhafte Einträge zu speichern, wird ein
 	 * {@link InvalidCSVRecordException} geworfen und die fehlerhaften Einträge
 	 * in einer weiteren Liste gespeichert.
 	 * 
@@ -86,7 +86,7 @@ public class CSVReader {
 	 *             Wird geworfen, wenn die CSV-Datei nicht existiert oder ein
 	 *             Abbruch beim öffnen der Datei passierte.
 	 * @throws InvalidCSVRecordException
-	 *             Wird beim lesen fehlerhafter Werte in der CSV geworfen.
+	 *             Wird beim lesen fehlerhafter Werte geworfen.
 	 * 
 	 * 
 	 */
@@ -151,7 +151,7 @@ public class CSVReader {
 	 * Holt den Wert aus der CSV-Datei und gibt ihn wieder als String zurück.
 	 * 
 	 * @param rec
-	 *            Aus der CSV-Datei die Werte holen.
+	 *            Werte aus der CSV-Datei lesen.
 	 * @param colName
 	 *            Spalte der CSV-Datei
 	 * @return Gibt den Wert von der CSV-Datei-Spalte zurück.
@@ -167,8 +167,8 @@ public class CSVReader {
 	/**
 	 * 
 	 * Holt den Wert aus der CSV-Datei und gibt ihn wieder als String zurück.
-	 * Überprüft ob es sich um ein Pflichfeld handelt und wirft eine Exception,
-	 * wenn dies nicht der Fall ist.
+	 * Überprüft ob es sich um ein Pflichfeld handelt 
+	 * und wirft eine {@link InvalidCSVRecordException}, wenn dies nicht der Fall ist.
 	 * 
 	 * @param rec
 	 *            CSV-Datei einlesen.
@@ -189,11 +189,11 @@ public class CSVReader {
 	}
 
 	/**
-	 * Holt den Wert aus der CSV-Datei und gibt ihn wieder als String
-	 * zurück. Überprüft ob es sich um ein Pflichfeld handelt und
-	 * wirft eine Exception, wenn dies nicht der Fall ist.
+	 * Holt den Wert aus der CSV-Datei und gibt ihn wieder als String zurück.
+	 * Überprüft ob es sich um ein Pflichfeld handelt
+	 * und wirft eine {@link InvalidCSVRecordException}, wenn dies nicht der Fall ist.
 	 * Überprüft, ob der Wert ein bestimmtes Pattern aufweist, wirft eine
-	 * Exception, wenn dies nicht der Fall ist.
+	 * {@link InvalidCSVRecordException}, wenn dies nicht der Fall ist.
 	 * 
 	 * 
 	 * @param rec
@@ -212,16 +212,25 @@ public class CSVReader {
 		String value = getValue(rec, colName, requireField);
 		if (!pattern.matcher(value).matches())
 			throw new InvalidCSVRecordException(colName, rec.getRecordNumber(),
-					"Der Wert \'%s\' ist für das Format %s nicht gültig.", value, pattern.toString());
+					"Der Wert %s ist für das Format %s nicht gültig.", value, pattern.toString());
 		return value;
 	}
+
+	public static String getMappedValue(CSVRecord rec, String colName, boolean requireField, ArrayList<String> taskTypeList) throws InvalidCSVRecordException{
 		
+		String value= getValue(rec, colName, requireField);
+		if(!(taskTypeList.contains(value))){
+			throw new InvalidCSVRecordException(colName, rec.getRecordNumber(),
+					"\'%s\' ist kein gültiger Wert %s", value, System.lineSeparator());
+		}
+		 return value;
+		
+	}
 	/**
-	 * Holt den Wert aus der CSV-Datei und konvertiert ihn in ein LocalDate
-	 * Format. Überprüft ob es sich um ein Pflichfeld handelt und
-	 * wirft eine Exception, wenn dies nicht der Fall ist.
-	 * Überprüft, ob der Wert ein bestimmtes Pattern aufweist, wirft eine
-	 * Exception, wenn dies nicht der Fall ist.
+	 * 
+	 * Holt den Wert aus der CSV-Datei und gibt ihn wieder als LocalDate zurück.
+	 * Überprüft ob es sich um ein Pflichfeld handelt
+	 * und wirft eine {@link InvalidCSVRecordException}, wenn dies nicht der Fall ist.
 	 * 
 	 * @param rec
 	 *            CSV-Datei einlesen.
@@ -237,7 +246,6 @@ public class CSVReader {
 			throws InvalidCSVRecordException, InvalidDateException {
 		String s = getValue(rec, colName, requireField);
 		LocalDate localDate = DateUtil.parseDate(s, colName);
-
 		return localDate;
 	}
 	
