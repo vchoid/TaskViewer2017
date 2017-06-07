@@ -1,8 +1,11 @@
-package de.gokv.client.taskviewer;
+package de.gokv.client.taskviewer.TestMe;
 
 import java.time.LocalDate;
 
 import org.apache.commons.csv.CSVRecord;
+
+import de.gokv.client.taskviewer.CSVReader;
+import de.gokv.client.taskviewer.Task;
 
 public class TestMeInMain {
 	private static CSVReader reader;
