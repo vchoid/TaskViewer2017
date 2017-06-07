@@ -49,8 +49,8 @@ public class TestMeInMain {
 		//gültige Einträge in CSV-Datei +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		
 //		getValidFile();
-//		getTaskTypesFile();
-		getInvalidTaskTypesFile();
+		getTaskTypesFile();
+//		getInvalidTaskTypesFile();
 		for (Task task : reader.getValidEntries()) {
 			System.out.println(task);
 		}

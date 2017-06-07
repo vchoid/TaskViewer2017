@@ -37,6 +37,10 @@ import de.gokv.client.taskviewer.exceptions.InvalidDateException;
  * die ungültige Zahlen in den Spalten Name, Vorname, Titel, vsWort und zsWort haben.</li>
  * <li><b>{@link #getInvalidReqFieldsFile()}</b>: Gibt den Dateipfad der CSV-Datei an,
  * in der die Pflichtfelder nicht gefüllt sind.</li>
+ * <li><b>{@link #getInvalidTaskTypeFile()}</b>: Gibt den Dateipfad der CSV-Datei an,
+ * die ungültige Werte in der Spalte TaskType hat.</li>
+ * <li><b>{@link #getTaskTypeFile()}</b>: Gibt den Dateipfad der CSV-Datei an,
+ * die gültige Werte in der Spalte TaskType hat.</li>
  * </ul>
  * </p>
  * 
@@ -60,9 +64,12 @@ import de.gokv.client.taskviewer.exceptions.InvalidDateException;
  * <li><b>{@link #testInvalidNumbInText()}</b>: Ließt zuerst die Datei
  * mit den fehlerhaften Einträgen in den Spalten Namen, Vornamen, zsWort, vsWort, Titel mit der {@link #getNoNumbAllowedFile()}-Methode.
  * Überprüft, ob sich Zahlen in den Spalten befinden und wenn ja ob eine {@link InvalidCSVRecordException} geworfen wird.</li>
- * <li><b>{@link #testInvalidRequiereFields()}</b>: </li>
- * <li><b>{@link #testInvalidNonRequiereFields()}</b>: </li>
- * <li><b>{@link #testEmptyRow}</b>: </li>
+ * <li><b>{@link #testInvalidTaskType()}</b>:  Ließt zuerst die Datei mit den fehlerhaften Werten in der Spalte TaskType,
+ * mit der {@link #getInvalidTaskTypeFile()}-Methode.
+ * Überprüft, ob die Werte eine erwartete {@link InvalidCSVRecordException} werfen..</li>
+ * <li><b>{@link #testValidTaskType()}</b>:Ließt zuerst die Datei mit den gültigen Werten in der Spalte TaskType,
+ * mit der {@link #getTaskTypeFile()}-Methode.
+ * Überprüft, ob die Werte eine {@link InvalidCSVRecordException} werfen.</li>
  * </ul>
  * </p>
  * 
@@ -328,33 +335,41 @@ public class TestCSVReader {
 				} 
 			}
 	}
-	
-	// TODO prüfen ob TaskType prüfung fehler wirft
-	/**..
-	 * 
+	/**
+	 * Ließt zuerst die Datei mit den fehlerhaften Werten in der Spalte TaskType, mit der {@link #getInvalidTaskTypeFile()}-Methode.
+	 * Überprüft, ob die Werte eine <b><u>erwartete</b></u> {@link InvalidCSVRecordException} werfen.
+	 * @throws InvalidCSVRecordException
+	 */
+	@Test(expected = InvalidCSVRecordException.class)
+	public void testInvalidTaskType() throws InvalidCSVRecordException{
+		getInvalidTaskTypeFile();
+		for (int i = 0; i < reader.getInvalidEntries().size(); i++) {
+			row = reader.getInvalidEntries().get(i);
+			try {
+				CSVReader.getMappedValue(row, CSVReader.COL_TASK_TYPE, true, Task.TASK_TYPES);
+			} catch (InvalidCSVRecordException e) {
+				
+				throw e;
+			} 
+		}
+	}
+	//TODO prüfen ob die erwarteten Tasktype normal erkannt werden
+	/**
+	 * Ließt zuerst die Datei mit den gültigen Werten in der Spalte TaskType, mit der {@link #getTaskTypeFile()}-Methode.
+	 * Überprüft, ob die Werte eine {@link InvalidCSVRecordException} werfen.
 	 * @throws InvalidCSVRecordException
 	 */
 	@Test
-	public void testValidTaskType() throws InvalidCSVRecordException {
-		getValidFile();
-//		getTaskTypeFile();
-//		getInvalidTaskTypeFile();
-		for (int i = 0; i < reader.getValidEntries().size(); i++) {
-			oneTask = reader.getValidEntries().get(i);
-			Assert.assertEquals(Task.TASK_TYPES.get(i), oneTask.getTasktype());
-//			Assert.assertEquals("famv_bestand", oneTask.getTasktype());
-//			Assert.assertEquals("eka", oneTask.getTasktype());
-//			Assert.assertEquals("unf", oneTask.getTasktype());
-//			Assert.assertEquals("kvv", oneTask.getTasktype());
+	public void testValidTaskType() throws InvalidCSVRecordException{
+		getTaskTypeFile();
+		for (int i = 0; i < reader.getInvalidEntries().size(); i++) {
+			try {
+				CSVReader.getMappedValue(row, CSVReader.COL_TASK_TYPE, true, Task.TASK_TYPES);
+			} catch (InvalidCSVRecordException e) {
+				throw e;
+			} 
 		}
-		
-			
-		
-				
-			
-		
 	}
-	
 	
 	//TODO Prüfen ob bei Leerzeile richtige Exception
 	
