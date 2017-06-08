@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Frame;
 import java.awt.GridBagLayout;
 import java.awt.ScrollPane;
@@ -26,7 +27,7 @@ public class MyFrame extends JFrame {
 
 	// Color[] colors = {Color.gray,Color.green, Color.orange};
 
-	JPanel input;
+	JPanel filterPan;
 	JTextField kvnr_field;
 	JTextField name_field;
 	JTextField vName_field;
@@ -35,7 +36,7 @@ public class MyFrame extends JFrame {
 	JTextField orderDate_field;
 	JButton setFilter;
 	
-	JPanel taskPanel;
+	JPanel taskListPan;
 	JButton loadDetails;
 	JList<String> taskList;
 
@@ -46,55 +47,55 @@ public class MyFrame extends JFrame {
 		setAlwaysOnTop(true);
 
 		// Input-Panel +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-		input = new JPanel();
-		input.setLayout(null);
-		input.setBounds(10, 10, 400, 350);
-		add(input);
+		filterPan = new JPanel();
+		filterPan.setLayout(null);
+		filterPan.setBounds(10, 10, 400, 350);
+		add(filterPan);
 		
 		kvnr_field = new JTextField("Kvnr");
 		kvnr_field.setBounds(0, 0, 400, 25);
-		input.add(kvnr_field);
+		filterPan.add(kvnr_field);
 
 		name_field = new JTextField("Name");
 		name_field.setBounds(0, 50, 180, 25);
-		input.add(name_field);
+		filterPan.add(name_field);
 
 		vName_field = new JTextField("Vorname");
 		vName_field.setBounds(220, 50, 180, 25);
-		input.add(vName_field);
+		filterPan.add(vName_field);
 
 		gebDate_field = new JTextField("Geburtsdatum");
 		gebDate_field.setBounds(220, 90, 180, 25);
-		input.add(gebDate_field);
+		filterPan.add(gebDate_field);
 
 		taskId_field = new JTextField("TaskID");
 		taskId_field.setBounds(0, 130, 400, 25);
-		input.add(taskId_field);
+		filterPan.add(taskId_field);
 
 		orderDate_field = new JTextField("OrderDate");
 		orderDate_field.setBounds(220, 170, 180, 25);
-		input.add(orderDate_field);
+		filterPan.add(orderDate_field);
 
 		setFilter = new JButton("Filter anwenden");
 		setFilter.setBounds(0, 210, 400, 25);
-		input.add(setFilter);
+		filterPan.add(setFilter);
 
 		// TaskPanel +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-		taskPanel = new JPanel();
-		taskPanel.setLayout(null);
-		taskPanel.setBounds(420, 10, 300, 350);
-		add(taskPanel);
+		taskListPan = new JPanel();
+		taskListPan.setLayout(null);
+		taskListPan.setBounds(420, 10, 300, 350);
+		add(taskListPan);
 		
 		String[] liste = { "Task 1", "Task 2", "Task 3", "Task 4", "Task 5", "Task 6", "Task 7", "Task 8", "Task 9",
 				"Task 10", "Task 11", "Task 12", "Task 13","Task 15","Task 16","Task 17","Task 18","Task 19" };
 		
 		taskList = new JList<>(liste);
 		taskList.setBounds(0, 0, 300, 190);
-		taskPanel.add(taskList);
+		taskListPan.add(taskList);
 
 		loadDetails = new JButton("Details anzeigen");
 		loadDetails.setBounds(0, 210, 300, 25);
-		taskPanel.add(loadDetails);
+		taskListPan.add(loadDetails);
 
 		/**
 		 * Beendet die Anwendung. Sichtbarkeit auf true.
