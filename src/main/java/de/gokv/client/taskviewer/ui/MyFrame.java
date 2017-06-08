@@ -33,8 +33,6 @@ public class MyFrame extends JFrame {
 	JTextField taskId_field;
 	JTextField orderDate_field;
 
-	JScrollPane scroll;
-	
 	JButton setFilter;
 	JButton loadDetails;
 
@@ -76,10 +74,8 @@ public class MyFrame extends JFrame {
 		String[] liste = { "Task 1", "Task 2", "Task 3", "Task 4", "Task 5", "Task 6", "Task 7", "Task 8", "Task 9",
 				"Task 10", "Task 11", "Task 12", "Task 13","Task 15","Task 16","Task 17","Task 18","Task 19" };
 		taskList = new JList<>(liste);
-		taskList.setVisibleRowCount(10);
-		taskList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		taskList.setBounds(430, 10, 300, 185);
-		this.add(new JScrollPane(taskList));
+		add(taskList);
 
 		loadDetails = new JButton("Details anzeigen");
 		loadDetails.setBounds(430, 210, 300, 25);
