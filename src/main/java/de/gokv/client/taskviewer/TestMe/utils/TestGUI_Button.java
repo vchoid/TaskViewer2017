@@ -1,4 +1,4 @@
-package de.gokv.client.taskviewer.TestMe;
+package de.gokv.client.taskviewer.TestMe.utils;
 
 public class TestGUI_Button extends javax.swing.JFrame{
 

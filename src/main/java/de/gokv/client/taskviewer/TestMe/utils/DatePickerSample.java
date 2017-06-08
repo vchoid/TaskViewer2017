@@ -1,4 +1,4 @@
-package de.gokv.client.taskviewer.TestMe;
+package de.gokv.client.taskviewer.TestMe.utils;
 
 import java.util.Locale;
 import javafx.application.Application;
@@ -22,7 +22,7 @@ public class DatePickerSample extends Application {
     @Override
     public void start(Stage stage) {
         this.stage = stage;
-        stage.setTitle("DatePickerSample ");
+        stage.setTitle("DatePickerSample");
         initUI();
         stage.show();
     }
@@ -39,7 +39,7 @@ public class DatePickerSample extends Application {
         gridPane.setHgap(10);
         gridPane.setVgap(10);
 
-        Label checkInlabel = new Label("Check-In Date:");
+        Label checkInlabel = new Label("Geburtsdatum");
         gridPane.add(checkInlabel, 0, 0);
 
         GridPane.setHalignment(checkInlabel, HPos.LEFT);
