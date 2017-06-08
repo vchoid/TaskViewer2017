@@ -16,17 +16,21 @@ import javax.swing.JTextField;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 
-public class TutFrame extends JFrame {
+public class TutFrame extends JFrame{
 
 	JLabel text;
-	JButton but;
 	JTextField eingabe;
+	
+	JPanel butPan;
+	JButton but;
+	JButton zeit;
+	
 
+	JPanel fontPan;
 	JCheckBox fett;
 	JCheckBox kursiv;
 	JCheckBox serif;
 
-	JPanel panel_font;
 
 	public TutFrame() {
 		this.setVisible(true);
@@ -45,48 +49,66 @@ public class TutFrame extends JFrame {
 		text.setToolTipText("Das ist der TextLabel");
 		add(text);
 
-		but = new JButton("Zeig es an!");
-		but.setBounds(10, 10, 100, 20);
-		but.addActionListener(new TutListener());
+		butPan = new JPanel();
+		butPan.setBounds(10, 10, 200, 60);
+		butPan.setLayout(null);
+		add(butPan);
+		
+		TutListener tutList = new TutListener();
+		
+		but = new JButton("Zeig es dort =>");
+		but.setBounds(0, 0, 120, 20);
+		but.addActionListener(tutList);
 		but.setEnabled(false);
 		but.setToolTipText("Der Button schickt den Text zum TextLabel");
-		add(but);
+		butPan.add(but);
 
+		zeit = new JButton("Die Zeit =>");
+		zeit.setBounds(0, 30, 120, 20);
+		zeit.addActionListener(tutList);
+		butPan.add(zeit);
+		
 		eingabe = new JTextField("Schreib was rein");
-		eingabe.setBounds(10, 40, 100, 20);
+		eingabe.setBounds(10, 70, 100, 20);
 		eingabe.addCaretListener(new TutCaretListen());
 		add(eingabe);
 
-		panel_font = new JPanel();
-		panel_font.setLayout(null);
-		panel_font.setBounds(5, 80, 130, 80);
-		add(panel_font);
+		fontPan = new JPanel();
+		fontPan.setLayout(null);
+		fontPan.setBounds(5, 100, 130, 80);
+		add(fontPan);
 
+		TutItemListen tutItemList = new TutItemListen();
+		
 		fett = new JCheckBox("Fett");
 		fett.setBounds(0, 0, 100, 20);
-		fett.addItemListener(new TutItemListen());
+		fett.addItemListener(tutItemList);
 		fett.setToolTipText("zum Fett machen vom Text im Label");
-		panel_font.add(fett);
+		fontPan.add(fett);
 
 		kursiv = new JCheckBox("Kursiv");
 		kursiv.setBounds(0, 20, 100, 20);
-		kursiv.addItemListener(new TutItemListen());
+		kursiv.addItemListener(tutItemList);
 		kursiv.setToolTipText("zum kursiv machen vom Text im Label");
-		panel_font.add(kursiv);
+		fontPan.add(kursiv);
 
 		serif = new JCheckBox("Serif");
 		serif.setBounds(0, 40, 120, 20);
-		serif.addItemListener(new TutItemListen());
+		serif.addItemListener(tutItemList);
 		serif.setToolTipText("serifer Text im Label");
-		panel_font.add(serif);
+		fontPan.add(serif);
 
 	}
 
 	private class TutListener implements ActionListener {
 
 		@Override
-		public void actionPerformed(ActionEvent ae) {
+		public void actionPerformed(ActionEvent e) {
+			if(e.getSource() == but){
 			text.setText(eingabe.getText());
+			} else if(e.getSource() == zeit){
+				text.setText("" + e.getWhen());
+			}
 		}
 	}
 
