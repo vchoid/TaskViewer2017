@@ -1,107 +1,123 @@
 package de.gokv.client.taskviewer.ui;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.Frame;
+import java.awt.Font;
 import java.awt.GridBagLayout;
-import java.awt.ScrollPane;
-import java.util.Locale;
+import java.awt.GridLayout;
 
-import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import javax.swing.ListSelectionModel;
 
-import de.gokv.client.taskviewer.TestMe.utils.DatePickerSample;
 
 public class MyFrame extends JFrame {
 
-	// Color[] colors = {Color.gray,Color.green, Color.orange};
-
-	JPanel filterPan;
+	JPanel contPanel;
+	
+	JPanel filterPanel;
 	JTextField kvnr_field;
 	JTextField name_field;
 	JTextField vName_field;
 	JTextField gebDate_field;
 	JTextField taskId_field;
 	JTextField orderDate_field;
-	JButton setFilter;
+	JButton filterBtn;
 	
-	JPanel taskListPan;
-	JButton loadDetails;
+	JPanel taskPanel;
+	JButton detailsBtn;
 	JList<String> taskList;
+	
+	JPanel infoPanel;
+	JLabel infoLabel;
 
 	public MyFrame() {
 		setTitle("GoKV-TaskViewer");
-		setSize(new Dimension(1000, 300));
-		setLayout(null);
+		setSize(new Dimension(800, 300));
 		setAlwaysOnTop(true);
+		
+		// Content-Panel +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		contPanel = new JPanel();
+		FlowLayout fl_contPanel = new FlowLayout();
+		fl_contPanel.setAlignment(FlowLayout.LEFT);
+		contPanel.setLayout(fl_contPanel);
+		setContentPane(contPanel);
 
 		// Input-Panel +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-		filterPan = new JPanel();
-		filterPan.setLayout(null);
-		filterPan.setBounds(10, 10, 400, 350);
-		add(filterPan);
+		filterPanel = new JPanel();
+		filterPanel.setLayout(new BoxLayout(filterPanel, BoxLayout.PAGE_AXIS));
+		filterPanel.setBounds(10, 10, 400, 350);
+		contPanel.add(filterPanel);
 		
 		kvnr_field = new JTextField("Kvnr");
 		kvnr_field.setBounds(0, 0, 400, 25);
-		filterPan.add(kvnr_field);
+		filterPanel.add(kvnr_field);
 
 		name_field = new JTextField("Name");
 		name_field.setBounds(0, 50, 180, 25);
-		filterPan.add(name_field);
+		filterPanel.add(name_field);
 
 		vName_field = new JTextField("Vorname");
 		vName_field.setBounds(220, 50, 180, 25);
-		filterPan.add(vName_field);
+		filterPanel.add(vName_field);
 
 		gebDate_field = new JTextField("Geburtsdatum");
 		gebDate_field.setBounds(220, 90, 180, 25);
-		filterPan.add(gebDate_field);
+		filterPanel.add(gebDate_field);
 
 		taskId_field = new JTextField("TaskID");
 		taskId_field.setBounds(0, 130, 400, 25);
-		filterPan.add(taskId_field);
+		filterPanel.add(taskId_field);
 
 		orderDate_field = new JTextField("OrderDate");
 		orderDate_field.setBounds(220, 170, 180, 25);
-		filterPan.add(orderDate_field);
+		filterPanel.add(orderDate_field);
 
-		setFilter = new JButton("Filter anwenden");
-		setFilter.setBounds(0, 210, 400, 25);
-		filterPan.add(setFilter);
+		filterBtn = new JButton("Filter anwenden");
+		filterBtn.setBounds(0, 210, 400, 25);
+		filterPanel.add(filterBtn);
 
 		// TaskPanel +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-		taskListPan = new JPanel();
-		taskListPan.setLayout(null);
-		taskListPan.setBounds(420, 10, 300, 350);
-		add(taskListPan);
+		taskPanel = new JPanel();
+		taskPanel.setLayout(new BoxLayout(taskPanel, BoxLayout.PAGE_AXIS));
+		contPanel.add(taskPanel);
 		
 		String[] liste = { "Task 1", "Task 2", "Task 3", "Task 4", "Task 5", "Task 6", "Task 7", "Task 8", "Task 9",
 				"Task 10", "Task 11", "Task 12", "Task 13","Task 15","Task 16","Task 17","Task 18","Task 19" };
 		
 		taskList = new JList<>(liste);
 		taskList.setBounds(0, 0, 300, 190);
-		taskListPan.add(taskList);
+		taskList.setVisibleRowCount(9);
+		taskPanel.add(new JScrollPane(taskList));
 
-		loadDetails = new JButton("Details anzeigen");
-		loadDetails.setBounds(0, 210, 300, 25);
-		taskListPan.add(loadDetails);
+		detailsBtn = new JButton("Details anzeigen");
+		detailsBtn.setBounds(0, 210, 300, 25);
+		taskPanel.add(detailsBtn);
 
+		// Info-Panel +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		infoPanel = new JPanel();
+		infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.X_AXIS));
+		contPanel.add(infoPanel);
+		
+		infoLabel = new JLabel("weitere Infos");
+		infoLabel.setBounds(0, 0, 100, 20);
+		Font schrift = new Font("Arial", Font.PLAIN, 20);
+		infoLabel.setFont(schrift);
+		infoPanel.add(infoLabel);
+		
+		
 		/**
 		 * Beendet die Anwendung. Sichtbarkeit auf true.
 		 */
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setVisible(true);
+		setLocationRelativeTo(null);
 	}
 
 }
