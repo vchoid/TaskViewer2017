@@ -1,6 +1,7 @@
 package de.gokv.client.taskviewer.ui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -24,6 +25,9 @@ import javax.swing.plaf.basic.BasicInternalFrameTitlePane.TitlePaneLayout;
 
 public class MyFrame extends JFrame {
 
+	Color pan241_C = new Color(166, 31, 125);
+	Color pan2736_C = new Color(35, 45, 141);
+	
 	JPanel contPanel;
 	
 	TitledBorder filtBorder;
@@ -47,9 +51,8 @@ public class MyFrame extends JFrame {
 
 	public MyFrame() {
 		setTitle("GoKV-TaskViewer");
-		setSize(new Dimension(900, 270));
+		setSize(new Dimension(700, 400));
 		setAlwaysOnTop(true);
-		
 		
 		
 		// Content-Panel +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -62,11 +65,13 @@ public class MyFrame extends JFrame {
 		// Input-Panel +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		filtBorder = BorderFactory.createTitledBorder("Filter Maske");
 		filtBorder.setTitleJustification(TitledBorder.CENTER);
+		filtBorder.setTitleColor(pan2736_C);
 		filterPanel = new JPanel();
 		filterPanel.setBorder(filtBorder);
+		filterPanel.setBackground(Color.LIGHT_GRAY);
 		GridBagLayout gbl_filPanel = new GridBagLayout();
 		gbl_filPanel.columnWidths = new int[]{10,200,200,10};
-		gbl_filPanel.rowHeights = new int[]{30,30,30,30,30,30,10};
+		gbl_filPanel.rowHeights = new int[]{10,30,30,30,30,30,30,10};
 		filterPanel.setLayout(gbl_filPanel);
 		contPanel.add(filterPanel);
 		
@@ -78,7 +83,7 @@ public class MyFrame extends JFrame {
 		gbc_kvnr.fill = GridBagConstraints.HORIZONTAL;
 		gbc_kvnr.gridwidth = 2;
 		gbc_kvnr.gridx = 1;
-		gbc_kvnr.gridy = 0;
+		gbc_kvnr.gridy = 1;
 		filterPanel.add(kvnr_field, gbc_kvnr);
 		
 		// << Name >>
@@ -89,7 +94,7 @@ public class MyFrame extends JFrame {
 		gbc_name.fill = GridBagConstraints.HORIZONTAL;
 		gbc_name.insets = new Insets(0, 0, 0, 10);
 		gbc_name.gridx = 1;
-		gbc_name.gridy = 1;
+		gbc_name.gridy = 2;
 		filterPanel.add(name_field, gbc_name);
 		
 		// << Vorname >>
@@ -99,7 +104,7 @@ public class MyFrame extends JFrame {
 		gbc_vName.anchor = GridBagConstraints.NORTH;
 		gbc_vName.fill = GridBagConstraints.HORIZONTAL;
 		gbc_vName.gridx = 2;
-		gbc_vName.gridy = 1;
+		gbc_vName.gridy = 2;
 		filterPanel.add(vName_field, gbc_vName);
 		
 		// << Geburtsdatum >>
@@ -109,7 +114,7 @@ public class MyFrame extends JFrame {
 		gbc_gebDate.anchor = GridBagConstraints.NORTH;
 		gbc_gebDate.fill = GridBagConstraints.HORIZONTAL;
 		gbc_gebDate.gridx = 2;
-		gbc_gebDate.gridy = 2;
+		gbc_gebDate.gridy = 3;
 		filterPanel.add(gebDate_field, gbc_gebDate);
 		
 		// << TaskID >>
@@ -120,7 +125,7 @@ public class MyFrame extends JFrame {
 		gbc_taskID.fill = GridBagConstraints.HORIZONTAL;
 		gbc_taskID.gridwidth = 2;
 		gbc_taskID.gridx = 1;
-		gbc_taskID.gridy = 3;
+		gbc_taskID.gridy = 4;
 		filterPanel.add(taskId_field, gbc_taskID);
 		
 		// << OrderedDate >>
@@ -130,27 +135,31 @@ public class MyFrame extends JFrame {
 		gbc_orderDate.anchor = GridBagConstraints.NORTH;
 		gbc_orderDate.fill = GridBagConstraints.HORIZONTAL;
 		gbc_orderDate.gridx = 2;
-		gbc_orderDate.gridy = 4;
+		gbc_orderDate.gridy = 5;
 		filterPanel.add(orderDate_field, gbc_orderDate);
 		
 		// << Button "Filter anwenden" >>
 		filterBtn = new JButton("Tasks filtern");
+		filterBtn.setBackground(pan241_C);
+		filterBtn.setForeground(Color.WHITE);
 		GridBagConstraints gbc_filterBtn = new GridBagConstraints();
 		gbc_filterBtn.anchor = GridBagConstraints.NORTH;
 		gbc_filterBtn.fill = GridBagConstraints.HORIZONTAL;
 		gbc_filterBtn.gridwidth = 2;
 		gbc_filterBtn.gridx = 1;
-		gbc_filterBtn.gridy = 5;
+		gbc_filterBtn.gridy = 6;
 		filterPanel.add(filterBtn, gbc_filterBtn);
 
 		// TaskPanel +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		taskBorder = BorderFactory.createTitledBorder("Task Liste");
 		taskBorder.setTitleJustification(TitledBorder.CENTER);
+		taskBorder.setTitleColor(pan2736_C);
 		taskPanel = new JPanel();
 		taskPanel.setBorder(taskBorder);
+		taskPanel.setBackground(Color.LIGHT_GRAY);
 		GridBagLayout gbl_taskPan = new GridBagLayout();
 		gbl_taskPan.columnWidths = new int[]{10,200,10};
-		gbl_taskPan.rowHeights = new int[]{150,10,10};
+		gbl_taskPan.rowHeights = new int[]{10,150,10,10};
 		taskPanel.setLayout(gbl_taskPan);
 		contPanel.add(taskPanel);
 		
@@ -167,18 +176,20 @@ public class MyFrame extends JFrame {
 		gbc_scrollTask.fill = GridBagConstraints.HORIZONTAL;
 		gbc_scrollTask.gridwidth = 1;
 		gbc_scrollTask.gridx = 1;
-		gbc_scrollTask.gridy = 0;
+		gbc_scrollTask.gridy = 1;
 		gbc_scrollTask.insets = new Insets(0, 0, 5, 0);
 		taskPanel.add(scrollTask, gbc_scrollTask);
 		
 		// << Detail-Button >>
 		detailsBtn = new JButton("Task laden");
+		detailsBtn.setBackground(pan241_C);
+		detailsBtn.setForeground(Color.WHITE);
 		GridBagConstraints gbc_detailBtn = new GridBagConstraints();
 		gbc_detailBtn.anchor = GridBagConstraints.NORTH;
 		gbc_detailBtn.fill = GridBagConstraints.HORIZONTAL;
 		gbc_detailBtn.gridwidth = 1;
 		gbc_detailBtn.gridx = 1;
-		gbc_detailBtn.gridy = 1;
+		gbc_detailBtn.gridy = 2;
 		taskPanel.add(detailsBtn, gbc_detailBtn);
 
 		// Info-Panel +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
