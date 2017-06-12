@@ -25,6 +25,10 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
+import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
+import net.sourceforge.jdatepicker.impl.UtilDateModel;
+
 public class LayoutTest extends JFrame {
 
 	/**
@@ -59,6 +63,11 @@ public class LayoutTest extends JFrame {
 
 		setLayout(new FlowLayout());
 
+		UtilDateModel model_geb = new UtilDateModel();
+		JDatePanelImpl gebDatePan = new JDatePanelImpl(model_geb);
+		JDatePickerImpl gDatePick = new JDatePickerImpl(gebDatePan);
+		add(gDatePick);
+		
 		ButtonHandler butHand = new ButtonHandler();
 
 		a = new JButton("Rot");

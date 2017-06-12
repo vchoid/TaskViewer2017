@@ -12,8 +12,8 @@ import javafx.stage.Stage;
  
 public class DatePickerSample extends Application {
  
-    private Stage stage;
-    private DatePicker checkInDatePicker;
+    public Stage stage;
+    public DatePicker checkInDatePicker;
     public static void main(String[] args) {
         Locale.setDefault(Locale.GERMANY);
         launch(args);
@@ -32,7 +32,7 @@ public class DatePickerSample extends Application {
         vbox.setStyle("-fx-padding: 10;");
         Scene scene = new Scene(vbox, 400, 400);
         stage.setScene(scene);
-
+        
         checkInDatePicker = new DatePicker();
 
         GridPane gridPane = new GridPane();

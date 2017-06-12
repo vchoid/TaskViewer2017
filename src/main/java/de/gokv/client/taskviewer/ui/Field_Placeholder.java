@@ -24,13 +24,16 @@ public class Field_Placeholder extends JTextField {
 	private DatePicker pDatePicker;
 	private Stage stage;
 	private Graphics2D g;
-
+	private int lenght;
+	Font txt = new Font("Arial", Font.PLAIN, 15);
+	
 	public Field_Placeholder() {
 	}
 
 	public Field_Placeholder(String pText) {
 
 	}
+	
 
 	@Override
 	protected void paintComponent(Graphics pG) {
@@ -39,7 +42,9 @@ public class Field_Placeholder extends JTextField {
 		if (placeholder.length() == 0 || getText().length() > 0) {
 			return;
 		}
-
+		setSize(lenght, 20);
+		setFont(txt);
+		
 		g = (Graphics2D) pG;
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g.setColor(pan214_C_dis);
@@ -48,6 +53,11 @@ public class Field_Placeholder extends JTextField {
 	}
 
 	public void setPlaceholder(String s) {
+		
+		placeholder = s;
+	}
+	public void setPlaceholder(String s, int lenght) {
+		this.lenght = lenght;
 		placeholder = s;
 	}
 
