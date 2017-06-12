@@ -9,6 +9,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.time.LocalDate;
+import java.util.Locale;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -25,27 +27,28 @@ import javax.swing.plaf.basic.BasicInternalFrameTitlePane.TitlePaneLayout;
 
 public class MyFrame extends JFrame {
 
-	Color pan241_C = new Color(166, 31, 125);
-	Color pan2736_C = new Color(35, 45, 141);
+	private Color pan241_C = new Color(166, 31, 125);
+	private Color pan2736_C = new Color(35, 45, 141);
 	
-	JPanel contPanel;
+	private JPanel contPanel;
 	
-	TitledBorder filtBorder;
-	JPanel filterPanel;
-	JTextField kvnr_field;
-	JTextField name_field;
-	JTextField vName_field;
-	JTextField gebDate_field;
-	JTextField taskId_field;
-	JTextField orderDate_field;
-	JButton filterBtn;
+	private TitledBorder filtBorder;
+	private JPanel filterPanel;
 	
-	TitledBorder taskBorder;
-	JPanel taskPanel;
-	JButton detailsBtn;
+	public static Field_Placeholder pKvnr;
+	public static Field_Placeholder pName;
+	public static Field_Placeholder pVname;
+	public static Field_Placeholder pGebDate;
+	public static Field_Placeholder pTaskID;
+	public static Field_Placeholder pOrderDate;
+	public static JButton filterBtn;
+	
+	private TitledBorder taskBorder;
+	private JPanel taskPanel;
+	private JButton detailsBtn;
 	JList<String> taskList;
 	
-	JPanel infoPanel;
+	private JPanel infoPanel;
 	JLabel infoLabel;
 	
 
@@ -76,67 +79,68 @@ public class MyFrame extends JFrame {
 		contPanel.add(filterPanel);
 		
 		// << KVNR >>
-		kvnr_field = new JTextField();
-		kvnr_field.setText("Kvnr");
+		pKvnr = new Field_Placeholder();
+		pKvnr.setPlaceholder("KvNr/Ordnungsbegriff");
 		GridBagConstraints gbc_kvnr = new GridBagConstraints();
 		gbc_kvnr.anchor = GridBagConstraints.NORTH;
 		gbc_kvnr.fill = GridBagConstraints.HORIZONTAL;
 		gbc_kvnr.gridwidth = 2;
 		gbc_kvnr.gridx = 1;
 		gbc_kvnr.gridy = 1;
-		filterPanel.add(kvnr_field, gbc_kvnr);
+		filterPanel.add(pKvnr, gbc_kvnr);
 		
 		// << Name >>
-		name_field = new JTextField();
-		name_field.setText("Name");
+		pName = new Field_Placeholder();
+		pName.setPlaceholder("Name");
 		GridBagConstraints gbc_name = new GridBagConstraints();
 		gbc_name.anchor = GridBagConstraints.NORTH;
 		gbc_name.fill = GridBagConstraints.HORIZONTAL;
 		gbc_name.insets = new Insets(0, 0, 0, 10);
 		gbc_name.gridx = 1;
 		gbc_name.gridy = 2;
-		filterPanel.add(name_field, gbc_name);
+		filterPanel.add(pName, gbc_name);
 		
 		// << Vorname >>
-		vName_field = new JTextField();
-		vName_field.setText("Vorname");
+		pVname = new Field_Placeholder();
+		pVname.setPlaceholder("Vorname");
 		GridBagConstraints gbc_vName = new GridBagConstraints();
 		gbc_vName.anchor = GridBagConstraints.NORTH;
 		gbc_vName.fill = GridBagConstraints.HORIZONTAL;
 		gbc_vName.gridx = 2;
 		gbc_vName.gridy = 2;
-		filterPanel.add(vName_field, gbc_vName);
+		filterPanel.add(pVname, gbc_vName);
 		
 		// << Geburtsdatum >>
-		gebDate_field = new JTextField();
-		gebDate_field.setText("Geburtsdatum");
+		pGebDate = new Field_Placeholder();
+		pGebDate.setPlaceholder("Geburtstag");
 		GridBagConstraints gbc_gebDate = new GridBagConstraints();
 		gbc_gebDate.anchor = GridBagConstraints.NORTH;
 		gbc_gebDate.fill = GridBagConstraints.HORIZONTAL;
 		gbc_gebDate.gridx = 2;
 		gbc_gebDate.gridy = 3;
-		filterPanel.add(gebDate_field, gbc_gebDate);
+		filterPanel.add(pGebDate, gbc_gebDate);
 		
 		// << TaskID >>
-		taskId_field = new JTextField();
-		taskId_field.setText("TaskID");
+		pTaskID = new Field_Placeholder();
+		pTaskID.setPlaceholder("TaskID");
 		GridBagConstraints gbc_taskID = new GridBagConstraints();
 		gbc_taskID.anchor = GridBagConstraints.NORTH;
 		gbc_taskID.fill = GridBagConstraints.HORIZONTAL;
 		gbc_taskID.gridwidth = 2;
 		gbc_taskID.gridx = 1;
 		gbc_taskID.gridy = 4;
-		filterPanel.add(taskId_field, gbc_taskID);
+		filterPanel.add(pTaskID, gbc_taskID);
 		
 		// << OrderedDate >>
-		orderDate_field = new JTextField();
-		orderDate_field.setText("OrderDate");
+		pOrderDate = new Field_Placeholder();
+		pOrderDate.setPlaceholder("Order Date");
+		Locale.setDefault(Locale.GERMANY);
 		GridBagConstraints gbc_orderDate = new GridBagConstraints();
 		gbc_orderDate.anchor = GridBagConstraints.NORTH;
 		gbc_orderDate.fill = GridBagConstraints.HORIZONTAL;
 		gbc_orderDate.gridx = 2;
 		gbc_orderDate.gridy = 5;
-		filterPanel.add(orderDate_field, gbc_orderDate);
+		filterPanel.add(pOrderDate, gbc_orderDate);
 		
 		// << Button "Filter anwenden" >>
 		filterBtn = new JButton("Tasks filtern");

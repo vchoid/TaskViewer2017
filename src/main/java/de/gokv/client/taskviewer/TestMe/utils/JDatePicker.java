@@ -10,10 +10,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
  
-public class DatePickerSample extends Application {
+public class JDatePicker extends Application {
  
     private Stage stage;
     private DatePicker checkInDatePicker;
+    
     public static void main(String[] args) {
         Locale.setDefault(Locale.GERMANY);
         launch(args);
