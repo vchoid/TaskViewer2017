@@ -9,6 +9,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
 
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -17,6 +18,8 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.border.TitledBorder;
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.TitlePaneLayout;
 
 
 public class MyFrame extends JFrame {
@@ -38,11 +41,15 @@ public class MyFrame extends JFrame {
 	
 	JPanel infoPanel;
 	JLabel infoLabel;
+	
+	TitledBorder tBorder;
 
 	public MyFrame() {
 		setTitle("GoKV-TaskViewer");
 		setSize(new Dimension(800, 300));
 		setAlwaysOnTop(true);
+		
+		
 		
 		// Content-Panel +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		contPanel = new JPanel();
@@ -52,7 +59,10 @@ public class MyFrame extends JFrame {
 		setContentPane(contPanel);
 
 		// Input-Panel +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		tBorder = BorderFactory.createTitledBorder("Filter Maske");
+		tBorder.setTitleJustification(TitledBorder.CENTER);
 		filterPanel = new JPanel();
+		filterPanel.setBorder(tBorder);
 		GridBagLayout gbl_filPanel = new GridBagLayout();
 		gbl_filPanel.columnWidths = new int[]{200,200,20};
 		gbl_filPanel.rowHeights = new int[]{30,30,30,30,30,30};
@@ -121,7 +131,7 @@ public class MyFrame extends JFrame {
 		filterPanel.add(orderDate_field, gbc_orderDate);
 		
 		// << Button "Filter anwenden" >>
-		filterBtn = new JButton("Filter anwenden");
+		filterBtn = new JButton("Tasks filtern");
 		GridBagConstraints gbc_filterBtn = new GridBagConstraints();
 		gbc_filterBtn.anchor = GridBagConstraints.NORTH;
 		gbc_filterBtn.fill = GridBagConstraints.HORIZONTAL;
@@ -149,14 +159,20 @@ public class MyFrame extends JFrame {
 		GridBagConstraints gbc_scrollTask = new GridBagConstraints();
 		gbc_scrollTask.anchor = GridBagConstraints.NORTH;
 		gbc_scrollTask.fill = GridBagConstraints.HORIZONTAL;
+		gbc_scrollTask.gridwidth = 1;
+		gbc_scrollTask.gridx = 0;
+		gbc_scrollTask.gridy = 0;
 		gbc_scrollTask.insets = new Insets(0, 0, 0, 5);
 		taskPanel.add(scrollTask, gbc_scrollTask);
 		
 		// << Detail-Button >>
-		detailsBtn = new JButton("Details anzeigen");
+		detailsBtn = new JButton("Task laden");
 		GridBagConstraints gbc_detailBtn = new GridBagConstraints();
 		gbc_detailBtn.anchor = GridBagConstraints.NORTH;
 		gbc_detailBtn.fill = GridBagConstraints.HORIZONTAL;
+		gbc_detailBtn.gridwidth = 1;
+		gbc_detailBtn.gridx = 0;
+		gbc_detailBtn.gridy = 1;
 		taskPanel.add(detailsBtn, gbc_detailBtn);
 
 		// Info-Panel +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
