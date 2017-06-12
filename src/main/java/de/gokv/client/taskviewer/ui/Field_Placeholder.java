@@ -42,9 +42,8 @@ public class Field_Placeholder extends JTextField {
 		if (placeholder.length() == 0 || getText().length() > 0) {
 			return;
 		}
-		setSize(lenght, 20);
+		setSize(lenght, 24);
 		setFont(txt);
-		
 		g = (Graphics2D) pG;
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g.setColor(pan214_C_dis);

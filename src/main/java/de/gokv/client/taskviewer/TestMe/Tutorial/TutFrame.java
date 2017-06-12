@@ -24,7 +24,7 @@ public class TutFrame extends JFrame{
 	JTextField eingabe;
 	
 	JPanel chkButPan;
-	JButton but;
+	JButton showBut;
 	JButton zeit;
 	
 	JPanel radButPan;
@@ -66,12 +66,12 @@ public class TutFrame extends JFrame{
 		
 		TutListener tutList = new TutListener();
 		
-		but = new JButton("Zeig es dort =>");
-		but.setBounds(0, 0, 120, 20);
-		but.addActionListener(tutList);
-		but.setEnabled(false);
-		but.setToolTipText("Der Button schickt den Text zum TextLabel");
-		chkButPan.add(but);
+		showBut = new JButton("Zeig es dort =>");
+		showBut.setBounds(0, 0, 120, 20);
+		showBut.addActionListener(tutList);
+		showBut.setEnabled(false);
+		showBut.setToolTipText("Der Button schickt den Text zum TextLabel");
+		chkButPan.add(showBut);
 
 		zeit = new JButton("Die Zeit =>");
 		zeit.setBounds(0, 30, 120, 20);
@@ -141,7 +141,7 @@ public class TutFrame extends JFrame{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if(e.getSource() == but){
+			if(e.getSource() == showBut){
 			text.setText(eingabe.getText());
 			} else if(e.getSource() == zeit){
 				text.setText("" + e.getWhen());
@@ -155,9 +155,9 @@ public class TutFrame extends JFrame{
 		public void caretUpdate(CaretEvent arg0) {
 			String s = eingabe.getText().trim();
 			if (s.isEmpty()) {
-				but.setEnabled(false);
+				showBut.setEnabled(false);
 			} else {
-				but.setEnabled(true);
+				showBut.setEnabled(true);
 			}
 		}
 	}

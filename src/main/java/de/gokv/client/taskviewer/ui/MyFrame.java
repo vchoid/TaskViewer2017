@@ -1,12 +1,9 @@
 package de.gokv.client.taskviewer.ui;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -20,19 +17,16 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
-import javax.xml.crypto.dsig.keyinfo.PGPData;
 
+import de.gokv.client.taskviewer.controller.MyFrameController;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
 
-
-
-
 public class MyFrame extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private Color pan241_C = new Color(166, 31, 125);
 	private Color pan2736_C = new Color(35, 45, 141);
 	
@@ -47,29 +41,31 @@ public class MyFrame extends JFrame {
 	public static JLabel gDateLabel;
 	UtilDateModel model_geb = new UtilDateModel();
 	JDatePanelImpl gebDatePan = new JDatePanelImpl(model_geb);
-	JDatePickerImpl gDatePick = new JDatePickerImpl(gebDatePan);
+	JDatePickerImpl gDatePick = new JDatePickerImpl(gebDatePan, new DateLabelFormatter());
 	public static Field_Placeholder pTaskID;
 	public static JLabel oDateLabel;
 	UtilDateModel model_ord = new UtilDateModel();
 	JDatePanelImpl orderDatePan = new JDatePanelImpl(model_ord);
-	JDatePickerImpl oDatePick = new JDatePickerImpl(orderDatePan);
+	JDatePickerImpl oDatePick = new JDatePickerImpl(orderDatePan, new DateLabelFormatter());
 	public static JButton filterBtn;
 	// Task Panel ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	private TitledBorder taskBorder;
 	private JPanel taskPanel;
 	private JButton detailsBtn;
+	private MyFrameController controller;
+	
+	//MODEL !!ACHTUNG
 	JList<String> taskList;
 	
 	private JPanel infoPanel;
 	JLabel infoLabel;
 	
-
 	public MyFrame() {
-		
 		setTitle("GoKV-TaskViewer");
-		setSize(new Dimension(705, 450));
+		setSize(new Dimension(770, 450));
 		setAlwaysOnTop(true);
 		
+		controller = new MyFrameController(this);
 		
 		// Content-Panel +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		contPanel = new JPanel();
@@ -82,6 +78,8 @@ public class MyFrame extends JFrame {
 		Font title = new Font("Arial",Font.BOLD, 16);
 		Font txt = new Font("Arial", Font.PLAIN, 15);
 		
+		
+				
 		// Input-Panel +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		filtBorder = BorderFactory.createTitledBorder("Filter Maske");
 		filtBorder.setTitleJustification(TitledBorder.CENTER);
@@ -113,7 +111,7 @@ public class MyFrame extends JFrame {
 		
 		// << Name >>
 		pName = new Field_Placeholder();
-		pName.setPlaceholder("Name", gbl_filPanel.columnWidths[2]-10);
+		pName.setPlaceholder("Name", gbl_filPanel.columnWidths[2]-5);
 		pName.setBackground(getBackground());
 		pName.setBorder(fieldBorder);
 		GridBagConstraints gbc_name = new GridBagConstraints();
@@ -126,12 +124,13 @@ public class MyFrame extends JFrame {
 		
 		// << Vorname >>
 		pVname = new Field_Placeholder();
-		pVname.setPlaceholder("Vorname", gbl_filPanel.columnWidths[2]+gbl_filPanel.columnWidths[3]);
+		pVname.setPlaceholder("Vorname", gbl_filPanel.columnWidths[2]);
 		pVname.setBackground(getBackground());
 		pVname.setBorder(fieldBorder);
 		GridBagConstraints gbc_vName = new GridBagConstraints();
 		gbc_vName.anchor = GridBagConstraints.BASELINE_LEADING;
 		gbc_vName.fill = GridBagConstraints.HORIZONTAL;
+		gbc_vName.insets = new Insets(0, 10, 10, 10);
 		gbc_vName.gridx = 2;
 		gbc_vName.gridy = 2;
 		filterPanel.add(pVname, gbc_vName);
@@ -143,14 +142,15 @@ public class MyFrame extends JFrame {
 		gDateLabel.setBorder(fieldBorder);
 		gDateLabel.setFont(txt);
 		GridBagConstraints gbc_gDateLabel = new GridBagConstraints();
-		gbc_gDateLabel.anchor = GridBagConstraints.BASELINE_TRAILING;
+		gbc_gDateLabel.anchor = GridBagConstraints.BELOW_BASELINE_TRAILING;
 		gbc_gDateLabel.gridx = 1;
 		gbc_gDateLabel.gridy = 3;
 		filterPanel.add(gDateLabel, gbc_gDateLabel);
 		GridBagConstraints gbc_gebDate = new GridBagConstraints();
-		gbc_gebDate.insets = new Insets(0, 10, 10, 0);
+		gbc_gebDate.insets = new Insets(0, 10, 5, 0);
 		gbc_gebDate.gridx = 2;
 		gbc_gebDate.gridy = 3;
+		gDatePick.setTextEditable(true);
 		filterPanel.add(gDatePick, gbc_gebDate);
 		
 		
@@ -173,7 +173,7 @@ public class MyFrame extends JFrame {
 		oDateLabel.setBorder(fieldBorder);
 		oDateLabel.setFont(txt);
 		GridBagConstraints gbc_oDateLabel = new GridBagConstraints();
-		gbc_oDateLabel.anchor = GridBagConstraints.BASELINE_TRAILING;
+		gbc_oDateLabel.anchor = GridBagConstraints.BELOW_BASELINE_TRAILING;
 		gbc_oDateLabel.gridx = 1;
 		gbc_oDateLabel.gridy = 5;
 		filterPanel.add(oDateLabel, gbc_oDateLabel);
@@ -181,6 +181,7 @@ public class MyFrame extends JFrame {
 		gbc_orderDate.insets = new Insets(0, 10, 10, 0);
 		gbc_orderDate.gridx = 2;
 		gbc_orderDate.gridy = 5;
+		oDatePick.setTextEditable(true);
 		filterPanel.add(oDatePick, gbc_orderDate);
 		
 		// << Button "Filter anwenden" >>
@@ -205,22 +206,17 @@ public class MyFrame extends JFrame {
 		taskPanel.setBorder(taskBorder);
 		taskPanel.setBackground(Color.LIGHT_GRAY);
 		GridBagLayout gbl_taskPan = new GridBagLayout();
-		gbl_taskPan.columnWidths = new int[]{10,200,10};
-		gbl_taskPan.rowHeights = new int[]{5,170,10,10};
+		gbl_taskPan.columnWidths = new int[]{10,260,10};
+		gbl_taskPan.rowHeights = new int[]{10,157,0,11};
 		taskPanel.setLayout(gbl_taskPan);
 		contPanel.add(taskPanel);
 		
-		// >>> Test-Liste
-		String[] StringList = { "Task 1", "Task 2", "Task 3", "Task 4", "Task 5", "Task 6", "Task 7", "Task 8", "Task 9",
-				"Task 10", "Task 11", "Task 12", "Task 13","Task 15","Task 16","Task 17","Task 18","Task 19" };
-		// <<<
-		
+				
 		// << Task-Liste >>
-		taskList = new JList<>(StringList);
-		taskList.setVisibleRowCount(9);
+		taskList = new JList<>(controller.getFilteredTasks());
+		taskList.setVisibleRowCount(8);
 		JScrollPane scrollTask = new JScrollPane(taskList);
 		GridBagConstraints gbc_scrollTask = new GridBagConstraints();
-		gbc_scrollTask.insets = new Insets(0, 0, 5, 0);
 		gbc_scrollTask.anchor = GridBagConstraints.NORTH;
 		gbc_scrollTask.fill = GridBagConstraints.HORIZONTAL;
 		gbc_scrollTask.gridwidth = 1;
@@ -236,6 +232,7 @@ public class MyFrame extends JFrame {
 		GridBagConstraints gbc_detailBtn = new GridBagConstraints();
 		gbc_detailBtn.anchor = GridBagConstraints.NORTH;
 		gbc_detailBtn.fill = GridBagConstraints.HORIZONTAL;
+		gbc_detailBtn.insets = new Insets(0, 0, 0, 0);
 		gbc_detailBtn.gridwidth = 1;
 		gbc_detailBtn.gridx = 1;
 		gbc_detailBtn.gridy = 2;

@@ -28,8 +28,10 @@ public class DatePickerSample extends Application {
     }
  
     private void initUI() {
-        VBox vbox = new VBox(20);
+        VBox vbox = new VBox(1000);
+        //Einrücken
         vbox.setStyle("-fx-padding: 10;");
+        //fenster
         Scene scene = new Scene(vbox, 400, 400);
         stage.setScene(scene);
         
