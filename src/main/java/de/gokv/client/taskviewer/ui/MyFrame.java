@@ -30,6 +30,7 @@ public class MyFrame extends JFrame {
 	private Color pan241_C = new Color(166, 31, 125);
 	private Color pan2736_C = new Color(35, 45, 141);
 	
+	
 	private JPanel contPanel;
 	
 	private TitledBorder filtBorder;
@@ -38,8 +39,10 @@ public class MyFrame extends JFrame {
 	public static Field_Placeholder pKvnr;
 	public static Field_Placeholder pName;
 	public static Field_Placeholder pVname;
+	public static JLabel gDateLabel;
 	public static Field_Placeholder pGebDate;
 	public static Field_Placeholder pTaskID;
+	public static JLabel oDateLabel;
 	public static Field_Placeholder pOrderDate;
 	public static JButton filterBtn;
 	
@@ -111,6 +114,8 @@ public class MyFrame extends JFrame {
 		filterPanel.add(pVname, gbc_vName);
 		
 		// << Geburtsdatum >>
+		gDateLabel = new JLabel("Geburtstag");
+		gDateLabel.setForeground(Color.GRAY);
 		pGebDate = new Field_Placeholder();
 		pGebDate.setPlaceholder("Geburtstag");
 		GridBagConstraints gbc_gebDate = new GridBagConstraints();
@@ -119,6 +124,12 @@ public class MyFrame extends JFrame {
 		gbc_gebDate.gridx = 2;
 		gbc_gebDate.gridy = 3;
 		filterPanel.add(pGebDate, gbc_gebDate);
+		GridBagConstraints gbc_gDateLabel = new GridBagConstraints();
+		gbc_gDateLabel.anchor = GridBagConstraints.BASELINE_TRAILING;
+		gbc_gDateLabel.fill = GridBagConstraints.BASELINE;
+		gbc_gDateLabel.gridx = 1;
+		gbc_gDateLabel.gridy = 3;
+		filterPanel.add(gDateLabel, gbc_gDateLabel);
 		
 		// << TaskID >>
 		pTaskID = new Field_Placeholder();
@@ -132,15 +143,22 @@ public class MyFrame extends JFrame {
 		filterPanel.add(pTaskID, gbc_taskID);
 		
 		// << OrderedDate >>
+		oDateLabel = new JLabel("Order Date");
+		oDateLabel.setForeground(Color.GRAY);
 		pOrderDate = new Field_Placeholder();
 		pOrderDate.setPlaceholder("Order Date");
-		Locale.setDefault(Locale.GERMANY);
 		GridBagConstraints gbc_orderDate = new GridBagConstraints();
 		gbc_orderDate.anchor = GridBagConstraints.NORTH;
 		gbc_orderDate.fill = GridBagConstraints.HORIZONTAL;
 		gbc_orderDate.gridx = 2;
 		gbc_orderDate.gridy = 5;
 		filterPanel.add(pOrderDate, gbc_orderDate);
+		GridBagConstraints gbc_oDateLabel = new GridBagConstraints();
+		gbc_oDateLabel.anchor = GridBagConstraints.BASELINE_TRAILING;
+		gbc_oDateLabel.fill = GridBagConstraints.BASELINE;
+		gbc_oDateLabel.gridx = 1;
+		gbc_oDateLabel.gridy = 5;
+		filterPanel.add(oDateLabel, gbc_oDateLabel);
 		
 		// << Button "Filter anwenden" >>
 		filterBtn = new JButton("Tasks filtern");
