@@ -122,7 +122,7 @@ public class CSVReader {
 					invalidEntries.add(csvRecord);
 					System.err.println("\n\n-------------------------------------------------------- Meldung "
 							+ invalidEntries.size() + " --------------------------------------------------------\n "
-							+ "\nDatei: ../" + filePath.substring(70) + "\n"
+							+ "\nDatei: " + filePath + "\n"
 							+ e.getMessage());
 				}
 			}

@@ -24,24 +24,43 @@ import de.gokv.client.taskviewer.exceptions.InvalidDateException;
  * <p>
  * <b>Methoden:</b>
  * <ul>
- * <li><b>{@link #createTaskFromRecord(CSVRecord record)}</b>: ...</li>
+ * <li><b>{@link #createTaskFromRecord(CSVRecord record)}</b>: Legt eine Variable der Klasse {@link Task} an. Holt ein Wert einer Zeile
+ * aus der CSV mit der {@link CSVReader#getValue(CSVRecord, String)
+ * getValue}-Methode oder
+ * {@link CSVReader#getValueAsDate(CSVRecord, String, boolean)
+ * getValueAsDate}-Methode und speichert ihn in einer Variable im passenden Format.</li>
+ * <li><b>{@link #matchesCriteria(Task)}</b>: Überprüfen ob Felder Werte enthalten und auf Gleicheit von Kriterien.</li>
  * 
  * </ul>
  * </p>
  * <p>
  * <b>Getter-Methoden:</b>
  * <ul>
- * <li><b>{@link #getTaskId()} </b>: String im <u>Format: [A-F0-9]{32}</u></li>
- * <li><b>{@link #getTasktype()}</b>: String im <u>Format: [^0-9]*</u></li>
- * <li><b>{@link #getOrderedDate()}</b>: {@link LocalDate} im <u>Format:
- * "dd.MM.yyyy"</u></li>
+ * <li><b>{@link #getGebDat()}</b>: {@link LocalDate} im <u>Format: "dd.MM.yyyy"</li>
  * <li><b>{@link #getKvnr()}</b>: String im <u>Format: [A-Z]{1}[0-9]{9}</u></li>
  * <li><b>{@link #getName()}</b>: String im <u>Format: [^0-9]*</u></li>
- * <li><b>{@link #getVorname()}</b>: String im <u>Format: [^0-9]*</u></li>
+ * <li><b>{@link #getOrderedDate()}</b>: {@link LocalDate} im <u>Format: "dd.MM.yyyy"</u></li>
+ * <li><b>{@link #getTaskId()} </b>: String im <u>Format: [A-F0-9]{32}</u></li>
+ * <li><b>{@link #getTaskType()}</b>: String im <u>Format: [^0-9]*</u></li>
  * <li><b>{@link #getTitel()}</b>: String im <u>Format: [^0-9]*</u></li>
- * <li><b>{@link #getZsWort()}</b>: String im <u>Format: [^0-9]*</u></li>
+ * <li><b>{@link #getvName()}</b>: String im <u>Format: [^0-9]*</u></li>
  * <li><b>{@link #getVsWort()}</b>: String im <u>Format: [^0-9]*</u></li>
- * <li><b>{@link #getGebDat()}</b>: ...</li>
+ * <li><b>{@link #getZsWort()}</b>: String im <u>Format: [^0-9]*</u></li>
+ * </ul>
+ * </p>
+ * <p>
+ * <b>Setter-Methoden:</b>
+ * <ul>
+ * <li><b>{@link #setGebDat(LocalDate)} </b>: ...</u></li>
+ * <li><b>{@link #setKvnr(String)}</b>: ...</u></li>
+ * <li><b>{@link #setName(String)}</b>: ...</u></li>
+ * <li><b>{@link #setOrderedDate(LocalDate)}</b>: ...</u></li>
+ * <li><b>{@link #setTaskId(String)}</b>: ...</u></li>
+ * <li><b>{@link #setTaskType(String)}</b>: ...</u></li>
+ * <li><b>{@link #setTitel(String)}</b>: ...</u></li>
+ * <li><b>{@link #setvName(String)}</b>: ...</u></li>
+ * <li><b>{@link #setVsWort(String)}</b>: ...</u></li>
+ * <li><b>{@link #setZsWort(String)}</b>: ...</li>
  * </ul>
  * </p>
  * 
