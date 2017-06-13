@@ -62,7 +62,7 @@ public class MyFrame extends JFrame {
 	
 	public MyFrame() {
 		setTitle("GoKV-TaskViewer");
-		setSize(new Dimension(770, 450));
+		setSize(new Dimension(800, 450));
 		setAlwaysOnTop(true);
 		
 		controller = new MyFrameController(this);
@@ -99,7 +99,6 @@ public class MyFrame extends JFrame {
 		// << KVNR >>
 		pKvnr = new Field_Placeholder();
 		pKvnr.setPlaceholder("KvNr/Ordnungsbegriff", gbl_filPanel.columnWidths[1]+gbl_filPanel.columnWidths[2]+gbl_filPanel.columnWidths[3]);
-		pKvnr.setBackground(getBackground());
 		pKvnr.setBorder(fieldBorder);
 		GridBagConstraints gbc_kvnr = new GridBagConstraints();
 		gbc_kvnr.anchor = GridBagConstraints.NORTH;
@@ -112,7 +111,6 @@ public class MyFrame extends JFrame {
 		// << Name >>
 		pName = new Field_Placeholder();
 		pName.setPlaceholder("Name", gbl_filPanel.columnWidths[2]-5);
-		pName.setBackground(getBackground());
 		pName.setBorder(fieldBorder);
 		GridBagConstraints gbc_name = new GridBagConstraints();
 		gbc_name.anchor = GridBagConstraints.NORTH;
@@ -125,7 +123,6 @@ public class MyFrame extends JFrame {
 		// << Vorname >>
 		pVname = new Field_Placeholder();
 		pVname.setPlaceholder("Vorname", gbl_filPanel.columnWidths[2]);
-		pVname.setBackground(getBackground());
 		pVname.setBorder(fieldBorder);
 		GridBagConstraints gbc_vName = new GridBagConstraints();
 		gbc_vName.anchor = GridBagConstraints.BASELINE_LEADING;
@@ -137,7 +134,6 @@ public class MyFrame extends JFrame {
 		
 		// << Geburtsdatum >>
 		gDateLabel = new JLabel("Geburtstag");
-		gDateLabel.setBackground(getBackground());
 		gDateLabel.setForeground(Color.GRAY);
 		gDateLabel.setBorder(fieldBorder);
 		gDateLabel.setFont(txt);
@@ -157,7 +153,6 @@ public class MyFrame extends JFrame {
 		// << TaskID >>
 		pTaskID = new Field_Placeholder();
 		pTaskID.setPlaceholder("TaskID", gbl_filPanel.columnWidths[1]+gbl_filPanel.columnWidths[2]+gbl_filPanel.columnWidths[3]);
-		pTaskID.setBackground(getBackground());
 		pTaskID.setBorder(fieldBorder);
 		GridBagConstraints gbc_taskID = new GridBagConstraints();
 		gbc_taskID.anchor = GridBagConstraints.NORTH;
@@ -214,7 +209,8 @@ public class MyFrame extends JFrame {
 				
 		// << Task-Liste >>
 		taskList = new JList<>(controller.getFilteredTasks());
-		taskList.setVisibleRowCount(8);
+		taskList.setVisibleRowCount(7);
+		taskList.setFont(txt);
 		JScrollPane scrollTask = new JScrollPane(taskList);
 		GridBagConstraints gbc_scrollTask = new GridBagConstraints();
 		gbc_scrollTask.anchor = GridBagConstraints.NORTH;
@@ -245,8 +241,7 @@ public class MyFrame extends JFrame {
 		
 		infoLabel = new JLabel("weitere Infos");
 		infoLabel.setBounds(0, 0, 100, 20);
-		title = new Font("Arial", Font.PLAIN, 20);
-		infoLabel.setFont(title);
+		infoLabel.setFont(txt);
 		infoPanel.add(infoLabel);
 		
 		
