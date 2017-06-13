@@ -21,26 +21,27 @@ import de.gokv.client.taskviewer.exceptions.InvalidDateException;
  * </ul>
  * </p>
  * 
- *<p>
+ * <p>
  * <b>Methoden:</b>
  * <ul>
  * <li><b>{@link #createTaskFromRecord(CSVRecord record)}</b>: ...</li>
  * 
  * </ul>
  * </p>
- *<p>
+ * <p>
  * <b>Getter-Methoden:</b>
  * <ul>
- * <li><b>{@link #getTask_id()} </b>: 		String im <u>Format: [A-F0-9]{32}</u></li>
- * <li><b>{@link #getTasktype()}</b>: 		String im <u>Format: [^0-9]*</u></li>
- * <li><b>{@link #getOrdered_date()}</b>: 	{@link LocalDate} im <u>Format: "dd.MM.yyyy"</u></li>
- * <li><b>{@link #getKvnr()}</b>: 			String im <u>Format: [A-Z]{1}[0-9]{9}</u></li>
- * <li><b>{@link #getName()}</b>: 			String im <u>Format: [^0-9]*</u></li>
- * <li><b>{@link #getVorname()}</b>: 		String im <u>Format: [^0-9]*</u></li>
- * <li><b>{@link #getTitel()}</b>: 			String im <u>Format: [^0-9]*</u></li>
- * <li><b>{@link #getZsWort()}</b>: 		String im <u>Format: [^0-9]*</u></li>
- * <li><b>{@link #getVsWort()}</b>: 		String im <u>Format: [^0-9]*</u></li>
- * <li><b>{@link #getGeb_dat()}</b>: ...</li>
+ * <li><b>{@link #getTaskId()} </b>: String im <u>Format: [A-F0-9]{32}</u></li>
+ * <li><b>{@link #getTasktype()}</b>: String im <u>Format: [^0-9]*</u></li>
+ * <li><b>{@link #getOrderedDate()}</b>: {@link LocalDate} im <u>Format:
+ * "dd.MM.yyyy"</u></li>
+ * <li><b>{@link #getKvnr()}</b>: String im <u>Format: [A-Z]{1}[0-9]{9}</u></li>
+ * <li><b>{@link #getName()}</b>: String im <u>Format: [^0-9]*</u></li>
+ * <li><b>{@link #getVorname()}</b>: String im <u>Format: [^0-9]*</u></li>
+ * <li><b>{@link #getTitel()}</b>: String im <u>Format: [^0-9]*</u></li>
+ * <li><b>{@link #getZsWort()}</b>: String im <u>Format: [^0-9]*</u></li>
+ * <li><b>{@link #getVsWort()}</b>: String im <u>Format: [^0-9]*</u></li>
+ * <li><b>{@link #getGebDat()}</b>: ...</li>
  * </ul>
  * </p>
  * 
@@ -50,8 +51,9 @@ import de.gokv.client.taskviewer.exceptions.InvalidDateException;
  * 
  */
 public class Task {
-	
-	// Header der CSV +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+	// Header der CSV
+	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	private LocalDate orderedDate;
 	private LocalDate gebDat;
 	private String taskId;
@@ -63,11 +65,13 @@ public class Task {
 	private String zsWort;
 	private String vsWort;
 
-	// Pattern für valide KvNr, TaskId, Namensgebung +++++++++++++++++++++++++++++++++++++++++++
+	// Pattern für valide KvNr, TaskId, Namensgebung
+	// +++++++++++++++++++++++++++++++++++++++++++
 	protected final static Pattern PATTERN_KVNR = Pattern.compile("[A-Z]{1}[0-9]{9}");
 	protected final static Pattern PATTERN_TASKID = Pattern.compile("[A-F0-9]{32}");
 	protected final static Pattern PATTERN_NONUMB = Pattern.compile("[^0-9]*");
-	// TaskTypes +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	// TaskTypes
+	// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	/**
 	 * <p>
 	 * <b>Tasktypen</b>
@@ -80,18 +84,21 @@ public class Task {
 	 * </ul>
 	 * </p>
 	 */
-	protected final static ArrayList<String> TASK_TYPES = new ArrayList<String>(Arrays.asList("famv_bestand","eka","unf","kvv"));
-	
+	protected final static ArrayList<String> TASK_TYPES = new ArrayList<String>(
+			Arrays.asList("famv_bestand", "eka", "unf", "kvv"));
+
 	private static int countTask = 0;
 
-
 	/**
-	 *Legt eine Variable der Klasse {@link Task} an.
-	 * Holt ein Wert einer Zeile aus der CSV mit der {@link CSVReader#getValue(CSVRecord, String) getValue}-Methode
-	 * oder {@link CSVReader#getValueAsDate(CSVRecord, String, boolean) getValueAsDate}-Methode
-	 * und speichert ihn in einer Variable im passenden Format.
+	 * Legt eine Variable der Klasse {@link Task} an. Holt ein Wert einer Zeile
+	 * aus der CSV mit der {@link CSVReader#getValue(CSVRecord, String)
+	 * getValue}-Methode oder
+	 * {@link CSVReader#getValueAsDate(CSVRecord, String, boolean)
+	 * getValueAsDate}-Methode und speichert ihn in einer Variable im passenden
+	 * Format.
 	 * 
-	 * @param record Inhalt einer Zeile der gelesenen CSV-Datei.
+	 * @param record
+	 *            Inhalt einer Zeile der gelesenen CSV-Datei.
 	 * @return Eine Zeile aus der CSV-Datei als {@link Task}-Objekt.
 	 * @throws InvalidCSVRecordException
 	 */
@@ -100,7 +107,7 @@ public class Task {
 		Task t = new Task();
 
 		try {
-			
+
 			t.gebDat = CSVReader.getValueAsDate(record, CSVReader.COL_MITGLIED_GEB_DAT, true);
 			t.orderedDate = CSVReader.getValueAsDate(record, CSVReader.COL_ORDERED_DATE, true);
 			t.taskId = CSVReader.getValue(record, CSVReader.COL_TASK_ID, true, PATTERN_TASKID);
@@ -119,62 +126,22 @@ public class Task {
 
 		return t;
 	}
+
 	// Konstruktor ++++++++++++++++++++++++++++++++++++++
 	public Task() {
 		super();
 	}
-	// Getter +++++++++++++++++++++++++++++++++++++++++++
-	public String getTask_id() {
-		return taskId;
-	}
-
-	public String getTasktype() {
-		return taskType;
-	}
-
-	public LocalDate getOrdered_date() {
-		return orderedDate;
-	}
-
-	public String getKvnr() {
-		return kvnr;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public String getVorname() {
-		return vName;
-	}
-
-	public String getTitel() {
-		return titel;
-	}
-
-	public String getZsWort() {
-		return zsWort;
-	}
-
-	public String getVsWort() {
-		return vsWort;
-	}
-
-	public LocalDate getGeb_dat() {
-		return gebDat;
-	}
 
 	@Override
 	public String toString() {
-		return  " _____________________________________  " + ++countTask
+		return " _____________________________________  " + ++countTask
 				+ ". Task  ______________________________________\n"
-				+ "|______________________________________________________________________________________|\n" 
-				+ "\nDatei: ../"+ CSVReader.getFilePath().substring(70) + "\n\n"	
-				+ "Id: "
-				+ taskId + " [Typ: " + taskType + "] erstellt am: " + orderedDate.getDayOfMonth() + "."
-				+ orderedDate.getMonthValue() + "." + orderedDate.getYear() + "\nKVNr.: " + kvnr + "\n" + "Name: "
-				+ titel + name + ", " + vName + "\ngeboren am: " + gebDat.getDayOfMonth() + "." + gebDat.getMonthValue()
-				+ "." + gebDat.getYear() + "\nzsWort: " + zsWort + "\nvsWort: \n" + vsWort;
+				+ "|______________________________________________________________________________________|\n"
+				+ "\nDatei: ../" + CSVReader.getFilePath().substring(70) + "\n\n" + "Id: " + taskId + " [Typ: "
+				+ taskType + "] erstellt am: " + orderedDate.getDayOfMonth() + "." + orderedDate.getMonthValue() + "."
+				+ orderedDate.getYear() + "\nKVNr.: " + kvnr + "\n" + "Name: " + titel + name + ", " + vName
+				+ "\ngeboren am: " + gebDat.getDayOfMonth() + "." + gebDat.getMonthValue() + "." + gebDat.getYear()
+				+ "\nzsWort: " + zsWort + "\nvsWort: \n" + vsWort;
 	}
 
 	@Override
@@ -216,6 +183,108 @@ public class Task {
 			if (other.taskType != null)
 				return false;
 		} else if (!taskType.equals(other.taskType))
+			return false;
+		return true;
+	}
+
+	// AUTOGENERATED METHODS Getter & SETTER
+	public LocalDate getOrderedDate() {
+		return orderedDate;
+	}
+
+	public void setOrderedDate(LocalDate orderedDate) {
+		this.orderedDate = orderedDate;
+	}
+
+	public LocalDate getGebDat() {
+		return gebDat;
+	}
+
+	public void setGebDat(LocalDate gebDat) {
+		this.gebDat = gebDat;
+	}
+
+	public String getTaskId() {
+		return taskId;
+	}
+
+	public void setTaskId(String taskId) {
+		this.taskId = taskId;
+	}
+
+	public String getTaskType() {
+		return taskType;
+	}
+
+	public void setTaskType(String taskType) {
+		this.taskType = taskType;
+	}
+
+	public String getKvnr() {
+		return kvnr;
+	}
+
+	public void setKvnr(String kvnr) {
+		this.kvnr = kvnr;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getvName() {
+		return vName;
+	}
+
+	public void setvName(String vName) {
+		this.vName = vName;
+	}
+
+	public String getTitel() {
+		return titel;
+	}
+
+	public void setTitel(String titel) {
+		this.titel = titel;
+	}
+
+	public String getZsWort() {
+		return zsWort;
+	}
+
+	public void setZsWort(String zsWort) {
+		this.zsWort = zsWort;
+	}
+
+	public String getVsWort() {
+		return vsWort;
+	}
+
+	public void setVsWort(String vsWort) {
+		this.vsWort = vsWort;
+	}
+	/**
+	 * Überprüfen ob Felder Werte enthalten und auf Gleicheit von Kriterien.
+	 * 
+	 * @param criteria
+	 * @return
+	 */
+	public boolean matchesCriteria(Task criteria) {
+		if(criteria.name.length() > 0 && ! criteria.name.equals(this.name))
+			return false;
+		if(criteria.vName.length() > 0 && ! criteria.vName.equals(this.vName))
+			return false;
+		if(criteria.kvnr.length() > 0 && ! criteria.kvnr.equals(this.kvnr))
+			return false;
+		if(criteria.taskId.length() > 0 && criteria.taskId.equals(this.taskId))
+			return false;
+		if(criteria.gebDat != null && ! criteria.gebDat.equals(this.gebDat))
+			return false;
+		if(criteria.orderedDate != null && ! criteria.orderedDate.equals(this.orderedDate))
 			return false;
 		return true;
 	}

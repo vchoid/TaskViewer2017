@@ -183,15 +183,15 @@ public class TestCSVReader {
 		getValidFile();
 		oneTask = reader.getValidEntries().get(0);
 		Assert.assertEquals(4, reader.getValidEntries().size());
-		Assert.assertEquals("405750F0395F11E7BED7F726E269B87F", oneTask.getTask_id());
+		Assert.assertEquals("405750F0395F11E7BED7F726E269B87F", oneTask.getTaskId());
 		Assert.assertEquals("famv_bestand", oneTask.getTasktype());
-		Assert.assertEquals("2017-05-15", oneTask.getOrdered_date().toString());
+		Assert.assertEquals("2017-05-15", oneTask.getOrderedDate().toString());
 		Assert.assertEquals("Q101084865", oneTask.getKvnr());
 		Assert.assertEquals("KRUPPIO", oneTask.getName());
 		Assert.assertEquals("Ulrich Moritz", oneTask.getVorname());
 		Assert.assertEquals("", oneTask.getZsWort());
 		Assert.assertEquals("", oneTask.getVsWort());
-		Assert.assertEquals("1982-03-06", oneTask.getGeb_dat().toString());
+		Assert.assertEquals("1982-03-06", oneTask.getGebDat().toString());
 
 	}
 

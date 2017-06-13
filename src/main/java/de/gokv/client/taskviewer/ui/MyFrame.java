@@ -18,6 +18,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
+
+import de.gokv.client.taskviewer.controller.FilterTaskListController;
 import de.gokv.client.taskviewer.controller.MyFrameController;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
@@ -35,14 +37,14 @@ public class MyFrame extends JFrame {
 	public static Field_Placeholder pName;
 	public static Field_Placeholder pVname;
 	public static JLabel gDateLabel;
-	UtilDateModel model_geb = new UtilDateModel();
-	JDatePanelImpl gebDatePan = new JDatePanelImpl(model_geb);
-	JDatePickerImpl gDatePick = new JDatePickerImpl(gebDatePan, new DateLabelFormatter());
+	public UtilDateModel model_geb = new UtilDateModel();
+	public JDatePanelImpl gebDatePan = new JDatePanelImpl(model_geb);
+	public JDatePickerImpl gDatePick = new JDatePickerImpl(gebDatePan, new DateLabelFormatter());
 	public static Field_Placeholder pTaskID;
 	public static JLabel oDateLabel;
-	UtilDateModel model_ord = new UtilDateModel();
-	JDatePanelImpl orderDatePan = new JDatePanelImpl(model_ord);
-	JDatePickerImpl oDatePick = new JDatePickerImpl(orderDatePan, new DateLabelFormatter());
+	public UtilDateModel model_ord = new UtilDateModel();
+	public JDatePanelImpl orderDatePan = new JDatePanelImpl(model_ord);
+	public JDatePickerImpl oDatePick = new JDatePickerImpl(orderDatePan, new DateLabelFormatter());
 	public static JButton filterBtn;
 	// Task Panel ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	private TitledBorder taskBorder;
@@ -60,7 +62,7 @@ public class MyFrame extends JFrame {
 	private Border btnBorder = BorderFactory.createEmptyBorder(8,5,8,5);
 	private Border emptyBorder = BorderFactory.createEmptyBorder();
 	//MODEL !!ACHTUNG
-	JList<String> taskList;
+	public JList<String> taskList;
 	
 	private JPanel infoPanel;
 	JLabel infoLabel;
@@ -189,7 +191,8 @@ public class MyFrame extends JFrame {
 		filterBtn.setBackground(pan241_C);
 		filterBtn.setForeground(Color.WHITE);
 		filterBtn.setFont(txt);
-		// dem ActionListener DIESEN Frame bekannt machen
+		// dem ActionListener DIESEN Frame bekannt machen mit this
+		filterBtn.addActionListener(new FilterTaskListController(this, controller.getModel()));
 		GridBagConstraints gbc_filterBtn = new GridBagConstraints();
 		gbc_filterBtn.anchor = GridBagConstraints.NORTH;
 		gbc_filterBtn.fill = GridBagConstraints.HORIZONTAL;

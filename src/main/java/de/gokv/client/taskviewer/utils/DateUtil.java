@@ -1,9 +1,11 @@
 package de.gokv.client.taskviewer.utils;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
+import java.util.Date;
 import java.util.regex.Pattern;
 
 import de.gokv.client.taskviewer.exceptions.InvalidDateException;
@@ -34,8 +36,9 @@ import de.gokv.client.taskviewer.exceptions.InvalidDateException;
 public class DateUtil {
 
 	// ResolveStyle.STRICT ==> verhindert: z.B. 29.02.2017 => 01.03.2017
-	private static DateTimeFormatter df2 = DateTimeFormatter.ofPattern("dd.MM.uuuu")
+	private final static DateTimeFormatter df2 = DateTimeFormatter.ofPattern("dd.MM.uuuu")
 			.withResolverStyle(ResolverStyle.STRICT);
+	private final static SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
 
 	/**
 	 * Legt ein {@link Pattern} im Format "ZZ.ZZ.ZZZZ" (Z = Ziffer) an.
@@ -91,6 +94,10 @@ public class DateUtil {
 		throw new InvalidDateException("Fehler beim Konvertieren vom String \'%s\' in ein LocalDate-Format", date);
 	}
 
+	public static LocalDate parseDate(Date date) throws InvalidDateException{
+		return parseDate(sdf.format(date));
+	}
+	
 	/**
 	 * Versucht mit der {@link #parseDate(String) parseDate()}-Methode ein Strind
 	 * in ein LocaDate-Format zu konverieren und wirf bei einem Fehler die

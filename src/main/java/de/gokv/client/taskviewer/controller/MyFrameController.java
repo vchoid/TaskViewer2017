@@ -17,5 +17,9 @@ public class MyFrameController {
 	public String[] getFilteredTasks(){
 		return model.getFilteredTasks();
 	}
+
+	public MyModel getModel() {
+		return model;
+	}
 	
 }

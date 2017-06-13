@@ -13,6 +13,7 @@ public class MyModel {
 	private CSVReader reader;
 	private List<Task> tasks;
 	private List<String> filteredTasks;
+	private Task filterCriteria;
 	
 	public MyModel() {
 		tasks = new ArrayList<Task>();
@@ -33,10 +34,18 @@ public class MyModel {
 		filteredTasks = new ArrayList<String>();
 		for (Task task : tasks) {
 			//TODO criterias
-			filteredTasks.add(task.getTask_id());
+			if(filterCriteria != null){
+				if(! task.matchesCriteria(filterCriteria))
+					continue;
+			}
+			filteredTasks.add(task.getTaskId());
 		}
 		
 		return filteredTasks.toArray(new String[0]);
+	}
+
+	public void setFilterCriteria(Task t) {
+		filterCriteria = t;
 	}
 
 	
