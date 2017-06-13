@@ -18,7 +18,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
-
 import de.gokv.client.taskviewer.controller.MyFrameController;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
@@ -27,13 +26,10 @@ import net.sourceforge.jdatepicker.impl.UtilDateModel;
 public class MyFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private Color pan241_C = new Color(166, 31, 125);
-	private Color pan2736_C = new Color(35, 45, 141);
+	
 	
 	private JPanel contPanel;
 	// Filter Panel ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	private TitledBorder filtBorder;
-	private Border fieldBorder;
 	private JPanel filterPanel;
 	public static Field_Placeholder pKvnr;
 	public static Field_Placeholder pName;
@@ -54,6 +50,15 @@ public class MyFrame extends JFrame {
 	private JButton detailsBtn;
 	private MyFrameController controller;
 	
+	// Style ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	private Font title = new Font("Arial",Font.BOLD, 16);
+	private Font txt = new Font("Arial", Font.PLAIN, 15);
+	private Color pan241_C = new Color(166, 31, 125);
+	private Color pan2736_C = new Color(35, 45, 141);
+	private TitledBorder filtBorder;
+	private Border fieldBorder;
+	private Border btnBorder = BorderFactory.createEmptyBorder(8,5,8,5);
+	private Border emptyBorder = BorderFactory.createEmptyBorder();
 	//MODEL !!ACHTUNG
 	JList<String> taskList;
 	
@@ -74,10 +79,6 @@ public class MyFrame extends JFrame {
 		contPanel.setLayout(fl_contPanel);
 		setContentPane(contPanel);
 
-		// Text ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-		Font title = new Font("Arial",Font.BOLD, 16);
-		Font txt = new Font("Arial", Font.PLAIN, 15);
-		
 		
 				
 		// Input-Panel +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -85,6 +86,7 @@ public class MyFrame extends JFrame {
 		filtBorder.setTitleJustification(TitledBorder.CENTER);
 		filtBorder.setTitleColor(pan2736_C);
 		filtBorder.setTitleFont(title);
+		filtBorder.setBorder(emptyBorder);
 		fieldBorder = BorderFactory.createEmptyBorder();
 		filterPanel = new JPanel();
 		filterPanel.setBorder(filtBorder);
@@ -147,6 +149,7 @@ public class MyFrame extends JFrame {
 		gbc_gebDate.gridx = 2;
 		gbc_gebDate.gridy = 3;
 		gDatePick.setTextEditable(true);
+		gebDatePan.setBorder(emptyBorder);
 		filterPanel.add(gDatePick, gbc_gebDate);
 		
 		
@@ -177,13 +180,16 @@ public class MyFrame extends JFrame {
 		gbc_orderDate.gridx = 2;
 		gbc_orderDate.gridy = 5;
 		oDatePick.setTextEditable(true);
+		orderDatePan.setBorder(emptyBorder);
 		filterPanel.add(oDatePick, gbc_orderDate);
 		
 		// << Button "Filter anwenden" >>
 		filterBtn = new JButton("Tasks filtern");
+		filterBtn.setBorder(btnBorder);
 		filterBtn.setBackground(pan241_C);
 		filterBtn.setForeground(Color.WHITE);
 		filterBtn.setFont(txt);
+		// dem ActionListener DIESEN Frame bekannt machen
 		GridBagConstraints gbc_filterBtn = new GridBagConstraints();
 		gbc_filterBtn.anchor = GridBagConstraints.NORTH;
 		gbc_filterBtn.fill = GridBagConstraints.HORIZONTAL;
@@ -197,6 +203,7 @@ public class MyFrame extends JFrame {
 		taskBorder.setTitleJustification(TitledBorder.CENTER);
 		taskBorder.setTitleColor(pan2736_C);
 		taskBorder.setTitleFont(title);
+		taskBorder.setBorder(emptyBorder);
 		taskPanel = new JPanel();
 		taskPanel.setBorder(taskBorder);
 		taskPanel.setBackground(Color.LIGHT_GRAY);
@@ -222,6 +229,7 @@ public class MyFrame extends JFrame {
 		
 		// << Detail-Button >>
 		detailsBtn = new JButton("Task laden");
+		detailsBtn.setBorder(btnBorder);
 		detailsBtn.setBackground(pan241_C);
 		detailsBtn.setForeground(Color.WHITE);
 		detailsBtn.setFont(txt);
