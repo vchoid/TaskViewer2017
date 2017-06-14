@@ -1,12 +1,220 @@
 package de.gokv.client.taskviewer.module.http;
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.security.GeneralSecurityException;
+import java.security.KeyManagementException;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.UnrecoverableKeyException;
+import java.security.cert.X509Certificate;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+import javax.net.ssl.KeyManagerFactory;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.TrustManagerFactory;
+
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.http.config.Registry;
+import org.apache.http.config.RegistryBuilder;
+import org.apache.http.conn.socket.ConnectionSocketFactory;
+import org.apache.http.conn.socket.PlainConnectionSocketFactory;
+import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
+
+import de.gokv.client.taskviewer.module.http.proxy.ProxyAuthentication;
+import de.gokv.client.taskviewer.module.http.ssl.ClientCertificate;
+import de.gokv.client.taskviewer.module.http.ssl.ClientCertificateException;
+import de.gokv.client.taskviewer.module.http.ssl.ServerException;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 public class HTTPSClient {
 
-	
-	public HTTPSClient(URL apiURL) {
-		
-		
+	private static final char[] KEYSTORE_PASSWORD = null;
+	private ClientCertificate clientCertificate;
+	private URI apiEntryPoint;
+	private URI apiAdminEntryPoint;
+	private URI apiTaskEntryPoint;
+	private ExecutorService downloadPool;
+	private CloseableHttpClient client;
+	private X509Certificate[] trustedCertficates;
+
+	@SuppressWarnings("deprecation")
+	public HTTPSClient(URL apiURL)
+			throws ServerException, KeyManagementException, UnrecoverableKeyException, NoSuchAlgorithmException,
+			KeyStoreException, GeneralSecurityException, IOException, ClientCertificateException, URISyntaxException {
+
+		clientCertificate = ClientCertificate.readCertificate();
+
+		apiEntryPoint = apiURL.toURI();
+
+		downloadPool = Executors.newFixedThreadPool(3);
+
+		final PoolingHttpClientConnectionManager connectionManager;
+
+		if (apiURL.getProtocol().equals("https")) {
+			configureTrustedServerCertficate();
+
+			SSLContext sslContext = buildSSL();
+
+			Registry<ConnectionSocketFactory> socketFactoryRegistry = RegistryBuilder.<ConnectionSocketFactory> create()
+					.register("https",
+							new SSLConnectionSocketFactory(sslContext,
+									SSLConnectionSocketFactory.BROWSER_COMPATIBLE_HOSTNAME_VERIFIER))
+					.register("http", PlainConnectionSocketFactory.getSocketFactory()).build();
+
+			connectionManager = new PoolingHttpClientConnectionManager(socketFactoryRegistry);
+		} else {
+			connectionManager = new PoolingHttpClientConnectionManager();
+		}
+		HttpClientBuilder httpClientBuilder = HttpClients.custom().setConnectionManager(connectionManager);
+
+		if (ProxyAuthentication.isProxy()) {
+			httpClientBuilder.setProxy(ProxyAuthentication.buildProxy());
+			if (ProxyAuthentication.isAuthentication()) {
+				httpClientBuilder.setDefaultCredentialsProvider(ProxyAuthentication.buildCredentials());
+			}
+		}
+		client = httpClientBuilder.build();
+
 	}
+
+	private SSLContext buildSSL()
+			throws KeyStoreException, GeneralSecurityException, IOException, ClientCertificateException {
+		SSLContext sslContext = SSLContext.getInstance("TLSv1");
+
+		KeyManagerFactory kmf = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
+
+		kmf.init(createClientKeyStore(), KEYSTORE_PASSWORD);
+
+		TrustManagerFactory tmf = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
+
+		tmf.init(createTrustKeyStore());
+
+		final TrustManager[] tms = tmf.getTrustManagers();
+
+		sslContext.init(kmf.getKeyManagers(), tms, null);
+
+		return sslContext;
+	}
+
+	private KeyStore createClientKeyStore() throws GeneralSecurityException, IOException, ClientCertificateException {
+		KeyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());
+
+		keyStore.load(null);
+
+		keyStore.setKeyEntry("default", clientCertificate.getClientPrivateKey(), KEYSTORE_PASSWORD,
+				clientCertificate.getClientCertificateChain());
+
+		return keyStore;
+	}
+
+	private KeyStore createTrustKeyStore() throws GeneralSecurityException, IOException, ClientCertificateException {
+		KeyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType());
+
+		keyStore.load(null);
+
+		int i = 1;
+		for (X509Certificate cert : trustedCertficates) {
+			keyStore.setCertificateEntry(String.format("server-%d", i), cert);
+			i++;
+		}
+
+		return keyStore;
+	}
+
+	private void configureTrustedServerCertficate() throws ClientCertificateException {
+		String filename = "";
+		trustedCertficates = ClientCertificate.readCertificateFromPKCS7(filename);
+	}
+
+	public void testConnection() {
+		try {
+			JSONObject taskDetails = getTaskDetails("2FCA7A80510311E78ED5DDE0C5917902");
+			JSONArray results = taskDetails.getJSONArray("results");
+			JSONObject task = results.getJSONObject(0);
+			// TODO Objekte anzeigen lassen
+			System.out.println(task.get("tenantName"));
+		} catch (ServerException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public <T> T get(URI url, ResponseFormat<T> format) throws ServerException {
+		HttpGet request = new HttpGet(url);
+		return execRequest(request, format);
+	}
+
+	public <T> T post(URI url, ResponseFormat<T> format, JSONObject data) throws ServerException {
+		HttpPost request = new HttpPost(url);
+		request.setEntity(new StringEntity(data.toString(), ContentType.APPLICATION_JSON));
+		return execRequest(request, format);
+	}
+
+	private <T> T execRequest(HttpUriRequest request, ResponseFormat<T> format) throws ServerException {
+		CloseableHttpResponse res = null;
+		try {
+			res = client.execute(request);
+			return format.getData(res, request.getURI());
+		} catch (IOException e) {
+			throw new ServerException(String.format("IO error accessing URI %s: %s", request.getURI(), e.getMessage()),
+					e);
+		}
+	}
+
+	public URI getApiAdminEntryPoint() throws ServerException {
+		if (apiAdminEntryPoint == null)
+			discoverApi();
+		return apiAdminEntryPoint;
+	}
+
+	private void discoverApi() throws ServerException {
+		try {
+			JSONObject info = get(apiEntryPoint, ResponseFormat.JSON);
+			apiAdminEntryPoint = JSONEntityUtil.getLink(apiEntryPoint, info, "gokv:admin");
+		} catch (ServerException e) {
+			// TODO Message
+			throw new ServerException("", e);
+		}
+	}
+
+	public URI getApiTaskEntryPoint() throws ServerException {
+		if (apiTaskEntryPoint == null) {
+			discoverApiAdmin();
+		}
+		return apiTaskEntryPoint;
+	}
+
+	private void discoverApiAdmin() throws ServerException {
+		JSONObject info;
+		try {
+			info = get(getApiAdminEntryPoint(), ResponseFormat.JSON);
+			apiTaskEntryPoint = JSONEntityUtil.getLink(apiAdminEntryPoint, info, "gokv:task");
+		} catch (ServerException e) {
+			throw new ServerException("", e);
+		}
+	}
+
+	public JSONObject getTaskDetails(String taskID) throws ServerException {
+		try {
+			return get(new URI(getApiTaskEntryPoint().toString() + "/" + taskID), ResponseFormat.JSON);
+		} catch (URISyntaxException e) {
+			throw new ServerException("", e);
+		}
+	}
+
 }

@@ -29,8 +29,7 @@ import de.gokv.client.taskviewer.exceptions.InvalidDateException;
  * mit der {@link CSVReader#getValue(CSVRecord, String) getValue}-Methode oder
  * {@link CSVReader#getValueAsDate(CSVRecord, String, boolean) getValueAsDate}
  * -Methode und speichert ihn in einer Variable im passenden Format.</li>
- * <li><b>{@link #matchesCriteria(Task)}</b>: Überprüfen ob Felder Werte
- * enthalten und auf Gleicheit von Kriterien.</li>
+ * <li><b>{@link #matchesCriteria(Task)}</b>: Filtern der Werte nach Kriterien.</li>
  * 
  * </ul>
  * </p>
@@ -291,6 +290,7 @@ public class Task {
 	}
 
 	/**
+	 * Filtern der Werte nach Kriterien.
 	 * Wenn Länge der Eingabe in den Felder größer als 0 ist und Kritierien
 	 * nicht übereinstimmen wird false zurückgegeben. Ansonsten wird true zurückgegeben.
 	 * 

@@ -1,0 +1,13 @@
+package de.gokv.client.taskviewer.module.http.proxy;
+
+import java.util.Properties;
+
+public class MissingProxyPropertyException extends Exception {
+	
+	private static final long serialVersionUID = 5416114931057410300L;
+
+	public MissingProxyPropertyException(String propertyName, Properties propertyFile) {
+		super(String.format("The property %s could not be found in the attached property File %s", propertyName,
+				propertyFile));
+	}
+}

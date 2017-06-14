@@ -1,4 +1,4 @@
-package de.gokv.client.taskviewer.ui;
+package de.gokv.client.taskviewer.view;
 
 import java.awt.Color;
 import java.awt.Font;

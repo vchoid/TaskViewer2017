@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 import de.gokv.client.taskviewer.model.MyModel;
 import de.gokv.client.taskviewer.module.http.HTTPSClient;
-import de.gokv.client.taskviewer.ui.MyFrame;
+import de.gokv.client.taskviewer.view.MyFrame;
 
 public class LoadTaskDetailsController implements ActionListener{
 

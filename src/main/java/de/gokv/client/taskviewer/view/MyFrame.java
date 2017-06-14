@@ -1,4 +1,4 @@
-package de.gokv.client.taskviewer.ui;
+package de.gokv.client.taskviewer.view;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -7,12 +7,9 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -92,7 +89,7 @@ public class MyFrame extends JFrame {
 	 */
 	public MyFrame() {
 		setTitle("GoKV-TaskViewer");
-		setSize(new Dimension(915, 590));
+		setSize(new Dimension(902, 578));
 		setAlwaysOnTop(true);
 
 		controller = new MyFrameController(this);
@@ -305,12 +302,12 @@ public class MyFrame extends JFrame {
 		infoPanel.setBorder(infoBorder);
 		infoPanel.setBackground(Color.LIGHT_GRAY);
 		GridBagLayout gbl_infoPanel = new GridBagLayout();
-		gbl_infoPanel.columnWidths = new int[] { 10, 340, 10 };
+		gbl_infoPanel.columnWidths = new int[] { 10, 410, 10 };
 		gbl_infoPanel.rowHeights = new int[] { 10, 194 };
 		infoPanel.setLayout(gbl_infoPanel);
 		contPanel.add(infoPanel);
 
-		infoLabel = new JLabel("weitere Infos");
+		infoLabel = new JLabel("...");
 		infoLabel.setFont(txt);
 		GridBagConstraints gbc_infoLabel = new GridBagConstraints();
 		gbc_infoLabel.anchor = GridBagConstraints.NORTH;
@@ -323,7 +320,7 @@ public class MyFrame extends JFrame {
 		
 		// Info-Panel
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-		info2Border = BorderFactory.createTitledBorder("Inhalt");
+		info2Border = BorderFactory.createTitledBorder(" ");
 		info2Border.setTitleJustification(TitledBorder.CENTER);
 		info2Border.setTitleColor(pan2736_C);
 		info2Border.setTitleFont(title);
@@ -354,6 +351,7 @@ public class MyFrame extends JFrame {
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setVisible(true);
 		setLocationRelativeTo(null);
+		setResizable(false);
 	}
 
 }

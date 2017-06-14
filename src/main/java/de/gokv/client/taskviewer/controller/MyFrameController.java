@@ -1,7 +1,8 @@
 package de.gokv.client.taskviewer.controller;
 
+import de.gokv.client.taskviewer.Task;
 import de.gokv.client.taskviewer.model.MyModel;
-import de.gokv.client.taskviewer.ui.MyFrame;
+import de.gokv.client.taskviewer.view.MyFrame;
 /**
  * 
  * @author Christoph Kiank

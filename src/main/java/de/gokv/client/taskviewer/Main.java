@@ -1,6 +1,6 @@
 package de.gokv.client.taskviewer;
 
-import de.gokv.client.taskviewer.ui.MyFrame;
+import de.gokv.client.taskviewer.view.MyFrame;
 
 public class Main {
 	
