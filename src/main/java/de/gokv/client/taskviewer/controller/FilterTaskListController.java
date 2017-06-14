@@ -23,7 +23,6 @@ public class FilterTaskListController implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		//Erzeugen einer Klasse Filter 
 		try {
 			Task t = new Task();
 			

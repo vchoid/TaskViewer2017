@@ -12,7 +12,7 @@ public class MyFrameController {
 	private MyModel model;
 	private final MyFrame frame;
 	/**
-	 * Konstruktor
+	 * Konstruktor legt ein neues Model-Objekt an und dieses startet das lesen der CSV-Datei.
 	 * @param frame
 	 */
 	public MyFrameController(MyFrame frame) {
@@ -21,7 +21,7 @@ public class MyFrameController {
 		model.readFiles();
 	}
 	/**
-	 * Gitb die gefilterten Tasks als String Array zurück.
+	 * Gibt die gefilterten Tasks als String Array zurück.
 	 * @return
 	 */
 	public String[] getFilteredTasks(){

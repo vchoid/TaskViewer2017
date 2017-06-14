@@ -7,6 +7,9 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -16,10 +19,13 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
+import de.gokv.client.taskviewer.controller.FilterTaskKeyHandler;
 import de.gokv.client.taskviewer.controller.FilterTaskListController;
+import de.gokv.client.taskviewer.controller.LoadTaskDetailsController;
 import de.gokv.client.taskviewer.controller.MyFrameController;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
@@ -56,16 +62,20 @@ public class MyFrame extends JFrame {
 	public JDatePanelImpl orderDatePan = new JDatePanelImpl(model_ord);
 	public JDatePickerImpl oDatePick = new JDatePickerImpl(orderDatePan, new DateLabelFormatter());
 	public static JButton filterBtn;
+	public static KeyListener tfKeyListener;
+	private MyFrameController controller;
 	// Task Panel ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	private TitledBorder taskBorder;
 	private JPanel taskPanel;
-	private JButton detailsBtn;
-	private MyFrameController controller;
+	public static JButton detailsBtn;
 	// Info Panel ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	private TitledBorder infoBorder;
 	private JPanel infoPanel;
-	JLabel infoLabel;
-
+	private JLabel infoLabel;
+	// Info Panel 2 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	private TitledBorder info2Border;
+	private JPanel info2Panel;
+	private JLabel info2Label;
 	// Style ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	private Font title = new Font("Arial", Font.BOLD, 16);
 	private Font txt = new Font("Arial", Font.PLAIN, 15);
@@ -98,7 +108,7 @@ public class MyFrame extends JFrame {
 
 		// Titel-Panel
 		// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-		titleBorder = BorderFactory.createTitledBorder("BitGo_KV");
+		titleBorder = BorderFactory.createTitledBorder("bitGo_KV");
 		titleBorder.setTitleJustification(TitledBorder.LEADING);
 		titleBorder.setTitleColor(pan2736_C);
 		titleBorder.setTitleFont(title);
@@ -137,6 +147,7 @@ public class MyFrame extends JFrame {
 		pKvnr.setPlaceholder("KvNr/Ordnungsbegriff",
 				gbl_filPanel.columnWidths[1] + gbl_filPanel.columnWidths[2] + gbl_filPanel.columnWidths[3]);
 		pKvnr.setBorder(fieldBorder);
+		pKvnr.addKeyListener(new FilterTaskKeyHandler(this, controller.getModel()));
 		GridBagConstraints gbc_kvnr = new GridBagConstraints();
 		gbc_kvnr.anchor = GridBagConstraints.NORTH;
 		gbc_kvnr.fill = GridBagConstraints.HORIZONTAL;
@@ -149,6 +160,7 @@ public class MyFrame extends JFrame {
 		pName = new Field_Placeholder();
 		pName.setPlaceholder("Name", gbl_filPanel.columnWidths[2] - 5);
 		pName.setBorder(fieldBorder);
+		pName.addKeyListener(new FilterTaskKeyHandler(this, controller.getModel()));
 		GridBagConstraints gbc_name = new GridBagConstraints();
 		gbc_name.anchor = GridBagConstraints.NORTH;
 		gbc_name.fill = GridBagConstraints.HORIZONTAL;
@@ -161,6 +173,7 @@ public class MyFrame extends JFrame {
 		pVname = new Field_Placeholder();
 		pVname.setPlaceholder("Vorname", gbl_filPanel.columnWidths[2]);
 		pVname.setBorder(fieldBorder);
+		pVname.addKeyListener(new FilterTaskKeyHandler(this, controller.getModel()));
 		GridBagConstraints gbc_vName = new GridBagConstraints();
 		gbc_vName.anchor = GridBagConstraints.BASELINE_LEADING;
 		gbc_vName.fill = GridBagConstraints.HORIZONTAL;
@@ -192,6 +205,7 @@ public class MyFrame extends JFrame {
 		pTaskID.setPlaceholder("TaskID",
 				gbl_filPanel.columnWidths[1] + gbl_filPanel.columnWidths[2] + gbl_filPanel.columnWidths[3]);
 		pTaskID.setBorder(fieldBorder);
+		pTaskID.addKeyListener(new FilterTaskKeyHandler(this, controller.getModel()));
 		GridBagConstraints gbc_taskID = new GridBagConstraints();
 		gbc_taskID.anchor = GridBagConstraints.NORTH;
 		gbc_taskID.fill = GridBagConstraints.HORIZONTAL;
@@ -254,6 +268,7 @@ public class MyFrame extends JFrame {
 		taskList = new JList<>(controller.getFilteredTasks());
 		taskList.setVisibleRowCount(7);
 		taskList.setFont(txt);
+		taskList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		JScrollPane scrollTask = new JScrollPane(taskList);
 		GridBagConstraints gbc_scrollTask = new GridBagConstraints();
 		gbc_scrollTask.anchor = GridBagConstraints.NORTH;
@@ -269,6 +284,7 @@ public class MyFrame extends JFrame {
 		detailsBtn.setBackground(pan241_C);
 		detailsBtn.setForeground(Color.WHITE);
 		detailsBtn.setFont(txt);
+		detailsBtn.addActionListener(new LoadTaskDetailsController(this, controller.getModel()));
 		GridBagConstraints gbc_detailBtn = new GridBagConstraints();
 		gbc_detailBtn.anchor = GridBagConstraints.NORTH;
 		gbc_detailBtn.fill = GridBagConstraints.HORIZONTAL;
@@ -304,6 +320,33 @@ public class MyFrame extends JFrame {
 		gbc_infoLabel.gridx = 0;
 		gbc_infoLabel.gridy = 0;
 		infoPanel.add(infoLabel, gbc_infoLabel);
+		
+		// Info-Panel
+		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		info2Border = BorderFactory.createTitledBorder("Inhalt");
+		info2Border.setTitleJustification(TitledBorder.CENTER);
+		info2Border.setTitleColor(pan2736_C);
+		info2Border.setTitleFont(title);
+		info2Border.setBorder(emptyBorder);
+		info2Panel = new JPanel();
+		info2Panel.setBorder(info2Border);
+		info2Panel.setBackground(Color.LIGHT_GRAY);
+		GridBagLayout gbl_info2Panel = new GridBagLayout();
+		gbl_info2Panel.columnWidths = new int[] { 10, 410, 10 };
+		gbl_info2Panel.rowHeights = new int[] { 10, 194 };
+		info2Panel.setLayout(gbl_info2Panel);
+		contPanel.add(info2Panel);
+		
+		info2Label = new JLabel("...");
+		info2Label.setFont(txt);
+		GridBagConstraints gbc_info2Label = new GridBagConstraints();
+		gbc_info2Label.anchor = GridBagConstraints.NORTH;
+		gbc_info2Label.fill = GridBagConstraints.HORIZONTAL;
+		gbc_info2Label.insets = new Insets(0, 0, 0, 0);
+		gbc_info2Label.gridwidth = 1;
+		gbc_info2Label.gridx = 0;
+		gbc_info2Label.gridy = 0;
+		info2Panel.add(info2Label, gbc_infoLabel);
 
 		/**
 		 * Beendet die Anwendung. Sichtbarkeit auf true.
