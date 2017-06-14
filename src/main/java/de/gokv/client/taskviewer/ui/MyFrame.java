@@ -25,13 +25,19 @@ import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
 
+/**
+ * 
+ * @author Christoph Kiank
+ *
+ */
 public class MyFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	
-	
+	// Content Panel ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	private JPanel contPanel;
-	// Filter Panel ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	// Filter Panel ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	private TitledBorder filtBorder;
+	private Border fieldBorder;
 	private JPanel filterPanel;
 	public static Field_Placeholder pKvnr;
 	public static Field_Placeholder pName;
@@ -46,27 +52,29 @@ public class MyFrame extends JFrame {
 	public JDatePanelImpl orderDatePan = new JDatePanelImpl(model_ord);
 	public JDatePickerImpl oDatePick = new JDatePickerImpl(orderDatePan, new DateLabelFormatter());
 	public static JButton filterBtn;
-	// Task Panel ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	// Task Panel ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	private TitledBorder taskBorder;
 	private JPanel taskPanel;
 	private JButton detailsBtn;
 	private MyFrameController controller;
+	// Info Panel ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	private TitledBorder infoBorder;
+	private JPanel infoPanel;
+	JLabel infoLabel;
 	
 	// Style ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	private Font title = new Font("Arial",Font.BOLD, 16);
 	private Font txt = new Font("Arial", Font.PLAIN, 15);
 	private Color pan241_C = new Color(166, 31, 125);
 	private Color pan2736_C = new Color(35, 45, 141);
-	private TitledBorder filtBorder;
-	private Border fieldBorder;
 	private Border btnBorder = BorderFactory.createEmptyBorder(8,5,8,5);
 	private Border emptyBorder = BorderFactory.createEmptyBorder();
+	
 	//MODEL !!ACHTUNG
 	public JList<String> taskList;
-	
-	private JPanel infoPanel;
-	JLabel infoLabel;
-	
+	/**
+	 * Konstruktor
+	 */
 	public MyFrame() {
 		setTitle("GoKV-TaskViewer");
 		setSize(new Dimension(800, 450));
@@ -80,8 +88,6 @@ public class MyFrame extends JFrame {
 		fl_contPanel.setAlignment(FlowLayout.LEFT);
 		contPanel.setLayout(fl_contPanel);
 		setContentPane(contPanel);
-
-		
 				
 		// Input-Panel +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		filtBorder = BorderFactory.createTitledBorder("Filter Maske");
@@ -246,13 +252,29 @@ public class MyFrame extends JFrame {
 		taskPanel.add(detailsBtn, gbc_detailBtn);
 
 		// Info-Panel +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		infoBorder = BorderFactory.createTitledBorder("Informationen");
+		infoBorder.setTitleJustification(TitledBorder.CENTER);
+		infoBorder.setTitleColor(pan2736_C);
+		infoBorder.setTitleFont(title);
+		infoBorder.setBorder(emptyBorder);
 		infoPanel = new JPanel();
-		infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.X_AXIS));
+		infoPanel.setBorder(infoBorder);
+		infoPanel.setBackground(Color.LIGHT_GRAY);
+		GridBagLayout gbl_infoPanel = new GridBagLayout();
+		gbl_infoPanel.columnWidths = new int[]{10,200,200,10};
+		gbl_infoPanel.rowHeights = new int[]{10,30,30,30,30,30,30,10};
+		infoPanel.setLayout(gbl_infoPanel);
 		contPanel.add(infoPanel);
 		
 		infoLabel = new JLabel("weitere Infos");
-		infoLabel.setBounds(0, 0, 100, 20);
 		infoLabel.setFont(txt);
+		GridBagConstraints gbc_infoLabel = new GridBagConstraints();
+		gbc_infoLabel.anchor = GridBagConstraints.NORTH;
+		gbc_infoLabel.fill = GridBagConstraints.HORIZONTAL;
+		gbc_infoLabel.insets = new Insets(0, 0, 0, 0);
+		gbc_infoLabel.gridwidth = 0;
+		gbc_infoLabel.gridx = 0;
+		gbc_infoLabel.gridy = 0;
 		infoPanel.add(infoLabel);
 		
 		

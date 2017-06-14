@@ -24,22 +24,25 @@ import de.gokv.client.taskviewer.exceptions.InvalidDateException;
  * <p>
  * <b>Methoden:</b>
  * <ul>
- * <li><b>{@link #createTaskFromRecord(CSVRecord record)}</b>: Legt eine Variable der Klasse {@link Task} an. Holt ein Wert einer Zeile
- * aus der CSV mit der {@link CSVReader#getValue(CSVRecord, String)
- * getValue}-Methode oder
- * {@link CSVReader#getValueAsDate(CSVRecord, String, boolean)
- * getValueAsDate}-Methode und speichert ihn in einer Variable im passenden Format.</li>
- * <li><b>{@link #matchesCriteria(Task)}</b>: Überprüfen ob Felder Werte enthalten und auf Gleicheit von Kriterien.</li>
+ * <li><b>{@link #createTaskFromRecord(CSVRecord record)}</b>: Legt eine
+ * Variable der Klasse {@link Task} an. Holt ein Wert einer Zeile aus der CSV
+ * mit der {@link CSVReader#getValue(CSVRecord, String) getValue}-Methode oder
+ * {@link CSVReader#getValueAsDate(CSVRecord, String, boolean) getValueAsDate}
+ * -Methode und speichert ihn in einer Variable im passenden Format.</li>
+ * <li><b>{@link #matchesCriteria(Task)}</b>: Überprüfen ob Felder Werte
+ * enthalten und auf Gleicheit von Kriterien.</li>
  * 
  * </ul>
  * </p>
  * <p>
  * <b>Getter-Methoden:</b>
  * <ul>
- * <li><b>{@link #getGebDat()}</b>: {@link LocalDate} im <u>Format: "dd.MM.yyyy"</li>
+ * <li><b>{@link #getGebDat()}</b>: {@link LocalDate} im <u>Format: "dd.MM.yyyy"
+ * </li>
  * <li><b>{@link #getKvnr()}</b>: String im <u>Format: [A-Z]{1}[0-9]{9}</u></li>
  * <li><b>{@link #getName()}</b>: String im <u>Format: [^0-9]*</u></li>
- * <li><b>{@link #getOrderedDate()}</b>: {@link LocalDate} im <u>Format: "dd.MM.yyyy"</u></li>
+ * <li><b>{@link #getOrderedDate()}</b>: {@link LocalDate} im <u>Format:
+ * "dd.MM.yyyy"</u></li>
  * <li><b>{@link #getTaskId()} </b>: String im <u>Format: [A-F0-9]{32}</u></li>
  * <li><b>{@link #getTaskType()}</b>: String im <u>Format: [^0-9]*</u></li>
  * <li><b>{@link #getTitel()}</b>: String im <u>Format: [^0-9]*</u></li>
@@ -286,24 +289,26 @@ public class Task {
 	public void setVsWort(String vsWort) {
 		this.vsWort = vsWort;
 	}
+
 	/**
-	 * Überprüfen ob Felder Werte enthalten und auf Gleicheit von Kriterien.
+	 * Wenn Länge der Eingabe in den Felder größer als 0 ist und Kritierien
+	 * nicht übereinstimmen wird false zurückgegeben. Ansonsten wird true zurückgegeben.
 	 * 
 	 * @param criteria
 	 * @return
 	 */
 	public boolean matchesCriteria(Task criteria) {
-		if(criteria.name.length() > 0 && ! criteria.name.equals(this.name))
+		if (criteria.name.length() > 0 && !criteria.name.equals(this.name))
 			return false;
-		if(criteria.vName.length() > 0 && ! criteria.vName.equals(this.vName))
+		if (criteria.vName.length() > 0 && !criteria.vName.equals(this.vName))
 			return false;
-		if(criteria.kvnr.length() > 0 && ! criteria.kvnr.equals(this.kvnr))
+		if (criteria.kvnr.length() > 0 && !criteria.kvnr.equals(this.kvnr))
 			return false;
-		if(criteria.taskId.length() > 0 && criteria.taskId.equals(this.taskId))
+		if (criteria.taskId.length() > 0 && !criteria.taskId.equals(this.taskId))
 			return false;
-		if(criteria.gebDat != null && ! criteria.gebDat.equals(this.gebDat))
+		if (criteria.gebDat != null && !criteria.gebDat.equals(this.gebDat))
 			return false;
-		if(criteria.orderedDate != null && ! criteria.orderedDate.equals(this.orderedDate))
+		if (criteria.orderedDate != null && !criteria.orderedDate.equals(this.orderedDate))
 			return false;
 		return true;
 	}

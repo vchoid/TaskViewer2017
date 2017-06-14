@@ -98,7 +98,7 @@ public class TestCSVReader {
 	 * die mit validen Werten gefüllt ist.
 	 */
 	private void getValidFile() {
-		filePath = "/src/test/resources/famv_direct_input_monitoring_20170515131131.csv";
+		filePath = "/orders/dum_famv_direct_input_monitoring_20170515131131.csv";
 		getFile(filePath);
 	}
 	/**
@@ -182,7 +182,7 @@ public class TestCSVReader {
 	public void testCSVReadContent() {
 		getValidFile();
 		oneTask = reader.getValidEntries().get(0);
-		Assert.assertEquals(4, reader.getValidEntries().size());
+		Assert.assertEquals(16, reader.getValidEntries().size());
 		Assert.assertEquals("405750F0395F11E7BED7F726E269B87F", oneTask.getTaskId());
 		Assert.assertEquals("famv_bestand", oneTask.getTaskType());
 		Assert.assertEquals("2017-05-15", oneTask.getOrderedDate().toString());

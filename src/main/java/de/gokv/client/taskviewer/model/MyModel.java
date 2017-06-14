@@ -8,7 +8,13 @@ import org.apache.commons.lang3.ArrayUtils;
 
 import de.gokv.client.taskviewer.CSVReader;
 import de.gokv.client.taskviewer.Task;
-
+/**
+ * 
+ * 
+ * 
+ * @author Christoph Kiank
+ *
+ */
 public class MyModel {
 	private CSVReader reader;
 	private List<Task> tasks;
@@ -18,7 +24,11 @@ public class MyModel {
 	public MyModel() {
 		tasks = new ArrayList<Task>();
 	}
-
+	/**
+	 * Öffnet zuerst den Ordner 'orders'. Falls nicht vorhanden wird automatisch einer erstellt.
+	 * Ließt anschließend alle CSV Dateien und holt. Öffnet mittels des CSVReaders die Dateien
+	 * und holt alle gültigen Einträge und speichert diese dann in einer Liste.
+	 */
 	public void readFiles() {
 		File folder = new File(System.getProperty("user.dir") + "/orders");
 		folder.mkdirs();
@@ -29,7 +39,10 @@ public class MyModel {
 			tasks.addAll(reader.getValidEntries());
 		}
 	}
-
+	/**
+	 * 
+	 * @return
+	 */
 	public String[] getFilteredTasks() {
 		filteredTasks = new ArrayList<String>();
 		for (Task task : tasks) {

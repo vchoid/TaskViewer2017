@@ -26,18 +26,23 @@ public class FilterTaskListController implements ActionListener{
 		//Erzeugen einer Klasse Filter 
 		try {
 			Task t = new Task();
+			
 			t.setName(MyFrame.pName.getText());
 			t.setvName(MyFrame.pVname.getText());
 			t.setKvnr(MyFrame.pKvnr.getText());
 			t.setTaskId(MyFrame.pTaskID.getText());
+			
 			if(frame.model_geb.getValue() != null){
 				t.setGebDat(DateUtil.parseDate(frame.model_geb.getValue()));
 			}
+			
 			if(frame.model_ord.getValue() != null){
 				t.setOrderedDate(DateUtil.parseDate(frame.model_ord.getValue()));
 			}
+			
 			model.setFilterCriteria(t);
 			frame.taskList.setListData(model.getFilteredTasks());
+			
 		} catch (InvalidDateException e1) {
 			// DO NOTHING
 			e1.printStackTrace();
