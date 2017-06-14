@@ -77,7 +77,7 @@ public class MyFrame extends JFrame {
 	 */
 	public MyFrame() {
 		setTitle("GoKV-TaskViewer");
-		setSize(new Dimension(800, 450));
+		setSize(new Dimension(800, 540));
 		setAlwaysOnTop(true);
 		
 		controller = new MyFrameController(this);
@@ -261,8 +261,8 @@ public class MyFrame extends JFrame {
 		infoPanel.setBorder(infoBorder);
 		infoPanel.setBackground(Color.LIGHT_GRAY);
 		GridBagLayout gbl_infoPanel = new GridBagLayout();
-		gbl_infoPanel.columnWidths = new int[]{10,200,200,10};
-		gbl_infoPanel.rowHeights = new int[]{10,30,30,30,30,30,30,10};
+		gbl_infoPanel.columnWidths = new int[]{10,340,10};
+		gbl_infoPanel.rowHeights = new int[]{10,200};
 		infoPanel.setLayout(gbl_infoPanel);
 		contPanel.add(infoPanel);
 		
@@ -272,10 +272,10 @@ public class MyFrame extends JFrame {
 		gbc_infoLabel.anchor = GridBagConstraints.NORTH;
 		gbc_infoLabel.fill = GridBagConstraints.HORIZONTAL;
 		gbc_infoLabel.insets = new Insets(0, 0, 0, 0);
-		gbc_infoLabel.gridwidth = 0;
+		gbc_infoLabel.gridwidth = 1;
 		gbc_infoLabel.gridx = 0;
 		gbc_infoLabel.gridy = 0;
-		infoPanel.add(infoLabel);
+		infoPanel.add(infoLabel, gbc_infoLabel);
 		
 		
 		/**
