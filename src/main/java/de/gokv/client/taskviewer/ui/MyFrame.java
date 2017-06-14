@@ -35,6 +35,10 @@ public class MyFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	// Content Panel ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	private JPanel contPanel;
+	// Info Panel ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	private TitledBorder titleBorder;
+	private JPanel titlePanel;
+	private JLabel titleLabel;
 	// Filter Panel ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	private TitledBorder filtBorder;
 	private Border fieldBorder;
@@ -61,35 +65,58 @@ public class MyFrame extends JFrame {
 	private TitledBorder infoBorder;
 	private JPanel infoPanel;
 	JLabel infoLabel;
-	
+
 	// Style ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	private Font title = new Font("Arial",Font.BOLD, 16);
+	private Font title = new Font("Arial", Font.BOLD, 16);
 	private Font txt = new Font("Arial", Font.PLAIN, 15);
 	private Color pan241_C = new Color(166, 31, 125);
 	private Color pan2736_C = new Color(35, 45, 141);
-	private Border btnBorder = BorderFactory.createEmptyBorder(8,5,8,5);
+	private Border btnBorder = BorderFactory.createEmptyBorder(8, 5, 8, 5);
 	private Border emptyBorder = BorderFactory.createEmptyBorder();
-	
-	//MODEL !!ACHTUNG
+
+	// MODEL !! ACHTUNG
 	public JList<String> taskList;
+
 	/**
 	 * Konstruktor
 	 */
 	public MyFrame() {
 		setTitle("GoKV-TaskViewer");
-		setSize(new Dimension(800, 540));
+		setSize(new Dimension(915, 590));
 		setAlwaysOnTop(true);
-		
+
 		controller = new MyFrameController(this);
-		
-		// Content-Panel +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+		// Content-Panel
+		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		contPanel = new JPanel();
+		contPanel.setBorder(taskBorder);
 		FlowLayout fl_contPanel = new FlowLayout();
 		fl_contPanel.setAlignment(FlowLayout.LEFT);
 		contPanel.setLayout(fl_contPanel);
 		setContentPane(contPanel);
-				
-		// Input-Panel +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+		// Titel-Panel
+		// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		titleBorder = BorderFactory.createTitledBorder("BitGo_KV");
+		titleBorder.setTitleJustification(TitledBorder.LEADING);
+		titleBorder.setTitleColor(pan2736_C);
+		titleBorder.setTitleFont(title);
+		titleBorder.setBorder(emptyBorder);
+		titlePanel = new JPanel();
+		titlePanel.setBorder(titleBorder);
+		titlePanel.setBackground(Color.LIGHT_GRAY);
+		
+		titlePanel.setLayout(new FlowLayout());
+		contPanel.add(titlePanel);
+		// leeres Label
+		titleLabel = new JLabel("-- Taskviewer -------------------------------------------------------------------                                                                                                              ");
+		titleLabel.setFont(txt);;
+		titleLabel.setFont(txt);
+		
+		titlePanel.add(titleLabel);
+		// Input-Panel
+		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		filtBorder = BorderFactory.createTitledBorder("Filter Maske");
 		filtBorder.setTitleJustification(TitledBorder.CENTER);
 		filtBorder.setTitleColor(pan2736_C);
@@ -100,15 +127,15 @@ public class MyFrame extends JFrame {
 		filterPanel.setBorder(filtBorder);
 		filterPanel.setBackground(Color.LIGHT_GRAY);
 		GridBagLayout gbl_filPanel = new GridBagLayout();
-		gbl_filPanel.columnWidths = new int[]{10,200,200,10};
-		gbl_filPanel.rowHeights = new int[]{10,30,30,30,30,30,30,10};
+		gbl_filPanel.columnWidths = new int[] { 10, 200, 200, 10 };
+		gbl_filPanel.rowHeights = new int[] { 10, 30, 30, 30, 30, 30, 30, 10 };
 		filterPanel.setLayout(gbl_filPanel);
 		contPanel.add(filterPanel);
-		
-						
+
 		// << KVNR >>
 		pKvnr = new Field_Placeholder();
-		pKvnr.setPlaceholder("KvNr/Ordnungsbegriff", gbl_filPanel.columnWidths[1]+gbl_filPanel.columnWidths[2]+gbl_filPanel.columnWidths[3]);
+		pKvnr.setPlaceholder("KvNr/Ordnungsbegriff",
+				gbl_filPanel.columnWidths[1] + gbl_filPanel.columnWidths[2] + gbl_filPanel.columnWidths[3]);
 		pKvnr.setBorder(fieldBorder);
 		GridBagConstraints gbc_kvnr = new GridBagConstraints();
 		gbc_kvnr.anchor = GridBagConstraints.NORTH;
@@ -117,10 +144,10 @@ public class MyFrame extends JFrame {
 		gbc_kvnr.gridx = 1;
 		gbc_kvnr.gridy = 1;
 		filterPanel.add(pKvnr, gbc_kvnr);
-		
+
 		// << Name >>
 		pName = new Field_Placeholder();
-		pName.setPlaceholder("Name", gbl_filPanel.columnWidths[2]-5);
+		pName.setPlaceholder("Name", gbl_filPanel.columnWidths[2] - 5);
 		pName.setBorder(fieldBorder);
 		GridBagConstraints gbc_name = new GridBagConstraints();
 		gbc_name.anchor = GridBagConstraints.NORTH;
@@ -129,7 +156,7 @@ public class MyFrame extends JFrame {
 		gbc_name.gridx = 1;
 		gbc_name.gridy = 2;
 		filterPanel.add(pName, gbc_name);
-		
+
 		// << Vorname >>
 		pVname = new Field_Placeholder();
 		pVname.setPlaceholder("Vorname", gbl_filPanel.columnWidths[2]);
@@ -141,7 +168,7 @@ public class MyFrame extends JFrame {
 		gbc_vName.gridx = 2;
 		gbc_vName.gridy = 2;
 		filterPanel.add(pVname, gbc_vName);
-		
+
 		// << Geburtsdatum >>
 		gDateLabel = new JLabel("Geburtstag");
 		gDateLabel.setForeground(Color.GRAY);
@@ -159,11 +186,11 @@ public class MyFrame extends JFrame {
 		gDatePick.setTextEditable(true);
 		gebDatePan.setBorder(emptyBorder);
 		filterPanel.add(gDatePick, gbc_gebDate);
-		
-		
+
 		// << TaskID >>
 		pTaskID = new Field_Placeholder();
-		pTaskID.setPlaceholder("TaskID", gbl_filPanel.columnWidths[1]+gbl_filPanel.columnWidths[2]+gbl_filPanel.columnWidths[3]);
+		pTaskID.setPlaceholder("TaskID",
+				gbl_filPanel.columnWidths[1] + gbl_filPanel.columnWidths[2] + gbl_filPanel.columnWidths[3]);
 		pTaskID.setBorder(fieldBorder);
 		GridBagConstraints gbc_taskID = new GridBagConstraints();
 		gbc_taskID.anchor = GridBagConstraints.NORTH;
@@ -172,7 +199,7 @@ public class MyFrame extends JFrame {
 		gbc_taskID.gridx = 1;
 		gbc_taskID.gridy = 4;
 		filterPanel.add(pTaskID, gbc_taskID);
-		
+
 		// << OrderedDate >>
 		oDateLabel = new JLabel("Order Date");
 		oDateLabel.setForeground(Color.GRAY);
@@ -190,7 +217,7 @@ public class MyFrame extends JFrame {
 		oDatePick.setTextEditable(true);
 		orderDatePan.setBorder(emptyBorder);
 		filterPanel.add(oDatePick, gbc_orderDate);
-		
+
 		// << Button "Filter anwenden" >>
 		filterBtn = new JButton("Tasks filtern");
 		filterBtn.setBorder(btnBorder);
@@ -207,7 +234,8 @@ public class MyFrame extends JFrame {
 		gbc_filterBtn.gridy = 6;
 		filterPanel.add(filterBtn, gbc_filterBtn);
 
-		// TaskPanel +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		// TaskPanel
+		// +++++++++++++++++++++++++++++++++++++++++++++++++++++
 		taskBorder = BorderFactory.createTitledBorder("Task Liste");
 		taskBorder.setTitleJustification(TitledBorder.CENTER);
 		taskBorder.setTitleColor(pan2736_C);
@@ -217,12 +245,11 @@ public class MyFrame extends JFrame {
 		taskPanel.setBorder(taskBorder);
 		taskPanel.setBackground(Color.LIGHT_GRAY);
 		GridBagLayout gbl_taskPan = new GridBagLayout();
-		gbl_taskPan.columnWidths = new int[]{10,260,10};
-		gbl_taskPan.rowHeights = new int[]{10,157,0,11};
+		gbl_taskPan.columnWidths = new int[] { 10, 412, 10 };
+		gbl_taskPan.rowHeights = new int[] { 10, 157, 0, 11 };
 		taskPanel.setLayout(gbl_taskPan);
 		contPanel.add(taskPanel);
-		
-				
+
 		// << Task-Liste >>
 		taskList = new JList<>(controller.getFilteredTasks());
 		taskList.setVisibleRowCount(7);
@@ -235,7 +262,7 @@ public class MyFrame extends JFrame {
 		gbc_scrollTask.gridx = 1;
 		gbc_scrollTask.gridy = 1;
 		taskPanel.add(scrollTask, gbc_scrollTask);
-		
+
 		// << Detail-Button >>
 		detailsBtn = new JButton("Task laden");
 		detailsBtn.setBorder(btnBorder);
@@ -251,7 +278,8 @@ public class MyFrame extends JFrame {
 		gbc_detailBtn.gridy = 2;
 		taskPanel.add(detailsBtn, gbc_detailBtn);
 
-		// Info-Panel +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		// Info-Panel
+		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		infoBorder = BorderFactory.createTitledBorder("Informationen");
 		infoBorder.setTitleJustification(TitledBorder.CENTER);
 		infoBorder.setTitleColor(pan2736_C);
@@ -261,11 +289,11 @@ public class MyFrame extends JFrame {
 		infoPanel.setBorder(infoBorder);
 		infoPanel.setBackground(Color.LIGHT_GRAY);
 		GridBagLayout gbl_infoPanel = new GridBagLayout();
-		gbl_infoPanel.columnWidths = new int[]{10,340,10};
-		gbl_infoPanel.rowHeights = new int[]{10,200};
+		gbl_infoPanel.columnWidths = new int[] { 10, 340, 10 };
+		gbl_infoPanel.rowHeights = new int[] { 10, 194 };
 		infoPanel.setLayout(gbl_infoPanel);
 		contPanel.add(infoPanel);
-		
+
 		infoLabel = new JLabel("weitere Infos");
 		infoLabel.setFont(txt);
 		GridBagConstraints gbc_infoLabel = new GridBagConstraints();
@@ -276,8 +304,7 @@ public class MyFrame extends JFrame {
 		gbc_infoLabel.gridx = 0;
 		gbc_infoLabel.gridy = 0;
 		infoPanel.add(infoLabel, gbc_infoLabel);
-		
-		
+
 		/**
 		 * Beendet die Anwendung. Sichtbarkeit auf true.
 		 */
