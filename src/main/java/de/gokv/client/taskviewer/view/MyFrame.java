@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
@@ -44,17 +45,16 @@ public class MyFrame extends JFrame {
 	private JLabel titleLabel;
 	// Filter Panel ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	private TitledBorder filtBorder;
-	private Border fieldBorder;
 	private JPanel filterPanel;
 	public static Field_Placeholder pKvnr;
 	public static Field_Placeholder pName;
 	public static Field_Placeholder pVname;
-	public static JLabel gDateLabel;
+	public JLabel gDateLabel;
 	public UtilDateModel model_geb = new UtilDateModel();
 	public JDatePanelImpl gebDatePan = new JDatePanelImpl(model_geb);
 	public JDatePickerImpl gDatePick = new JDatePickerImpl(gebDatePan, new DateLabelFormatter());
 	public static Field_Placeholder pTaskID;
-	public static JLabel oDateLabel;
+	public JLabel oDateLabel;
 	public UtilDateModel model_ord = new UtilDateModel();
 	public JDatePanelImpl orderDatePan = new JDatePanelImpl(model_ord);
 	public JDatePickerImpl oDatePick = new JDatePickerImpl(orderDatePan, new DateLabelFormatter());
@@ -68,14 +68,29 @@ public class MyFrame extends JFrame {
 	// Info Panel ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	private TitledBorder infoBorder;
 	private JPanel infoPanel;
-	private JLabel infoLabel;
-	// Info Panel 2 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	private TitledBorder info2Border;
-	private JPanel info2Panel;
-	private JLabel info2Label;
+	private JLabel state;
+	private JLabel taskType;
+	private JLabel orderDate;
+	private JLabel evCompl;
+	private JLabel evInProgs;
+	private JLabel evReceived;
+	private JLabel evResult;
+	private JTextField state_field;
+	private JTextField taskType_field;
+	private JTextField orderDate_field;
+	private JTextField evCompl_field;
+	private JTextField evInProgs_field;
+	private JTextField evReceived_field;
+	private JTextField evResult_field;
+	// Info Panel 2
+	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//	private TitledBorder info2Border;
+//	private JPanel info2Panel;
+//	private JLabel info2Label;
 	// Style ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	private Font title = new Font("Arial", Font.BOLD, 16);
 	private Font txt = new Font("Arial", Font.PLAIN, 15);
+	private Font label = new Font("Arial", Font.BOLD, 14);
 	private Color pan241_C = new Color(166, 31, 125);
 	private Color pan2736_C = new Color(35, 45, 141);
 	private Border btnBorder = BorderFactory.createEmptyBorder(8, 5, 8, 5);
@@ -89,7 +104,7 @@ public class MyFrame extends JFrame {
 	 */
 	public MyFrame() {
 		setTitle("GoKV-TaskViewer");
-		setSize(new Dimension(902, 578));
+		setSize(new Dimension(1402, 325));
 		setAlwaysOnTop(true);
 
 		controller = new MyFrameController(this);
@@ -103,25 +118,24 @@ public class MyFrame extends JFrame {
 		contPanel.setLayout(fl_contPanel);
 		setContentPane(contPanel);
 
-		// Titel-Panel
-		// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-		titleBorder = BorderFactory.createTitledBorder("bitGo_KV");
-		titleBorder.setTitleJustification(TitledBorder.LEADING);
-		titleBorder.setTitleColor(pan2736_C);
-		titleBorder.setTitleFont(title);
-		titleBorder.setBorder(emptyBorder);
-		titlePanel = new JPanel();
-		titlePanel.setBorder(titleBorder);
-		titlePanel.setBackground(Color.LIGHT_GRAY);
-		
-		titlePanel.setLayout(new FlowLayout());
-		contPanel.add(titlePanel);
-		// leeres Label
-		titleLabel = new JLabel("-- Taskviewer -------------------------------------------------------------------                                                                                                              ");
-		titleLabel.setFont(txt);;
-		titleLabel.setFont(txt);
-		
-		titlePanel.add(titleLabel);
+//		// Titel-Panel
+//		// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//		titleBorder = BorderFactory.createTitledBorder("bitGo_KV");
+//		titleBorder.setTitleJustification(TitledBorder.LEADING);
+//		titleBorder.setTitleColor(pan2736_C);
+//		titleBorder.setTitleFont(title);
+//		titleBorder.setBorder(emptyBorder);
+//		titlePanel = new JPanel();
+//		titlePanel.setBorder(titleBorder);
+//		titlePanel.setBackground(Color.LIGHT_GRAY);
+//
+//		titlePanel.setLayout(new FlowLayout());
+//		contPanel.add(titlePanel);
+//		// leeres Label
+//		titleLabel = new JLabel(
+//				"-- Taskviewer -------------------------------------------------------------------                                                                                                              ");
+//		titleLabel.setFont(txt);
+//		titlePanel.add(titleLabel);
 		// Input-Panel
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		filtBorder = BorderFactory.createTitledBorder("Filter Maske");
@@ -129,7 +143,6 @@ public class MyFrame extends JFrame {
 		filtBorder.setTitleColor(pan2736_C);
 		filtBorder.setTitleFont(title);
 		filtBorder.setBorder(emptyBorder);
-		fieldBorder = BorderFactory.createEmptyBorder();
 		filterPanel = new JPanel();
 		filterPanel.setBorder(filtBorder);
 		filterPanel.setBackground(Color.LIGHT_GRAY);
@@ -143,7 +156,7 @@ public class MyFrame extends JFrame {
 		pKvnr = new Field_Placeholder();
 		pKvnr.setPlaceholder("KvNr/Ordnungsbegriff",
 				gbl_filPanel.columnWidths[1] + gbl_filPanel.columnWidths[2] + gbl_filPanel.columnWidths[3]);
-		pKvnr.setBorder(fieldBorder);
+		pKvnr.setBorder(emptyBorder);
 		pKvnr.addKeyListener(new FilterTaskKeyHandler(this, controller.getModel()));
 		GridBagConstraints gbc_kvnr = new GridBagConstraints();
 		gbc_kvnr.anchor = GridBagConstraints.NORTH;
@@ -156,7 +169,7 @@ public class MyFrame extends JFrame {
 		// << Name >>
 		pName = new Field_Placeholder();
 		pName.setPlaceholder("Name", gbl_filPanel.columnWidths[2] - 5);
-		pName.setBorder(fieldBorder);
+		pName.setBorder(emptyBorder);
 		pName.addKeyListener(new FilterTaskKeyHandler(this, controller.getModel()));
 		GridBagConstraints gbc_name = new GridBagConstraints();
 		gbc_name.anchor = GridBagConstraints.NORTH;
@@ -169,7 +182,7 @@ public class MyFrame extends JFrame {
 		// << Vorname >>
 		pVname = new Field_Placeholder();
 		pVname.setPlaceholder("Vorname", gbl_filPanel.columnWidths[2]);
-		pVname.setBorder(fieldBorder);
+		pVname.setBorder(emptyBorder);
 		pVname.addKeyListener(new FilterTaskKeyHandler(this, controller.getModel()));
 		GridBagConstraints gbc_vName = new GridBagConstraints();
 		gbc_vName.anchor = GridBagConstraints.BASELINE_LEADING;
@@ -182,7 +195,7 @@ public class MyFrame extends JFrame {
 		// << Geburtsdatum >>
 		gDateLabel = new JLabel("Geburtstag");
 		gDateLabel.setForeground(Color.GRAY);
-		gDateLabel.setBorder(fieldBorder);
+		gDateLabel.setBorder(emptyBorder);
 		gDateLabel.setFont(txt);
 		GridBagConstraints gbc_gDateLabel = new GridBagConstraints();
 		gbc_gDateLabel.anchor = GridBagConstraints.BELOW_BASELINE_TRAILING;
@@ -201,7 +214,7 @@ public class MyFrame extends JFrame {
 		pTaskID = new Field_Placeholder();
 		pTaskID.setPlaceholder("TaskID",
 				gbl_filPanel.columnWidths[1] + gbl_filPanel.columnWidths[2] + gbl_filPanel.columnWidths[3]);
-		pTaskID.setBorder(fieldBorder);
+		pTaskID.setBorder(emptyBorder);
 		pTaskID.addKeyListener(new FilterTaskKeyHandler(this, controller.getModel()));
 		GridBagConstraints gbc_taskID = new GridBagConstraints();
 		gbc_taskID.anchor = GridBagConstraints.NORTH;
@@ -214,7 +227,7 @@ public class MyFrame extends JFrame {
 		// << OrderedDate >>
 		oDateLabel = new JLabel("Order Date");
 		oDateLabel.setForeground(Color.GRAY);
-		oDateLabel.setBorder(fieldBorder);
+		oDateLabel.setBorder(emptyBorder);
 		oDateLabel.setFont(txt);
 		GridBagConstraints gbc_oDateLabel = new GridBagConstraints();
 		gbc_oDateLabel.anchor = GridBagConstraints.BELOW_BASELINE_TRAILING;
@@ -302,48 +315,219 @@ public class MyFrame extends JFrame {
 		infoPanel.setBorder(infoBorder);
 		infoPanel.setBackground(Color.LIGHT_GRAY);
 		GridBagLayout gbl_infoPanel = new GridBagLayout();
-		gbl_infoPanel.columnWidths = new int[] { 10, 410, 10 };
-		gbl_infoPanel.rowHeights = new int[] { 10, 194 };
+		gbl_infoPanel.columnWidths = new int[] { 10, 150, 262, 10 };
+		gbl_infoPanel.rowHeights = new int[] { 22, 24, 24, 24, 24, 24, 24, 24, 22 };
 		infoPanel.setLayout(gbl_infoPanel);
 		contPanel.add(infoPanel);
 
-		infoLabel = new JLabel("...");
-		infoLabel.setFont(txt);
-		GridBagConstraints gbc_infoLabel = new GridBagConstraints();
-		gbc_infoLabel.anchor = GridBagConstraints.NORTH;
-		gbc_infoLabel.fill = GridBagConstraints.HORIZONTAL;
-		gbc_infoLabel.insets = new Insets(0, 0, 0, 0);
-		gbc_infoLabel.gridwidth = 1;
-		gbc_infoLabel.gridx = 0;
-		gbc_infoLabel.gridy = 0;
-		infoPanel.add(infoLabel, gbc_infoLabel);
+		// 1. State - Status
+		state = new JLabel("Status:");
+		state.setFont(label);
+		GridBagConstraints gbc_stateLabel = new GridBagConstraints();
+		gbc_stateLabel.anchor = GridBagConstraints.NORTH;
+		gbc_stateLabel.fill = GridBagConstraints.HORIZONTAL;
+		gbc_stateLabel.insets = new Insets(0, 0, 0, 0);
+		gbc_stateLabel.gridwidth = 1;
+		gbc_stateLabel.gridx = 1;
+		gbc_stateLabel.gridy = 1;
+		infoPanel.add(state, gbc_stateLabel);
 		
-		// Info-Panel
-		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-		info2Border = BorderFactory.createTitledBorder(" ");
-		info2Border.setTitleJustification(TitledBorder.CENTER);
-		info2Border.setTitleColor(pan2736_C);
-		info2Border.setTitleFont(title);
-		info2Border.setBorder(emptyBorder);
-		info2Panel = new JPanel();
-		info2Panel.setBorder(info2Border);
-		info2Panel.setBackground(Color.LIGHT_GRAY);
-		GridBagLayout gbl_info2Panel = new GridBagLayout();
-		gbl_info2Panel.columnWidths = new int[] { 10, 410, 10 };
-		gbl_info2Panel.rowHeights = new int[] { 10, 194 };
-		info2Panel.setLayout(gbl_info2Panel);
-		contPanel.add(info2Panel);
+		state_field = new JTextField();
+		state_field.setFont(txt);
+		state_field.setBorder(emptyBorder);
+		state_field.disable();
+//		state_field.setBackground(Color.LIGHT_GRAY);
+		GridBagConstraints gbc_state_field = new GridBagConstraints();
+		gbc_state_field.anchor = GridBagConstraints.NORTH;
+		gbc_state_field.fill = GridBagConstraints.HORIZONTAL;
+		gbc_state_field.insets = new Insets(0, 0, 0, 0);
+		gbc_state_field.gridwidth = 1;
+		gbc_state_field.gridx = 2;
+		gbc_state_field.gridy = 1;
+		infoPanel.add(state_field, gbc_state_field);
 		
-		info2Label = new JLabel("...");
-		info2Label.setFont(txt);
-		GridBagConstraints gbc_info2Label = new GridBagConstraints();
-		gbc_info2Label.anchor = GridBagConstraints.NORTH;
-		gbc_info2Label.fill = GridBagConstraints.HORIZONTAL;
-		gbc_info2Label.insets = new Insets(0, 0, 0, 0);
-		gbc_info2Label.gridwidth = 1;
-		gbc_info2Label.gridx = 0;
-		gbc_info2Label.gridy = 0;
-		info2Panel.add(info2Label, gbc_infoLabel);
+		// 2. Type - Task Type
+		taskType = new JLabel("Task Type:");
+		taskType.setFont(label);
+		GridBagConstraints gbc_TaskTypeLabel = new GridBagConstraints();
+		gbc_TaskTypeLabel.anchor = GridBagConstraints.NORTH;
+		gbc_TaskTypeLabel.fill = GridBagConstraints.HORIZONTAL;
+		gbc_TaskTypeLabel.insets = new Insets(0, 0, 0, 0);
+		gbc_TaskTypeLabel.gridwidth = 1;
+		gbc_TaskTypeLabel.gridx = 1;
+		gbc_TaskTypeLabel.gridy = 2;
+		infoPanel.add(taskType, gbc_TaskTypeLabel);
+		
+		taskType_field = new JTextField();
+		taskType_field.setFont(txt);
+		taskType_field.setBorder(emptyBorder);
+		taskType_field.disable();
+//		taskType_field.setBackground(Color.LIGHT_GRAY);
+		GridBagConstraints gbc_taskType_field = new GridBagConstraints();
+		gbc_taskType_field.anchor = GridBagConstraints.NORTH;
+		gbc_taskType_field.fill = GridBagConstraints.HORIZONTAL;
+		gbc_taskType_field.insets = new Insets(0, 0, 0, 0);
+		gbc_taskType_field.gridwidth = 1;
+		gbc_taskType_field.gridx = 2;
+		gbc_taskType_field.gridy = 2;
+		infoPanel.add(taskType_field, gbc_taskType_field);
+		
+		// 3. OrderedDate - Datum Order
+		orderDate = new JLabel("OrderDate:");
+		orderDate.setFont(label);
+		GridBagConstraints gbc_orderDateLabel = new GridBagConstraints();
+		gbc_orderDateLabel.anchor = GridBagConstraints.NORTH;
+		gbc_orderDateLabel.fill = GridBagConstraints.HORIZONTAL;
+		gbc_orderDateLabel.insets = new Insets(0, 0, 0, 0);
+		gbc_orderDateLabel.gridwidth = 1;
+		gbc_orderDateLabel.gridx = 1;
+		gbc_orderDateLabel.gridy = 3;
+		infoPanel.add(orderDate, gbc_orderDateLabel);
+		
+		orderDate_field = new JTextField();
+		orderDate_field.setFont(txt);
+		orderDate_field.setBorder(emptyBorder);
+		orderDate_field.disable();
+//		taskType_field.setBackground(Color.LIGHT_GRAY);
+		GridBagConstraints gbc_orderDate_field = new GridBagConstraints();
+		gbc_orderDate_field.anchor = GridBagConstraints.NORTH;
+		gbc_orderDate_field.fill = GridBagConstraints.HORIZONTAL;
+		gbc_orderDate_field.insets = new Insets(0, 0, 0, 0);
+		gbc_orderDate_field.gridwidth = 1;
+		gbc_orderDate_field.gridx = 2;
+		gbc_orderDate_field.gridy = 3;
+		infoPanel.add(orderDate_field, gbc_orderDate_field);
+		
+		// 4. EventInProgress - Zeitpunkt In Arbeit
+		evInProgs = new JLabel("Event in Progress:");
+		evInProgs.setFont(label);
+		GridBagConstraints gbc_evInProgsLabel = new GridBagConstraints();
+		gbc_evInProgsLabel.anchor = GridBagConstraints.NORTH;
+		gbc_evInProgsLabel.fill = GridBagConstraints.HORIZONTAL;
+		gbc_evInProgsLabel.insets = new Insets(0, 0, 0, 0);
+		gbc_evInProgsLabel.gridwidth = 1;
+		gbc_evInProgsLabel.gridx = 1;
+		gbc_evInProgsLabel.gridy = 4;
+		infoPanel.add(evInProgs, gbc_evInProgsLabel);
+		
+		evInProgs_field = new JTextField();
+		evInProgs_field.setFont(txt);
+		evInProgs_field.setBorder(emptyBorder);
+		evInProgs_field.disable();
+//		taskType_field.setBackground(Color.LIGHT_GRAY);
+		GridBagConstraints gbc_evInProgs_field = new GridBagConstraints();
+		gbc_evInProgs_field.anchor = GridBagConstraints.NORTH;
+		gbc_evInProgs_field.fill = GridBagConstraints.HORIZONTAL;
+		gbc_evInProgs_field.insets = new Insets(0, 0, 0, 0);
+		gbc_evInProgs_field.gridwidth = 1;
+		gbc_evInProgs_field.gridx = 2;
+		gbc_evInProgs_field.gridy = 4;
+		infoPanel.add(evInProgs_field, gbc_evInProgs_field);
+		
+		// 5. EventCompleted - Zeitpunkt Bereit zur Abholung
+		evCompl = new JLabel("Event Completed:");
+		evCompl.setFont(label);
+		GridBagConstraints gbc_evComplLabel = new GridBagConstraints();
+		gbc_evComplLabel.anchor = GridBagConstraints.NORTH;
+		gbc_evComplLabel.fill = GridBagConstraints.HORIZONTAL;
+		gbc_evComplLabel.insets = new Insets(0, 0, 0, 0);
+		gbc_evComplLabel.gridwidth = 1;
+		gbc_evComplLabel.gridx = 1;
+		gbc_evComplLabel.gridy = 5;
+		infoPanel.add(evCompl, gbc_evComplLabel);
+		
+		evCompl_field = new JTextField();
+		evCompl_field.setFont(txt);
+		evCompl_field.setBorder(emptyBorder);
+		evCompl_field.disable();
+//		taskType_field.setBackground(Color.LIGHT_GRAY);
+		GridBagConstraints gbc_evCompl_field = new GridBagConstraints();
+		gbc_evCompl_field.anchor = GridBagConstraints.NORTH;
+		gbc_evCompl_field.fill = GridBagConstraints.HORIZONTAL;
+		gbc_evCompl_field.insets = new Insets(0, 0, 0, 0);
+		gbc_evCompl_field.gridwidth = 1;
+		gbc_evCompl_field.gridx = 2;
+		gbc_evCompl_field.gridy = 5;
+		infoPanel.add(evCompl_field, gbc_evCompl_field);
+		
+		// 6. EventReceived - Zeitpunkt Abholung
+		evReceived = new JLabel("Event Received:");
+		evReceived.setFont(label);
+		GridBagConstraints gbc_evReceivedLabel = new GridBagConstraints();
+		gbc_evReceivedLabel.anchor = GridBagConstraints.NORTH;
+		gbc_evReceivedLabel.fill = GridBagConstraints.HORIZONTAL;
+		gbc_evReceivedLabel.insets = new Insets(0, 0, 0, 0);
+		gbc_evReceivedLabel.gridwidth = 1;
+		gbc_evReceivedLabel.gridx = 1;
+		gbc_evReceivedLabel.gridy = 6;
+		infoPanel.add(evReceived, gbc_evReceivedLabel);
+		
+		evReceived_field = new JTextField();
+		evReceived_field.setFont(txt);
+		evReceived_field.setBorder(emptyBorder);
+		evReceived_field.disable();
+//		taskType_field.setBackground(Color.LIGHT_GRAY);
+		GridBagConstraints gbc_evReceived_field = new GridBagConstraints();
+		gbc_evReceived_field.anchor = GridBagConstraints.NORTH;
+		gbc_evReceived_field.fill = GridBagConstraints.HORIZONTAL;
+		gbc_evReceived_field.insets = new Insets(0, 0, 0, 0);
+		gbc_evReceived_field.gridwidth = 1;
+		gbc_evReceived_field.gridx = 2;
+		gbc_evReceived_field.gridy = 6;
+		infoPanel.add(evReceived_field, gbc_evReceived_field);
+		
+		// 7. EventResult - Zeitpunkt Prüfung	
+		evResult = new JLabel("Event Result:");
+		evResult.setFont(label);
+		GridBagConstraints gbc_evResultLabel = new GridBagConstraints();
+		gbc_evResultLabel.anchor = GridBagConstraints.NORTH;
+		gbc_evResultLabel.fill = GridBagConstraints.HORIZONTAL;
+		gbc_evResultLabel.insets = new Insets(0, 0, 0, 0);
+		gbc_evResultLabel.gridwidth = 1;
+		gbc_evResultLabel.gridx = 1;
+		gbc_evResultLabel.gridy = 7;
+		infoPanel.add(evResult, gbc_evResultLabel);
+		
+		evResult_field = new JTextField();
+		evResult_field.setFont(txt);
+		evResult_field.setBorder(emptyBorder);
+		evResult_field.disable();
+//		taskType_field.setBackground(Color.LIGHT_GRAY);
+		GridBagConstraints gbc_evResult_field = new GridBagConstraints();
+		gbc_evResult_field.anchor = GridBagConstraints.NORTH;
+		gbc_evResult_field.fill = GridBagConstraints.HORIZONTAL;
+		gbc_evResult_field.insets = new Insets(0, 0, 0, 0);
+		gbc_evResult_field.gridwidth = 1;
+		gbc_evResult_field.gridx = 2;
+		gbc_evResult_field.gridy = 7;
+		infoPanel.add(evResult_field, gbc_evResult_field);
+
+//		// Info-Panel 2
+//		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//		info2Border = BorderFactory.createTitledBorder(" ");
+//		info2Border.setTitleJustification(TitledBorder.CENTER);
+//		info2Border.setTitleColor(pan2736_C);
+//		info2Border.setTitleFont(title);
+//		info2Border.setBorder(emptyBorder);
+//		info2Panel = new JPanel();
+//		info2Panel.setBorder(info2Border);
+//		info2Panel.setBackground(Color.LIGHT_GRAY);
+//		GridBagLayout gbl_info2Panel = new GridBagLayout();
+//		gbl_info2Panel.columnWidths = new int[] { 10, 410, 10 };
+//		gbl_info2Panel.rowHeights = new int[] { 10, 220 };
+//		info2Panel.setLayout(gbl_info2Panel);
+//		contPanel.add(info2Panel);
+//
+//		info2Label = new JLabel("...");
+//		info2Label.setFont(txt);
+//		GridBagConstraints gbc_info2Label = new GridBagConstraints();
+//		gbc_info2Label.anchor = GridBagConstraints.NORTH;
+//		gbc_info2Label.fill = GridBagConstraints.HORIZONTAL;
+//		gbc_info2Label.insets = new Insets(0, 0, 0, 0);
+//		gbc_info2Label.gridwidth = 1;
+//		gbc_info2Label.gridx = 0;
+//		gbc_info2Label.gridy = 0;
+//		info2Panel.add(info2Label, gbc_infoLabel);
 
 		/**
 		 * Beendet die Anwendung. Sichtbarkeit auf true.
@@ -351,7 +535,7 @@ public class MyFrame extends JFrame {
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setVisible(true);
 		setLocationRelativeTo(null);
-		setResizable(false);
+		setResizable(true);
 	}
 
 }

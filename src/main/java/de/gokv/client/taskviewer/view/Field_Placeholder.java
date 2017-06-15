@@ -16,6 +16,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * 
+ * @author Christoph Kiank
+ *
+ */
 public class Field_Placeholder extends JTextField {
 
 	private Color pan214_C_dis = new Color(211, 143, 190);
@@ -42,7 +47,7 @@ public class Field_Placeholder extends JTextField {
 		if (placeholder.length() == 0 || getText().length() > 0) {
 			return;
 		}
-		setSize(lenght, 24);
+		setSize(lenght, 23);
 		setFont(txt);
 		g = (Graphics2D) pG;
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -52,7 +57,6 @@ public class Field_Placeholder extends JTextField {
 	}
 
 	public void setPlaceholder(String s) {
-		
 		placeholder = s;
 	}
 	public void setPlaceholder(String s, int lenght) {
