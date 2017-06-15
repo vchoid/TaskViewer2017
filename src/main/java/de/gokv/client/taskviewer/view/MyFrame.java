@@ -6,10 +6,12 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.KeyListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -101,11 +103,11 @@ public class MyFrame extends JFrame {
 	 * Konstruktor
 	 */
 	public MyFrame() {
-		setTitle("GoKV-TaskViewer");
+		setTitle("bitGo_KV-TaskViewer");
 		// Quer
-//		setSize(new Dimension(915, 630));
+		setSize(new Dimension(915, 630));
 		// Hoch
-		setSize(new Dimension(470, 870));
+//		setSize(new Dimension(470, 870));
 		setAlwaysOnTop(true);
 
 		controller = new MyFrameController(this);
@@ -209,6 +211,7 @@ public class MyFrame extends JFrame {
 		gbc_gebDate.gridx = 2;
 		gbc_gebDate.gridy = 3;
 		gDatePick.setTextEditable(true);
+		gebDatePan.setBorder(emptyBorder);
 		filterPanel.add(gDatePick, gbc_gebDate);
 
 		// << TaskID >>
@@ -240,6 +243,7 @@ public class MyFrame extends JFrame {
 		gbc_orderDate.gridx = 2;
 		gbc_orderDate.gridy = 5;
 		oDatePick.setTextEditable(true);
+		orderDatePan.setBorder(emptyBorder);
 		filterPanel.add(oDatePick, gbc_orderDate);
 		
 
@@ -336,6 +340,7 @@ public class MyFrame extends JFrame {
 
 		taskID_field = new JLabel();
 		taskID_field.setFont(txt);
+		taskID_field.setForeground(pan2736_C);
 		taskID_field.setBorder(emptyBorder);
 		GridBagConstraints gbc_taskID_field = new GridBagConstraints();
 		gbc_taskID_field.anchor = GridBagConstraints.NORTH;
@@ -360,7 +365,7 @@ public class MyFrame extends JFrame {
 		
 		state_field = new JLabel();
 		state_field.setFont(txt);
-		state_field.setForeground(Color.BLACK);
+		state_field.setForeground(pan2736_C);
 		state_field.setBorder(emptyBorder);
 		GridBagConstraints gbc_state_field = new GridBagConstraints();
 		gbc_state_field.anchor = GridBagConstraints.NORTH;
@@ -385,6 +390,7 @@ public class MyFrame extends JFrame {
 		
 		taskType_field = new JLabel();
 		taskType_field.setFont(txt);
+		taskType_field.setForeground(pan2736_C);
 		taskType_field.setBorder(emptyBorder);
 		GridBagConstraints gbc_taskType_field = new GridBagConstraints();
 		gbc_taskType_field.anchor = GridBagConstraints.NORTH;
@@ -409,6 +415,7 @@ public class MyFrame extends JFrame {
 		
 		orderDate_field = new JLabel();
 		orderDate_field.setFont(txt);
+		orderDate_field.setForeground(pan2736_C);
 		orderDate_field.setBorder(emptyBorder);
 		GridBagConstraints gbc_orderDate_field = new GridBagConstraints();
 		gbc_orderDate_field.anchor = GridBagConstraints.NORTH;
@@ -433,6 +440,7 @@ public class MyFrame extends JFrame {
 		
 		evInProgs_field = new JLabel();
 		evInProgs_field.setFont(txt);
+		evInProgs_field.setForeground(pan2736_C);
 		evInProgs_field.setBorder(emptyBorder);
 		GridBagConstraints gbc_evInProgs_field = new GridBagConstraints();
 		gbc_evInProgs_field.anchor = GridBagConstraints.NORTH;
@@ -457,6 +465,7 @@ public class MyFrame extends JFrame {
 		
 		evCompl_field = new JLabel();
 		evCompl_field.setFont(txt);
+		evCompl_field.setForeground(pan2736_C);
 		evCompl_field.setBorder(emptyBorder);
 		GridBagConstraints gbc_evCompl_field = new GridBagConstraints();
 		gbc_evCompl_field.anchor = GridBagConstraints.NORTH;
@@ -481,6 +490,7 @@ public class MyFrame extends JFrame {
 		
 		evReceived_field = new JLabel();
 		evReceived_field.setFont(txt);
+		evReceived_field.setForeground(pan2736_C);
 		evReceived_field.setBorder(emptyBorder);
 		GridBagConstraints gbc_evReceived_field = new GridBagConstraints();
 		gbc_evReceived_field.anchor = GridBagConstraints.NORTH;
@@ -505,6 +515,7 @@ public class MyFrame extends JFrame {
 		
 		evResult_field = new JLabel();
 		evResult_field.setFont(txt);
+		evResult_field.setForeground(pan2736_C);
 		evResult_field.setBorder(emptyBorder);
 		GridBagConstraints gbc_evResult_field = new GridBagConstraints();
 		gbc_evResult_field.anchor = GridBagConstraints.NORTH;
@@ -520,7 +531,7 @@ public class MyFrame extends JFrame {
 		 */
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setVisible(true);
-//		setLocationRelativeTo(null);
+		setLocationRelativeTo(null);
 		setResizable(true);
 	}
 

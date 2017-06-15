@@ -19,6 +19,12 @@ import de.gokv.client.taskviewer.module.http.ssl.ServerException;
 import de.gokv.client.taskviewer.utils.DateUtil;
 import de.gokv.client.taskviewer.view.MyFrame;
 
+/**
+ * 
+ * 
+ * @author Christoph Kiank
+ *
+ */
 public class LoadTaskDetailsController implements ActionListener, ListSelectionListener {
 
 	private HTTPSClient client;
@@ -26,7 +32,7 @@ public class LoadTaskDetailsController implements ActionListener, ListSelectionL
 	MyModel model;
 	LocalDate lDate;
 	String strDate;
-	
+
 	public static String taskID;
 
 	public LoadTaskDetailsController(MyFrame frame, MyModel model) {
@@ -35,25 +41,30 @@ public class LoadTaskDetailsController implements ActionListener, ListSelectionL
 		this.model = model;
 	}
 
+	/**
+	 * Stellt eine Verbindung zum Client her und lädt mittels der ausgwählten
+	 * taskID weitere Informationen und setzt diese ins Formular.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		try {
 			client = new HTTPSClient(new URL("http://localhost:9080/gokv-tenant/api"));
 			client.testConnection(taskID);
-			
+
 			lDate = LocalDate.parse(HTTPSClient.task.get("orderedDate").toString(), DateUtil.dTf_request);
-			strDate = lDate.getDayOfMonth()+ "." + lDate.getMonthValue() + "." + lDate.getYear();
-			
+			strDate = lDate.getDayOfMonth() + "." + lDate.getMonthValue() + "." + lDate.getYear();
+			MyFrame.orderDate_field.setText(strDate);
+
 			MyFrame.state_field.setText(HTTPSClient.task.get("state").toString());
 			MyFrame.taskType_field.setText(HTTPSClient.task.get("type").toString());
-			MyFrame.orderDate_field.setText(strDate);
 			MyFrame.evInProgs_field.setText(HTTPSClient.task.get("eventInProgress").toString());
 			MyFrame.evCompl_field.setText(HTTPSClient.task.get("eventCompleted").toString());
 			MyFrame.evReceived_field.setText(HTTPSClient.task.get("eventReceived").toString());
 			MyFrame.evResult_field.setText(HTTPSClient.task.get("eventResult").toString());
-			
+
 		} catch (ServerException | GeneralSecurityException | IOException | ClientCertificateException
 				| URISyntaxException ex) {
+			System.out.println(taskID + " nicht gefunden");
 			ex.printStackTrace();
 		}
 

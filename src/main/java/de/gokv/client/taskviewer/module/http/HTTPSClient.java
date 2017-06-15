@@ -148,8 +148,6 @@ public class HTTPSClient {
 			JSONObject taskDetails = getTaskDetails(taskID);
 			JSONArray results = taskDetails.getJSONArray("results");
 			task = results.getJSONObject(0);
-			// TODO Objekte anzeigen lassen +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//			System.out.println(task.get("type"));
 		} catch (ServerException e) {
 			e.printStackTrace();
 		}
