@@ -159,6 +159,7 @@ public class MyFrame extends JFrame {
 				gbl_filPanel.columnWidths[1] + gbl_filPanel.columnWidths[2] + gbl_filPanel.columnWidths[3]);
 		pKvnr.setBorder(emptyBorder);
 		pKvnr.addKeyListener(new FilterTaskKeyHandler(this, controller.getModel()));
+		pKvnr.addActionListener(new LoadTaskDetailsController(this, controller.getModel()));
 		GridBagConstraints gbc_kvnr = new GridBagConstraints();
 		gbc_kvnr.anchor = GridBagConstraints.NORTH;
 		gbc_kvnr.fill = GridBagConstraints.HORIZONTAL;

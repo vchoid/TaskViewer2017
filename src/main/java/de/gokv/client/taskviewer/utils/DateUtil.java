@@ -1,5 +1,6 @@
 package de.gokv.client.taskviewer.utils;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -7,8 +8,10 @@ import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 import java.util.Date;
 import java.util.regex.Pattern;
+import java.util.regex.*;
 
 import de.gokv.client.taskviewer.exceptions.InvalidDateException;
+import net.sf.json.JSON;
 
 /**
  * Beinhaltet eine Methode zum Überprüfen des richtigen Formates (DD.MM.YYYY)
@@ -39,6 +42,8 @@ public class DateUtil {
 	private final static DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("dd.MM.uuuu")
 			.withResolverStyle(ResolverStyle.STRICT);
 	private final static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
+	public final static DateTimeFormatter dTf_request = DateTimeFormatter.ofPattern("uuuu'-'MM'-'dd'T'HH':'mm':'ss'.'SSS'Z'");
+
 
 	/**
 	 * Legt ein {@link Pattern} im Format "ZZ.ZZ.ZZZZ" (Z = Ziffer) an.
@@ -61,8 +66,10 @@ public class DateUtil {
 	public static boolean isDateValid(String date) {
 		// String überprüfen, ob 
 		Pattern p = Pattern.compile("\\d{2}\\.\\d{2}\\.\\d{4}");
-		java.util.regex.Matcher m = p.matcher(date);
-		if (!m.matches()) {
+		Pattern p2 = Pattern.compile("\\d{4}\\-\\d{2}\\-\\d{2}");
+		Matcher m = p.matcher(date);
+		Matcher m2 = p.matcher(date);
+		if (!m.matches() || !m2.matches()) {
 			return false;
 		}
 		try {
@@ -104,6 +111,11 @@ public class DateUtil {
 	public static LocalDate parseDate(Date date) throws InvalidDateException{
 		return parseDate(simpleDateFormat.format(date));
 	}
+	
+	
+//	public static LocalDate parseDate(Object date) throws InvalidDateException{
+//		return parseDate(sDf_request.format(date));
+//	}
 	
 	/**
 	 * Versucht mit der {@link #parseDate(String) parseDate()}-Methode ein Strind

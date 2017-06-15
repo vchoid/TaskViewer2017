@@ -12,7 +12,7 @@ public class RunHttpClient {
 	public static void main(String[] args) {
 		try {
 			HTTPSClient httpsClient = new HTTPSClient(new URL("http://localhost:9080/gokv-tenant/api"));
-			httpsClient.testConnection();
+			httpsClient.testConnection("");
 		} catch (ServerException | GeneralSecurityException | IOException | ClientCertificateException
 				| URISyntaxException e) {
 			e.printStackTrace();
