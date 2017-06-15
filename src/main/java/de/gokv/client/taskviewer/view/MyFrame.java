@@ -82,11 +82,7 @@ public class MyFrame extends JFrame {
 	private JTextField evInProgs_field;
 	private JTextField evReceived_field;
 	private JTextField evResult_field;
-	// Info Panel 2
-	// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-//	private TitledBorder info2Border;
-//	private JPanel info2Panel;
-//	private JLabel info2Label;
+	
 	// Style ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	private Font title = new Font("Arial", Font.BOLD, 16);
 	private Font txt = new Font("Arial", Font.PLAIN, 15);
@@ -137,7 +133,7 @@ public class MyFrame extends JFrame {
 		titleLabel.setFont(txt);
 		titlePanel.add(titleLabel);
 //		 Input-Panel
-		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		filtBorder = BorderFactory.createTitledBorder("Filter Maske");
 		filtBorder.setTitleJustification(TitledBorder.CENTER);
 		filtBorder.setTitleColor(pan2736_C);
@@ -207,7 +203,6 @@ public class MyFrame extends JFrame {
 		gbc_gebDate.gridx = 2;
 		gbc_gebDate.gridy = 3;
 		gDatePick.setTextEditable(true);
-		gebDatePan.setBorder(emptyBorder);
 		filterPanel.add(gDatePick, gbc_gebDate);
 
 		// << TaskID >>
@@ -239,8 +234,8 @@ public class MyFrame extends JFrame {
 		gbc_orderDate.gridx = 2;
 		gbc_orderDate.gridy = 5;
 		oDatePick.setTextEditable(true);
-		orderDatePan.setBorder(emptyBorder);
 		filterPanel.add(oDatePick, gbc_orderDate);
+		
 
 		// << Button "Filter anwenden" >>
 		filterBtn = new JButton("Tasks filtern");
@@ -259,7 +254,7 @@ public class MyFrame extends JFrame {
 		filterPanel.add(filterBtn, gbc_filterBtn);
 
 		// TaskPanel
-		// +++++++++++++++++++++++++++++++++++++++++++++++++++++
+		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		taskBorder = BorderFactory.createTitledBorder("Task Liste");
 		taskBorder.setTitleJustification(TitledBorder.CENTER);
 		taskBorder.setTitleColor(pan2736_C);
@@ -305,7 +300,7 @@ public class MyFrame extends JFrame {
 		taskPanel.add(detailsBtn, gbc_detailBtn);
 
 		// Info-Panel
-		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		infoBorder = BorderFactory.createTitledBorder("Informationen");
 		infoBorder.setTitleJustification(TitledBorder.CENTER);
 		infoBorder.setTitleColor(pan2736_C);
@@ -316,7 +311,7 @@ public class MyFrame extends JFrame {
 		infoPanel.setBackground(Color.LIGHT_GRAY);
 		GridBagLayout gbl_infoPanel = new GridBagLayout();
 		gbl_infoPanel.columnWidths = new int[] { 10, 150, 262, 10 };
-		gbl_infoPanel.rowHeights = new int[] { 22, 24, 24, 24, 24, 24, 24, 24, 22 };
+		gbl_infoPanel.rowHeights = new int[] { 21, 24, 24, 24, 24, 24, 24, 24, 21 };
 		infoPanel.setLayout(gbl_infoPanel);
 		contPanel.add(infoPanel);
 
@@ -502,32 +497,7 @@ public class MyFrame extends JFrame {
 		gbc_evResult_field.gridy = 7;
 		infoPanel.add(evResult_field, gbc_evResult_field);
 
-//		// Info-Panel 2
-//		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//		info2Border = BorderFactory.createTitledBorder(" ");
-//		info2Border.setTitleJustification(TitledBorder.CENTER);
-//		info2Border.setTitleColor(pan2736_C);
-//		info2Border.setTitleFont(title);
-//		info2Border.setBorder(emptyBorder);
-//		info2Panel = new JPanel();
-//		info2Panel.setBorder(info2Border);
-//		info2Panel.setBackground(Color.LIGHT_GRAY);
-//		GridBagLayout gbl_info2Panel = new GridBagLayout();
-//		gbl_info2Panel.columnWidths = new int[] { 10, 410, 10 };
-//		gbl_info2Panel.rowHeights = new int[] { 10, 220 };
-//		info2Panel.setLayout(gbl_info2Panel);
-//		contPanel.add(info2Panel);
-//
-//		info2Label = new JLabel("...");
-//		info2Label.setFont(txt);
-//		GridBagConstraints gbc_info2Label = new GridBagConstraints();
-//		gbc_info2Label.anchor = GridBagConstraints.NORTH;
-//		gbc_info2Label.fill = GridBagConstraints.HORIZONTAL;
-//		gbc_info2Label.insets = new Insets(0, 0, 0, 0);
-//		gbc_info2Label.gridwidth = 1;
-//		gbc_info2Label.gridx = 0;
-//		gbc_info2Label.gridy = 0;
-//		info2Panel.add(info2Label, gbc_infoLabel);
+		
 
 		/**
 		 * Beendet die Anwendung. Sichtbarkeit auf true.

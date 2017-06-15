@@ -32,11 +32,11 @@ public class FilterTaskKeyHandler implements KeyListener {
 				t.setKvnr(MyFrame.pKvnr.getText());
 				t.setTaskId(MyFrame.pTaskID.getText());
 
-				if (frame.model_geb.getValue() != null) {
+				if (frame.model_geb.isSelected()) {
 					t.setGebDat(DateUtil.parseDate(frame.model_geb.getValue()));
 				}
 
-				if (frame.model_ord.getValue() != null) {
+				if (frame.model_ord.isSelected()) {
 					t.setOrderedDate(DateUtil.parseDate(frame.model_ord.getValue()));
 				}
 
