@@ -52,6 +52,7 @@ public class HTTPSClient {
 	private ExecutorService downloadPool;
 	private CloseableHttpClient client;
 	private X509Certificate[] trustedCertficates;
+	public static JSONObject task;
 
 	@SuppressWarnings("deprecation")
 	public HTTPSClient(URL apiURL)
@@ -142,13 +143,13 @@ public class HTTPSClient {
 		trustedCertficates = ClientCertificate.readCertificateFromPKCS7(filename);
 	}
 
-	public void testConnection() {
+	public void testConnection(String taskID) {
 		try {
-			JSONObject taskDetails = getTaskDetails("2FCA7A80510311E78ED5DDE0C5917902");
+			JSONObject taskDetails = getTaskDetails(taskID);
 			JSONArray results = taskDetails.getJSONArray("results");
-			JSONObject task = results.getJSONObject(0);
+			task = results.getJSONObject(0);
 			// TODO Objekte anzeigen lassen +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-			System.out.println(task.get("tenantName"));
+//			System.out.println(task.get("type"));
 		} catch (ServerException e) {
 			e.printStackTrace();
 		}

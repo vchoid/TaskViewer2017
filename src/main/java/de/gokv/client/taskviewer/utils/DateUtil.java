@@ -36,9 +36,9 @@ import de.gokv.client.taskviewer.exceptions.InvalidDateException;
 public class DateUtil {
 
 	// ResolveStyle.STRICT ==> verhindert: z.B. 29.02.2017 => 01.03.2017
-	private final static DateTimeFormatter df2 = DateTimeFormatter.ofPattern("dd.MM.uuuu")
+	private final static DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("dd.MM.uuuu")
 			.withResolverStyle(ResolverStyle.STRICT);
-	private final static SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+	private final static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
 
 	/**
 	 * Legt ein {@link Pattern} im Format "ZZ.ZZ.ZZZZ" (Z = Ziffer) an.
@@ -66,7 +66,7 @@ public class DateUtil {
 			return false;
 		}
 		try {
-			df2.parse(date);
+			dateTimeFormat.parse(date);
 			return true;
 		} catch (DateTimeParseException e) {
 			return false;
@@ -88,14 +88,21 @@ public class DateUtil {
 	public static LocalDate parseDate(String date) throws InvalidDateException {
 		if (isDateValid(date)) {
 			LocalDate d2;
-			d2 = LocalDate.parse(date, df2);
+			d2 = LocalDate.parse(date, dateTimeFormat);
 			return d2;
 		}
 		throw new InvalidDateException("Fehler beim Konvertieren vom String \'%s\' in ein LocalDate-Format", date);
 	}
-
+	
+	/**
+	 * Konvertiert ein {@link Date}-Objekt in ein {@link LocalDate}.
+	 * 
+	 * @param date
+	 * @return
+	 * @throws InvalidDateException
+	 */
 	public static LocalDate parseDate(Date date) throws InvalidDateException{
-		return parseDate(sdf.format(date));
+		return parseDate(simpleDateFormat.format(date));
 	}
 	
 	/**

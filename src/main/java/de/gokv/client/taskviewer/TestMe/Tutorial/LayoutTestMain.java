@@ -11,7 +11,7 @@ public class LayoutTestMain {
 		
 		jf = new LayoutTest();
 		jf.setVisible(true);
-		jf.setSize(500, 300);
+		jf.setSize(900, 500);
 		jf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		jf.setLocationRelativeTo(null); // -> startet in der Mitte
 		jf.setAlwaysOnTop(true);
