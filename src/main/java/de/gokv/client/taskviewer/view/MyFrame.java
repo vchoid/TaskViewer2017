@@ -104,7 +104,7 @@ public class MyFrame extends JFrame {
 	 */
 	public MyFrame() {
 		setTitle("GoKV-TaskViewer");
-		setSize(new Dimension(1402, 325));
+		setSize(new Dimension(915, 590));
 		setAlwaysOnTop(true);
 
 		controller = new MyFrameController(this);
@@ -118,25 +118,25 @@ public class MyFrame extends JFrame {
 		contPanel.setLayout(fl_contPanel);
 		setContentPane(contPanel);
 
-//		// Titel-Panel
-//		// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//		titleBorder = BorderFactory.createTitledBorder("bitGo_KV");
-//		titleBorder.setTitleJustification(TitledBorder.LEADING);
-//		titleBorder.setTitleColor(pan2736_C);
-//		titleBorder.setTitleFont(title);
-//		titleBorder.setBorder(emptyBorder);
-//		titlePanel = new JPanel();
-//		titlePanel.setBorder(titleBorder);
-//		titlePanel.setBackground(Color.LIGHT_GRAY);
-//
-//		titlePanel.setLayout(new FlowLayout());
-//		contPanel.add(titlePanel);
-//		// leeres Label
-//		titleLabel = new JLabel(
-//				"-- Taskviewer -------------------------------------------------------------------                                                                                                              ");
-//		titleLabel.setFont(txt);
-//		titlePanel.add(titleLabel);
-		// Input-Panel
+		// Titel-Panel
+		// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		titleBorder = BorderFactory.createTitledBorder("bitGo_KV");
+		titleBorder.setTitleJustification(TitledBorder.LEADING);
+		titleBorder.setTitleColor(pan2736_C);
+		titleBorder.setTitleFont(title);
+		titleBorder.setBorder(emptyBorder);
+		titlePanel = new JPanel();
+		titlePanel.setBorder(titleBorder);
+		titlePanel.setBackground(Color.LIGHT_GRAY);
+
+		titlePanel.setLayout(new FlowLayout());
+		contPanel.add(titlePanel);
+		// leeres Label
+		titleLabel = new JLabel(
+				"-- Taskviewer -------------------------------------------------------------------                                                                                                              ");
+		titleLabel.setFont(txt);
+		titlePanel.add(titleLabel);
+//		 Input-Panel
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		filtBorder = BorderFactory.createTitledBorder("Filter Maske");
 		filtBorder.setTitleJustification(TitledBorder.CENTER);
