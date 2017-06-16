@@ -29,7 +29,7 @@ public class InvalidCSVRecordException extends Throwable {
 
 	private static final long serialVersionUID = -887930394449075849L;
 
-	private String message;
+	private static String message;
 
 	/**
 	 * Gibt den ein Fehler, an der genauen Stelle (Zeile und Spalte) der CSV zurück.
