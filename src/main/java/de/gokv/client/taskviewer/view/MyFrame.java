@@ -19,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
@@ -67,7 +68,8 @@ public class MyFrame extends JFrame {
 	public static JPanel taskPanel;
 	public static JButton taskLoadBtn;
 	public static JButton reloadBtn;
-	public static int countTasks;
+	public static JTextField anzTasks;
+	public static MyModel model;
 	private String iconRelPath;
 	private Image icon;
 	private ImageIcon reloadIcon;
@@ -121,6 +123,7 @@ public class MyFrame extends JFrame {
 		setAlwaysOnTop(true);
 
 		controller = new MyFrameController(this);
+		model = new MyModel();
 
 		// Content-Panel
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -274,8 +277,7 @@ public class MyFrame extends JFrame {
 
 		// TaskPanel
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-		countTasks = new MyModel().getCountTasks();
-		taskBorder = BorderFactory.createTitledBorder("Tasks (" + countTasks + ")");
+		taskBorder = BorderFactory.createTitledBorder("Tasks");
 		taskBorder.setTitleJustification(TitledBorder.TOP);
 		taskBorder.setTitleColor(pan2736_C);
 		taskBorder.setTitleFont(title);
@@ -285,13 +287,26 @@ public class MyFrame extends JFrame {
 		taskPanel.setBackground(Color.LIGHT_GRAY);
 		GridBagLayout gbl_taskPan = new GridBagLayout();
 		gbl_taskPan.columnWidths = new int[] { 10, 206, 206, 10 };
-		gbl_taskPan.rowHeights = new int[] { 37, 157, 0, 23 };
+		gbl_taskPan.rowHeights = new int[] { 43 , 0, 157, 40, 23};
 		taskPanel.setLayout(gbl_taskPan);
 		contPanel.add(taskPanel);
+		
+		anzTasks = new JTextField(" Einträge");
+		anzTasks.setBorder(emptyBorder);
+		anzTasks.setBackground(Color.LIGHT_GRAY);
+		anzTasks.addActionListener(new LoadTaskDetailsController(this, controller.getModel()));
+		taskPanel.add(anzTasks);
+		GridBagConstraints gbc_anzTask = new GridBagConstraints();
+		gbc_anzTask.anchor = GridBagConstraints.NORTH;
+		gbc_anzTask.fill = GridBagConstraints.HORIZONTAL;
+		gbc_anzTask.gridwidth = 1;
+		gbc_anzTask.gridx = 1;
+		gbc_anzTask.gridy = 0;
+		taskPanel.add(anzTasks, gbc_anzTask);
 
 		// << Task-Liste >>
 		taskList = new JList<>(controller.getFilteredTasks());
-		taskList.setVisibleRowCount(8);
+		taskList.setVisibleRowCount(9);
 		taskList.setFont(txt);
 		taskList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		taskList.addListSelectionListener(new LoadTaskDetailsController(this, controller.getModel()));
@@ -301,7 +316,7 @@ public class MyFrame extends JFrame {
 		gbc_scrollTask.fill = GridBagConstraints.HORIZONTAL;
 		gbc_scrollTask.gridwidth = 2;
 		gbc_scrollTask.gridx = 1;
-		gbc_scrollTask.gridy = 1;
+		gbc_scrollTask.gridy = 2;
 		taskPanel.add(scrollTask, gbc_scrollTask);
 				
 		// << Tasks reload -Button >>
@@ -320,7 +335,7 @@ public class MyFrame extends JFrame {
 		gbc_reloadTaskBtn.fill = GridBagConstraints.HORIZONTAL;
 		gbc_reloadTaskBtn.insets = new Insets(20, 10, 0, 0);
 		gbc_reloadTaskBtn.gridx = 2;
-		gbc_reloadTaskBtn.gridy = 2;
+		gbc_reloadTaskBtn.gridy = 3;
 		taskPanel.add(reloadBtn, gbc_reloadTaskBtn);
 		
 		// << Tasks laden -Button >>
@@ -335,7 +350,7 @@ public class MyFrame extends JFrame {
 		gbc_detailBtn.fill = GridBagConstraints.HORIZONTAL;
 		gbc_detailBtn.insets = new Insets(20, 0, 0, 5);
 		gbc_detailBtn.gridx = 1;
-		gbc_detailBtn.gridy = 2;
+		gbc_detailBtn.gridy = 3;
 		taskPanel.add(taskLoadBtn, gbc_detailBtn);
 		
 

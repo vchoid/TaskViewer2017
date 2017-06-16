@@ -7,9 +7,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.security.GeneralSecurityException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
-import javax.swing.JList;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -31,6 +29,7 @@ public class LoadTaskDetailsController implements ActionListener, ListSelectionL
 	private HTTPSClient client;
 	private MyFrame frame;
 	private MyModel model;
+	private MyModel modelNew;
 	private LocalDate lDate;
 	private String strDate;
 
@@ -71,9 +70,11 @@ public class LoadTaskDetailsController implements ActionListener, ListSelectionL
 				ex.printStackTrace();
 			}
 		} else if(e.getSource() == MyFrame.reloadBtn){
-			model.readFiles();
-			model.setCountTasks(model.getCountTasks());;
-			frame.taskList.setListData(model.getFilteredTasks());
+			modelNew = new MyModel();
+			modelNew.readFiles();
+			model.setCountTasks(modelNew.getCountTasks());
+			frame.anzTasks.setText("" + model.getCountTasks()+ " Einträge");
+			frame.taskList.setListData(modelNew.getFilteredTasks());
 			
 			
 			
@@ -108,5 +109,7 @@ public class LoadTaskDetailsController implements ActionListener, ListSelectionL
 			}
 		}
 	}
+
+	
 
 }

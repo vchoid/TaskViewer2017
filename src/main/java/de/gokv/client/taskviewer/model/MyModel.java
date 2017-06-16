@@ -21,9 +21,9 @@ public class MyModel {
 	public static List<Task> tasks;
 	private List<String> filteredTasks;
 	private Task filteredCriteria;
-	public static int countTasks;
+	public int countTasks;
 
-	public static int getCountTasks() {
+	public int getCountTasks() {
 		return countTasks;
 	}
 
