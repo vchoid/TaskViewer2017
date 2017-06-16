@@ -18,10 +18,18 @@ import de.gokv.client.taskviewer.Task;
  */
 public class MyModel {
 	private CSVReader reader;
-	private List<Task> tasks;
+	public static List<Task> tasks;
 	private List<String> filteredTasks;
 	private Task filteredCriteria;
 	public static int countTasks;
+
+	public static int getCountTasks() {
+		return countTasks;
+	}
+
+	public void setCountTasks(int countTasks) {
+		this.countTasks = countTasks;
+	}
 
 	public MyModel() {
 		tasks = new ArrayList<Task>();

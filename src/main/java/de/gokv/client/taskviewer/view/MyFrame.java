@@ -1,32 +1,24 @@
 package de.gokv.client.taskviewer.view;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.KeyListener;
 
 import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
@@ -68,12 +60,17 @@ public class MyFrame extends JFrame {
 	public JDatePickerImpl oDatePick = new JDatePickerImpl(orderDatePan, new DateLabelFormatter());
 	public static JButton filterBtn;
 	public static KeyListener tfKeyListener;
-	private MyFrameController controller;
+	public static JButton clearFieldBtn;
+	public static MyFrameController controller;
 	// Task Panel ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	private TitledBorder taskBorder;
-	private JPanel taskPanel;
-	private JButton taskLoadBtn;
-	private JButton reloadBtn;
+	public static JPanel taskPanel;
+	public static JButton taskLoadBtn;
+	public static JButton reloadBtn;
+	public static int countTasks;
+	private String iconRelPath;
+	private Image icon;
+	private ImageIcon reloadIcon;
 	// Info Panel ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	private TitledBorder infoBorder;
 	private JPanel infoPanel;
@@ -115,10 +112,12 @@ public class MyFrame extends JFrame {
 	public MyFrame() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("taskViewer.png")));
 		setTitle("bitGo_KV-TaskViewer");
-		// Quer
-		setSize(new Dimension(915, 630));
+		// Quer 3x1
+//		setSize(new Dimension(1360, 355));
+		// Quer 2x2
+		setSize(new Dimension(915, 662));
 		// Hoch
-//		setSize(new Dimension(470, 870));
+//		setSize(new Dimension(470, 970));
 		setAlwaysOnTop(true);
 
 		controller = new MyFrameController(this);
@@ -144,7 +143,7 @@ public class MyFrame extends JFrame {
 		filterPanel.setBackground(Color.LIGHT_GRAY);
 		GridBagLayout gbl_filPanel = new GridBagLayout();
 		gbl_filPanel.columnWidths = new int[] { 10, 200, 200, 10 };
-		gbl_filPanel.rowHeights = new int[] { 10, 30, 30, 30, 30, 30, 30, 10 };
+		gbl_filPanel.rowHeights = new int[] { 43, 30, 30, 30, 30, 30, 30, 23 };
 		filterPanel.setLayout(gbl_filPanel);
 		contPanel.add(filterPanel);
 
@@ -241,6 +240,22 @@ public class MyFrame extends JFrame {
 		filterPanel.add(oDatePick, gbc_orderDate);
 		
 
+		// << Button "Felder leeren" >>
+		clearFieldBtn = new JButton("Felder leeren");
+		clearFieldBtn.setBorder(btnBorder);
+		clearFieldBtn.setBackground(pan241_C);
+		clearFieldBtn.setForeground(Color.WHITE);
+		clearFieldBtn.setFont(txt);
+		// dem ActionListener DIESEN Frame bekannt machen mit this
+		clearFieldBtn.addActionListener(new FilterTaskListController(this, controller.getModel()));
+		GridBagConstraints gbc_clearFieldBtn = new GridBagConstraints();
+		gbc_clearFieldBtn.anchor = GridBagConstraints.NORTH;
+		gbc_clearFieldBtn.fill = GridBagConstraints.HORIZONTAL;
+		gbc_clearFieldBtn.insets = new Insets(20, 0, 0, 5);
+		gbc_clearFieldBtn.gridx = 1;
+		gbc_clearFieldBtn.gridy = 6;
+		filterPanel.add(clearFieldBtn, gbc_clearFieldBtn);
+		
 		// << Button "Filter anwenden" >>
 		filterBtn = new JButton("Tasks filtern");
 		filterBtn.setBorder(btnBorder);
@@ -252,14 +267,15 @@ public class MyFrame extends JFrame {
 		GridBagConstraints gbc_filterBtn = new GridBagConstraints();
 		gbc_filterBtn.anchor = GridBagConstraints.NORTH;
 		gbc_filterBtn.fill = GridBagConstraints.HORIZONTAL;
-		gbc_filterBtn.gridwidth = 2;
-		gbc_filterBtn.gridx = 1;
+		gbc_filterBtn.insets = new Insets(20, 10, 0, 0);
+		gbc_filterBtn.gridx = 2;
 		gbc_filterBtn.gridy = 6;
 		filterPanel.add(filterBtn, gbc_filterBtn);
 
 		// TaskPanel
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-		taskBorder = BorderFactory.createTitledBorder("Tasks (" + MyModel.countTasks + ")");
+		countTasks = new MyModel().getCountTasks();
+		taskBorder = BorderFactory.createTitledBorder("Tasks (" + countTasks + ")");
 		taskBorder.setTitleJustification(TitledBorder.TOP);
 		taskBorder.setTitleColor(pan2736_C);
 		taskBorder.setTitleFont(title);
@@ -268,14 +284,14 @@ public class MyFrame extends JFrame {
 		taskPanel.setBorder(taskBorder);
 		taskPanel.setBackground(Color.LIGHT_GRAY);
 		GridBagLayout gbl_taskPan = new GridBagLayout();
-		gbl_taskPan.columnWidths = new int[] { 10, 412, 10 };
-		gbl_taskPan.rowHeights = new int[] { 10, 157, 0, 11 };
+		gbl_taskPan.columnWidths = new int[] { 10, 206, 206, 10 };
+		gbl_taskPan.rowHeights = new int[] { 37, 157, 0, 23 };
 		taskPanel.setLayout(gbl_taskPan);
 		contPanel.add(taskPanel);
 
 		// << Task-Liste >>
 		taskList = new JList<>(controller.getFilteredTasks());
-		taskList.setVisibleRowCount(7);
+		taskList.setVisibleRowCount(8);
 		taskList.setFont(txt);
 		taskList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		taskList.addListSelectionListener(new LoadTaskDetailsController(this, controller.getModel()));
@@ -283,27 +299,29 @@ public class MyFrame extends JFrame {
 		GridBagConstraints gbc_scrollTask = new GridBagConstraints();
 		gbc_scrollTask.anchor = GridBagConstraints.NORTH;
 		gbc_scrollTask.fill = GridBagConstraints.HORIZONTAL;
-		gbc_scrollTask.gridwidth = 1;
+		gbc_scrollTask.gridwidth = 2;
 		gbc_scrollTask.gridx = 1;
 		gbc_scrollTask.gridy = 1;
 		taskPanel.add(scrollTask, gbc_scrollTask);
-
-		// << Reload -Button >>
-		reloadBtn = new JButton("reload");
-		reloadBtn.setIcon(new ImageIcon("taskViewer.png"));
-		reloadBtn.setBounds(0, 0, 20, 20);
+				
+		// << Tasks reload -Button >>
+		reloadBtn = new JButton(" Taskliste neu laden  ");
+		iconRelPath = "reload.png";
+		icon = new ImageIcon(getClass().getResource(iconRelPath)).getImage();
+		reloadIcon = new ImageIcon(icon.getScaledInstance(18, 18, 0));
+		reloadBtn.setIcon(reloadIcon);
 		reloadBtn.setBorder(btnBorder);
 		reloadBtn.setBackground(pan241_C);
 		reloadBtn.setForeground(Color.WHITE);
+		reloadBtn.setFont(txt);
 		reloadBtn.addActionListener(new LoadTaskDetailsController(this, controller.getModel()));
-		GridBagConstraints gbc_reloadBtn = new GridBagConstraints();
-		gbc_reloadBtn.anchor = GridBagConstraints.NORTH;
-		gbc_reloadBtn.fill = GridBagConstraints.HORIZONTAL;
-		gbc_reloadBtn.insets = new Insets(0, 0, 0, 0);
-		gbc_reloadBtn.gridwidth = 1;
-		gbc_reloadBtn.gridx = 2;
-		gbc_reloadBtn.gridy = 1;
-		taskPanel.add(reloadBtn, gbc_reloadBtn);
+		GridBagConstraints gbc_reloadTaskBtn = new GridBagConstraints();
+		gbc_reloadTaskBtn.anchor = GridBagConstraints.NORTH;
+		gbc_reloadTaskBtn.fill = GridBagConstraints.HORIZONTAL;
+		gbc_reloadTaskBtn.insets = new Insets(20, 10, 0, 0);
+		gbc_reloadTaskBtn.gridx = 2;
+		gbc_reloadTaskBtn.gridy = 2;
+		taskPanel.add(reloadBtn, gbc_reloadTaskBtn);
 		
 		// << Tasks laden -Button >>
 		taskLoadBtn = new JButton("Task laden");
@@ -315,11 +333,11 @@ public class MyFrame extends JFrame {
 		GridBagConstraints gbc_detailBtn = new GridBagConstraints();
 		gbc_detailBtn.anchor = GridBagConstraints.NORTH;
 		gbc_detailBtn.fill = GridBagConstraints.HORIZONTAL;
-		gbc_detailBtn.insets = new Insets(0, 0, 0, 0);
-		gbc_detailBtn.gridwidth = 1;
+		gbc_detailBtn.insets = new Insets(20, 0, 0, 5);
 		gbc_detailBtn.gridx = 1;
 		gbc_detailBtn.gridy = 2;
 		taskPanel.add(taskLoadBtn, gbc_detailBtn);
+		
 
 		// Info-Panel
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

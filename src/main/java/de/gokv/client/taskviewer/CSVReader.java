@@ -63,6 +63,7 @@ public class CSVReader {
 	// ungültige Einträge aus der CSV ++++++++++++++++++++++++++++++++++
 	private List<CSVRecord> invalidEntries = new ArrayList<CSVRecord>();
 	public static int invEntSize;
+	private String errMsg;
 
 	// gültige Einträge aus der CSV
 	private List<Task> validEntries = new ArrayList<Task>();
@@ -122,10 +123,11 @@ public class CSVReader {
 
 					invalidEntries.add(csvRecord);
 					invEntSize = invalidEntries.size();
-					System.err.println("\n\n-------------------------------------------------------- Meldung "
+					errMsg = "\n\n-------------------------------------------------------- Meldung "
 							+ invEntSize + " --------------------------------------------------------\n "
 							+ "\nDatei: " + filePath + "\n"
-							+ e.getMessage());
+							+ e.getMessage();
+//					System.err.println(errMsg);
 				}
 			}
 

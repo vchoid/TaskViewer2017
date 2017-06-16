@@ -9,6 +9,7 @@ import java.security.GeneralSecurityException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import javax.swing.JList;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -28,11 +29,12 @@ import de.gokv.client.taskviewer.view.MyFrame;
 public class LoadTaskDetailsController implements ActionListener, ListSelectionListener {
 
 	private HTTPSClient client;
-	MyFrame frame;
-	MyModel model;
-	LocalDate lDate;
-	String strDate;
+	private MyFrame frame;
+	private MyModel model;
+	private LocalDate lDate;
+	private String strDate;
 
+	
 	public static String taskID;
 
 	public LoadTaskDetailsController(MyFrame frame, MyModel model) {
@@ -47,27 +49,35 @@ public class LoadTaskDetailsController implements ActionListener, ListSelectionL
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		try {
-			client = new HTTPSClient(new URL("http://localhost:9080/gokv-tenant/api"));
-			client.testConnection(taskID);
+		if (e.getSource() == MyFrame.taskLoadBtn && frame.taskList.isSelectedIndex(frame.taskList.getSelectedIndex())) {
+			try {
+				client = new HTTPSClient(new URL("http://localhost:9080/gokv-tenant/api"));
+				client.testConnection(taskID);
 
-			lDate = LocalDate.parse(HTTPSClient.task.get("orderedDate").toString(), DateUtil.dTf_request);
-			strDate = lDate.getDayOfMonth() + "." + lDate.getMonthValue() + "." + lDate.getYear();
-			MyFrame.orderDate_field.setText(strDate);
+				lDate = LocalDate.parse(HTTPSClient.task.get("orderedDate").toString(), DateUtil.dTf_request);
+				strDate = lDate.getDayOfMonth() + "." + lDate.getMonthValue() + "." + lDate.getYear();
+				MyFrame.orderDate_field.setText(strDate);
 
-			MyFrame.state_field.setText(HTTPSClient.task.get("state").toString());
-			MyFrame.taskType_field.setText(HTTPSClient.task.get("type").toString());
-			MyFrame.evInProgs_field.setText(HTTPSClient.task.get("eventInProgress").toString());
-			MyFrame.evCompl_field.setText(HTTPSClient.task.get("eventCompleted").toString());
-			MyFrame.evReceived_field.setText(HTTPSClient.task.get("eventReceived").toString());
-			MyFrame.evResult_field.setText(HTTPSClient.task.get("eventResult").toString());
+				MyFrame.state_field.setText(HTTPSClient.task.get("state").toString());
+				MyFrame.taskType_field.setText(HTTPSClient.task.get("type").toString());
+				MyFrame.evInProgs_field.setText(HTTPSClient.task.get("eventInProgress").toString());
+				MyFrame.evCompl_field.setText(HTTPSClient.task.get("eventCompleted").toString());
+				MyFrame.evReceived_field.setText(HTTPSClient.task.get("eventReceived").toString());
+				MyFrame.evResult_field.setText(HTTPSClient.task.get("eventResult").toString());
 
-		} catch (ServerException | GeneralSecurityException | IOException | ClientCertificateException
-				| URISyntaxException ex) {
-			System.out.println(taskID + " nicht gefunden");
-			ex.printStackTrace();
+			} catch (ServerException | GeneralSecurityException | IOException | ClientCertificateException
+					| URISyntaxException ex) {
+				System.out.println(taskID + " nicht gefunden");
+				ex.printStackTrace();
+			}
+		} else if(e.getSource() == MyFrame.reloadBtn){
+			model.readFiles();
+			model.setCountTasks(model.getCountTasks());;
+			frame.taskList.setListData(model.getFilteredTasks());
+			
+			
+			
 		}
-
 	}
 
 	@Override
@@ -75,6 +85,27 @@ public class LoadTaskDetailsController implements ActionListener, ListSelectionL
 		if (e.getValueIsAdjusting()) {
 			taskID = frame.taskList.getSelectedValue();
 			MyFrame.taskID_field.setText(taskID);
+			
+			try {
+				client = new HTTPSClient(new URL("http://localhost:9080/gokv-tenant/api"));
+				client.testConnection(taskID);
+
+				lDate = LocalDate.parse(HTTPSClient.task.get("orderedDate").toString(), DateUtil.dTf_request);
+				strDate = lDate.getDayOfMonth() + "." + lDate.getMonthValue() + "." + lDate.getYear();
+				MyFrame.orderDate_field.setText(strDate);
+
+				MyFrame.state_field.setText(HTTPSClient.task.get("state").toString());
+				MyFrame.taskType_field.setText(HTTPSClient.task.get("type").toString());
+				MyFrame.evInProgs_field.setText(HTTPSClient.task.get("eventInProgress").toString());
+				MyFrame.evCompl_field.setText(HTTPSClient.task.get("eventCompleted").toString());
+				MyFrame.evReceived_field.setText(HTTPSClient.task.get("eventReceived").toString());
+				MyFrame.evResult_field.setText(HTTPSClient.task.get("eventResult").toString());
+
+			} catch (ServerException | GeneralSecurityException | IOException | ClientCertificateException
+					| URISyntaxException ex) {
+				System.out.println(taskID + " nicht gefunden");
+				ex.printStackTrace();
+			}
 		}
 	}
 
