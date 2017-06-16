@@ -21,6 +21,7 @@ public class MyModel {
 	private List<Task> tasks;
 	private List<String> filteredTasks;
 	private Task filteredCriteria;
+	public static int countTasks;
 
 	public MyModel() {
 		tasks = new ArrayList<Task>();
@@ -40,6 +41,7 @@ public class MyModel {
 			reader = new CSVReader(file.getAbsolutePath());
 			reader.readCSVFile();
 			tasks.addAll(reader.getValidEntries());
+			countTasks += reader.getValidEntries().size();
 		}
 	}
 
