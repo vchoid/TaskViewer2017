@@ -27,10 +27,41 @@ public class FilterTaskKeyHandler implements KeyListener{
 			try {
 				Task t = new Task();
 
-				t.setName(MyFrame.pName.getText());
-				t.setvName(MyFrame.pVname.getText());
-				t.setKvnr(MyFrame.pKvnr.getText());
-				t.setTaskId(MyFrame.pTaskID.getText());
+				t.setName(frame.pName.getText());
+				t.setvName(frame.pVname.getText());
+				t.setKvnr(frame.pKvnr.getText());
+				t.setTaskId(frame.pTaskID.getText());
+
+				if (frame.model_geb.isSelected()) {
+					t.setGebDat(DateUtil.parseDate(frame.model_geb.getValue()));
+				}
+
+				if (frame.model_ord.isSelected()) {
+					t.setOrderedDate(DateUtil.parseDate(frame.model_ord.getValue()));
+				}
+
+				model.setFilterCriteria(t);
+				frame.taskList.setListData(model.getFilteredTasks());
+
+			} catch (InvalidDateException e1) {
+				// DO NOTHING
+				e1.printStackTrace();
+			}
+		} else if (e.getKeyCode() == KeyEvent.VK_ESCAPE){
+			frame.pName.setText(null);
+			frame.pVname.setText(null);
+			frame.pKvnr.setText(null);
+			frame.pTaskID.setText(null);
+			frame.model_geb.setValue(null);
+			frame.model_ord.setValue(null);
+			
+			try {
+				Task t = new Task();
+
+				t.setName(frame.pName.getText());
+				t.setvName(frame.pVname.getText());
+				t.setKvnr(frame.pKvnr.getText());
+				t.setTaskId(frame.pTaskID.getText());
 
 				if (frame.model_geb.isSelected()) {
 					t.setGebDat(DateUtil.parseDate(frame.model_geb.getValue()));

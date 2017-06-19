@@ -27,12 +27,17 @@ public class TaskListController implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == MyFrame.reloadBtn) {
 			model.reload();
-			if(model.countInvalidTasks > 0){
-				invalEntMsg = "(davon fehlerhaft: "+ model.countInvalidTasks + ")";
-			} else{
+			
+			if (model.countInvalidTasks > 0) {
+				invalEntMsg = "(davon fehlerhaft: " + model.countInvalidTasks + ")";
+			} else {
 				invalEntMsg = "";
 			}
-			valEntMsg = model.countValidTasks + " Einträge ";
+			if (model.countValidTasks > 0) {
+				valEntMsg = model.countValidTasks + " Einträge ";
+			} else {
+				valEntMsg = "";
+			}
 			MyFrame.anzTasks.setText(valEntMsg + invalEntMsg);
 			frame.taskList.setListData(model.getFilteredTasks());
 		}

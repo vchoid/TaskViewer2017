@@ -47,19 +47,19 @@ public class MyFrame extends JFrame {
 	// Filter Panel ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	private TitledBorder filtBorder;
 	private JPanel filterPanel;
-	public static Field_Placeholder pKvnr;
-	public static Field_Placeholder pName;
-	public static Field_Placeholder pVname;
+	public Field_Placeholder pKvnr;
+	public Field_Placeholder pName;
+	public Field_Placeholder pVname;
 	public JLabel gDateLabel;
 	public UtilDateModel model_geb = new UtilDateModel();
 	public JDatePanelImpl gebDatePan = new JDatePanelImpl(model_geb);
 	public JDatePickerImpl gDatePick = new JDatePickerImpl(gebDatePan, new DateLabelFormatter());
-	public static Field_Placeholder pTaskID;
+	public Field_Placeholder pTaskID;
 	public JLabel oDateLabel;
 	public UtilDateModel model_ord = new UtilDateModel();
 	public JDatePanelImpl orderDatePan = new JDatePanelImpl(model_ord);
 	public JDatePickerImpl oDatePick = new JDatePickerImpl(orderDatePan, new DateLabelFormatter());
-	public static JButton filterBtn;
+	public JButton filterBtn;
 	public static JButton clearFieldBtn;
 	public static MyFrameController controller;
 	// Task Panel ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -70,6 +70,7 @@ public class MyFrame extends JFrame {
 	public int countValidTasks;
 	public int countInvalidTasks;
 	public String invalEntMsg = "";
+	public String valEntMsg = "";
 	public static JTextField anzTasks;
 	private String iconRelPath;
 	private Image icon;
@@ -294,6 +295,8 @@ public class MyFrame extends JFrame {
 		gbl_taskPan.rowHeights = new int[] { 43 , 0, 157, 30, 23};
 		taskPanel.setLayout(gbl_taskPan);
 		contPanel.add(taskPanel);
+		
+		// Anzahl der Tasks
 		countInvalidTasks = MyModel.countInvalidTasks;
 		if(countInvalidTasks > 0){
 			invalEntMsg = "(davon fehlerhaft: "+ countInvalidTasks + ")";
@@ -301,7 +304,13 @@ public class MyFrame extends JFrame {
 			invalEntMsg = "";
 		}
 		countValidTasks = controller.getFilteredTasks().length;
-		anzTasks = new JTextField(countValidTasks + " Einträge " + invalEntMsg);
+		if(countValidTasks > 0){
+			valEntMsg = countValidTasks + " Einträge ";
+		} else {
+			valEntMsg = "";
+		}
+		
+		anzTasks = new JTextField(valEntMsg + invalEntMsg);
 		anzTasks.setBorder(emptyBorder);
 		anzTasks.setBackground(Color.LIGHT_GRAY);
 		anzTasks.addActionListener(taskListCont);
