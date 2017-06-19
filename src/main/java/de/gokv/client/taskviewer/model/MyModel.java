@@ -24,22 +24,7 @@ public class MyModel {
 	public int countValidTasks;
 	public static int countInvalidTasks;
 	
-	public int getCountValidTasks() {
-		return countValidTasks;
-	}
-
-	public void setCountValidTasks(int countValidTasks) {
-		this.countValidTasks += countValidTasks;
-	}
-
-	public static void setCountInvalidTasks(int countInvalidTasks) {
-		MyModel.countInvalidTasks += countInvalidTasks;
-	}
-
-	public int getCountInvalidTasks() {
-		return countInvalidTasks;
-	}
-
+	
 	public MyModel() {
 		tasks = new ArrayList<Task>();
 	}
@@ -58,8 +43,8 @@ public class MyModel {
 			reader = new CSVReader(file.getAbsolutePath());
 			reader.readCSVFile();
 			tasks.addAll(reader.getValidEntries());
-			setCountValidTasks(reader.getValidEntries().size());
-			setCountInvalidTasks(reader.getInvalidEntries().size());
+			countValidTasks += reader.getValidEntries().size();
+			countInvalidTasks += reader.getInvalidEntries().size();
 			
 		}
 	}
