@@ -23,9 +23,8 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
-import de.gokv.client.taskviewer.CSVReader;
-import de.gokv.client.taskviewer.controller.FilterTaskKeyHandler;
 import de.gokv.client.taskviewer.controller.FilterTaskListController;
+import de.gokv.client.taskviewer.controller.FilterTaskListKeyHandler;
 import de.gokv.client.taskviewer.controller.LoadTaskDetailsController;
 import de.gokv.client.taskviewer.controller.MyFrameController;
 import de.gokv.client.taskviewer.controller.TaskListController;
@@ -62,19 +61,21 @@ public class MyFrame extends JFrame {
 	public JButton filterBtn;
 	public static JButton clearFieldBtn;
 	public static MyFrameController controller;
+	public static JTextField anzFiltTask;
+	public String valFiltMsg = "";
 	// Task Panel ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	private TitledBorder taskBorder;
 	public static JPanel taskPanel;
 	public static JButton taskLoadBtn;
 	public static JButton reloadBtn;
+	private String iconRelPath;
+	private Image icon;
+	private ImageIcon reloadIcon;
+	public static JTextField anzTasks;
 	public int countValidTasks;
 	public int countInvalidTasks;
 	public String invalEntMsg = "";
 	public String valEntMsg = "";
-	public static JTextField anzTasks;
-	private String iconRelPath;
-	private Image icon;
-	private ImageIcon reloadIcon;
 	// Info Panel ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	private TitledBorder infoBorder;
 	private JPanel infoPanel;
@@ -99,8 +100,11 @@ public class MyFrame extends JFrame {
 	private Font title = new Font("Arial", Font.BOLD, 16);
 	private Font txt = new Font("Arial", Font.PLAIN, 15);
 	private Font label = new Font("Arial", Font.BOLD, 14);
+	
 	private Color pan241_C = new Color(166, 31, 125);
 	private Color pan2736_C = new Color(35, 45, 141);
+	private Color panelBackground = new Color(190,190,190);
+	
 	private Border btnBorder = BorderFactory.createEmptyBorder(8, 5, 8, 5);
 	private Border emptyBorder = BorderFactory.createEmptyBorder();
 
@@ -135,7 +139,7 @@ public class MyFrame extends JFrame {
 //		 Input-Panel
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		FilterTaskListController filtTaskCont = new FilterTaskListController(this, controller.getModel());
-		FilterTaskKeyHandler filtTaskKeyHandler = new FilterTaskKeyHandler(this, controller.getModel());
+		FilterTaskListKeyHandler filtTaskKey = new FilterTaskListKeyHandler(this, controller.getModel());
 		
 		filtBorder = BorderFactory.createTitledBorder("Filter Maske");
 		filtBorder.setTitleJustification(TitledBorder.TOP);
@@ -144,7 +148,7 @@ public class MyFrame extends JFrame {
 		filtBorder.setBorder(emptyBorder);
 		filterPanel = new JPanel();
 		filterPanel.setBorder(filtBorder);
-		filterPanel.setBackground(Color.LIGHT_GRAY);
+		filterPanel.setBackground(panelBackground);
 		GridBagLayout gbl_filPanel = new GridBagLayout();
 		gbl_filPanel.columnWidths = new int[] { 10, 200, 200, 10 };
 		gbl_filPanel.rowHeights = new int[] { 43, 30, 30, 30, 30, 30, 30, 23 };
@@ -156,7 +160,6 @@ public class MyFrame extends JFrame {
 		pKvnr.setPlaceholder("KvNr/Ordnungsbegriff",
 				gbl_filPanel.columnWidths[1] + gbl_filPanel.columnWidths[2] + gbl_filPanel.columnWidths[3]);
 		pKvnr.setBorder(emptyBorder);
-		pKvnr.addKeyListener(filtTaskKeyHandler);
 		pKvnr.addActionListener(filtTaskCont);
 		GridBagConstraints gbc_kvnr = new GridBagConstraints();
 		gbc_kvnr.anchor = GridBagConstraints.NORTH;
@@ -170,8 +173,8 @@ public class MyFrame extends JFrame {
 		pName = new Field_Placeholder();
 		pName.setPlaceholder("Name", gbl_filPanel.columnWidths[2] - 5);
 		pName.setBorder(emptyBorder);
-		pName.addKeyListener(filtTaskKeyHandler);
 		pName.addActionListener(filtTaskCont);
+		pName.addKeyListener(filtTaskKey);
 		GridBagConstraints gbc_name = new GridBagConstraints();
 		gbc_name.anchor = GridBagConstraints.NORTH;
 		gbc_name.fill = GridBagConstraints.HORIZONTAL;
@@ -184,8 +187,8 @@ public class MyFrame extends JFrame {
 		pVname = new Field_Placeholder();
 		pVname.setPlaceholder("Vorname", gbl_filPanel.columnWidths[2]);
 		pVname.setBorder(emptyBorder);
-		pVname.addKeyListener(filtTaskKeyHandler);
 		pVname.addActionListener(filtTaskCont);
+		pVname.addKeyListener(filtTaskKey);
 		GridBagConstraints gbc_vName = new GridBagConstraints();
 		gbc_vName.anchor = GridBagConstraints.BASELINE_LEADING;
 		gbc_vName.fill = GridBagConstraints.HORIZONTAL;
@@ -217,8 +220,8 @@ public class MyFrame extends JFrame {
 		pTaskID.setPlaceholder("TaskID",
 				gbl_filPanel.columnWidths[1] + gbl_filPanel.columnWidths[2] + gbl_filPanel.columnWidths[3]);
 		pTaskID.setBorder(emptyBorder);
-		pTaskID.addKeyListener(filtTaskKeyHandler);
 		pTaskID.addActionListener(filtTaskCont);
+		pTaskID.addKeyListener(filtTaskKey);
 		GridBagConstraints gbc_taskID = new GridBagConstraints();
 		gbc_taskID.anchor = GridBagConstraints.NORTH;
 		gbc_taskID.fill = GridBagConstraints.HORIZONTAL;
@@ -251,8 +254,7 @@ public class MyFrame extends JFrame {
 		clearFieldBtn.setBackground(pan241_C);
 		clearFieldBtn.setForeground(Color.WHITE);
 		clearFieldBtn.setFont(txt);
-		// dem ActionListener DIESEN Frame bekannt machen mit this
-		clearFieldBtn.addActionListener(new FilterTaskListController(this, controller.getModel()));
+		clearFieldBtn.addActionListener(filtTaskCont);
 		GridBagConstraints gbc_clearFieldBtn = new GridBagConstraints();
 		gbc_clearFieldBtn.anchor = GridBagConstraints.NORTH;
 		gbc_clearFieldBtn.fill = GridBagConstraints.HORIZONTAL;
@@ -267,7 +269,6 @@ public class MyFrame extends JFrame {
 		filterBtn.setBackground(pan241_C);
 		filterBtn.setForeground(Color.WHITE);
 		filterBtn.setFont(txt);
-		// dem ActionListener DIESEN Frame bekannt machen mit this
 		filterBtn.addActionListener(filtTaskCont);
 		GridBagConstraints gbc_filterBtn = new GridBagConstraints();
 		gbc_filterBtn.anchor = GridBagConstraints.NORTH;
@@ -276,6 +277,22 @@ public class MyFrame extends JFrame {
 		gbc_filterBtn.gridx = 2;
 		gbc_filterBtn.gridy = 6;
 		filterPanel.add(filterBtn, gbc_filterBtn);
+		
+		// Anzahl der gefilterten Tasks
+		anzFiltTask = new JTextField(countValidTasks + " Einträge " );
+		anzFiltTask.setBorder(emptyBorder);
+		anzFiltTask.addActionListener(filtTaskCont);
+		anzFiltTask.addKeyListener(filtTaskKey);
+		anzFiltTask.setOpaque(false);
+		filterPanel.add(anzFiltTask);
+		GridBagConstraints gbc_anzFiltTask = new GridBagConstraints();
+		gbc_anzFiltTask.anchor = GridBagConstraints.NORTH;
+		gbc_anzFiltTask.fill = GridBagConstraints.HORIZONTAL;
+		gbc_anzFiltTask.insets = new Insets(0, 10, 00, 0);
+		gbc_anzFiltTask.gridx = 2;
+		gbc_anzFiltTask.gridy = 7;
+		filterPanel.add(anzFiltTask, gbc_anzFiltTask);
+		
 
 		// TaskPanel
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -289,7 +306,7 @@ public class MyFrame extends JFrame {
 		taskBorder.setBorder(emptyBorder);
 		taskPanel = new JPanel();
 		taskPanel.setBorder(taskBorder);
-		taskPanel.setBackground(Color.LIGHT_GRAY);
+		taskPanel.setBackground(panelBackground);
 		GridBagLayout gbl_taskPan = new GridBagLayout();
 		gbl_taskPan.columnWidths = new int[] { 10, 206, 206, 10 };
 		gbl_taskPan.rowHeights = new int[] { 43 , 0, 157, 30, 23};
@@ -309,10 +326,9 @@ public class MyFrame extends JFrame {
 		} else {
 			valEntMsg = "";
 		}
-		
 		anzTasks = new JTextField(valEntMsg + invalEntMsg);
 		anzTasks.setBorder(emptyBorder);
-		anzTasks.setBackground(Color.LIGHT_GRAY);
+		anzTasks.setOpaque(false);
 		anzTasks.addActionListener(taskListCont);
 		taskPanel.add(anzTasks);
 		GridBagConstraints gbc_anzTask = new GridBagConstraints();
@@ -383,7 +399,7 @@ public class MyFrame extends JFrame {
 		infoBorder.setBorder(emptyBorder);
 		infoPanel = new JPanel();
 		infoPanel.setBorder(infoBorder);
-		infoPanel.setBackground(Color.LIGHT_GRAY);
+		infoPanel.setBackground(panelBackground);
 		GridBagLayout gbl_infoPanel = new GridBagLayout();
 		gbl_infoPanel.columnWidths = new int[] { 10, 150, 262, 10 };
 		gbl_infoPanel.rowHeights = new int[] { 21, 20, 23, 24, 24, 24, 24, 24, 24, 24, 24, 21 };
