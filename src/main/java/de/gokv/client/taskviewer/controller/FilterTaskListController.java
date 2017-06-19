@@ -2,7 +2,6 @@ package de.gokv.client.taskviewer.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.time.LocalDate;
 
 import de.gokv.client.taskviewer.Task;
 import de.gokv.client.taskviewer.exceptions.InvalidDateException;
@@ -23,7 +22,7 @@ public class FilterTaskListController implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == frame.filterBtn) {
+		if (e.getSource() == MyFrame.filterBtn) {
 			try {
 				Task t = new Task();
 
@@ -45,7 +44,7 @@ public class FilterTaskListController implements ActionListener {
 				// DO NOTHING
 				e1.printStackTrace();
 			}
-		} else if(e.getSource() == frame.clearFieldBtn){
+		} else if(e.getSource() == MyFrame.clearFieldBtn){
 			MyFrame.pName.setText(null);
 			MyFrame.pVname.setText(null);
 			MyFrame.pKvnr.setText(null);

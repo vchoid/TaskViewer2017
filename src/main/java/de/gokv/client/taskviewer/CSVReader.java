@@ -62,7 +62,7 @@ public class CSVReader {
 
 	// ungültige Einträge aus der CSV ++++++++++++++++++++++++++++++++++
 	private List<CSVRecord> invalidEntries = new ArrayList<CSVRecord>();
-	public static int invEntSize;
+	public int invEntSize;
 	private String errMsg;
 
 	// gültige Einträge aus der CSV

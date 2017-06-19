@@ -9,7 +9,7 @@ import de.gokv.client.taskviewer.model.MyModel;
 import de.gokv.client.taskviewer.utils.DateUtil;
 import de.gokv.client.taskviewer.view.MyFrame;
 
-public class FilterTaskKeyHandler implements KeyListener {
+public class FilterTaskKeyHandler implements KeyListener{
 
 	MyFrame frame;
 	MyModel model;
@@ -57,5 +57,6 @@ public class FilterTaskKeyHandler implements KeyListener {
 	@Override
 	public void keyTyped(KeyEvent e) {
 	}
+
 
 }

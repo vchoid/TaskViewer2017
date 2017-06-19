@@ -9,7 +9,6 @@ import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Toolkit;
-import java.awt.event.KeyListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -29,6 +28,7 @@ import de.gokv.client.taskviewer.controller.FilterTaskKeyHandler;
 import de.gokv.client.taskviewer.controller.FilterTaskListController;
 import de.gokv.client.taskviewer.controller.LoadTaskDetailsController;
 import de.gokv.client.taskviewer.controller.MyFrameController;
+import de.gokv.client.taskviewer.controller.TaskListController;
 import de.gokv.client.taskviewer.model.MyModel;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
@@ -60,7 +60,6 @@ public class MyFrame extends JFrame {
 	public JDatePanelImpl orderDatePan = new JDatePanelImpl(model_ord);
 	public JDatePickerImpl oDatePick = new JDatePickerImpl(orderDatePan, new DateLabelFormatter());
 	public static JButton filterBtn;
-	public static KeyListener tfKeyListener;
 	public static JButton clearFieldBtn;
 	public static MyFrameController controller;
 	// Task Panel ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -68,8 +67,10 @@ public class MyFrame extends JFrame {
 	public static JPanel taskPanel;
 	public static JButton taskLoadBtn;
 	public static JButton reloadBtn;
+	public int countValidTasks;
+	public int countInvalidTasks;
+	public String invalEntMsg = "";
 	public static JTextField anzTasks;
-	public static MyModel model;
 	private String iconRelPath;
 	private Image icon;
 	private ImageIcon reloadIcon;
@@ -84,7 +85,6 @@ public class MyFrame extends JFrame {
 	private JLabel evInProgs;
 	private JLabel evReceived;
 	private JLabel evResult;
-	private JLabel error;
 	public static JLabel taskID_field;
 	public static  JLabel state_field;
 	public static  JLabel taskType_field;
@@ -93,13 +93,11 @@ public class MyFrame extends JFrame {
 	public static  JLabel evInProgs_field;
 	public static  JLabel evReceived_field;
 	public static  JLabel evResult_field;
-	public static  JLabel error_output;
 	
 	// Style ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	private Font title = new Font("Arial", Font.BOLD, 16);
 	private Font txt = new Font("Arial", Font.PLAIN, 15);
 	private Font label = new Font("Arial", Font.BOLD, 14);
-	private Font errMsg = new Font("Arial", Font.ITALIC, 10);
 	private Color pan241_C = new Color(166, 31, 125);
 	private Color pan2736_C = new Color(35, 45, 141);
 	private Border btnBorder = BorderFactory.createEmptyBorder(8, 5, 8, 5);
@@ -123,7 +121,6 @@ public class MyFrame extends JFrame {
 		setAlwaysOnTop(true);
 
 		controller = new MyFrameController(this);
-		model = new MyModel();
 
 		// Content-Panel
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -136,6 +133,9 @@ public class MyFrame extends JFrame {
 		
 //		 Input-Panel
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		FilterTaskListController filtTaskCont = new FilterTaskListController(this, controller.getModel());
+		FilterTaskKeyHandler filtTaskKeyHandler = new FilterTaskKeyHandler(this, controller.getModel());
+		
 		filtBorder = BorderFactory.createTitledBorder("Filter Maske");
 		filtBorder.setTitleJustification(TitledBorder.TOP);
 		filtBorder.setTitleColor(pan2736_C);
@@ -155,8 +155,8 @@ public class MyFrame extends JFrame {
 		pKvnr.setPlaceholder("KvNr/Ordnungsbegriff",
 				gbl_filPanel.columnWidths[1] + gbl_filPanel.columnWidths[2] + gbl_filPanel.columnWidths[3]);
 		pKvnr.setBorder(emptyBorder);
-		pKvnr.addKeyListener(new FilterTaskKeyHandler(this, controller.getModel()));
-		pKvnr.addActionListener(new LoadTaskDetailsController(this, controller.getModel()));
+		pKvnr.addKeyListener(filtTaskKeyHandler);
+		pKvnr.addActionListener(filtTaskCont);
 		GridBagConstraints gbc_kvnr = new GridBagConstraints();
 		gbc_kvnr.anchor = GridBagConstraints.NORTH;
 		gbc_kvnr.fill = GridBagConstraints.HORIZONTAL;
@@ -169,7 +169,8 @@ public class MyFrame extends JFrame {
 		pName = new Field_Placeholder();
 		pName.setPlaceholder("Name", gbl_filPanel.columnWidths[2] - 5);
 		pName.setBorder(emptyBorder);
-		pName.addKeyListener(new FilterTaskKeyHandler(this, controller.getModel()));
+		pName.addKeyListener(filtTaskKeyHandler);
+		pName.addActionListener(filtTaskCont);
 		GridBagConstraints gbc_name = new GridBagConstraints();
 		gbc_name.anchor = GridBagConstraints.NORTH;
 		gbc_name.fill = GridBagConstraints.HORIZONTAL;
@@ -182,7 +183,8 @@ public class MyFrame extends JFrame {
 		pVname = new Field_Placeholder();
 		pVname.setPlaceholder("Vorname", gbl_filPanel.columnWidths[2]);
 		pVname.setBorder(emptyBorder);
-		pVname.addKeyListener(new FilterTaskKeyHandler(this, controller.getModel()));
+		pVname.addKeyListener(filtTaskKeyHandler);
+		pVname.addActionListener(filtTaskCont);
 		GridBagConstraints gbc_vName = new GridBagConstraints();
 		gbc_vName.anchor = GridBagConstraints.BASELINE_LEADING;
 		gbc_vName.fill = GridBagConstraints.HORIZONTAL;
@@ -196,7 +198,6 @@ public class MyFrame extends JFrame {
 		gDateLabel.setForeground(Color.GRAY);
 		gDateLabel.setBorder(emptyBorder);
 		gDateLabel.setFont(txt);
-		
 		GridBagConstraints gbc_gDateLabel = new GridBagConstraints();
 		gbc_gDateLabel.anchor = GridBagConstraints.BELOW_BASELINE_TRAILING;
 		gbc_gDateLabel.gridx = 1;
@@ -215,7 +216,8 @@ public class MyFrame extends JFrame {
 		pTaskID.setPlaceholder("TaskID",
 				gbl_filPanel.columnWidths[1] + gbl_filPanel.columnWidths[2] + gbl_filPanel.columnWidths[3]);
 		pTaskID.setBorder(emptyBorder);
-		pTaskID.addKeyListener(new FilterTaskKeyHandler(this, controller.getModel()));
+		pTaskID.addKeyListener(filtTaskKeyHandler);
+		pTaskID.addActionListener(filtTaskCont);
 		GridBagConstraints gbc_taskID = new GridBagConstraints();
 		gbc_taskID.anchor = GridBagConstraints.NORTH;
 		gbc_taskID.fill = GridBagConstraints.HORIZONTAL;
@@ -241,7 +243,6 @@ public class MyFrame extends JFrame {
 		oDatePick.setTextEditable(true);
 		orderDatePan.setBorder(emptyBorder);
 		filterPanel.add(oDatePick, gbc_orderDate);
-		
 
 		// << Button "Felder leeren" >>
 		clearFieldBtn = new JButton("Felder leeren");
@@ -266,7 +267,7 @@ public class MyFrame extends JFrame {
 		filterBtn.setForeground(Color.WHITE);
 		filterBtn.setFont(txt);
 		// dem ActionListener DIESEN Frame bekannt machen mit this
-		filterBtn.addActionListener(new FilterTaskListController(this, controller.getModel()));
+		filterBtn.addActionListener(filtTaskCont);
 		GridBagConstraints gbc_filterBtn = new GridBagConstraints();
 		gbc_filterBtn.anchor = GridBagConstraints.NORTH;
 		gbc_filterBtn.fill = GridBagConstraints.HORIZONTAL;
@@ -277,6 +278,9 @@ public class MyFrame extends JFrame {
 
 		// TaskPanel
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		TaskListController taskListCont = new TaskListController(this, controller.getModel());
+		LoadTaskDetailsController loadTaskDetailsCont= new LoadTaskDetailsController(this, controller.getModel());
+		
 		taskBorder = BorderFactory.createTitledBorder("Tasks");
 		taskBorder.setTitleJustification(TitledBorder.TOP);
 		taskBorder.setTitleColor(pan2736_C);
@@ -287,29 +291,36 @@ public class MyFrame extends JFrame {
 		taskPanel.setBackground(Color.LIGHT_GRAY);
 		GridBagLayout gbl_taskPan = new GridBagLayout();
 		gbl_taskPan.columnWidths = new int[] { 10, 206, 206, 10 };
-		gbl_taskPan.rowHeights = new int[] { 43 , 0, 157, 40, 23};
+		gbl_taskPan.rowHeights = new int[] { 43 , 0, 157, 30, 23};
 		taskPanel.setLayout(gbl_taskPan);
 		contPanel.add(taskPanel);
-		
-		anzTasks = new JTextField(" Einträge");
+		countInvalidTasks = MyModel.countInvalidTasks;
+		if(countInvalidTasks > 0){
+			invalEntMsg = "(davon fehlerhaft: "+ countInvalidTasks + ")";
+		} else{
+			invalEntMsg = "";
+		}
+		countValidTasks = controller.getFilteredTasks().length;
+		anzTasks = new JTextField(countValidTasks + " Einträge " + invalEntMsg);
 		anzTasks.setBorder(emptyBorder);
 		anzTasks.setBackground(Color.LIGHT_GRAY);
-		anzTasks.addActionListener(new LoadTaskDetailsController(this, controller.getModel()));
+		anzTasks.addActionListener(taskListCont);
 		taskPanel.add(anzTasks);
 		GridBagConstraints gbc_anzTask = new GridBagConstraints();
 		gbc_anzTask.anchor = GridBagConstraints.NORTH;
 		gbc_anzTask.fill = GridBagConstraints.HORIZONTAL;
-		gbc_anzTask.gridwidth = 1;
-		gbc_anzTask.gridx = 1;
-		gbc_anzTask.gridy = 0;
+		gbc_anzTask.insets = new Insets(0, 12, 0, 0);
+		gbc_anzTask.gridwidth = 0;
+		gbc_anzTask.gridx = 2;
+		gbc_anzTask.gridy = 4;
 		taskPanel.add(anzTasks, gbc_anzTask);
-
+		
 		// << Task-Liste >>
 		taskList = new JList<>(controller.getFilteredTasks());
-		taskList.setVisibleRowCount(9);
+		taskList.setVisibleRowCount(7);
 		taskList.setFont(txt);
 		taskList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		taskList.addListSelectionListener(new LoadTaskDetailsController(this, controller.getModel()));
+		taskList.addListSelectionListener(loadTaskDetailsCont);
 		JScrollPane scrollTask = new JScrollPane(taskList);
 		GridBagConstraints gbc_scrollTask = new GridBagConstraints();
 		gbc_scrollTask.anchor = GridBagConstraints.NORTH;
@@ -329,7 +340,7 @@ public class MyFrame extends JFrame {
 		reloadBtn.setBackground(pan241_C);
 		reloadBtn.setForeground(Color.WHITE);
 		reloadBtn.setFont(txt);
-		reloadBtn.addActionListener(new LoadTaskDetailsController(this, controller.getModel()));
+		reloadBtn.addActionListener(taskListCont);
 		GridBagConstraints gbc_reloadTaskBtn = new GridBagConstraints();
 		gbc_reloadTaskBtn.anchor = GridBagConstraints.NORTH;
 		gbc_reloadTaskBtn.fill = GridBagConstraints.HORIZONTAL;
@@ -344,7 +355,7 @@ public class MyFrame extends JFrame {
 		taskLoadBtn.setBackground(pan241_C);
 		taskLoadBtn.setForeground(Color.WHITE);
 		taskLoadBtn.setFont(txt);
-		taskLoadBtn.addActionListener(new LoadTaskDetailsController(this, controller.getModel()));
+		taskLoadBtn.addActionListener(loadTaskDetailsCont);
 		GridBagConstraints gbc_detailBtn = new GridBagConstraints();
 		gbc_detailBtn.anchor = GridBagConstraints.NORTH;
 		gbc_detailBtn.fill = GridBagConstraints.HORIZONTAL;
@@ -570,18 +581,7 @@ public class MyFrame extends JFrame {
 		gbc_evResult_field.gridy = 9;
 		infoPanel.add(evResult_field, gbc_evResult_field);
 		
-		// Error
-		error = new JLabel("" + CSVReader.invEntSize+ " ungültige Einträge.");
-		error.setFont(errMsg);
-		error.setForeground(Color.GRAY);
-		GridBagConstraints gbc_errorLabel = new GridBagConstraints();
-		gbc_errorLabel.anchor = GridBagConstraints.NORTH;
-		gbc_errorLabel.fill = GridBagConstraints.HORIZONTAL;
-		gbc_errorLabel.insets = new Insets(0, 0, 0, 0);
-		gbc_errorLabel.gridwidth = 2;
-		gbc_errorLabel.gridx = 1;
-		gbc_errorLabel.gridy = 10;
-		infoPanel.add(error, gbc_errorLabel);
+		
 
 		/**
 		 * Beendet die Anwendung. Sichtbarkeit auf true.

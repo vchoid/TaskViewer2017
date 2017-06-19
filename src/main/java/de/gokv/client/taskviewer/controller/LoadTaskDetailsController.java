@@ -29,7 +29,6 @@ public class LoadTaskDetailsController implements ActionListener, ListSelectionL
 	private HTTPSClient client;
 	private MyFrame frame;
 	private MyModel model;
-	private MyModel modelNew;
 	private LocalDate lDate;
 	private String strDate;
 
@@ -69,15 +68,6 @@ public class LoadTaskDetailsController implements ActionListener, ListSelectionL
 				System.out.println(taskID + " nicht gefunden");
 				ex.printStackTrace();
 			}
-		} else if(e.getSource() == MyFrame.reloadBtn){
-			modelNew = new MyModel();
-			modelNew.readFiles();
-			model.setCountTasks(modelNew.getCountTasks());
-			frame.anzTasks.setText("" + model.getCountTasks()+ " Einträge");
-			frame.taskList.setListData(modelNew.getFilteredTasks());
-			
-			
-			
 		}
 	}
 
@@ -86,27 +76,7 @@ public class LoadTaskDetailsController implements ActionListener, ListSelectionL
 		if (e.getValueIsAdjusting()) {
 			taskID = frame.taskList.getSelectedValue();
 			MyFrame.taskID_field.setText(taskID);
-			
-			try {
-				client = new HTTPSClient(new URL("http://localhost:9080/gokv-tenant/api"));
-				client.testConnection(taskID);
-
-				lDate = LocalDate.parse(HTTPSClient.task.get("orderedDate").toString(), DateUtil.dTf_request);
-				strDate = lDate.getDayOfMonth() + "." + lDate.getMonthValue() + "." + lDate.getYear();
-				MyFrame.orderDate_field.setText(strDate);
-
-				MyFrame.state_field.setText(HTTPSClient.task.get("state").toString());
-				MyFrame.taskType_field.setText(HTTPSClient.task.get("type").toString());
-				MyFrame.evInProgs_field.setText(HTTPSClient.task.get("eventInProgress").toString());
-				MyFrame.evCompl_field.setText(HTTPSClient.task.get("eventCompleted").toString());
-				MyFrame.evReceived_field.setText(HTTPSClient.task.get("eventReceived").toString());
-				MyFrame.evResult_field.setText(HTTPSClient.task.get("eventResult").toString());
-
-			} catch (ServerException | GeneralSecurityException | IOException | ClientCertificateException
-					| URISyntaxException ex) {
-				System.out.println(taskID + " nicht gefunden");
-				ex.printStackTrace();
-			}
+						
 		}
 	}
 

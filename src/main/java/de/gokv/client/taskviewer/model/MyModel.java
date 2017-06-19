@@ -21,14 +21,15 @@ public class MyModel {
 	public static List<Task> tasks;
 	private List<String> filteredTasks;
 	private Task filteredCriteria;
-	public int countTasks;
-
-	public int getCountTasks() {
-		return countTasks;
+	public int countValidTasks;
+	public static int countInvalidTasks;
+	
+	public int getCountValidTasks() {
+		return countValidTasks;
 	}
 
-	public void setCountTasks(int countTasks) {
-		this.countTasks = countTasks;
+	public int getCountInvalidTasks() {
+		return countInvalidTasks;
 	}
 
 	public MyModel() {
@@ -44,15 +45,23 @@ public class MyModel {
 	public void readFiles() {
 		File folder = new File(System.getProperty("user.dir") + "/orders");
 		folder.mkdirs();
-
+		countValidTasks = 0;
 		for (File file : folder.listFiles()) {
 			reader = new CSVReader(file.getAbsolutePath());
 			reader.readCSVFile();
 			tasks.addAll(reader.getValidEntries());
-			countTasks += reader.getValidEntries().size();
+			countValidTasks += reader.getValidEntries().size();
+			countInvalidTasks += reader.getInvalidEntries().size();
+			
 		}
 	}
 
+	public void reload(){
+		tasks.clear();
+		countInvalidTasks = 0;
+		readFiles();
+	}
+	
 	/**
 	 * 
 	 * @return
