@@ -61,8 +61,9 @@ public class FilterTaskListKeyHandler implements KeyListener{
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 			setFilteredTask();
 		} else if (e.getKeyCode() == KeyEvent.VK_ESCAPE){
-			setFilteredTask();
 			clearTasks();
+			setFilteredTask();
+			frame.anzFiltTask.setText("0 Einträge");
 		}
 			}
 

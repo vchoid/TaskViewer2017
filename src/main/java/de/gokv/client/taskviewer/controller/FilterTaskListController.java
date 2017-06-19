@@ -60,8 +60,8 @@ public class FilterTaskListController implements ActionListener {
 		if (e.getSource() == frame.filterBtn) {
 			setFilteredTask();
 		} else if (e.getSource() == MyFrame.clearFieldBtn) {
-			setFilteredTask();
 			clearTasks();
+			setFilteredTask();
 			frame.anzFiltTask.setText("0 Einträge");
 		}
 	}
