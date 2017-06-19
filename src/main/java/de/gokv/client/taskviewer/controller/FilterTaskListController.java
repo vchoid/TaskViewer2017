@@ -37,6 +37,7 @@ public class FilterTaskListController implements ActionListener {
 
 			model.setFilterCriteria(t);
 			frame.taskList.setListData(model.getFilteredTasks());
+			MyFrame.anzFiltTask.setText(model.getFilteredTasks().length +" Einträge");
 
 		} catch (InvalidDateException e1) {
 			// DO NOTHING
@@ -61,7 +62,7 @@ public class FilterTaskListController implements ActionListener {
 		} else if (e.getSource() == MyFrame.clearFieldBtn) {
 			clearTasks();
 			setFilteredTask();
-			frame.anzFiltTask.setText("0 Einträge");
+			MyFrame.anzFiltTask.setText("0 Einträge");
 		}
 	}
 }

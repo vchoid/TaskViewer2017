@@ -37,7 +37,7 @@ public class FilterTaskListKeyHandler implements KeyListener{
 
 			model.setFilterCriteria(t);
 			frame.taskList.setListData(model.getFilteredTasks());
-			frame.anzFiltTask.setText(model.getFilteredTasks().length +" Einträge");
+			MyFrame.anzFiltTask.setText(model.getFilteredTasks().length +" Einträge");
 
 		} catch (InvalidDateException e1) {
 			// DO NOTHING
@@ -62,7 +62,7 @@ public class FilterTaskListKeyHandler implements KeyListener{
 		} else if (e.getKeyCode() == KeyEvent.VK_ESCAPE){
 			clearTasks();
 			setFilteredTask();
-			frame.anzFiltTask.setText("0 Einträge");
+			MyFrame.anzFiltTask.setText("0 Einträge");
 		}
 			}
 
