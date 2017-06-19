@@ -52,7 +52,6 @@ public class FilterTaskListKeyHandler implements KeyListener{
 		frame.pTaskID.setText(null);
 		frame.model_geb.setValue(null);
 		frame.model_ord.setValue(null);
-		frame.anzFiltTask.setText("0 Einträge");
 		
 	}
 	
