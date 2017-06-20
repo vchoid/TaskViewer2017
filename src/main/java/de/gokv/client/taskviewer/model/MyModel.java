@@ -9,8 +9,6 @@ import de.gokv.client.taskviewer.Task;
 
 /**
  * 
- * 
- * 
  * @author Christoph Kiank
  *
  */

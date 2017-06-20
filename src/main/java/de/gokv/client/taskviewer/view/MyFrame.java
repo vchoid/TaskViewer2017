@@ -9,6 +9,14 @@ import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Toolkit;
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Properties;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -30,6 +38,7 @@ import de.gokv.client.taskviewer.controller.LoadTaskDetailsController;
 import de.gokv.client.taskviewer.controller.MyFrameController;
 import de.gokv.client.taskviewer.controller.TaskListController;
 import de.gokv.client.taskviewer.model.MyModel;
+import de.gokv.client.taskviewer.utils.HexaToRGB;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
@@ -98,13 +107,16 @@ public class MyFrame extends JFrame {
 	public static  JLabel evResult_field;
 	
 	// Style ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	private Properties p;
+	private BufferedInputStream bis;
 	private Font title = new Font("Arial", Font.BOLD, 16);
 	private Font txt = new Font("Arial", Font.PLAIN, 15);
 	private Font label = new Font("Arial", Font.BOLD, 14);
 	
-	private Color pan241_C = new Color(166, 31, 125);
-	private Color pan2736_C = new Color(35, 45, 141);
-	private Color panelBackground = new Color(190,190,190);
+	private Color btnBackground;
+	private Color btnTxt;
+	private Color titelTextColor;
+	private Color panBlockBackground;
 	
 	private Border btnBorder = BorderFactory.createEmptyBorder(8, 5, 8, 5);
 	private Border emptyBorder = BorderFactory.createEmptyBorder();
@@ -128,8 +140,24 @@ public class MyFrame extends JFrame {
 
 		controller = new MyFrameController(this);
 
+		// Properties
+		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+			
+		p = new Properties();
+		File colorFile = new File("C:/java/workspaces/BitgoKV/gokv-client-task-viewer/src/main/resources/color.properties");
+		try {
+			bis = new BufferedInputStream(new FileInputStream(colorFile));
+			p.load(bis);
+			panBlockBackground = new HexaToRGB().getRGB(p.getProperty("color.panel.block.background"));
+			btnBackground = new HexaToRGB().getRGB(p.getProperty("color.button.background"));
+			btnTxt = new HexaToRGB().getRGB(p.getProperty("color.button.text"));
+			titelTextColor = new HexaToRGB().getRGB(p.getProperty("color.titeltext.foreground"));
+		} catch (IOException e) {
+			
+		}	
+		
 		// Content-Panel
-		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		contPanel = new JPanel();
 		contPanel.setBorder(taskBorder);
 		FlowLayout fl_contPanel = new FlowLayout();
@@ -144,12 +172,12 @@ public class MyFrame extends JFrame {
 		
 		filtBorder = BorderFactory.createTitledBorder("Filter Maske");
 		filtBorder.setTitleJustification(TitledBorder.TOP);
-		filtBorder.setTitleColor(pan2736_C);
+		filtBorder.setTitleColor(titelTextColor);
 		filtBorder.setTitleFont(title);
 		filtBorder.setBorder(emptyBorder);
 		filterPanel = new JPanel();
 		filterPanel.setBorder(filtBorder);
-		filterPanel.setBackground(panelBackground);
+		filterPanel.setBackground(panBlockBackground);
 		GridBagLayout gbl_filPanel = new GridBagLayout();
 		gbl_filPanel.columnWidths = new int[] { 10, 200, 200, 10 };
 		gbl_filPanel.rowHeights = new int[] { 43, 30, 30, 30, 30, 30, 30, 23 };
@@ -254,8 +282,8 @@ public class MyFrame extends JFrame {
 		// << Button "Felder leeren" >>
 		clearFieldBtn = new JButton("Felder leeren");
 		clearFieldBtn.setBorder(btnBorder);
-		clearFieldBtn.setBackground(pan241_C);
-		clearFieldBtn.setForeground(Color.WHITE);
+		clearFieldBtn.setBackground(btnBackground);
+		clearFieldBtn.setForeground(btnTxt);
 		clearFieldBtn.setFont(txt);
 		clearFieldBtn.addActionListener(filtTaskCont);
 		GridBagConstraints gbc_clearFieldBtn = new GridBagConstraints();
@@ -269,8 +297,8 @@ public class MyFrame extends JFrame {
 		// << Button "Filter anwenden" >>
 		filterBtn = new JButton("Tasks filtern");
 		filterBtn.setBorder(btnBorder);
-		filterBtn.setBackground(pan241_C);
-		filterBtn.setForeground(Color.WHITE);
+		filterBtn.setBackground(btnBackground);
+		filterBtn.setForeground(btnTxt);
 		filterBtn.setFont(txt);
 		filterBtn.addActionListener(filtTaskCont);
 		GridBagConstraints gbc_filterBtn = new GridBagConstraints();
@@ -298,18 +326,18 @@ public class MyFrame extends JFrame {
 		
 
 		// TaskPanel
-		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		TaskListController taskListCont = new TaskListController(this, controller.getModel());
 		LoadTaskDetailsController loadTaskDetailsCont= new LoadTaskDetailsController(this, controller.getModel());
 		
 		taskBorder = BorderFactory.createTitledBorder("Tasks");
 		taskBorder.setTitleJustification(TitledBorder.TOP);
-		taskBorder.setTitleColor(pan2736_C);
+		taskBorder.setTitleColor(titelTextColor);
 		taskBorder.setTitleFont(title);
 		taskBorder.setBorder(emptyBorder);
 		taskPanel = new JPanel();
 		taskPanel.setBorder(taskBorder);
-		taskPanel.setBackground(panelBackground);
+		taskPanel.setBackground(panBlockBackground);
 		GridBagLayout gbl_taskPan = new GridBagLayout();
 		gbl_taskPan.columnWidths = new int[] { 10, 206, 206, 10 };
 		gbl_taskPan.rowHeights = new int[] { 43 , 0, 157, 30, 23};
@@ -365,8 +393,8 @@ public class MyFrame extends JFrame {
 		reloadIcon = new ImageIcon(icon.getScaledInstance(18, 18, 0));
 		reloadBtn.setIcon(reloadIcon);
 		reloadBtn.setBorder(btnBorder);
-		reloadBtn.setBackground(pan241_C);
-		reloadBtn.setForeground(Color.WHITE);
+		reloadBtn.setBackground(btnBackground);
+		reloadBtn.setForeground(btnTxt);
 		reloadBtn.setFont(txt);
 		reloadBtn.addActionListener(taskListCont);
 		GridBagConstraints gbc_reloadTaskBtn = new GridBagConstraints();
@@ -380,8 +408,8 @@ public class MyFrame extends JFrame {
 		// << Tasks laden -Button >>
 		taskLoadBtn = new JButton("Task laden");
 		taskLoadBtn.setBorder(btnBorder);
-		taskLoadBtn.setBackground(pan241_C);
-		taskLoadBtn.setForeground(Color.WHITE);
+		taskLoadBtn.setBackground(btnBackground);
+		taskLoadBtn.setForeground(btnTxt);
 		taskLoadBtn.setFont(txt);
 		taskLoadBtn.addActionListener(loadTaskDetailsCont);
 		GridBagConstraints gbc_detailBtn = new GridBagConstraints();
@@ -394,15 +422,15 @@ public class MyFrame extends JFrame {
 		
 
 		// Info-Panel
-		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		infoBorder = BorderFactory.createTitledBorder("Informationen");
 		infoBorder.setTitleJustification(TitledBorder.TOP);
-		infoBorder.setTitleColor(pan2736_C);
+		infoBorder.setTitleColor(titelTextColor);
 		infoBorder.setTitleFont(title);
 		infoBorder.setBorder(emptyBorder);
 		infoPanel = new JPanel();
 		infoPanel.setBorder(infoBorder);
-		infoPanel.setBackground(panelBackground);
+		infoPanel.setBackground(panBlockBackground);
 		GridBagLayout gbl_infoPanel = new GridBagLayout();
 		gbl_infoPanel.columnWidths = new int[] { 10, 150, 262, 10 };
 		gbl_infoPanel.rowHeights = new int[] { 21, 20, 23, 24, 24, 24, 24, 24, 24, 24, 24, 21 };
@@ -423,7 +451,7 @@ public class MyFrame extends JFrame {
 
 		taskID_field = new JLabel();
 		taskID_field.setFont(txt);
-		taskID_field.setForeground(pan2736_C);
+		taskID_field.setForeground(titelTextColor);
 		taskID_field.setBorder(emptyBorder);
 		GridBagConstraints gbc_taskID_field = new GridBagConstraints();
 		gbc_taskID_field.anchor = GridBagConstraints.NORTH;
@@ -448,7 +476,7 @@ public class MyFrame extends JFrame {
 		
 		state_field = new JLabel();
 		state_field.setFont(txt);
-		state_field.setForeground(pan2736_C);
+		state_field.setForeground(titelTextColor);
 		state_field.setBorder(emptyBorder);
 		GridBagConstraints gbc_state_field = new GridBagConstraints();
 		gbc_state_field.anchor = GridBagConstraints.NORTH;
@@ -473,7 +501,7 @@ public class MyFrame extends JFrame {
 		
 		taskType_field = new JLabel();
 		taskType_field.setFont(txt);
-		taskType_field.setForeground(pan2736_C);
+		taskType_field.setForeground(titelTextColor);
 		taskType_field.setBorder(emptyBorder);
 		GridBagConstraints gbc_taskType_field = new GridBagConstraints();
 		gbc_taskType_field.anchor = GridBagConstraints.NORTH;
@@ -498,7 +526,7 @@ public class MyFrame extends JFrame {
 		
 		orderDate_field = new JLabel();
 		orderDate_field.setFont(txt);
-		orderDate_field.setForeground(pan2736_C);
+		orderDate_field.setForeground(titelTextColor);
 		orderDate_field.setBorder(emptyBorder);
 		GridBagConstraints gbc_orderDate_field = new GridBagConstraints();
 		gbc_orderDate_field.anchor = GridBagConstraints.NORTH;
@@ -523,7 +551,7 @@ public class MyFrame extends JFrame {
 		
 		evInProgs_field = new JLabel();
 		evInProgs_field.setFont(txt);
-		evInProgs_field.setForeground(pan2736_C);
+		evInProgs_field.setForeground(titelTextColor);
 		evInProgs_field.setBorder(emptyBorder);
 		GridBagConstraints gbc_evInProgs_field = new GridBagConstraints();
 		gbc_evInProgs_field.anchor = GridBagConstraints.NORTH;
@@ -548,7 +576,7 @@ public class MyFrame extends JFrame {
 		
 		evCompl_field = new JLabel();
 		evCompl_field.setFont(txt);
-		evCompl_field.setForeground(pan2736_C);
+		evCompl_field.setForeground(titelTextColor);
 		evCompl_field.setBorder(emptyBorder);
 		GridBagConstraints gbc_evCompl_field = new GridBagConstraints();
 		gbc_evCompl_field.anchor = GridBagConstraints.NORTH;
@@ -573,7 +601,7 @@ public class MyFrame extends JFrame {
 		
 		evReceived_field = new JLabel();
 		evReceived_field.setFont(txt);
-		evReceived_field.setForeground(pan2736_C);
+		evReceived_field.setForeground(titelTextColor);
 		evReceived_field.setBorder(emptyBorder);
 		GridBagConstraints gbc_evReceived_field = new GridBagConstraints();
 		gbc_evReceived_field.anchor = GridBagConstraints.NORTH;
@@ -598,7 +626,7 @@ public class MyFrame extends JFrame {
 		
 		evResult_field = new JLabel();
 		evResult_field.setFont(txt);
-		evResult_field.setForeground(pan2736_C);
+		evResult_field.setForeground(titelTextColor);
 		evResult_field.setBorder(emptyBorder);
 		GridBagConstraints gbc_evResult_field = new GridBagConstraints();
 		gbc_evResult_field.anchor = GridBagConstraints.NORTH;
@@ -611,9 +639,7 @@ public class MyFrame extends JFrame {
 		
 		
 
-		/**
-		 * Beendet die Anwendung. Sichtbarkeit auf true.
-		 */
+		// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setVisible(true);
 		setLocationRelativeTo(null);

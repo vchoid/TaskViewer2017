@@ -1,11 +1,6 @@
 package de.gokv.client.taskviewer.TestMe;
 
-import java.time.LocalDate;
-
-import org.apache.commons.csv.CSVRecord;
-
 import de.gokv.client.taskviewer.CSVReader;
-import de.gokv.client.taskviewer.Task;
 
 public class TestMeInMain {
 	private static CSVReader reader;
@@ -52,13 +47,13 @@ public class TestMeInMain {
 		//gültige Einträge in CSV-Datei +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		
 //		getValidFile();
-		getTaskTypesFile();
-//		getInvalidTaskTypesFile();
-		for (Task task : reader.getValidEntries()) {
-			System.out.println(task);
-		}
+//		getTaskTypesFile();
+////		getInvalidTaskTypesFile();
+//		for (Task task : reader.getValidEntries()) {
+//			System.out.println(task);
+//		}
 		
-		
+				
 		// ungültige Einträge in CSV ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 //		getInvalidFile();
 //		getInvalidReqFieldFile();
@@ -67,4 +62,6 @@ public class TestMeInMain {
 				
 
 	}
+	
+	
 }

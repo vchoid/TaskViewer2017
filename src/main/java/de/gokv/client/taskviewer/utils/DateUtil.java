@@ -1,17 +1,15 @@
 package de.gokv.client.taskviewer.utils;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 import java.util.Date;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.regex.*;
 
 import de.gokv.client.taskviewer.exceptions.InvalidDateException;
-import net.sf.json.JSON;
 
 /**
  * Beinhaltet eine Methode zum Überprüfen des richtigen Formates (DD.MM.YYYY)
@@ -66,10 +64,8 @@ public class DateUtil {
 	public static boolean isDateValid(String date) {
 		// String überprüfen, ob 
 		Pattern p = Pattern.compile("\\d{2}\\.\\d{2}\\.\\d{4}");
-		Pattern p2 = Pattern.compile("\\d{4}\\-\\d{2}\\-\\d{2}");
 		Matcher m = p.matcher(date);
-		Matcher m2 = p.matcher(date);
-		if (!m.matches() || !m2.matches()) {
+		if (!m.matches()) {
 			return false;
 		}
 		try {
