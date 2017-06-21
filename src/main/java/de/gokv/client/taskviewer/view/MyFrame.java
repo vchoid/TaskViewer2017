@@ -107,8 +107,6 @@ public class MyFrame extends JFrame {
 	public static  JLabel evResult_field;
 	
 	// Style ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	private Properties p;
-	private BufferedInputStream bis;
 	private Font title = new Font("Arial", Font.BOLD, 16);
 	private Font txt = new Font("Arial", Font.PLAIN, 15);
 	private Font label = new Font("Arial", Font.BOLD, 14);
@@ -142,20 +140,11 @@ public class MyFrame extends JFrame {
 
 		// Properties
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-			
-		p = new Properties();
-		File colorFile = new File("C:/java/workspaces/BitgoKV/gokv-client-task-viewer/src/main/resources/color.properties");
-		try {
-			bis = new BufferedInputStream(new FileInputStream(colorFile));
-			p.load(bis);
-			panBlockBackground = new HexaToRGB().getRGB(p.getProperty("color.panel.block.background"));
-			btnBackground = new HexaToRGB().getRGB(p.getProperty("color.button.background"));
-			btnTxt = new HexaToRGB().getRGB(p.getProperty("color.button.text"));
-			titelTextColor = new HexaToRGB().getRGB(p.getProperty("color.titeltext.foreground"));
-		} catch (IOException e) {
-			
-		}	
-		
+		// Farben 
+			panBlockBackground = new HexaToRGB("color.panel.block.background").getRGB();
+			btnBackground = new HexaToRGB("color.button.background").getRGB();
+			btnTxt = new HexaToRGB("color.button.text").getRGB();
+			titelTextColor = new HexaToRGB("color.titeltext.foreground").getRGB();
 		// Content-Panel
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		contPanel = new JPanel();
@@ -319,7 +308,8 @@ public class MyFrame extends JFrame {
 		GridBagConstraints gbc_anzFiltTask = new GridBagConstraints();
 		gbc_anzFiltTask.anchor = GridBagConstraints.NORTH;
 		gbc_anzFiltTask.fill = GridBagConstraints.HORIZONTAL;
-		gbc_anzFiltTask.insets = new Insets(0, 10, 00, 0);
+		gbc_anzFiltTask.insets = new Insets(3, 10, 0, 0);
+		gbc_anzFiltTask.gridwidth = 2;
 		gbc_anzFiltTask.gridx = 2;
 		gbc_anzFiltTask.gridy = 7;
 		filterPanel.add(anzFiltTask, gbc_anzFiltTask);
@@ -357,16 +347,16 @@ public class MyFrame extends JFrame {
 		} else {
 			valEntMsg = "";
 		}
-		anzTasks = new JTextField(valEntMsg + invalEntMsg);
+		anzTasks = new JTextField(valEntMsg + invalEntMsg );
 		anzTasks.setBorder(emptyBorder);
 		anzTasks.setOpaque(false);
 		anzTasks.addActionListener(taskListCont);
 		taskPanel.add(anzTasks);
 		GridBagConstraints gbc_anzTask = new GridBagConstraints();
-		gbc_anzTask.anchor = GridBagConstraints.NORTH;
-		gbc_anzTask.fill = GridBagConstraints.HORIZONTAL;
-		gbc_anzTask.insets = new Insets(0, 12, 0, 0);
-		gbc_anzTask.gridwidth = 0;
+		gbc_anzTask.anchor = GridBagConstraints.CENTER;
+		gbc_anzTask.fill = GridBagConstraints.BOTH;
+		gbc_anzTask.insets = new Insets(2, 10, 0, 0);
+		gbc_anzTask.gridwidth = 2;
 		gbc_anzTask.gridx = 2;
 		gbc_anzTask.gridy = 4;
 		taskPanel.add(anzTasks, gbc_anzTask);
