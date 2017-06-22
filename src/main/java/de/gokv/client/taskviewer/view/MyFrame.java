@@ -110,6 +110,7 @@ public class MyFrame extends JFrame {
 	private Color colorTitelTxt;
 	private Color colorBtnBG;
 	private Color colorBtnTxt;
+	private Color colorEntryTxt;
 	private Color colorLabelDateTxt;
 	private Color colorInfoTitleTxt;
 	private Color colorInfoTxt;
@@ -135,9 +136,9 @@ public class MyFrame extends JFrame {
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		// Fenstergröße
 		// Quer 3x1
-//		setSize(new Dimension(1360, 355));
+		setSize(new Dimension(1360, 355));
 		// Quer 2x2
-		setSize(new Dimension(915, 662));
+//		setSize(new Dimension(915, 662));
 		// Hoch
 //		setSize(new Dimension(470, 970));
 		// Farben 
@@ -146,6 +147,7 @@ public class MyFrame extends JFrame {
 		colorTitelTxt = new HexaToRGB("color.panel.titeltext.foreground").parseHexToRGB();
 		colorBtnBG = new HexaToRGB("color.button.background").parseHexToRGB();
 		colorBtnTxt = new HexaToRGB("color.button.text").parseHexToRGB();
+		colorEntryTxt = new HexaToRGB("color.entries.text").parseHexToRGB();
 		colorLabelDateTxt = new HexaToRGB("color.label.date.text").parseHexToRGB();
 		colorInfoTitleTxt =new HexaToRGB("color.info.titel.text").parseHexToRGB();
 		colorInfoTxt =new HexaToRGB("color.info.text").parseHexToRGB();
@@ -304,6 +306,7 @@ public class MyFrame extends JFrame {
 		
 		// Anzahl der gefilterten Tasks
 		anzFiltTask = new JTextField(countValidTasks + " Einträge " );
+		anzFiltTask.setForeground(colorEntryTxt);
 		anzFiltTask.setBorder(emptyBorder);
 		anzFiltTask.addActionListener(filtTaskCont);
 		anzFiltTask.addKeyListener(filtTaskKey);
@@ -352,6 +355,7 @@ public class MyFrame extends JFrame {
 			valEntMsg = "";
 		}
 		anzTasks = new JTextField(valEntMsg + invalEntMsg );
+		anzTasks.setForeground(colorEntryTxt);
 		anzTasks.setBorder(emptyBorder);
 		anzTasks.setOpaque(false);
 		anzTasks.addActionListener(taskListCont);
@@ -650,7 +654,7 @@ public class MyFrame extends JFrame {
 		gbc_errMsg_field.gridwidth = 4;
 		gbc_errMsg_field.gridx = 0;
 		gbc_errMsg_field.gridy = 10;
-		infoPanel.add(errMsg_field, gbc_errMsg_field);
+		getContentPane().add(errMsg_field, gbc_errMsg_field);
 		
 		
 

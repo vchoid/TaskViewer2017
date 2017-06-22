@@ -66,8 +66,14 @@ public class HexaToRGB {
 	 */
 	public boolean isHexValid() {
 		propFile = "color.properties";
-		loadProp = new LoadProperties(propFile);
-		propVal = loadProp.getPropertyVal(propTitle);
+		try {
+			loadProp = new LoadProperties(propFile);
+			propVal = loadProp.getPropertyVal(propTitle);
+		} catch (Exception e) {
+			getDefaultColor();
+			++countErr;
+		}
+		
 		if (propVal == null) {
 			getDefaultColor();
 			++countErr;
@@ -103,6 +109,7 @@ public class HexaToRGB {
 	 * <li><b>color.panel.titeltext.foreground</b>: #232d8d</li>
 	 * <li><b>color.button.background</b>: #a61f7d</li>
 	 * <li><b>color.button.text</b>: #ffffff</li>
+	 * <li><b>color.entries.text</b>: #6e6e6e</li>
 	 * <li><b>color.label.date.text</b>: #6e6e6e</li>
 	 * <li><b>color.info.titel.text</b>: #000000</li>
 	 * <li><b>color.info.text</b>: #232d8d</li>
@@ -139,6 +146,11 @@ public class HexaToRGB {
 			errMsg = countErr + " Fehler: Der Farbwert '" + propVal + "' von '" + propTitle
 					+ "' wurde auf den Standardwert zurück gesetzt";
 			propVal = "#ffffff";
+			return propVal;
+		case "color.entries.text":
+			errMsg = countErr + " Fehler: Der Farbwert '" + propVal + "' von '" + propTitle
+			+ "' wurde auf den Standardwert zurück gesetzt";
+			propVal = "#6e6e6e";
 			return propVal;
 		case "color.label.date.text":
 			errMsg = countErr + " Fehler: Der Farbwert '" + propVal + "' von '" + propTitle
