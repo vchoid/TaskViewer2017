@@ -140,20 +140,10 @@ public class MyFrame extends JFrame {
 		// Fenstergröße
 		// Quer 3x1
 //		setSize(new Dimension(1360, 355));
-//		Laden über eine .properties-Datei-----------------------------------------------------
-		try {
-			String propWindow = "window.properties";
-			String fileP = "C:/java/workspaces/BitgoKV/gokv-client-task-viewer/src/main/resources/";
-			int w = new LoadProperties(propWindow, "w", fileP).getPropertyIntVal();
-			int h = new LoadProperties(propWindow, "h").getPropertyIntVal();
-			setSize(w,h);
-		} catch (ClientException e) {
-			setSize(new Dimension(470, 970));
-		}
-		//--------------------------------------------------------------------------------------
 		// Quer 2x2
-//		setSize(new Dimension(915, 662));
+		 setSize(new Dimension(915, 662));
 		// Hoch
+		// setSize(new Dimension(470, 970));
 		// Farben 
 		colorPanContBG = new HexaToRGB("color.panel.content.background").parseHexToRGB();
 		colorPanBlockBG = new HexaToRGB("color.panel.block.background").parseHexToRGB();
