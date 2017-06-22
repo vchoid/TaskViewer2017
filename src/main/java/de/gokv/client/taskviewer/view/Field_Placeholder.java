@@ -22,7 +22,7 @@ public class Field_Placeholder extends JTextField {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private Color colorPlaceholderTxt = new HexaToRGB("color.placeholder.text").getRGB();
+	private Color colorPlaceholderTxt = new HexaToRGB("color.placeholder.text").parseHexToRGB();
 
 	private String placeholder;
 	private Graphics2D g;

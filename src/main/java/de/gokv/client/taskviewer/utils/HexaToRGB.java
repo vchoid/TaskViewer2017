@@ -1,13 +1,9 @@
 package de.gokv.client.taskviewer.utils;
 
 import java.awt.Color;
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.util.Properties;
+import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.hamcrest.core.IsNull;
 
 import de.gokv.client.taskviewer.controller.LoadProperties;
 
@@ -15,8 +11,18 @@ import de.gokv.client.taskviewer.controller.LoadProperties;
  * Umwandeln von HTML-Farbcodes in RGB-Farbwerte. Bei fehlerhaften Werten werden
  * Default-Werte geladen.
  * 
+ * <p>
+ * <b>Methoden:</b>
+ * <ul>
+ * <li><b>{@link #isHexValid()}</b>: Prüft ein Hex-Farbwert auf syntaktische
+ * Korrektheit und liefert ein boolischen Wert</li>
+ * <li><b>{@link #parseHexToRGB()}</b>: Wandelt ein Hex-Farbwert in ein RGB-Farbwert um.</li>
+ * <li><b>{@link #getDefaultColor()}</b>: Setzt Default-Werte.</li>
+ * </ul>
+ * </p>
  * 
  * @author Christoph Kiank
+ * @version 1.0.0
  *
  */
 public class HexaToRGB {
@@ -37,19 +43,33 @@ public class HexaToRGB {
 
 	// Konstruktor
 	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	/**
+	 * Verlangt ein Parameter, als String, den Titel aus der .properties-Datei.
+	 * 
+	 * @param propTitle
+	 */
 	public HexaToRGB(String propTitle) {
 		super();
 		this.propTitle = propTitle;
 	}
 
 	// ------------------------------------------------------------------------------------------------------
-
+	/**
+	 * Lädt zuerst die color.properties-Datei. Holt den jeweiligen zugeordneten
+	 * Wert über den Titel in der .properties-Datei und speichert ihn in einer
+	 * Variable ab. Wenn der Wert falsch oder leer (null) ist, werden die
+	 * default Einstellungen geladen zu den jeweiligen Wert. Ist ein Wert
+	 * vorhanden, wird dieser mittels eines Pattern auf eine korrekte Form
+	 * überprüft und wird anschließen mit einen true zurückgegeben.
+	 * 
+	 * @return
+	 */
 	public boolean isHexValid() {
 		propFile = "color.properties";
 		loadProp = new LoadProperties(propFile);
 		propVal = loadProp.getPropertyVal(propTitle);
 		if (propVal == null) {
-			setDefaultColor();
+			getDefaultColor();
 			++countErr;
 		}
 		patt = Pattern.compile(HEX_PATTERN);
@@ -57,16 +77,43 @@ public class HexaToRGB {
 		return match.matches();
 	}
 
-	public Color getRGB() {
+	/**
+	 * Prüft zuerst ob der Wert valide ist. Wenn ja, dann wandel den
+	 * Hexfarbcode in ein RGB-Wert um und gib ihn zurück. Wenn nein, dann setze den Default
+	 * Wert ein und gib ihn zurück.
+	 * 
+	 * @return
+	 */
+	public Color parseHexToRGB() {
 		if (isHexValid()) {
 			return Color.decode(propVal);
 		} else {
 			++countErr;
-			return Color.decode(setDefaultColor());
+			return Color.decode(getDefaultColor());
 		}
 	}
 
-	public String setDefaultColor() {
+	/**
+	 * Default-Einstellungswerte für die Hexadezimale Farbdefinition.
+	 * <p>
+	 * <b>Methoden:</b>
+	 * <ul>
+	 * <li><b>color.panel.content.background</b>: #f0f0f0</li>
+	 * <li><b>color.panel.block.background</b>: #bebebE</li>
+	 * <li><b>color.panel.titeltext.foreground</b>: #232d8d</li>
+	 * <li><b>color.button.background</b>: #a61f7d</li>
+	 * <li><b>color.button.text</b>: #ffffff</li>
+	 * <li><b>color.label.date.text</b>: #6e6e6e</li>
+	 * <li><b>color.info.titel.text</b>: #000000</li>
+	 * <li><b>color.info.text</b>: #232d8d</li>
+	 * <li><b>color.ErrorMsg.text</b>: #a61f7d</li>
+	 * <li><b>color.placeholder.text</b>: #6e6e6e</li>
+	 * </ul>
+	 * </p>
+	 * 
+	 * @return
+	 */
+	public String getDefaultColor() {
 		switch (propTitle) {
 		case "color.panel.content.background":
 			errMsg = countErr + " Fehler: Der Farbwert '" + propVal + "' von '" + propTitle
@@ -110,7 +157,7 @@ public class HexaToRGB {
 			return propVal;
 		case "color.ErrorMsg.text":
 			errMsg = countErr + " Fehler: Der Farbwert '" + propVal + "' von '" + propTitle
-			+ "' wurde auf den Standardwert zurück gesetzt";
+					+ "' wurde auf den Standardwert zurück gesetzt";
 			propVal = "#a61f7d";
 			return propVal;
 		case "color.placeholder.text":

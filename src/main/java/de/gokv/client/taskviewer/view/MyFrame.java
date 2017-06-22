@@ -141,15 +141,15 @@ public class MyFrame extends JFrame {
 		// Hoch
 //		setSize(new Dimension(470, 970));
 		// Farben 
-		colorPanContBG = new HexaToRGB("color.panel.content.background").getRGB();
-		colorPanBlockBG = new HexaToRGB("color.panel.block.background").getRGB();
-		colorTitelTxt = new HexaToRGB("color.panel.titeltext.foreground").getRGB();
-		colorBtnBG = new HexaToRGB("color.button.background").getRGB();
-		colorBtnTxt = new HexaToRGB("color.button.text").getRGB();
-		colorLabelDateTxt = new HexaToRGB("color.label.date.text").getRGB();
-		colorInfoTitleTxt =new HexaToRGB("color.info.titel.text").getRGB();
-		colorInfoTxt =new HexaToRGB("color.info.text").getRGB();
-		colorErrMsg =new HexaToRGB("color.ErrorMsg.text").getRGB();
+		colorPanContBG = new HexaToRGB("color.panel.content.background").parseHexToRGB();
+		colorPanBlockBG = new HexaToRGB("color.panel.block.background").parseHexToRGB();
+		colorTitelTxt = new HexaToRGB("color.panel.titeltext.foreground").parseHexToRGB();
+		colorBtnBG = new HexaToRGB("color.button.background").parseHexToRGB();
+		colorBtnTxt = new HexaToRGB("color.button.text").parseHexToRGB();
+		colorLabelDateTxt = new HexaToRGB("color.label.date.text").parseHexToRGB();
+		colorInfoTitleTxt =new HexaToRGB("color.info.titel.text").parseHexToRGB();
+		colorInfoTxt =new HexaToRGB("color.info.text").parseHexToRGB();
+		colorErrMsg =new HexaToRGB("color.ErrorMsg.text").parseHexToRGB();
 		// Content-Panel
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		contPanel = new JPanel();
