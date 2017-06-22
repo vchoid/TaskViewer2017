@@ -13,6 +13,7 @@ public class LoadProperties{
 
 	private File file;
 	private String propVal;
+	private Integer propIntVal;
 	private String propTitle;
 	private String propFileName;
 	private Properties prop;
@@ -20,37 +21,29 @@ public class LoadProperties{
 	
 	// Konstruktor +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	
-	public LoadProperties(String propFileName) {
-		file = new File(
-				"C:/java/workspaces/BitgoKV/gokv-client-task-viewer/src/main/resources/" + propFileName);
+	
+	public LoadProperties(String propFileName, String propTitle) {
+		this.propFileName = propFileName;
+		this.propTitle = propTitle;
 		try {
+			file = new File("C:/java/workspaces/BitgoKV/gokv-client-task-viewer/src/main/resources/"+ propFileName);
 			bis = new BufferedInputStream(new FileInputStream(file));
 		} catch (FileNotFoundException e) {
-			throw new ClientException(e, "Datei '" + file + "' wurde nicht gefunden");
+			throw new ClientException(e, "Der Wert mit der Bezeichung '" + propTitle + "' in der Datei '" + propFileName + "' wurde nicht gefunden");
 		}
 	}
 	
-	public LoadProperties(String propFileName, String filePath) {
-		this(propFileName);
+	public LoadProperties(String propFileName, String propTitle, String filePath) {
+		this(propFileName, propTitle);
 		try {
-			file = new File(filePath);
+			file = new File(filePath+propFileName);
 			bis = new BufferedInputStream(new FileInputStream(file));
 		} catch (FileNotFoundException e) {
-			throw new ClientException(e, "Datei " + filePath + " wurde nicht gefunden");
-		}
-	}
-	
-	public LoadProperties(String propFileName, String filePath, String propTitle) {
-		this(propFileName, filePath);
-		try {
-			file = new File(filePath);
-			bis = new BufferedInputStream(new FileInputStream(file));
-		} catch (FileNotFoundException e) {
-			throw new ClientException(e, "Datei " + filePath + " wurde nicht gefunden");
+			throw new ClientException(e, "Der Wert mit der Bezeichung '" + propTitle + "' in der Datei '" + propFileName + "' im Pfad '" + filePath + "' wurde nicht gefunden");
 		}
 	}
 			
-	public String getPropertyVal(String propTitle){
+	public String getPropertyStringVal(){
 		try {
 			prop = new Properties();
 			prop.load(bis);
@@ -59,6 +52,18 @@ public class LoadProperties{
 			throw new ClientException(e, "Es ist ein Fehler beim Lesen der Datei aufgetreten");
 		}
 		return propVal;
+	}
+	
+	public int getPropertyIntVal(){
+		try {
+			prop = new Properties();
+			prop.load(bis);
+			propVal = prop.getProperty(propTitle);
+			propIntVal = Integer.parseInt(propVal);
+		} catch (IOException e) {
+			throw new ClientException(e, "Es ist ein Fehler beim Lesen der Datei aufgetreten");
+		}
+		return propIntVal;
 	}
 
 

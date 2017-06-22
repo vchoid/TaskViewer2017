@@ -62,13 +62,13 @@ public class HexaToRGB {
 	 * vorhanden, wird dieser mittels eines Pattern auf eine korrekte Form
 	 * überprüft und wird anschließen mit einen true zurückgegeben.
 	 * 
-	 * @return
+	 * @return boolean
 	 */
 	public boolean isHexValid() {
 		propFile = "color.properties";
 		try {
-			loadProp = new LoadProperties(propFile);
-			propVal = loadProp.getPropertyVal(propTitle);
+			loadProp = new LoadProperties(propFile, propTitle);
+			propVal = loadProp.getPropertyStringVal();
 		} catch (Exception e) {
 			getDefaultColor();
 			++countErr;
@@ -88,7 +88,7 @@ public class HexaToRGB {
 	 * Hexfarbcode in ein RGB-Wert um und gib ihn zurück. Wenn nein, dann setze den Default
 	 * Wert ein und gib ihn zurück.
 	 * 
-	 * @return
+	 * @return {@link Color}
 	 */
 	public Color parseHexToRGB() {
 		if (isHexValid()) {
@@ -118,7 +118,7 @@ public class HexaToRGB {
 	 * </ul>
 	 * </p>
 	 * 
-	 * @return
+	 * @return {@link String}
 	 */
 	public String getDefaultColor() {
 		switch (propTitle) {

@@ -8,7 +8,9 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
+import java.util.Properties;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -25,9 +27,11 @@ import javax.swing.border.TitledBorder;
 
 import de.gokv.client.taskviewer.controller.FilterTaskListController;
 import de.gokv.client.taskviewer.controller.FilterTaskListKeyHandler;
+import de.gokv.client.taskviewer.controller.LoadProperties;
 import de.gokv.client.taskviewer.controller.LoadTaskDetailsController;
 import de.gokv.client.taskviewer.controller.MyFrameController;
 import de.gokv.client.taskviewer.controller.TaskListController;
+import de.gokv.client.taskviewer.exceptions.ClientException;
 import de.gokv.client.taskviewer.model.MyModel;
 import de.gokv.client.taskviewer.utils.HexaToRGB;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
@@ -131,16 +135,25 @@ public class MyFrame extends JFrame {
 		setTitle("bitGo_KV-TaskViewer");
 		setAlwaysOnTop(true);
 
-
 		// Properties
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		// Fenstergröße
 		// Quer 3x1
-		setSize(new Dimension(1360, 355));
+//		setSize(new Dimension(1360, 355));
+//		Laden über eine .properties-Datei-----------------------------------------------------
+		try {
+			String propWindow = "window.properties";
+			String fileP = "C:/java/workspaces/BitgoKV/gokv-client-task-viewer/src/main/resources/";
+			int w = new LoadProperties(propWindow, "w", fileP).getPropertyIntVal();
+			int h = new LoadProperties(propWindow, "h").getPropertyIntVal();
+			setSize(w,h);
+		} catch (ClientException e) {
+			setSize(new Dimension(470, 970));
+		}
+		//--------------------------------------------------------------------------------------
 		// Quer 2x2
 //		setSize(new Dimension(915, 662));
 		// Hoch
-//		setSize(new Dimension(470, 970));
 		// Farben 
 		colorPanContBG = new HexaToRGB("color.panel.content.background").parseHexToRGB();
 		colorPanBlockBG = new HexaToRGB("color.panel.block.background").parseHexToRGB();
@@ -655,8 +668,6 @@ public class MyFrame extends JFrame {
 		gbc_errMsg_field.gridx = 0;
 		gbc_errMsg_field.gridy = 10;
 		getContentPane().add(errMsg_field, gbc_errMsg_field);
-		
-		
 
 		// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
