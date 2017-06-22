@@ -96,11 +96,13 @@ public class MyFrame extends JFrame {
 	public static  JLabel evInProgs_field;
 	public static  JLabel evReceived_field;
 	public static  JLabel evResult_field;
+	public static  JLabel errMsg_field;
 	
 	// Style ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	private String pathIconPrg;
 	private Font title = new Font("Arial", Font.BOLD, 16);
 	private Font txt = new Font("Arial", Font.PLAIN, 15);
+	private Font errMsgTxt = new Font("Arial", Font.PLAIN, 9);
 	private Font label = new Font("Arial", Font.BOLD, 14);
 	
 	private Color colorPanBlockBG;
@@ -111,6 +113,7 @@ public class MyFrame extends JFrame {
 	private Color colorLabelDateTxt;
 	private Color colorInfoTitleTxt;
 	private Color colorInfoTxt;
+	private Color colorErrMsg;
 	
 	private Border btnBorder = BorderFactory.createEmptyBorder(8, 5, 8, 5);
 	private Border emptyBorder = BorderFactory.createEmptyBorder();
@@ -146,6 +149,7 @@ public class MyFrame extends JFrame {
 		colorLabelDateTxt = new HexaToRGB("color.label.date.text").getRGB();
 		colorInfoTitleTxt =new HexaToRGB("color.info.titel.text").getRGB();
 		colorInfoTxt =new HexaToRGB("color.info.text").getRGB();
+		colorErrMsg =new HexaToRGB("color.ErrorMsg.text").getRGB();
 		// Content-Panel
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		contPanel = new JPanel();
@@ -634,6 +638,19 @@ public class MyFrame extends JFrame {
 		gbc_evResult_field.gridx = 2;
 		gbc_evResult_field.gridy = 9;
 		infoPanel.add(evResult_field, gbc_evResult_field);
+		
+		errMsg_field = new JLabel(HexaToRGB.errMsg);
+		errMsg_field.setFont(errMsgTxt);
+		errMsg_field.setForeground(colorErrMsg);
+		errMsg_field.setBorder(emptyBorder);
+		GridBagConstraints gbc_errMsg_field = new GridBagConstraints();
+		gbc_errMsg_field.anchor = GridBagConstraints.NORTH;
+		gbc_errMsg_field.fill = GridBagConstraints.HORIZONTAL;
+		gbc_errMsg_field.insets = new Insets(0, 0, 0, 0);
+		gbc_errMsg_field.gridwidth = 4;
+		gbc_errMsg_field.gridx = 0;
+		gbc_errMsg_field.gridy = 10;
+		infoPanel.add(errMsg_field, gbc_errMsg_field);
 		
 		
 
