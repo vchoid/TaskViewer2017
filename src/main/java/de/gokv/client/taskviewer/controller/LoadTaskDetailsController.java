@@ -41,6 +41,18 @@ public class LoadTaskDetailsController implements ActionListener, ListSelectionL
 		this.model = model;
 	}
 
+	public void iniClient(){
+		try {
+			client = new HTTPSClient(new URL("http://localhost:9080/gokv-tenant/api"));
+			client.testConnection(taskID);
+		} catch (ServerException | GeneralSecurityException | IOException | ClientCertificateException
+				| URISyntaxException ex) {
+			System.out.println(taskID + " nicht gefunden");
+			ex.printStackTrace();
+		}
+		
+	}
+	
 	/**
 	 * Stellt eine Verbindung zum Client her und lädt mittels der ausgwählten
 	 * taskID weitere Informationen und setzt diese ins Formular.
@@ -48,10 +60,7 @@ public class LoadTaskDetailsController implements ActionListener, ListSelectionL
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == MyFrame.taskLoadBtn && frame.taskList.isSelectedIndex(frame.taskList.getSelectedIndex())) {
-			try {
-				client = new HTTPSClient(new URL("http://localhost:9080/gokv-tenant/api"));
-				client.testConnection(taskID);
-				
+				iniClient();
 				MyFrame.orderDate_field.setText(DateUtil.datetoString((HTTPSClient.task.get("orderedDate").toString())));
 				MyFrame.state_field.setText(HTTPSClient.task.get("state").toString());
 				MyFrame.taskType_field.setText(HTTPSClient.task.get("type").toString());
@@ -60,11 +69,6 @@ public class LoadTaskDetailsController implements ActionListener, ListSelectionL
 				MyFrame.evReceived_field.setText(HTTPSClient.task.get("eventReceived").toString());
 				MyFrame.evResult_field.setText(HTTPSClient.task.get("eventResult").toString());
 
-			} catch (ServerException | GeneralSecurityException | IOException | ClientCertificateException
-					| URISyntaxException ex) {
-				System.out.println(taskID + " nicht gefunden");
-				ex.printStackTrace();
-			}
 		}
 	}
 
