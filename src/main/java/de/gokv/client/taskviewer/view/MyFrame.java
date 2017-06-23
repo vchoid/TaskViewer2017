@@ -441,7 +441,7 @@ public class MyFrame extends JFrame {
 		csvInfoPanel.setBackground(colorPanBlockBG);
 		GridBagLayout gbl_csvInfoPanel = new GridBagLayout();
 		gbl_csvInfoPanel.columnWidths = new int[] { 10, 150, 262, 10 };
-		gbl_csvInfoPanel.rowHeights = new int[] { 63, 30, 30, 30, 30, 30, 64 };
+		gbl_csvInfoPanel.rowHeights = new int[] { 55, 0, 30, 30, 30, 30, 30, 55 };
 		csvInfoPanel.setLayout(gbl_csvInfoPanel);
 		contPanel.add(csvInfoPanel);
 
@@ -739,7 +739,7 @@ public class MyFrame extends JFrame {
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setVisible(true);
 		setLocationRelativeTo(null);
-		setResizable(true);
+		setResizable(false);
 	}
 
 }
