@@ -10,6 +10,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import de.gokv.client.taskviewer.exceptions.InvalidDateException;
+import de.gokv.client.taskviewer.module.http.HTTPSClient;
 
 /**
  * Beinhaltet eine Methode zum Überprüfen des richtigen Formates (DD.MM.YYYY)
@@ -76,6 +77,15 @@ public class DateUtil {
 		}
 	}
 
+	public static String localDateToString(LocalDate lDate){
+		return lDate.getDayOfMonth() + "." + lDate.getMonthValue() + "." + lDate.getYear();
+	}
+	
+	public static String datetoString(String strDate){
+		LocalDate lDate = LocalDate.parse(HTTPSClient.task.get("orderedDate").toString(), DateUtil.dTf_request);
+		strDate = lDate.getDayOfMonth() + "." + lDate.getMonthValue() + "." + lDate.getYear();
+		return strDate;
+	}
 	/**
 	 * Überprüft zuerst mit der {@link #isDateValid(String) is DateValid()}-Methode
 	 * ein String auf syntaktische Korrektheit und

@@ -51,11 +51,8 @@ public class LoadTaskDetailsController implements ActionListener, ListSelectionL
 			try {
 				client = new HTTPSClient(new URL("http://localhost:9080/gokv-tenant/api"));
 				client.testConnection(taskID);
-
-				lDate = LocalDate.parse(HTTPSClient.task.get("orderedDate").toString(), DateUtil.dTf_request);
-				strDate = lDate.getDayOfMonth() + "." + lDate.getMonthValue() + "." + lDate.getYear();
-				MyFrame.orderDate_field.setText(strDate);
-
+				
+				MyFrame.orderDate_field.setText(DateUtil.datetoString((HTTPSClient.task.get("orderedDate").toString())));
 				MyFrame.state_field.setText(HTTPSClient.task.get("state").toString());
 				MyFrame.taskType_field.setText(HTTPSClient.task.get("type").toString());
 				MyFrame.evInProgs_field.setText(HTTPSClient.task.get("eventInProgress").toString());
