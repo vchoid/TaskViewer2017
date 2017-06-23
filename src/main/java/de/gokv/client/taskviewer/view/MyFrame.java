@@ -27,6 +27,7 @@ import javax.swing.border.TitledBorder;
 import de.gokv.client.taskviewer.controller.FilterTaskListController;
 import de.gokv.client.taskviewer.controller.FilterTaskListKeyHandler;
 import de.gokv.client.taskviewer.controller.LoadTaskDetailsController;
+import de.gokv.client.taskviewer.controller.LoadTaskDetailsKeyHandler;
 import de.gokv.client.taskviewer.controller.MyFrameController;
 import de.gokv.client.taskviewer.controller.TaskListController;
 import de.gokv.client.taskviewer.model.MyModel;
@@ -336,6 +337,7 @@ public class MyFrame extends JFrame {
 		// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		TaskListController taskListCont = new TaskListController(this, controller.getModel());
 		LoadTaskDetailsController loadTaskDetailsCont = new LoadTaskDetailsController(this, controller.getModel());
+		LoadTaskDetailsKeyHandler loadTaskDetailKey = new LoadTaskDetailsKeyHandler(this,  controller.getModel());
 
 		taskBorder = BorderFactory.createTitledBorder("Tasks");
 		taskBorder.setTitleJustification(TitledBorder.TOP);
@@ -385,6 +387,7 @@ public class MyFrame extends JFrame {
 		taskList.setFont(txt);
 		taskList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		taskList.addListSelectionListener(loadTaskDetailsCont);
+		taskList.addKeyListener(loadTaskDetailKey);
 		JScrollPane scrollTask = new JScrollPane(taskList);
 		GridBagConstraints gbc_scrollTask = new GridBagConstraints();
 		gbc_scrollTask.anchor = GridBagConstraints.NORTH;

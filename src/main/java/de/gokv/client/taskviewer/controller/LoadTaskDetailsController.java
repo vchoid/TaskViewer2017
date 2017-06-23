@@ -31,8 +31,6 @@ public class LoadTaskDetailsController implements ActionListener, ListSelectionL
 	private MyModel model;
 	private LocalDate lDate;
 	private String strDate;
-
-	
 	public static String taskID;
 
 	public LoadTaskDetailsController(MyFrame frame, MyModel model) {
@@ -50,7 +48,6 @@ public class LoadTaskDetailsController implements ActionListener, ListSelectionL
 			System.out.println(taskID + " nicht gefunden");
 			ex.printStackTrace();
 		}
-		
 	}
 	
 	/**
@@ -68,7 +65,6 @@ public class LoadTaskDetailsController implements ActionListener, ListSelectionL
 				MyFrame.evCompl_field.setText(HTTPSClient.task.get("eventCompleted").toString());
 				MyFrame.evReceived_field.setText(HTTPSClient.task.get("eventReceived").toString());
 				MyFrame.evResult_field.setText(HTTPSClient.task.get("eventResult").toString());
-
 		}
 	}
 

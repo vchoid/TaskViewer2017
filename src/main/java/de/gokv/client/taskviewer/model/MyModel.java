@@ -7,9 +7,6 @@ import java.util.List;
 
 import de.gokv.client.taskviewer.CSVReader;
 import de.gokv.client.taskviewer.Task;
-import de.gokv.client.taskviewer.exceptions.InvalidDateException;
-import de.gokv.client.taskviewer.utils.DateUtil;
-import de.gokv.client.taskviewer.view.MyFrame;
 
 /**
  * 
