@@ -149,7 +149,7 @@ public class MyFrame extends JFrame {
 		// Quer 3x1
 		// setSize(new Dimension(1360, 355));
 		// Quer 2x2
-		setSize(new Dimension(915, 662));
+		setSize(new Dimension(902, 650));
 		// Hoch
 		// setSize(new Dimension(470, 970));
 		// Farben
