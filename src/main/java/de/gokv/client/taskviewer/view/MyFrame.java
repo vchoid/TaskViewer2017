@@ -285,21 +285,6 @@ public class MyFrame extends JFrame {
 		orderDatePan.setBorder(emptyBorder);
 		filterPanel.add(oDatePick, gbc_orderDate);
 
-		// << Button "Felder leeren" >>
-		clearFieldBtn = new JButton("Felder leeren");
-		clearFieldBtn.setBorder(btnBorder);
-		clearFieldBtn.setBackground(colorBtnBG);
-		clearFieldBtn.setForeground(colorBtnTxt);
-		clearFieldBtn.setFont(txt);
-		clearFieldBtn.addActionListener(filtTaskCont);
-		GridBagConstraints gbc_clearFieldBtn = new GridBagConstraints();
-		gbc_clearFieldBtn.anchor = GridBagConstraints.NORTH;
-		gbc_clearFieldBtn.fill = GridBagConstraints.HORIZONTAL;
-		gbc_clearFieldBtn.insets = new Insets(20, 0, 0, 5);
-		gbc_clearFieldBtn.gridx = 1;
-		gbc_clearFieldBtn.gridy = 6;
-		filterPanel.add(clearFieldBtn, gbc_clearFieldBtn);
-
 		// << Button "Filter anwenden" >>
 		filterBtn = new JButton("Tasks filtern");
 		filterBtn.setBorder(btnBorder);
@@ -310,10 +295,25 @@ public class MyFrame extends JFrame {
 		GridBagConstraints gbc_filterBtn = new GridBagConstraints();
 		gbc_filterBtn.anchor = GridBagConstraints.NORTH;
 		gbc_filterBtn.fill = GridBagConstraints.HORIZONTAL;
-		gbc_filterBtn.insets = new Insets(20, 10, 0, 0);
-		gbc_filterBtn.gridx = 2;
+		gbc_filterBtn.insets = new Insets(20, 0, 0, 5);
+		gbc_filterBtn.gridx = 1;
 		gbc_filterBtn.gridy = 6;
 		filterPanel.add(filterBtn, gbc_filterBtn);
+		
+		// << Button "Felder leeren" >>
+		clearFieldBtn = new JButton("Alles zurücksetzen");
+		clearFieldBtn.setBorder(btnBorder);
+		clearFieldBtn.setBackground(colorBtnBG);
+		clearFieldBtn.setForeground(colorBtnTxt);
+		clearFieldBtn.setFont(txt);
+		clearFieldBtn.addActionListener(filtTaskCont);
+		GridBagConstraints gbc_clearFieldBtn = new GridBagConstraints();
+		gbc_clearFieldBtn.anchor = GridBagConstraints.NORTH;
+		gbc_clearFieldBtn.fill = GridBagConstraints.HORIZONTAL;
+		gbc_clearFieldBtn.insets = new Insets(20, 10, 0, 0);
+		gbc_clearFieldBtn.gridx = 2;
+		gbc_clearFieldBtn.gridy = 6;
+		filterPanel.add(clearFieldBtn, gbc_clearFieldBtn);
 
 		// Anzahl der gefilterten Tasks
 		anzFiltTask = new JTextField(countValidTasks + " Einträge ");
@@ -354,7 +354,7 @@ public class MyFrame extends JFrame {
 		// Anzahl der Tasks
 		countInvalidTasks = MyModel.countInvalidTasks;
 		if (countInvalidTasks > 0) {
-			invalEntMsg = "(davon fehlerhaft: " + countInvalidTasks + ")";
+			invalEntMsg = "(fehlerhaft: " + countInvalidTasks + ")";
 		} else {
 			invalEntMsg = "";
 		}

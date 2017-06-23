@@ -74,23 +74,24 @@ public class LoadTaskDetailsController implements ActionListener, ListSelectionL
 
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
+		if(e.getValueIsAdjusting()){
 			taskID = frame.taskList.getSelectedValue();
-			model.getFilteredTaskValue(taskID);
+			model.getTaskValueByID(taskID);
 			MyFrame.taskID_field.setText(taskID);
 			MyFrame.kvnr_field.setText(model.kvnr);
 			MyFrame.name_field.setText(model.name);
 			MyFrame.vName_field.setText(model.vName);
 			MyFrame.gebDate_field.setText(DateUtil.localDateToString(model.gebDate));
-			
+		}
 			// Löschen ---------------------------------------------------------------------------------------------
-			iniClient();
-			MyFrame.orderDate_field.setText(DateUtil.datetoString((HTTPSClient.task.get("orderedDate").toString())));
-			MyFrame.state_field.setText(HTTPSClient.task.get("state").toString());
-			MyFrame.taskType_field.setText(HTTPSClient.task.get("type").toString());
-			MyFrame.evInProgs_field.setText(HTTPSClient.task.get("eventInProgress").toString());
-			MyFrame.evCompl_field.setText(HTTPSClient.task.get("eventCompleted").toString());
-			MyFrame.evReceived_field.setText(HTTPSClient.task.get("eventReceived").toString());
-			MyFrame.evResult_field.setText(HTTPSClient.task.get("eventResult").toString());
+//			iniClient();
+//			MyFrame.orderDate_field.setText(DateUtil.datetoString((HTTPSClient.task.get("orderedDate").toString())));
+//			MyFrame.state_field.setText(HTTPSClient.task.get("state").toString());
+//			MyFrame.taskType_field.setText(HTTPSClient.task.get("type").toString());
+//			MyFrame.evInProgs_field.setText(HTTPSClient.task.get("eventInProgress").toString());
+//			MyFrame.evCompl_field.setText(HTTPSClient.task.get("eventCompleted").toString());
+//			MyFrame.evReceived_field.setText(HTTPSClient.task.get("eventReceived").toString());
+//			MyFrame.evResult_field.setText(HTTPSClient.task.get("eventResult").toString());
 			//-------------------------------------------------------------------------------------------------------
 		
 	}

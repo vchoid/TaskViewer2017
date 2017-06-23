@@ -28,7 +28,6 @@ public class MyModel {
 	public static String vName;
 	public static LocalDate gebDate;
 	
-	
 	public MyModel() {
 		tasks = new ArrayList<Task>();
 	}
@@ -52,14 +51,13 @@ public class MyModel {
 			
 		}
 	}
-
 	public void reload(){
 		tasks.clear();
 		countInvalidTasks = 0;
 		readFiles();
 	}
 	
-	public void getFilteredTaskValue(String taskID){
+	public void getTaskValueByID(String taskID){
 		for(Task t : tasks){
 			if(taskID.equals(t.getTaskId())){
 				kvnr = t.getKvnr();
@@ -71,7 +69,7 @@ public class MyModel {
 	}
 	
 	/**
-	 * 
+	 * fabian fragen...
 	 * @return
 	 */
 	public String[] getFilteredTaskID() {

@@ -45,12 +45,27 @@ public class FilterTaskListKeyHandler implements KeyListener{
 	}
 	
 	public void clearTasks(){
+		// Filter-Panel
 		frame.pName.setText(null);
 		frame.pVname.setText(null);
 		frame.pKvnr.setText(null);
 		frame.pTaskID.setText(null);
 		frame.model_geb.setValue(null);
 		frame.model_ord.setValue(null);
+		// CSV Info-Panel
+		frame.taskID_field.setText(null);
+		frame.kvnr_field.setText(null);
+		frame.name_field.setText(null);
+		frame.vName_field.setText(null);
+		frame.gebDate_field.setText(null);
+		// Task Info-Panel
+		frame.state_field.setText(null);
+		frame.taskType_field.setText(null);
+		frame.orderDate_field.setText(null);
+		frame.evInProgs_field.setText(null);
+		frame.evCompl_field.setText(null);
+		frame.evReceived_field.setText(null);
+		frame.evResult_field.setText(null);
 		
 	}
 	
