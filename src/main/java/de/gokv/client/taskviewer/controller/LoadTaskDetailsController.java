@@ -82,6 +82,7 @@ public class LoadTaskDetailsController implements ActionListener, ListSelectionL
 			MyFrame.vName_field.setText(model.vName);
 			MyFrame.gebDate_field.setText(DateUtil.localDateToString(model.gebDate));
 			
+			// Löschen ---------------------------------------------------------------------------------------------
 			iniClient();
 			MyFrame.orderDate_field.setText(DateUtil.datetoString((HTTPSClient.task.get("orderedDate").toString())));
 			MyFrame.state_field.setText(HTTPSClient.task.get("state").toString());
@@ -90,6 +91,7 @@ public class LoadTaskDetailsController implements ActionListener, ListSelectionL
 			MyFrame.evCompl_field.setText(HTTPSClient.task.get("eventCompleted").toString());
 			MyFrame.evReceived_field.setText(HTTPSClient.task.get("eventReceived").toString());
 			MyFrame.evResult_field.setText(HTTPSClient.task.get("eventResult").toString());
+			//-------------------------------------------------------------------------------------------------------
 		
 	}
 
