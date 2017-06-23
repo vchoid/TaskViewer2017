@@ -76,11 +76,19 @@ public class DateUtil {
 			return false;
 		}
 	}
-
+	/**
+	 * Konvertiert ein Datum(LocalDate) zu einem String im Format "mm.dd.yyyy".
+	 * @param lDate
+	 * @return
+	 */
 	public static String localDateToString(LocalDate lDate){
 		return lDate.getDayOfMonth() + "." + lDate.getMonthValue() + "." + lDate.getYear();
 	}
-	
+	/**
+	 * Konvertiert ein Datum(String) zu einem String im Format "mm.dd.yyyy".
+	 * @param strDate
+	 * @return
+	 */
 	public static String datetoString(String strDate){
 		LocalDate lDate = LocalDate.parse(HTTPSClient.task.get("orderedDate").toString(), DateUtil.dTf_request);
 		strDate = lDate.getDayOfMonth() + "." + lDate.getMonthValue() + "." + lDate.getYear();
