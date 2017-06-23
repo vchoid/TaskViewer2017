@@ -1,6 +1,7 @@
 package de.gokv.client.taskviewer.model;
 
 import java.io.File;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +23,10 @@ public class MyModel {
 	private Task filteredCriteria;
 	public int countValidTasks;
 	public static int countInvalidTasks;
+	public static String kvnr;
+	public static String name;
+	public static String vName;
+	public static LocalDate gebDate;
 	
 	
 	public MyModel() {
@@ -54,21 +59,22 @@ public class MyModel {
 		readFiles();
 	}
 	
-	public void setFilteredTask(){
+	public void getFilteredTaskValue(String taskID){
 		for(Task t : tasks){
-			System.out.println(t);
+			if(taskID.equals(t.getTaskId())){
+				kvnr = t.getKvnr();
+				name = t.getName();
+				vName = t.getvName();
+				gebDate = t.getGebDat();
+			}
 		}
-		
-
-			
-
 	}
 	
 	/**
 	 * 
 	 * @return
 	 */
-	public String[] getFilteredTasks() {
+	public String[] getFilteredTaskID() {
 		filteredTasks = new ArrayList<String>();
 		for (Task task : tasks) {
 			// criterias

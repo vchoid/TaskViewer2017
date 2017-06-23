@@ -34,10 +34,9 @@ public class FilterTaskListKeyHandler implements KeyListener{
 			if (frame.model_ord.getValue() != null) {
 				t.setOrderedDate(DateUtil.parseDate(frame.model_ord.getValue()));
 			}
-
 			model.setFilterCriteria(t);
-			frame.taskList.setListData(model.getFilteredTasks());
-			MyFrame.anzFiltTask.setText(model.getFilteredTasks().length +" Einträge");
+			frame.taskList.setListData(model.getFilteredTaskID());
+			MyFrame.anzFiltTask.setText(model.getFilteredTaskID().length +" Einträge");
 
 		} catch (InvalidDateException e1) {
 			// DO NOTHING

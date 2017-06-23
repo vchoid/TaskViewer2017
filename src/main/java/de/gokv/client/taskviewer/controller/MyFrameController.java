@@ -26,7 +26,7 @@ public class MyFrameController {
 	 * @return
 	 */
 	public String[] getFilteredTasks(){
-		return model.getFilteredTasks();
+		return model.getFilteredTaskID();
 	}
 	/**
 	 * Gibt das model aus der Klasse MyModel zurück.

@@ -36,8 +36,8 @@ public class FilterTaskListController implements ActionListener {
 			}
 
 			model.setFilterCriteria(t);
-			frame.taskList.setListData(model.getFilteredTasks());
-			MyFrame.anzFiltTask.setText(model.getFilteredTasks().length +" Einträge");
+			frame.taskList.setListData(model.getFilteredTaskID());
+			MyFrame.anzFiltTask.setText(model.getFilteredTaskID().length +" Einträge");
 
 		} catch (InvalidDateException e1) {
 			// DO NOTHING

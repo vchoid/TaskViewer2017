@@ -39,7 +39,7 @@ public class TaskListController implements ActionListener {
 				valEntMsg = "";
 			}
 			MyFrame.anzTasks.setText(valEntMsg + invalEntMsg);
-			frame.taskList.setListData(model.getFilteredTasks());
+			frame.taskList.setListData(model.getFilteredTaskID());
 		}
 	}
 }
