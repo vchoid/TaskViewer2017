@@ -8,9 +8,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
-import java.awt.Rectangle;
 import java.awt.Toolkit;
-import java.util.Properties;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -18,6 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -27,11 +26,9 @@ import javax.swing.border.TitledBorder;
 
 import de.gokv.client.taskviewer.controller.FilterTaskListController;
 import de.gokv.client.taskviewer.controller.FilterTaskListKeyHandler;
-import de.gokv.client.taskviewer.controller.LoadProperties;
 import de.gokv.client.taskviewer.controller.LoadTaskDetailsController;
 import de.gokv.client.taskviewer.controller.MyFrameController;
 import de.gokv.client.taskviewer.controller.TaskListController;
-import de.gokv.client.taskviewer.exceptions.ClientException;
 import de.gokv.client.taskviewer.model.MyModel;
 import de.gokv.client.taskviewer.utils.HexaToRGB;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
@@ -93,22 +90,22 @@ public class MyFrame extends JFrame {
 	private JLabel evReceived;
 	private JLabel evResult;
 	public static JLabel taskID_field;
-	public static  JLabel state_field;
-	public static  JLabel taskType_field;
-	public static  JLabel orderDate_field;
-	public static  JLabel evCompl_field;
-	public static  JLabel evInProgs_field;
-	public static  JLabel evReceived_field;
-	public static  JLabel evResult_field;
-	public static  JLabel errMsg_field;
-	
+	public static JLabel state_field;
+	public static JLabel taskType_field;
+	public static JLabel orderDate_field;
+	public static JLabel evCompl_field;
+	public static JLabel evInProgs_field;
+	public static JLabel evReceived_field;
+	public static JLabel evResult_field;
+	public static JLabel errMsg_field;
+
 	// Style ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	private String pathIconPrg;
 	private Font title = new Font("Arial", Font.BOLD, 16);
 	private Font txt = new Font("Arial", Font.PLAIN, 15);
 	private Font errMsgTxt = new Font("Arial", Font.PLAIN, 9);
 	private Font label = new Font("Arial", Font.BOLD, 14);
-	
+
 	private Color colorPanBlockBG;
 	private Color colorPanContBG;
 	private Color colorTitelTxt;
@@ -119,7 +116,7 @@ public class MyFrame extends JFrame {
 	private Color colorInfoTitleTxt;
 	private Color colorInfoTxt;
 	private Color colorErrMsg;
-	
+
 	private Border btnBorder = BorderFactory.createEmptyBorder(8, 5, 8, 5);
 	private Border emptyBorder = BorderFactory.createEmptyBorder();
 
@@ -139,12 +136,12 @@ public class MyFrame extends JFrame {
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		// Fenstergröße
 		// Quer 3x1
-//		setSize(new Dimension(1360, 355));
+		// setSize(new Dimension(1360, 355));
 		// Quer 2x2
-		 setSize(new Dimension(915, 662));
+		setSize(new Dimension(915, 662));
 		// Hoch
 		// setSize(new Dimension(470, 970));
-		// Farben 
+		// Farben
 		colorPanContBG = new HexaToRGB("color.panel.content.background").parseHexToRGB();
 		colorPanBlockBG = new HexaToRGB("color.panel.block.background").parseHexToRGB();
 		colorTitelTxt = new HexaToRGB("color.panel.titeltext.foreground").parseHexToRGB();
@@ -152,9 +149,9 @@ public class MyFrame extends JFrame {
 		colorBtnTxt = new HexaToRGB("color.button.text").parseHexToRGB();
 		colorEntryTxt = new HexaToRGB("color.entries.text").parseHexToRGB();
 		colorLabelDateTxt = new HexaToRGB("color.label.date.text").parseHexToRGB();
-		colorInfoTitleTxt =new HexaToRGB("color.info.titel.text").parseHexToRGB();
-		colorInfoTxt =new HexaToRGB("color.info.text").parseHexToRGB();
-		colorErrMsg =new HexaToRGB("color.ErrorMsg.text").parseHexToRGB();
+		colorInfoTitleTxt = new HexaToRGB("color.info.titel.text").parseHexToRGB();
+		colorInfoTxt = new HexaToRGB("color.info.text").parseHexToRGB();
+		colorErrMsg = new HexaToRGB("color.ErrorMsg.text").parseHexToRGB();
 		// Content-Panel
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		contPanel = new JPanel();
@@ -165,11 +162,11 @@ public class MyFrame extends JFrame {
 		contPanel.setLayout(fl_contPanel);
 		setContentPane(contPanel);
 		getContentPane().setBackground(colorPanContBG);
-//		 Input-Panel
+		// Input-Panel
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		FilterTaskListController filtTaskCont = new FilterTaskListController(this, controller.getModel());
 		FilterTaskListKeyHandler filtTaskKey = new FilterTaskListKeyHandler(this, controller.getModel());
-		
+
 		filtBorder = BorderFactory.createTitledBorder("Filter Maske");
 		filtBorder.setTitleJustification(TitledBorder.TOP);
 		filtBorder.setTitleColor(colorTitelTxt);
@@ -291,7 +288,7 @@ public class MyFrame extends JFrame {
 		gbc_clearFieldBtn.gridx = 1;
 		gbc_clearFieldBtn.gridy = 6;
 		filterPanel.add(clearFieldBtn, gbc_clearFieldBtn);
-		
+
 		// << Button "Filter anwenden" >>
 		filterBtn = new JButton("Tasks filtern");
 		filterBtn.setBorder(btnBorder);
@@ -306,9 +303,9 @@ public class MyFrame extends JFrame {
 		gbc_filterBtn.gridx = 2;
 		gbc_filterBtn.gridy = 6;
 		filterPanel.add(filterBtn, gbc_filterBtn);
-		
+
 		// Anzahl der gefilterten Tasks
-		anzFiltTask = new JTextField(countValidTasks + " Einträge " );
+		anzFiltTask = new JTextField(countValidTasks + " Einträge ");
 		anzFiltTask.setForeground(colorEntryTxt);
 		anzFiltTask.setBorder(emptyBorder);
 		anzFiltTask.addActionListener(filtTaskCont);
@@ -323,13 +320,12 @@ public class MyFrame extends JFrame {
 		gbc_anzFiltTask.gridx = 2;
 		gbc_anzFiltTask.gridy = 7;
 		filterPanel.add(anzFiltTask, gbc_anzFiltTask);
-		
 
 		// TaskPanel
 		// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		TaskListController taskListCont = new TaskListController(this, controller.getModel());
-		LoadTaskDetailsController loadTaskDetailsCont= new LoadTaskDetailsController(this, controller.getModel());
-		
+		LoadTaskDetailsController loadTaskDetailsCont = new LoadTaskDetailsController(this, controller.getModel());
+
 		taskBorder = BorderFactory.createTitledBorder("Tasks");
 		taskBorder.setTitleJustification(TitledBorder.TOP);
 		taskBorder.setTitleColor(colorTitelTxt);
@@ -340,24 +336,24 @@ public class MyFrame extends JFrame {
 		taskPanel.setBackground(colorPanBlockBG);
 		GridBagLayout gbl_taskPan = new GridBagLayout();
 		gbl_taskPan.columnWidths = new int[] { 10, 206, 206, 10 };
-		gbl_taskPan.rowHeights = new int[] { 43 , 0, 157, 30, 23};
+		gbl_taskPan.rowHeights = new int[] { 43, 0, 157, 30, 23 };
 		taskPanel.setLayout(gbl_taskPan);
 		contPanel.add(taskPanel);
-		
+
 		// Anzahl der Tasks
 		countInvalidTasks = MyModel.countInvalidTasks;
-		if(countInvalidTasks > 0){
-			invalEntMsg = "(davon fehlerhaft: "+ countInvalidTasks + ")";
-		} else{
+		if (countInvalidTasks > 0) {
+			invalEntMsg = "(davon fehlerhaft: " + countInvalidTasks + ")";
+		} else {
 			invalEntMsg = "";
 		}
 		countValidTasks = controller.getFilteredTasks().length;
-		if(countValidTasks > 0){
+		if (countValidTasks > 0) {
 			valEntMsg = countValidTasks + " Einträge ";
 		} else {
 			valEntMsg = "";
 		}
-		anzTasks = new JTextField(valEntMsg + invalEntMsg );
+		anzTasks = new JTextField(valEntMsg + invalEntMsg);
 		anzTasks.setForeground(colorEntryTxt);
 		anzTasks.setBorder(emptyBorder);
 		anzTasks.setOpaque(false);
@@ -371,7 +367,7 @@ public class MyFrame extends JFrame {
 		gbc_anzTask.gridx = 2;
 		gbc_anzTask.gridy = 4;
 		taskPanel.add(anzTasks, gbc_anzTask);
-		
+
 		// << Task-Liste >>
 		taskList = new JList<>(controller.getFilteredTasks());
 		taskList.setVisibleRowCount(7);
@@ -386,7 +382,7 @@ public class MyFrame extends JFrame {
 		gbc_scrollTask.gridx = 1;
 		gbc_scrollTask.gridy = 2;
 		taskPanel.add(scrollTask, gbc_scrollTask);
-				
+
 		// << Tasks reload -Button >>
 		reloadBtn = new JButton(" Taskliste neu laden  ");
 		pathIconReload = "/reload.png";
@@ -405,7 +401,7 @@ public class MyFrame extends JFrame {
 		gbc_reloadTaskBtn.gridx = 2;
 		gbc_reloadTaskBtn.gridy = 3;
 		taskPanel.add(reloadBtn, gbc_reloadTaskBtn);
-		
+
 		// << Tasks laden -Button >>
 		taskLoadBtn = new JButton("Task laden");
 		taskLoadBtn.setBorder(btnBorder);
@@ -420,7 +416,6 @@ public class MyFrame extends JFrame {
 		gbc_detailBtn.gridx = 1;
 		gbc_detailBtn.gridy = 3;
 		taskPanel.add(taskLoadBtn, gbc_detailBtn);
-		
 
 		// Info-Panel
 		// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -463,7 +458,7 @@ public class MyFrame extends JFrame {
 		gbc_taskID_field.gridx = 1;
 		gbc_taskID_field.gridy = 2;
 		infoPanel.add(taskID_field, gbc_taskID_field);
-		
+
 		// 1. State - Status
 		state = new JLabel("Status:");
 		state.setFont(label);
@@ -476,7 +471,7 @@ public class MyFrame extends JFrame {
 		gbc_stateLabel.gridx = 1;
 		gbc_stateLabel.gridy = 3;
 		infoPanel.add(state, gbc_stateLabel);
-		
+
 		state_field = new JLabel();
 		state_field.setFont(txt);
 		state_field.setForeground(colorInfoTxt);
@@ -489,7 +484,7 @@ public class MyFrame extends JFrame {
 		gbc_state_field.gridx = 2;
 		gbc_state_field.gridy = 3;
 		infoPanel.add(state_field, gbc_state_field);
-		
+
 		// 2. Type - Task Type
 		taskType = new JLabel("Task Type:");
 		taskType.setFont(label);
@@ -502,7 +497,7 @@ public class MyFrame extends JFrame {
 		gbc_TaskTypeLabel.gridx = 1;
 		gbc_TaskTypeLabel.gridy = 4;
 		infoPanel.add(taskType, gbc_TaskTypeLabel);
-		
+
 		taskType_field = new JLabel();
 		taskType_field.setFont(txt);
 		taskType_field.setForeground(colorInfoTxt);
@@ -515,7 +510,7 @@ public class MyFrame extends JFrame {
 		gbc_taskType_field.gridx = 2;
 		gbc_taskType_field.gridy = 4;
 		infoPanel.add(taskType_field, gbc_taskType_field);
-				
+
 		// 3. OrderedDate - Datum Order
 		orderDate = new JLabel("Order Datum:");
 		orderDate.setFont(label);
@@ -528,7 +523,7 @@ public class MyFrame extends JFrame {
 		gbc_orderDateLabel.gridx = 1;
 		gbc_orderDateLabel.gridy = 5;
 		infoPanel.add(orderDate, gbc_orderDateLabel);
-		
+
 		orderDate_field = new JLabel();
 		orderDate_field.setFont(txt);
 		orderDate_field.setForeground(colorInfoTxt);
@@ -541,7 +536,7 @@ public class MyFrame extends JFrame {
 		gbc_orderDate_field.gridx = 2;
 		gbc_orderDate_field.gridy = 5;
 		infoPanel.add(orderDate_field, gbc_orderDate_field);
-		
+
 		// 4. EventInProgress - Zeitpunkt In Arbeit
 		evInProgs = new JLabel("In Arbeit:");
 		evInProgs.setFont(label);
@@ -554,7 +549,7 @@ public class MyFrame extends JFrame {
 		gbc_evInProgsLabel.gridx = 1;
 		gbc_evInProgsLabel.gridy = 6;
 		infoPanel.add(evInProgs, gbc_evInProgsLabel);
-		
+
 		evInProgs_field = new JLabel();
 		evInProgs_field.setFont(txt);
 		evInProgs_field.setForeground(colorInfoTxt);
@@ -567,7 +562,7 @@ public class MyFrame extends JFrame {
 		gbc_evInProgs_field.gridx = 2;
 		gbc_evInProgs_field.gridy = 6;
 		infoPanel.add(evInProgs_field, gbc_evInProgs_field);
-		
+
 		// 5. EventCompleted - Zeitpunkt Bereit zur Abholung
 		evCompl = new JLabel("Bereit zur Abholung:");
 		evCompl.setFont(label);
@@ -580,7 +575,7 @@ public class MyFrame extends JFrame {
 		gbc_evComplLabel.gridx = 1;
 		gbc_evComplLabel.gridy = 7;
 		infoPanel.add(evCompl, gbc_evComplLabel);
-		
+
 		evCompl_field = new JLabel();
 		evCompl_field.setFont(txt);
 		evCompl_field.setForeground(colorInfoTxt);
@@ -593,7 +588,7 @@ public class MyFrame extends JFrame {
 		gbc_evCompl_field.gridx = 2;
 		gbc_evCompl_field.gridy = 7;
 		infoPanel.add(evCompl_field, gbc_evCompl_field);
-		
+
 		// 6. EventReceived - Zeitpunkt Abholung
 		evReceived = new JLabel("Abholung:");
 		evReceived.setFont(label);
@@ -606,7 +601,7 @@ public class MyFrame extends JFrame {
 		gbc_evReceivedLabel.gridx = 1;
 		gbc_evReceivedLabel.gridy = 8;
 		infoPanel.add(evReceived, gbc_evReceivedLabel);
-		
+
 		evReceived_field = new JLabel();
 		evReceived_field.setFont(txt);
 		evReceived_field.setForeground(colorInfoTxt);
@@ -619,8 +614,8 @@ public class MyFrame extends JFrame {
 		gbc_evReceived_field.gridx = 2;
 		gbc_evReceived_field.gridy = 8;
 		infoPanel.add(evReceived_field, gbc_evReceived_field);
-		
-		// 7. EventResult - Zeitpunkt Prüfung	
+
+		// 7. EventResult - Zeitpunkt Prüfung
 		evResult = new JLabel("Prüfung:");
 		evResult.setFont(label);
 		evResult.setForeground(colorInfoTitleTxt);
@@ -632,7 +627,7 @@ public class MyFrame extends JFrame {
 		gbc_evResultLabel.gridx = 1;
 		gbc_evResultLabel.gridy = 9;
 		infoPanel.add(evResult, gbc_evResultLabel);
-		
+
 		evResult_field = new JLabel();
 		evResult_field.setFont(txt);
 		evResult_field.setForeground(colorInfoTxt);
@@ -645,19 +640,13 @@ public class MyFrame extends JFrame {
 		gbc_evResult_field.gridx = 2;
 		gbc_evResult_field.gridy = 9;
 		infoPanel.add(evResult_field, gbc_evResult_field);
-		
-		errMsg_field = new JLabel(HexaToRGB.errMsg);
-		errMsg_field.setFont(errMsgTxt);
-		errMsg_field.setForeground(colorErrMsg);
-		errMsg_field.setBorder(emptyBorder);
-		GridBagConstraints gbc_errMsg_field = new GridBagConstraints();
-		gbc_errMsg_field.anchor = GridBagConstraints.NORTH;
-		gbc_errMsg_field.fill = GridBagConstraints.HORIZONTAL;
-		gbc_errMsg_field.insets = new Insets(0, 0, 0, 0);
-		gbc_errMsg_field.gridwidth = 4;
-		gbc_errMsg_field.gridx = 0;
-		gbc_errMsg_field.gridy = 10;
-		getContentPane().add(errMsg_field, gbc_errMsg_field);
+
+		// Error Message
+		// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		if (HexaToRGB.errMsg != null) {
+			JOptionPane.showMessageDialog(null, HexaToRGB.errMsg, "Fehler in der color.properties Datei",
+					JOptionPane.WARNING_MESSAGE);
+		}
 
 		// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);

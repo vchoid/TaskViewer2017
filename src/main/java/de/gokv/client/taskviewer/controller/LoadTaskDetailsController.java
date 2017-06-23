@@ -73,11 +73,10 @@ public class LoadTaskDetailsController implements ActionListener, ListSelectionL
 
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
-		if (e.getValueIsAdjusting()) {
 			taskID = frame.taskList.getSelectedValue();
 			MyFrame.taskID_field.setText(taskID);
 						
-		}
+		
 	}
 
 	
