@@ -13,6 +13,7 @@ import de.gokv.client.taskviewer.module.http.HTTPSClient;
 import de.gokv.client.taskviewer.module.http.ssl.ClientCertificateException;
 import de.gokv.client.taskviewer.module.http.ssl.ServerException;
 import de.gokv.client.taskviewer.utils.DateUtil;
+import de.gokv.client.taskviewer.view.InfoField;
 import de.gokv.client.taskviewer.view.MyFrame;
 
 public class LoadTaskDetailsKeyHandler implements KeyListener{
@@ -43,8 +44,8 @@ public class LoadTaskDetailsKeyHandler implements KeyListener{
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
+		taskID = frame.taskList.getSelectedValue();
 		if (e.getKeyCode() == KeyEvent.VK_ENTER && frame.taskList.isSelectedIndex(frame.taskList.getSelectedIndex())) {
-			taskID = frame.taskList.getSelectedValue();
 			iniClient();
 			MyFrame.orderDate_field.setText(DateUtil.datetoString((HTTPSClient.task.get("orderedDate").toString())));
 			MyFrame.state_field.setText(HTTPSClient.task.get("state").toString());
@@ -53,11 +54,22 @@ public class LoadTaskDetailsKeyHandler implements KeyListener{
 			MyFrame.evCompl_field.setText(HTTPSClient.task.get("eventCompleted").toString());
 			MyFrame.evReceived_field.setText(HTTPSClient.task.get("eventReceived").toString());
 			MyFrame.evResult_field.setText(HTTPSClient.task.get("eventResult").toString());
+			
 		}
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
+		taskID = frame.taskList.getSelectedValue();
+		model.getTaskValueByID(taskID);
+		if(e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_DOWN ){
+			MyFrame.taskID_field.setText(taskID);
+			MyFrame.taskID_field.setText(taskID);
+			MyFrame.kvnr_field.setText(model.kvnr);
+			MyFrame.name_field.setText(model.name);
+			MyFrame.vName_field.setText(model.vName);
+			MyFrame.gebDate_field.setText(DateUtil.localDateToString(model.gebDate));
+		}
 		
 	}
 

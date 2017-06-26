@@ -70,6 +70,7 @@ public class LoadTaskDetailsController implements ActionListener, ListSelectionL
 
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
+		//TODO Inhalt soll auch bei Benutzung durch die Pfeiltasten angezeigt werden
 		if(e.getValueIsAdjusting()){
 			taskID = frame.taskList.getSelectedValue();
 			model.getTaskValueByID(taskID);
