@@ -58,13 +58,13 @@ public class LoadTaskDetailsController implements ActionListener, ListSelectionL
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == MyFrame.taskLoadBtn && frame.taskList.isSelectedIndex(frame.taskList.getSelectedIndex())) {
 				iniClient();
-				MyFrame.orderDate_field.setText(DateUtil.datetoString((HTTPSClient.task.get("orderedDate").toString())));
-				MyFrame.state_field.setText(HTTPSClient.task.get("state").toString());
-				MyFrame.taskType_field.setText(HTTPSClient.task.get("type").toString());
-				MyFrame.evInProgs_field.setText(HTTPSClient.task.get("eventInProgress").toString());
-				MyFrame.evCompl_field.setText(HTTPSClient.task.get("eventCompleted").toString());
-				MyFrame.evReceived_field.setText(HTTPSClient.task.get("eventReceived").toString());
-				MyFrame.evResult_field.setText(HTTPSClient.task.get("eventResult").toString());
+				MyFrame.state.setlField(HTTPSClient.task.get("state").toString());
+				MyFrame.taskType.setlField(HTTPSClient.task.get("type").toString());
+				MyFrame.orderDate.setlField(DateUtil.datetoString((HTTPSClient.task.get("orderedDate").toString())));
+				MyFrame.evInProgs.setlField(HTTPSClient.task.get("eventInProgress").toString());
+				MyFrame.evCompl.setlField(HTTPSClient.task.get("eventCompleted").toString());
+				MyFrame.evReceived.setlField(HTTPSClient.task.get("eventReceived").toString());
+				MyFrame.evResult.setlField(HTTPSClient.task.get("eventResult").toString());
 		}
 	}
 
@@ -75,10 +75,10 @@ public class LoadTaskDetailsController implements ActionListener, ListSelectionL
 			taskID = frame.taskList.getSelectedValue();
 			model.getTaskValueByID(taskID);
 			MyFrame.taskID_field.setText(taskID);
-			MyFrame.kvnr_field.setText(model.kvnr);
-			MyFrame.name_field.setText(model.name);
-			MyFrame.vName_field.setText(model.vName);
-			MyFrame.gebDate_field.setText(DateUtil.localDateToString(model.gebDate));
+			MyFrame.kvnr.setlField(model.kvnr);
+			MyFrame.name.setlField(model.name);
+			MyFrame.vName.setlField(model.vName);
+			MyFrame.gebDate.setlField(DateUtil.localDateToString(model.gebDate));
 		}
 			// Löschen ---------------------------------------------------------------------------------------------
 //			iniClient();

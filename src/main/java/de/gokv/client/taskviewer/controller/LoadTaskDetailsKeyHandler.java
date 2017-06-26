@@ -13,7 +13,7 @@ import de.gokv.client.taskviewer.module.http.HTTPSClient;
 import de.gokv.client.taskviewer.module.http.ssl.ClientCertificateException;
 import de.gokv.client.taskviewer.module.http.ssl.ServerException;
 import de.gokv.client.taskviewer.utils.DateUtil;
-import de.gokv.client.taskviewer.view.InfoField;
+import de.gokv.client.taskviewer.view.InfoFieldMaker;
 import de.gokv.client.taskviewer.view.MyFrame;
 
 public class LoadTaskDetailsKeyHandler implements KeyListener{
@@ -47,13 +47,13 @@ public class LoadTaskDetailsKeyHandler implements KeyListener{
 		taskID = frame.taskList.getSelectedValue();
 		if (e.getKeyCode() == KeyEvent.VK_ENTER && frame.taskList.isSelectedIndex(frame.taskList.getSelectedIndex())) {
 			iniClient();
-			MyFrame.orderDate_field.setText(DateUtil.datetoString((HTTPSClient.task.get("orderedDate").toString())));
-			MyFrame.state_field.setText(HTTPSClient.task.get("state").toString());
-			MyFrame.taskType_field.setText(HTTPSClient.task.get("type").toString());
-			MyFrame.evInProgs_field.setText(HTTPSClient.task.get("eventInProgress").toString());
-			MyFrame.evCompl_field.setText(HTTPSClient.task.get("eventCompleted").toString());
-			MyFrame.evReceived_field.setText(HTTPSClient.task.get("eventReceived").toString());
-			MyFrame.evResult_field.setText(HTTPSClient.task.get("eventResult").toString());
+			MyFrame.state.setlField(HTTPSClient.task.get("state").toString());
+			MyFrame.taskType.setlField(HTTPSClient.task.get("type").toString());
+			MyFrame.orderDate.setlField(DateUtil.datetoString((HTTPSClient.task.get("orderedDate").toString())));
+			MyFrame.evInProgs.setlField(HTTPSClient.task.get("eventInProgress").toString());
+			MyFrame.evCompl.setlField(HTTPSClient.task.get("eventCompleted").toString());
+			MyFrame.evReceived.setlField(HTTPSClient.task.get("eventReceived").toString());
+			MyFrame.evResult.setlField(HTTPSClient.task.get("eventResult").toString());
 			
 		}
 	}
@@ -64,11 +64,11 @@ public class LoadTaskDetailsKeyHandler implements KeyListener{
 		model.getTaskValueByID(taskID);
 		if(e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_DOWN ){
 			MyFrame.taskID_field.setText(taskID);
-			MyFrame.taskID_field.setText(taskID);
-			MyFrame.kvnr_field.setText(model.kvnr);
-			MyFrame.name_field.setText(model.name);
-			MyFrame.vName_field.setText(model.vName);
-			MyFrame.gebDate_field.setText(DateUtil.localDateToString(model.gebDate));
+			MyFrame.kvnr.setlField(model.kvnr);
+			MyFrame.name.setlField(model.name);
+			MyFrame.vName.setlField(model.vName);
+			MyFrame.gebDate.setlField(DateUtil.localDateToString(model.gebDate));
+			
 		}
 		
 	}

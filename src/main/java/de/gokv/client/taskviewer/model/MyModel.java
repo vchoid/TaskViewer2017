@@ -20,10 +20,10 @@ public class MyModel {
 	private Task filteredCriteria;
 	public int countValidTasks;
 	public static int countInvalidTasks;
-	public static String kvnr;
-	public static String name;
-	public static String vName;
-	public static LocalDate gebDate;
+	public String kvnr;
+	public String name;
+	public String vName;
+	public LocalDate gebDate;
 	
 	public MyModel() {
 		tasks = new ArrayList<Task>();
@@ -87,4 +87,19 @@ public class MyModel {
 		filteredCriteria = t;
 	}
 
+	public String getKvnr() {
+		return kvnr;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public String getvName() {
+		return vName;
+	}
+	
+	public LocalDate getGebDate() {
+		return gebDate;
+	}
 }

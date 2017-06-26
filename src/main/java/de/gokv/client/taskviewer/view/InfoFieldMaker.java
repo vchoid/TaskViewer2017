@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 
 import de.gokv.client.taskviewer.utils.HexaToRGB;
 
-public class InfoField {
+public class InfoFieldMaker {
 
 	
 	
@@ -21,12 +21,12 @@ public class InfoField {
 	private Color colorInfoTxt = new HexaToRGB("color.info.text").parseHexToRGB();
 	
 	private JLabel lTitle;
-	public static JLabel lField;
+	private JLabel lField;
 	private GridBagConstraints gbc_lTitle;
 	private GridBagConstraints gbc_lField;
 	
 
-	public InfoField() {
+	public InfoFieldMaker() {
 		super();
 	}
 	
@@ -74,8 +74,8 @@ public class InfoField {
 	}
 	
 	
-	public void setlField(JLabel lField) {
-		this.lField = lField;
+	public void setlField(String lField) {
+	this.lField.setText(lField);
 	}
 	
 

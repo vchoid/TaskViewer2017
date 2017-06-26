@@ -78,32 +78,22 @@ public class MyFrame extends JFrame {
 	// CSV Info Panel ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	private JPanel csvInfoPanel;
 	private JLabel taskID;
-	private JLabel kvnr;
-	private JLabel name;
-	private JLabel vName;
-	private JLabel gebDate;
 	public static JLabel taskID_field;
-	public static JLabel kvnr_field;
-	public static JLabel name_field;
-	public static JLabel vName_field;
-	public static JLabel gebDate_field;
+	public static InfoFieldMaker kvnr; 
+	public static InfoFieldMaker name; 
+	public static InfoFieldMaker vName; 
+	public static InfoFieldMaker gebDate; 
 	// Task Info Panel ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	private JPanel taskInfoPanel;
-	private JLabel state;
-	private JLabel taskType;
-	private JLabel orderDate;
-	private JLabel evCompl;
-	private JLabel evInProgs;
-	private JLabel evReceived;
-	private JLabel evResult;
-	public static JLabel state_field;
-	public static JLabel taskType_field;
-	public static JLabel orderDate_field;
-	public static JLabel evCompl_field;
-	public static JLabel evInProgs_field;
-	public static JLabel evReceived_field;
-	public static JLabel evResult_field;
-	public static JLabel errMsg_field;
+	
+	public static InfoFieldMaker state;
+	public static InfoFieldMaker taskType;
+	public static InfoFieldMaker orderDate;
+	public static InfoFieldMaker evCompl;
+	public static InfoFieldMaker evInProgs;
+	public static InfoFieldMaker evReceived;
+	public static InfoFieldMaker evResult;
+
 
 	// Style ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	private String pathIconPrg;
@@ -440,90 +430,28 @@ public class MyFrame extends JFrame {
 		gbc_taskID_field.gridy = 2;
 		csvInfoPanel.add(taskID_field, gbc_taskID_field);
 		
-		// 2. KVNR
-		kvnr = new JLabel("KvNr:");
-		kvnr.setFont(label);
-		kvnr.setForeground(colorInfoTitleTxt);
-		GridBagConstraints gbc_kvnrLabel = new GridBagConstraints();
-		gbc_kvnrLabel.anchor = GridBagConstraints.NORTH;
-		gbc_kvnrLabel.fill = GridBagConstraints.HORIZONTAL;
-		gbc_kvnrLabel.gridx = 1;
-		gbc_kvnrLabel.gridy = 3;
-		csvInfoPanel.add(kvnr, gbc_kvnrLabel);
+		// 2. KvNr
+		kvnr = new InfoFieldMaker();
+		kvnr.createInfoField("KvNr:", 1, 3);
+		csvInfoPanel.add(kvnr.getlTitle(), kvnr.getGbc_lTitle());
+		csvInfoPanel.add(kvnr.getlField(), kvnr.getGbc_lField());
 		
-		kvnr_field = new JLabel();
-		kvnr_field.setFont(txt);
-		kvnr_field.setForeground(colorInfoTxt);
-		GridBagConstraints gbc_kvnr_field = new GridBagConstraints();
-		gbc_kvnr_field.anchor = GridBagConstraints.NORTH;
-		gbc_kvnr_field.fill = GridBagConstraints.HORIZONTAL;
-		gbc_kvnr_field.gridx = 2;
-		gbc_kvnr_field.gridy = 3;
-		csvInfoPanel.add(kvnr_field, gbc_kvnr_field);
-		
-		
-		// 2. Name
-		name = new JLabel("Name:");
-		name.setFont(label);
-		name.setForeground(colorInfoTitleTxt);
-		GridBagConstraints gbc_nameLabel = new GridBagConstraints();
-		gbc_nameLabel.anchor = GridBagConstraints.NORTH;
-		gbc_nameLabel.fill = GridBagConstraints.HORIZONTAL;
-		gbc_nameLabel.gridx = 1;
-		gbc_nameLabel.gridy = 4;
-		csvInfoPanel.add(name, gbc_nameLabel);
-		
-		name_field = new JLabel();
-		name_field.setFont(txt);
-		name_field.setForeground(colorInfoTxt);
-		GridBagConstraints gbc_name_field = new GridBagConstraints();
-		gbc_name_field.anchor = GridBagConstraints.NORTH;
-		gbc_name_field.fill = GridBagConstraints.HORIZONTAL;
-		gbc_name_field.gridx = 2;
-		gbc_name_field.gridy = 4;
-		csvInfoPanel.add(name_field, gbc_name_field);
-		
-		// 3. Vorname
-		vName = new JLabel("Vorname:");
-		vName.setFont(label);
-		vName.setForeground(colorInfoTitleTxt);
-		GridBagConstraints gbc_vNameLabel = new GridBagConstraints();
-		gbc_vNameLabel.anchor = GridBagConstraints.NORTH;
-		gbc_vNameLabel.fill = GridBagConstraints.HORIZONTAL;
-		gbc_vNameLabel.gridx = 1;
-		gbc_vNameLabel.gridy = 5;
-		csvInfoPanel.add(vName, gbc_vNameLabel);
-		
-		vName_field = new JLabel();
-		vName_field.setFont(txt);
-		vName_field.setForeground(colorInfoTxt);
-		GridBagConstraints gbc_vName_field = new GridBagConstraints();
-		gbc_vName_field.anchor = GridBagConstraints.NORTH;
-		gbc_vName_field.fill = GridBagConstraints.HORIZONTAL;
-		gbc_vName_field.gridx = 2;
-		gbc_vName_field.gridy = 5;
-		csvInfoPanel.add(vName_field, gbc_vName_field);
-		
+		// 3. Name
+		name = new InfoFieldMaker();
+		name.createInfoField("Name:", 1, 4);
+		csvInfoPanel.add(name.getlTitle(), name.getGbc_lTitle());
+		csvInfoPanel.add(name.getlField(), name.getGbc_lField());
 		// 4. Vorname
-		gebDate = new JLabel("Geburtsdatum:");
-		gebDate.setFont(label);
-		gebDate.setForeground(colorInfoTitleTxt);
-		GridBagConstraints gbc_gebDateLabel = new GridBagConstraints();
-		gbc_gebDateLabel.anchor = GridBagConstraints.NORTH;
-		gbc_gebDateLabel.fill = GridBagConstraints.HORIZONTAL;
-		gbc_gebDateLabel.gridx = 1;
-		gbc_gebDateLabel.gridy = 6;
-		csvInfoPanel.add(gebDate, gbc_gebDateLabel);
+		vName = new InfoFieldMaker();
+		vName.createInfoField("Vorname:", 1, 5);
+		csvInfoPanel.add(vName.getlTitle(), vName.getGbc_lTitle());
+		csvInfoPanel.add(vName.getlField(), vName.getGbc_lField());
 		
-		gebDate_field = new JLabel();
-		gebDate_field.setFont(txt);
-		gebDate_field.setForeground(colorInfoTxt);
-		GridBagConstraints gbc_gebDate_field = new GridBagConstraints();
-		gbc_gebDate_field.anchor = GridBagConstraints.NORTH;
-		gbc_gebDate_field.fill = GridBagConstraints.HORIZONTAL;
-		gbc_gebDate_field.gridx = 2;
-		gbc_gebDate_field.gridy = 6;
-		csvInfoPanel.add(gebDate_field, gbc_gebDate_field);
+		// 5. Geburtsdatum
+		gebDate = new InfoFieldMaker();
+		gebDate.createInfoField("Geburtsdatum:", 1, 6);
+		csvInfoPanel.add(gebDate.getlTitle(), gebDate.getGbc_lTitle());
+		csvInfoPanel.add(gebDate.getlField(), gebDate.getGbc_lField());
 		
 		
 		// Task Info-Panel
@@ -538,151 +466,46 @@ public class MyFrame extends JFrame {
 		contPanel.add(taskInfoPanel);
 		
 		// 1. State - Status
-		state = new JLabel("Status:");
-		state.setFont(label);
-		state.setForeground(colorInfoTitleTxt);
-		GridBagConstraints gbc_stateLabel = new GridBagConstraints();
-		gbc_stateLabel.anchor = GridBagConstraints.NORTH;
-		gbc_stateLabel.fill = GridBagConstraints.HORIZONTAL;
-		gbc_stateLabel.gridx = 1;
-		gbc_stateLabel.gridy = 1;
-		taskInfoPanel.add(state, gbc_stateLabel);
-
-		state_field = new JLabel();
-		state_field.setFont(txt);
-		state_field.setForeground(colorInfoTxt);
-		GridBagConstraints gbc_state_field = new GridBagConstraints();
-		gbc_state_field.anchor = GridBagConstraints.NORTH;
-		gbc_state_field.fill = GridBagConstraints.HORIZONTAL;
-		gbc_state_field.gridx = 2;
-		gbc_state_field.gridy = 1;
-		taskInfoPanel.add(state_field, gbc_state_field);
-
+		state = new InfoFieldMaker();
+		state.createInfoField("Status:", 1, 1);
+		taskInfoPanel.add(state.getlTitle(), state.getGbc_lTitle());
+		taskInfoPanel.add(state.getlField(), state.getGbc_lField());
+		
 		// 2. Type - Task Type
-		taskType = new JLabel("Task Type:");
-		taskType.setFont(label);
-		taskType.setForeground(colorInfoTitleTxt);
-		GridBagConstraints gbc_TaskTypeLabel = new GridBagConstraints();
-		gbc_TaskTypeLabel.anchor = GridBagConstraints.NORTH;
-		gbc_TaskTypeLabel.fill = GridBagConstraints.HORIZONTAL;
-		gbc_TaskTypeLabel.gridx = 1;
-		gbc_TaskTypeLabel.gridy = 2;
-		taskInfoPanel.add(taskType, gbc_TaskTypeLabel);
-
-		taskType_field = new JLabel();
-		taskType_field.setFont(txt);
-		taskType_field.setForeground(colorInfoTxt);
-		GridBagConstraints gbc_taskType_field = new GridBagConstraints();
-		gbc_taskType_field.anchor = GridBagConstraints.NORTH;
-		gbc_taskType_field.fill = GridBagConstraints.HORIZONTAL;
-		gbc_taskType_field.gridx = 2;
-		gbc_taskType_field.gridy = 2;
-		taskInfoPanel.add(taskType_field, gbc_taskType_field);
+		taskType = new InfoFieldMaker();
+		taskType.createInfoField("Task Type:", 1, 2);
+		taskInfoPanel.add(taskType.getlTitle(), taskType.getGbc_lTitle());
+		taskInfoPanel.add(taskType.getlField(), taskType.getGbc_lField());
 
 		// 3. OrderedDate - Datum Order
-		orderDate = new JLabel("Order Datum:");
-		orderDate.setFont(label);
-		orderDate.setForeground(colorInfoTitleTxt);
-		GridBagConstraints gbc_orderDateLabel = new GridBagConstraints();
-		gbc_orderDateLabel.anchor = GridBagConstraints.NORTH;
-		gbc_orderDateLabel.fill = GridBagConstraints.HORIZONTAL;
-		gbc_orderDateLabel.gridx = 1;
-		gbc_orderDateLabel.gridy = 3;
-		taskInfoPanel.add(orderDate, gbc_orderDateLabel);
-
-		orderDate_field = new JLabel();
-		orderDate_field.setFont(txt);
-		orderDate_field.setForeground(colorInfoTxt);
-		GridBagConstraints gbc_orderDate_field = new GridBagConstraints();
-		gbc_orderDate_field.anchor = GridBagConstraints.NORTH;
-		gbc_orderDate_field.fill = GridBagConstraints.HORIZONTAL;
-		gbc_orderDate_field.gridx = 2;
-		gbc_orderDate_field.gridy = 3;
-		taskInfoPanel.add(orderDate_field, gbc_orderDate_field);
+		orderDate = new InfoFieldMaker();
+		orderDate.createInfoField("Order Datum:", 1, 3);
+		taskInfoPanel.add(orderDate.getlTitle(), orderDate.getGbc_lTitle());
+		taskInfoPanel.add(orderDate.getlField(), orderDate.getGbc_lField());
 
 		// 4. EventInProgress - Zeitpunkt In Arbeit
-		evInProgs = new JLabel("In Arbeit:");
-		evInProgs.setFont(label);
-		evInProgs.setForeground(colorInfoTitleTxt);
-		GridBagConstraints gbc_evInProgsLabel = new GridBagConstraints();
-		gbc_evInProgsLabel.anchor = GridBagConstraints.NORTH;
-		gbc_evInProgsLabel.fill = GridBagConstraints.HORIZONTAL;
-		gbc_evInProgsLabel.gridx = 1;
-		gbc_evInProgsLabel.gridy = 4;
-		taskInfoPanel.add(evInProgs, gbc_evInProgsLabel);
-
-		evInProgs_field = new JLabel();
-		evInProgs_field.setFont(txt);
-		evInProgs_field.setForeground(colorInfoTxt);
-		GridBagConstraints gbc_evInProgs_field = new GridBagConstraints();
-		gbc_evInProgs_field.anchor = GridBagConstraints.NORTH;
-		gbc_evInProgs_field.fill = GridBagConstraints.HORIZONTAL;
-		gbc_evInProgs_field.gridx = 2;
-		gbc_evInProgs_field.gridy = 4;
-		taskInfoPanel.add(evInProgs_field, gbc_evInProgs_field);
+		evInProgs = new InfoFieldMaker();
+		evInProgs.createInfoField("In Arbeit:", 1, 4);
+		taskInfoPanel.add(evInProgs.getlTitle(), evInProgs.getGbc_lTitle());
+		taskInfoPanel.add(evInProgs.getlField(), evInProgs.getGbc_lField());
 
 		// 5. EventCompleted - Zeitpunkt Bereit zur Abholung
-		evCompl = new JLabel("Bereit zur Abholung:");
-		evCompl.setFont(label);
-		evCompl.setForeground(colorInfoTitleTxt);
-		GridBagConstraints gbc_evComplLabel = new GridBagConstraints();
-		gbc_evComplLabel.anchor = GridBagConstraints.NORTH;
-		gbc_evComplLabel.fill = GridBagConstraints.HORIZONTAL;
-		gbc_evComplLabel.gridx = 1;
-		gbc_evComplLabel.gridy = 5;
-		taskInfoPanel.add(evCompl, gbc_evComplLabel);
-
-		evCompl_field = new JLabel();
-		evCompl_field.setFont(txt);
-		evCompl_field.setForeground(colorInfoTxt);
-		GridBagConstraints gbc_evCompl_field = new GridBagConstraints();
-		gbc_evCompl_field.anchor = GridBagConstraints.NORTH;
-		gbc_evCompl_field.fill = GridBagConstraints.HORIZONTAL;
-		gbc_evCompl_field.gridx = 2;
-		gbc_evCompl_field.gridy = 5;
-		taskInfoPanel.add(evCompl_field, gbc_evCompl_field);
+		evCompl = new InfoFieldMaker();
+		evCompl.createInfoField("Bereit zur Abholung:", 1, 5);
+		taskInfoPanel.add(evCompl.getlTitle(), evCompl.getGbc_lTitle());
+		taskInfoPanel.add(evCompl.getlField(), evCompl.getGbc_lField());
 
 		// 6. EventReceived - Zeitpunkt Abholung
-		evReceived = new JLabel("Abholung:");
-		evReceived.setFont(label);
-		evReceived.setForeground(colorInfoTitleTxt);
-		GridBagConstraints gbc_evReceivedLabel = new GridBagConstraints();
-		gbc_evReceivedLabel.anchor = GridBagConstraints.NORTH;
-		gbc_evReceivedLabel.fill = GridBagConstraints.HORIZONTAL;
-		gbc_evReceivedLabel.gridx = 1;
-		gbc_evReceivedLabel.gridy = 6;
-		taskInfoPanel.add(evReceived, gbc_evReceivedLabel);
-
-		evReceived_field = new JLabel();
-		evReceived_field.setFont(txt);
-		evReceived_field.setForeground(colorInfoTxt);
-		GridBagConstraints gbc_evReceived_field = new GridBagConstraints();
-		gbc_evReceived_field.anchor = GridBagConstraints.NORTH;
-		gbc_evReceived_field.fill = GridBagConstraints.HORIZONTAL;
-		gbc_evReceived_field.gridx = 2;
-		gbc_evReceived_field.gridy = 6;
-		taskInfoPanel.add(evReceived_field, gbc_evReceived_field);
-
+		evReceived = new InfoFieldMaker();
+		evReceived.createInfoField("Abholung:", 1, 6);
+		taskInfoPanel.add(evReceived.getlTitle(), evReceived.getGbc_lTitle());
+		taskInfoPanel.add(evReceived.getlField(), evReceived.getGbc_lField());
+		
 		// 7. EventResult - Zeitpunkt Prüfung
-		evResult = new JLabel("Prüfung:");
-		evResult.setFont(label);
-		evResult.setForeground(colorInfoTitleTxt);
-		GridBagConstraints gbc_evResultLabel = new GridBagConstraints();
-		gbc_evResultLabel.anchor = GridBagConstraints.NORTH;
-		gbc_evResultLabel.fill = GridBagConstraints.HORIZONTAL;
-		gbc_evResultLabel.gridx = 1;
-		gbc_evResultLabel.gridy = 7;
-		taskInfoPanel.add(evResult, gbc_evResultLabel);
-
-		evResult_field = new JLabel();
-		evResult_field.setFont(txt);
-		evResult_field.setForeground(colorInfoTxt);
-		GridBagConstraints gbc_evResult_field = new GridBagConstraints();
-		gbc_evResult_field.anchor = GridBagConstraints.NORTH;
-		gbc_evResult_field.fill = GridBagConstraints.HORIZONTAL;
-		gbc_evResult_field.gridx = 2;
-		gbc_evResult_field.gridy = 7;
-		taskInfoPanel.add(evResult_field, gbc_evResult_field);
+		evResult = new InfoFieldMaker();
+		evResult.createInfoField("Prüfung:", 1, 7);
+		taskInfoPanel.add(evResult.getlTitle(), evResult.getGbc_lTitle());
+		taskInfoPanel.add(evResult.getlField(), evResult.getGbc_lField());
 
 		// Error Message
 		// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
