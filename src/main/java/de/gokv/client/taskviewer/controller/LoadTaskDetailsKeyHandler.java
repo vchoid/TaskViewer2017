@@ -13,7 +13,7 @@ import de.gokv.client.taskviewer.module.http.HTTPSClient;
 import de.gokv.client.taskviewer.module.http.ssl.ClientCertificateException;
 import de.gokv.client.taskviewer.module.http.ssl.ServerException;
 import de.gokv.client.taskviewer.utils.DateUtil;
-import de.gokv.client.taskviewer.view.InfoFieldMaker;
+import de.gokv.client.taskviewer.view.InfoField;
 import de.gokv.client.taskviewer.view.MyFrame;
 
 public class LoadTaskDetailsKeyHandler implements KeyListener{

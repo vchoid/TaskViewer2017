@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 
 import de.gokv.client.taskviewer.utils.HexaToRGB;
 
-public class InfoFieldMaker {
+public class InfoField {
 
 	
 	
@@ -26,7 +26,7 @@ public class InfoFieldMaker {
 	private GridBagConstraints gbc_lField;
 	
 
-	public InfoFieldMaker() {
+	public InfoField() {
 		super();
 	}
 	

@@ -79,20 +79,19 @@ public class MyFrame extends JFrame {
 	private JPanel csvInfoPanel;
 	private JLabel taskID;
 	public static JLabel taskID_field;
-	public static InfoFieldMaker kvnr; 
-	public static InfoFieldMaker name; 
-	public static InfoFieldMaker vName; 
-	public static InfoFieldMaker gebDate; 
+	public static InfoField kvnr; 
+	public static InfoField name; 
+	public static InfoField vName; 
+	public static InfoField gebDate; 
 	// Task Info Panel ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	private JPanel taskInfoPanel;
-	
-	public static InfoFieldMaker state;
-	public static InfoFieldMaker taskType;
-	public static InfoFieldMaker orderDate;
-	public static InfoFieldMaker evCompl;
-	public static InfoFieldMaker evInProgs;
-	public static InfoFieldMaker evReceived;
-	public static InfoFieldMaker evResult;
+	public static InfoField state;
+	public static InfoField taskType;
+	public static InfoField orderDate;
+	public static InfoField evCompl;
+	public static InfoField evInProgs;
+	public static InfoField evReceived;
+	public static InfoField evResult;
 
 
 	// Style ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -144,8 +143,6 @@ public class MyFrame extends JFrame {
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		contPanel = new JPanel();
 		controller = new MyFrameController(this);
-		
-		
 		FlowLayout fl_contPanel = new FlowLayout();
 		fl_contPanel.setAlignment(FlowLayout.LEFT);
 		contPanel.setLayout(fl_contPanel);
@@ -431,24 +428,24 @@ public class MyFrame extends JFrame {
 		csvInfoPanel.add(taskID_field, gbc_taskID_field);
 		
 		// 2. KvNr
-		kvnr = new InfoFieldMaker();
+		kvnr = new InfoField();
 		kvnr.createInfoField("KvNr:", 1, 3);
 		csvInfoPanel.add(kvnr.getlTitle(), kvnr.getGbc_lTitle());
 		csvInfoPanel.add(kvnr.getlField(), kvnr.getGbc_lField());
 		
 		// 3. Name
-		name = new InfoFieldMaker();
+		name = new InfoField();
 		name.createInfoField("Name:", 1, 4);
 		csvInfoPanel.add(name.getlTitle(), name.getGbc_lTitle());
 		csvInfoPanel.add(name.getlField(), name.getGbc_lField());
 		// 4. Vorname
-		vName = new InfoFieldMaker();
+		vName = new InfoField();
 		vName.createInfoField("Vorname:", 1, 5);
 		csvInfoPanel.add(vName.getlTitle(), vName.getGbc_lTitle());
 		csvInfoPanel.add(vName.getlField(), vName.getGbc_lField());
 		
 		// 5. Geburtsdatum
-		gebDate = new InfoFieldMaker();
+		gebDate = new InfoField();
 		gebDate.createInfoField("Geburtsdatum:", 1, 6);
 		csvInfoPanel.add(gebDate.getlTitle(), gebDate.getGbc_lTitle());
 		csvInfoPanel.add(gebDate.getlField(), gebDate.getGbc_lField());
@@ -466,43 +463,43 @@ public class MyFrame extends JFrame {
 		contPanel.add(taskInfoPanel);
 		
 		// 1. State - Status
-		state = new InfoFieldMaker();
+		state = new InfoField();
 		state.createInfoField("Status:", 1, 1);
 		taskInfoPanel.add(state.getlTitle(), state.getGbc_lTitle());
 		taskInfoPanel.add(state.getlField(), state.getGbc_lField());
 		
 		// 2. Type - Task Type
-		taskType = new InfoFieldMaker();
+		taskType = new InfoField();
 		taskType.createInfoField("Task Type:", 1, 2);
 		taskInfoPanel.add(taskType.getlTitle(), taskType.getGbc_lTitle());
 		taskInfoPanel.add(taskType.getlField(), taskType.getGbc_lField());
 
 		// 3. OrderedDate - Datum Order
-		orderDate = new InfoFieldMaker();
+		orderDate = new InfoField();
 		orderDate.createInfoField("Order Datum:", 1, 3);
 		taskInfoPanel.add(orderDate.getlTitle(), orderDate.getGbc_lTitle());
 		taskInfoPanel.add(orderDate.getlField(), orderDate.getGbc_lField());
 
 		// 4. EventInProgress - Zeitpunkt In Arbeit
-		evInProgs = new InfoFieldMaker();
+		evInProgs = new InfoField();
 		evInProgs.createInfoField("In Arbeit:", 1, 4);
 		taskInfoPanel.add(evInProgs.getlTitle(), evInProgs.getGbc_lTitle());
 		taskInfoPanel.add(evInProgs.getlField(), evInProgs.getGbc_lField());
 
 		// 5. EventCompleted - Zeitpunkt Bereit zur Abholung
-		evCompl = new InfoFieldMaker();
+		evCompl = new InfoField();
 		evCompl.createInfoField("Bereit zur Abholung:", 1, 5);
 		taskInfoPanel.add(evCompl.getlTitle(), evCompl.getGbc_lTitle());
 		taskInfoPanel.add(evCompl.getlField(), evCompl.getGbc_lField());
 
 		// 6. EventReceived - Zeitpunkt Abholung
-		evReceived = new InfoFieldMaker();
+		evReceived = new InfoField();
 		evReceived.createInfoField("Abholung:", 1, 6);
 		taskInfoPanel.add(evReceived.getlTitle(), evReceived.getGbc_lTitle());
 		taskInfoPanel.add(evReceived.getlField(), evReceived.getGbc_lField());
 		
 		// 7. EventResult - Zeitpunkt Prüfung
-		evResult = new InfoFieldMaker();
+		evResult = new InfoField();
 		evResult.createInfoField("Prüfung:", 1, 7);
 		taskInfoPanel.add(evResult.getlTitle(), evResult.getGbc_lTitle());
 		taskInfoPanel.add(evResult.getlField(), evResult.getGbc_lField());
