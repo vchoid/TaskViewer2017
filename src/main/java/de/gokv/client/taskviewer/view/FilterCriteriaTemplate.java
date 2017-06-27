@@ -35,7 +35,7 @@ public class FilterCriteriaTemplate extends PanelBlockTemplate {
 	public JDatePanelImpl orderDatePan = new JDatePanelImpl(model_ord);
 	public JDatePickerImpl oDatePick = new JDatePickerImpl(orderDatePan, new DateLabelFormatter());
 	public JButton filterBtn;
-	public JButton clearFieldBtn;
+	public JButton clearAllBtn;
 	public JTextField anzFiltTask;
 	public String valFiltMsg = "";
 	
@@ -163,19 +163,19 @@ public class FilterCriteriaTemplate extends PanelBlockTemplate {
 		this.add(filterBtn, gbc_filterBtn);
 
 		// << Button "Felder leeren" >>
-		clearFieldBtn = new JButton("Alles zurücksetzen");
-		clearFieldBtn.setBorder(btnBorder);
-		clearFieldBtn.setBackground(colorBtnBG);
-		clearFieldBtn.setForeground(colorBtnTxt);
-		clearFieldBtn.setFont(fontTxt);
-		clearFieldBtn.addActionListener(filtTaskCont);
+		clearAllBtn = new JButton("Alles zurücksetzen");
+		clearAllBtn.setBorder(btnBorder);
+		clearAllBtn.setBackground(colorBtnBG);
+		clearAllBtn.setForeground(colorBtnTxt);
+		clearAllBtn.setFont(fontTxt);
+		clearAllBtn.addActionListener(filtTaskCont);
 		GridBagConstraints gbc_clearFieldBtn = new GridBagConstraints();
 		gbc_clearFieldBtn.anchor = GridBagConstraints.NORTH;
 		gbc_clearFieldBtn.fill = GridBagConstraints.HORIZONTAL;
 		gbc_clearFieldBtn.insets = new Insets(20, 10, 0, 0);
 		gbc_clearFieldBtn.gridx = 2;
 		gbc_clearFieldBtn.gridy = 6;
-		this.add(clearFieldBtn, gbc_clearFieldBtn);
+		this.add(clearAllBtn, gbc_clearFieldBtn);
 
 		// Anzahl der gefilterten Tasks
 		anzFiltTask = new JTextField(controller.getFilteredTasks().length + " Einträge ");

@@ -4,17 +4,22 @@ import de.gokv.client.taskviewer.Task;
 import de.gokv.client.taskviewer.exceptions.InvalidDateException;
 import de.gokv.client.taskviewer.utils.DateUtil;
 import de.gokv.client.taskviewer.view.FilterCriteriaTemplate;
-import de.gokv.client.taskviewer.view.MyFrame;
+import de.gokv.client.taskviewer.view.InfoCSVTemplate;
+import de.gokv.client.taskviewer.view.InfoTaskTemplate;
 
-public class AbstractFilterTaskListController extends AbstractController{
-	
-	FilterCriteriaTemplate criteria;
-	
+public class AbstractFilterTaskListController extends AbstractController {
+
+	private FilterCriteriaTemplate criteria;
+	private InfoCSVTemplate infoCSV;
+	private InfoTaskTemplate infoTask;
+
 	public AbstractFilterTaskListController() {
 		super();
 		criteria = frame.filterMask;
+		infoCSV = frame.infoCSV;
+		infoTask = frame.infoTask;
 	}
-	
+
 	public void setFilteredTask() {
 		try {
 			Task t = new Task();
@@ -31,7 +36,7 @@ public class AbstractFilterTaskListController extends AbstractController{
 
 			model.setFilterCriteria(t);
 			frame.taskMask.taskList.setListData(model.getFilteredTaskID());
-			criteria.anzFiltTask.setText(model.getFilteredTaskID().length +" Einträge");
+			criteria.anzFiltTask.setText(model.getFilteredTaskID().length + " Einträge");
 
 		} catch (InvalidDateException e1) {
 			// DO NOTHING
@@ -43,12 +48,12 @@ public class AbstractFilterTaskListController extends AbstractController{
 		// Filter-Panel
 		clearCriterias();
 		// CSV Info-Panel
-//		clearCSVInfoPanel();
+		 clearCSVInfoPanel();
 		// Task Info-Panel
-//		clearTaskInfoPanel();
+		 clearTaskInfoPanel();
 	}
 
-	private void clearCriterias(){
+	private void clearCriterias() {
 		criteria.pName.setText(null);
 		criteria.pVname.setText(null);
 		criteria.pKvnr.setText(null);
@@ -56,22 +61,23 @@ public class AbstractFilterTaskListController extends AbstractController{
 		criteria.model_geb.setValue(null);
 		criteria.model_ord.setValue(null);
 	}
-	
-//	private void clearCSVInfoPanel(){
-//		MyFrame.taskID_field.setText(null);
-//		MyFrame.kvnr.setlField(null);
-//		MyFrame.name.setlField(null);
-//		MyFrame.vName.setlField(null);
-//		MyFrame.gebDate.setlField(null);
-//	}
-//	private void clearTaskInfoPanel(){
-//		frame.state.setlField(null);
-//		frame.taskType.setlField(null);
-//		frame.orderDate.setlField(null);
-//		frame.evInProgs.setlField(null);
-//		frame.evCompl.setlField(null);
-//		frame.evReceived.setlField(null);
-//		frame.evResult.setlField(null);
-//	}
-	
+
+	private void clearCSVInfoPanel() {
+		infoCSV.taskID_field.setText(null);
+		infoCSV.kvnr.setlField(null);
+		infoCSV.name.setlField(null);
+		infoCSV.vName.setlField(null);
+		infoCSV.gebDate.setlField(null);
+	}
+
+	private void clearTaskInfoPanel() {
+		infoTask.state.setlField(null);
+		infoTask.taskType.setlField(null);
+		infoTask.orderDate.setlField(null);
+		infoTask.evInProgs.setlField(null);
+		infoTask.evCompl.setlField(null);
+		infoTask.evReceived.setlField(null);
+		infoTask.evResult.setlField(null);
+	}
+
 }

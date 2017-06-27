@@ -18,14 +18,14 @@ public class TaskListController extends AbstractController implements ActionList
 		taskMask = frame.taskMask;
 	}
 
-	public void countvalidEntries(){
+	public void getAllEntries(){
 		if (model.countInvalidTasks > 0) {
-			getInvalidEntries();
+			System.out.println(getInvalidEntries());
 		} else {
 			invalEntMsg = "";
 		}
 		if (model.countValidTasks > 0) {
-			getValidEntries();
+			System.out.println(getValidEntries());
 		} else {
 			valEntMsg = "";
 		}
@@ -40,10 +40,12 @@ public class TaskListController extends AbstractController implements ActionList
 	public String getValidEntries(){
 		return valEntMsg = model.countValidTasks + " Einträge ";
 	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == taskMask.reloadBtn) {
 			model.reload();
+			getAllEntries();
 			taskMask.taskList.setListData(model.getFilteredTaskID());
 			
 		}

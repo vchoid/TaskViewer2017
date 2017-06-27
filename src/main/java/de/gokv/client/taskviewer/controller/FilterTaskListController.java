@@ -15,9 +15,10 @@ public class FilterTaskListController extends AbstractFilterTaskListController i
 		FilterCriteriaTemplate criteria = frame.filterMask;
 		if (e.getSource() == criteria.filterBtn) {
 			setFilteredTask();
-		} else if (e.getSource() == criteria.clearFieldBtn) {
+		} else if (e.getSource() == criteria.clearAllBtn) {
 			resetForm();
 			setFilteredTask();
+			
 		}
 	}
 }
