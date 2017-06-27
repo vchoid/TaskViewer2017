@@ -33,16 +33,17 @@ public class MyFrame extends JFrame {
 	public InfoTaskTemplate infoTask;
 
 	// Style ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	private String pathIconPrg;
-
+	private String pathAppIcon;
 	private Color colorPanContBG;
 
 	/**
 	 * Konstruktor
 	 */
 	public MyFrame() {
-		pathIconPrg = "/taskViewer.png";
-		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(pathIconPrg)));
+		controller = new MyFrameController(this);
+		
+		pathAppIcon = "/taskViewer.png";
+		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(pathAppIcon)));
 		setTitle("bitGo_KV-TaskViewer");
 		setAlwaysOnTop(true);
 
@@ -50,9 +51,9 @@ public class MyFrame extends JFrame {
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		// Fenstergröße-------------------------
 		// Quer 3x1
-		// setSize(new Dimension(1360, 355));
+//		 setSize(new Dimension(1400, 455));
 		// Quer 2x2
-		setSize(new Dimension(902, 670));
+		setSize(new Dimension(930, 740));
 		// Hoch
 		// setSize(new Dimension(470, 970));
 		
@@ -62,7 +63,6 @@ public class MyFrame extends JFrame {
 		// Content-Panel
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		contPanel = new JPanel();
-		controller = new MyFrameController(this);
 		
 		FlowLayout fl_contPanel = new FlowLayout();
 		fl_contPanel.setAlignment(FlowLayout.LEFT);
@@ -70,22 +70,22 @@ public class MyFrame extends JFrame {
 		setContentPane(contPanel);
 		getContentPane().setBackground(colorPanContBG);
 
-		// Filter-Panel
-		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		// Dummy Objekte ------------------------------------
 		filterMask = new FilterCriteriaTemplate(controller);
-		contPanel.add(filterMask);
-		// Task-Panel
-		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		taskMask = new TaskListTemplate(controller);
-		contPanel.add(taskMask);
-
-		// Information Panel
-		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-		// CSV Info -------------------------------
 		infoCSV = new InfoCSVTemplate(controller);
-		contPanel.add(infoCSV);
-		// Task Info ------------------------------
 		infoTask = new InfoTaskTemplate(controller);
+
+		// Initialisierung ----------------------------------
+		filterMask.init();
+		taskMask.init();
+		infoCSV.init();
+		infoTask.init();
+		
+		// Ergänzen auf Panel -------------------------------
+		contPanel.add(filterMask);
+		contPanel.add(taskMask);
+		contPanel.add(infoCSV);
 		contPanel.add(infoTask);
 
 		// Error Message
@@ -99,7 +99,7 @@ public class MyFrame extends JFrame {
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setVisible(true);
 		setLocationRelativeTo(null);
-		setResizable(true);
+		setResizable(false);
 	}
 
 	public MyFrameController getController() {

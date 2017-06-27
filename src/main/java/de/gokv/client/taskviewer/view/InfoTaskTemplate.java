@@ -18,7 +18,18 @@ public class InfoTaskTemplate extends PanelBlockTemplate {
 
 	protected InfoTaskTemplate(MyFrameController controller) {
 		super("Informationen (Task)", controller);
+	}
 
+	@Override
+	public GridBagLayout getLayout() {
+		GridBagLayout layout = new GridBagLayout();
+		layout.columnWidths = new int[] { 10, 210, 210, 10 };
+		layout.rowHeights = new int[] { 20, 30, 30, 30, 30, 30, 30, 30, 30 };
+		return layout;
+	}
+
+	@Override
+	public void init() {
 		// 1. State - Status
 		state = InfoField.createInfoField("Status:", 1, 1);
 		this.add(state.getlTitle(), state.getGbc_lTitle());
@@ -53,14 +64,6 @@ public class InfoTaskTemplate extends PanelBlockTemplate {
 		evResult = InfoField.createInfoField("Prüfung:", 1, 7);
 		this.add(evResult.getlTitle(), evResult.getGbc_lTitle());
 		this.add(evResult.getlField(), evResult.getGbc_lField());
-	}
-
-	@Override
-	public GridBagLayout getLayout() {
-		GridBagLayout layout = new GridBagLayout();
-		layout.columnWidths = new int[] { 10, 206, 206, 10 };
-		layout.rowHeights = new int[] { 40, 35, 35, 35, 35, 35, 35, 35, 10 };
-		return layout;
 	}
 
 }

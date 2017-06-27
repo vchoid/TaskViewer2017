@@ -23,9 +23,9 @@ public abstract class PanelBlockTemplate extends JPanel{
 	protected final Color colorInfoTitleTxt = new HexaToRGB("color.info.titel.text").parseHexToRGB();
 	protected final Color colorInfoTxt = new HexaToRGB("color.info.text").parseHexToRGB();
 	
-	protected final Font fontTitle = new Font("Arial", Font.BOLD, 16);
-	protected final Font fontText = new Font("Arial", Font.PLAIN, 14);
-	protected final Font fontLabelText = new Font("Arial", Font.BOLD, 15);
+	protected final Font fontTitle = new Font("SansSerif", Font.BOLD, 18);
+	protected final Font fontInfoTitle = new Font("Arial", Font.BOLD, 14);
+	protected final Font fontTxt = new Font("Arial", Font.PLAIN, 15);
 
 	
 	protected final Border emptyBorder = BorderFactory.createEmptyBorder();
@@ -47,4 +47,5 @@ public abstract class PanelBlockTemplate extends JPanel{
 	
 	public abstract GridBagLayout getLayout();
 	
+	public abstract void init();
 }

@@ -41,13 +41,24 @@ public class FilterCriteriaTemplate extends PanelBlockTemplate {
 	
 	public FilterCriteriaTemplate(MyFrameController controller) {
 		super("Filter Maske", controller);
+	}
 
+	@Override
+	public GridBagLayout getLayout() {
+		GridBagLayout layout = new GridBagLayout();
+		layout.columnWidths = new int[] { 10, 210, 210, 10 };
+		layout.rowHeights = new int[] {50,30,30,30,30,30,30,50 };
+		return layout;
+	}
+
+	@Override
+	public void init() {
 		FilterTaskListController filtTaskCont = new FilterTaskListController();
 		FilterTaskListKeyHandler filtTaskKey = new FilterTaskListKeyHandler();
 		
 		// << KVNR >>
 		pKvnr = new Field_Placeholder();
-		pKvnr.setPlaceholder("Krankenversichertennummer (laut eGk)", 410);
+		pKvnr.setPlaceholder("Krankenversichertennummer (laut eGk)", getLayout().columnWidths[1]*2);
 		pKvnr.setBorder(emptyBorder);
 		pKvnr.addActionListener(filtTaskCont);
 		GridBagConstraints gbc_kvnr = new GridBagConstraints();
@@ -60,28 +71,28 @@ public class FilterCriteriaTemplate extends PanelBlockTemplate {
 
 		// << Name >>
 		pName = new Field_Placeholder();
-		pName.setPlaceholder("Name", 195);
+		pName.setPlaceholder("Name", getLayout().columnWidths[1]);
 		pName.setBorder(emptyBorder);
 		pName.addActionListener(filtTaskCont);
 		pName.addKeyListener(filtTaskKey);
 		GridBagConstraints gbc_name = new GridBagConstraints();
 		gbc_name.anchor = GridBagConstraints.NORTH;
 		gbc_name.fill = GridBagConstraints.HORIZONTAL;
-		gbc_name.insets = new Insets(0, 0, 0, 10);
+		gbc_name.insets = new Insets(0, 0, 0, 0);
 		gbc_name.gridx = 1;
 		gbc_name.gridy = 2;
 		this.add(pName, gbc_name);
 
 		// << Vorname >>
 		pVname = new Field_Placeholder();
-		pVname.setPlaceholder("Vorname", 200);
+		pVname.setPlaceholder("Vorname", getLayout().columnWidths[2]-10);
 		pVname.setBorder(emptyBorder);
 		pVname.addActionListener(filtTaskCont);
 		pVname.addKeyListener(filtTaskKey);
 		GridBagConstraints gbc_vName = new GridBagConstraints();
 		gbc_vName.anchor = GridBagConstraints.BASELINE_LEADING;
 		gbc_vName.fill = GridBagConstraints.HORIZONTAL;
-		gbc_vName.insets = new Insets(0, 10, 10, 10);
+		gbc_vName.insets = new Insets(0, 10, 0, 0);
 		gbc_vName.gridx = 2;
 		gbc_vName.gridy = 2;
 		this.add(pVname, gbc_vName);
@@ -90,14 +101,14 @@ public class FilterCriteriaTemplate extends PanelBlockTemplate {
 		gDateLabel = new JLabel("Geburtstag");
 		gDateLabel.setForeground(colorLabelDateTxt);
 		gDateLabel.setBorder(emptyBorder);
-		gDateLabel.setFont(fontText);
+		gDateLabel.setFont(fontTxt);
 		GridBagConstraints gbc_gDateLabel = new GridBagConstraints();
 		gbc_gDateLabel.anchor = GridBagConstraints.BELOW_BASELINE_TRAILING;
 		gbc_gDateLabel.gridx = 1;
 		gbc_gDateLabel.gridy = 3;
 		this.add(gDateLabel, gbc_gDateLabel);
 		GridBagConstraints gbc_gebDate = new GridBagConstraints();
-		gbc_gebDate.insets = new Insets(0, 10, 5, 0);
+		gbc_gebDate.insets = new Insets(0, 8, 5, 0);
 		gbc_gebDate.gridx = 2;
 		gbc_gebDate.gridy = 3;
 		gDatePick.setTextEditable(true);
@@ -106,7 +117,7 @@ public class FilterCriteriaTemplate extends PanelBlockTemplate {
 
 		// << TaskID >>
 		pTaskID = new Field_Placeholder();
-		pTaskID.setPlaceholder("TaskID", 410);
+		pTaskID.setPlaceholder("TaskID", getLayout().columnWidths[1]*2);
 		pTaskID.setBorder(emptyBorder);
 		pTaskID.addActionListener(filtTaskCont);
 		pTaskID.addKeyListener(filtTaskKey);
@@ -122,14 +133,14 @@ public class FilterCriteriaTemplate extends PanelBlockTemplate {
 		oDateLabel = new JLabel("Order Date");
 		oDateLabel.setForeground(colorLabelDateTxt);
 		oDateLabel.setBorder(emptyBorder);
-		oDateLabel.setFont(fontText);
+		oDateLabel.setFont(fontTxt);
 		GridBagConstraints gbc_oDateLabel = new GridBagConstraints();
 		gbc_oDateLabel.anchor = GridBagConstraints.BELOW_BASELINE_TRAILING;
 		gbc_oDateLabel.gridx = 1;
 		gbc_oDateLabel.gridy = 5;
 		this.add(oDateLabel, gbc_oDateLabel);
 		GridBagConstraints gbc_orderDate = new GridBagConstraints();
-		gbc_orderDate.insets = new Insets(0, 10, 10, 0);
+		gbc_orderDate.insets = new Insets(0, 8, 10, 0);
 		gbc_orderDate.gridx = 2;
 		gbc_orderDate.gridy = 5;
 		oDatePick.setTextEditable(true);
@@ -141,7 +152,7 @@ public class FilterCriteriaTemplate extends PanelBlockTemplate {
 		filterBtn.setBorder(btnBorder);
 		filterBtn.setBackground(colorBtnBG);
 		filterBtn.setForeground(colorBtnTxt);
-		filterBtn.setFont(fontText);
+		filterBtn.setFont(fontTxt);
 		filterBtn.addActionListener(filtTaskCont);
 		GridBagConstraints gbc_filterBtn = new GridBagConstraints();
 		gbc_filterBtn.anchor = GridBagConstraints.NORTH;
@@ -156,7 +167,7 @@ public class FilterCriteriaTemplate extends PanelBlockTemplate {
 		clearFieldBtn.setBorder(btnBorder);
 		clearFieldBtn.setBackground(colorBtnBG);
 		clearFieldBtn.setForeground(colorBtnTxt);
-		clearFieldBtn.setFont(fontText);
+		clearFieldBtn.setFont(fontTxt);
 		clearFieldBtn.addActionListener(filtTaskCont);
 		GridBagConstraints gbc_clearFieldBtn = new GridBagConstraints();
 		gbc_clearFieldBtn.anchor = GridBagConstraints.NORTH;
@@ -183,14 +194,6 @@ public class FilterCriteriaTemplate extends PanelBlockTemplate {
 		gbc_anzFiltTask.gridx = 2;
 		gbc_anzFiltTask.gridy = 7;
 		this.add(anzFiltTask, gbc_anzFiltTask);
-	}
-
-	@Override
-	public GridBagLayout getLayout() {
-		GridBagLayout layout = new GridBagLayout();
-		layout.columnWidths = new int[] { 10, 206, 206, 10 };
-		layout.rowHeights = new int[] {15,30,30,30,30,30,30,30,29 };
-		return layout;
 	}
 
 }

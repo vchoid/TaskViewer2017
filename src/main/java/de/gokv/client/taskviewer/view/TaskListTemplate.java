@@ -34,7 +34,18 @@ public class TaskListTemplate extends PanelBlockTemplate{
 	
 	protected TaskListTemplate(MyFrameController controller) {
 		super("Tasks", controller);
-		
+	}
+
+	@Override
+	public GridBagLayout getLayout() {
+		GridBagLayout layout = new GridBagLayout();
+		layout.columnWidths = new int[] { 10, 210, 210, 10 };
+		layout.rowHeights = new int[] { 50, 0, 157, 30, 50 };
+		return layout;
+	}
+
+	@Override
+	public void init() {
 		TaskListController taskListCont = new TaskListController();
 		LoadTaskDetailsController loadTaskDetailsCont = new LoadTaskDetailsController();
 		LoadTaskDetailsKeyHandler loadTaskDetailKey = new LoadTaskDetailsKeyHandler();
@@ -57,7 +68,7 @@ public class TaskListTemplate extends PanelBlockTemplate{
 		// << Task-Liste >>
 		taskList = new JList<>(controller.getFilteredTasks());
 		taskList.setVisibleRowCount(7);
-		taskList.setFont(fontText);
+		taskList.setFont(fontTxt);
 		taskList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		taskList.addListSelectionListener(loadTaskDetailsCont);
 		taskList.addKeyListener(loadTaskDetailKey);
@@ -72,6 +83,7 @@ public class TaskListTemplate extends PanelBlockTemplate{
 
 		// << Tasks reload -Button >>
 		reloadBtn = new JButton(" Liste neu laden  ");
+		
 		pathIconReload = "/reload.png";
 		iconReload = new ImageIcon(getClass().getResource(pathIconReload)).getImage();
 		iconReloadScaled = new ImageIcon(iconReload.getScaledInstance(18, 18, 0));
@@ -79,7 +91,7 @@ public class TaskListTemplate extends PanelBlockTemplate{
 		reloadBtn.setBorder(btnBorder);
 		reloadBtn.setBackground(colorBtnBG);
 		reloadBtn.setForeground(colorBtnTxt);
-		reloadBtn.setFont(fontText);
+		reloadBtn.setFont(fontTxt);
 		reloadBtn.addActionListener(taskListCont);
 		GridBagConstraints gbc_reloadTaskBtn = new GridBagConstraints();
 		gbc_reloadTaskBtn.anchor = GridBagConstraints.NORTH;
@@ -94,7 +106,7 @@ public class TaskListTemplate extends PanelBlockTemplate{
 		taskLoadBtn.setBorder(btnBorder);
 		taskLoadBtn.setBackground(colorBtnBG);
 		taskLoadBtn.setForeground(colorBtnTxt);
-		taskLoadBtn.setFont(fontText);
+		taskLoadBtn.setFont(fontTxt);
 		taskLoadBtn.addActionListener(loadTaskDetailsCont);
 		GridBagConstraints gbc_detailBtn = new GridBagConstraints();
 		gbc_detailBtn.anchor = GridBagConstraints.NORTH;
@@ -103,14 +115,6 @@ public class TaskListTemplate extends PanelBlockTemplate{
 		gbc_detailBtn.gridx = 1;
 		gbc_detailBtn.gridy = 3;
 		this.add(taskLoadBtn, gbc_detailBtn);
-	}
-
-	@Override
-	public GridBagLayout getLayout() {
-		GridBagLayout layout = new GridBagLayout();
-		layout.columnWidths = new int[] { 10, 206, 206, 10 };
-		layout.rowHeights = new int[] { 30, 0, 157, 30, 30 };
-		return layout;
 	}
 
 }
