@@ -9,50 +9,42 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
+import de.gokv.client.taskviewer.controller.MyFrameController;
 import de.gokv.client.taskviewer.utils.HexaToRGB;
 
-public class PanelBlockTemplate {
+public abstract class PanelBlockTemplate extends JPanel{
+	private static final long serialVersionUID = 1L;
 	
-	GridBagLayout layout;
+	protected final Color colorTitle = new HexaToRGB("color.panel.titeltext.foreground").parseHexToRGB();
+	protected final Color background = new HexaToRGB("color.panel.block.background").parseHexToRGB();
+	protected final Color colorBtnBG = new HexaToRGB("color.button.background").parseHexToRGB();
+	protected final Color colorBtnTxt = new HexaToRGB("color.button.text").parseHexToRGB();
+	protected final Color colorEntryTxt = new HexaToRGB("color.entries.text").parseHexToRGB();
+	protected final Color colorInfoTitleTxt = new HexaToRGB("color.info.titel.text").parseHexToRGB();
+	protected final Color colorInfoTxt = new HexaToRGB("color.info.text").parseHexToRGB();
 	
-	private TitledBorder titleBorder;
-	private JPanel panel;
+	protected final Font fontTitle = new Font("Arial", Font.BOLD, 16);
+	protected final Font fontText = new Font("Arial", Font.PLAIN, 14);
+	protected final Font fontLabelText = new Font("Arial", Font.BOLD, 15);
+
 	
-	private Color colorTitle = new HexaToRGB("color.panel.titeltext.foreground").parseHexToRGB();
-	private Color background = new HexaToRGB("color.panel.block.background").parseHexToRGB();
+	protected final Border emptyBorder = BorderFactory.createEmptyBorder();
+	protected final Border btnBorder = BorderFactory.createEmptyBorder(8, 5, 8, 5);
 	
-	private Font fontTitle = new Font("Arial", Font.BOLD, 16);
+	protected final MyFrameController controller;
 	
-	private Border emptyBorder = BorderFactory.createEmptyBorder();
-	
-	public PanelBlockTemplate() {
-		super();
-	}
-	
-	public void createPanelWithTitle(String title){
-		titleBorder = BorderFactory.createTitledBorder(title);
+	protected PanelBlockTemplate(String title, MyFrameController controller){
+		TitledBorder titleBorder = BorderFactory.createTitledBorder(title);
 		titleBorder.setTitleJustification(TitledBorder.TOP);
 		titleBorder.setTitleColor(colorTitle);
 		titleBorder.setTitleFont(fontTitle);
 		titleBorder.setBorder(emptyBorder);
-		panel =  new JPanel();
-		panel.setBorder(titleBorder);
-		panel.setBackground(background);
+		this.setBorder(titleBorder);
+		this.setBackground(background);
+		this.setLayout(getLayout());	
+		this.controller = controller;
 	}
 	
-	public JPanel getPanel() {
-		return panel;
-	}
-
-	public void setGridBagLayout(GridBagLayout layout){
-		panel.setLayout(layout);
-	}
+	public abstract GridBagLayout getLayout();
 	
-	
-	
-	
-	
-	
-	
-
 }

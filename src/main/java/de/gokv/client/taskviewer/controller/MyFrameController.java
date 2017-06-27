@@ -1,6 +1,5 @@
 package de.gokv.client.taskviewer.controller;
 
-import de.gokv.client.taskviewer.Task;
 import de.gokv.client.taskviewer.model.MyModel;
 import de.gokv.client.taskviewer.view.MyFrame;
 /**
@@ -8,17 +7,14 @@ import de.gokv.client.taskviewer.view.MyFrame;
  * @author Christoph Kiank
  *
  */
-public class MyFrameController {
+public class MyFrameController extends AbstractController{
 
-	private MyModel model;
-	private final MyFrame frame;
 	/**
 	 * Konstruktor legt ein neues Model-Objekt an und dieses startet das lesen der CSV-Datei.
 	 * @param frame
 	 */
 	public MyFrameController(MyFrame frame) {
-		this.frame = frame;
-		model = new MyModel();
+		super(new MyModel(), frame);
 		model.readFiles();
 	}
 	/**
@@ -27,13 +23,6 @@ public class MyFrameController {
 	 */
 	public String[] getFilteredTasks(){
 		return model.getFilteredTaskID();
-	}
-	/**
-	 * Gibt das model aus der Klasse MyModel zurück.
-	 * @return
-	 */
-	public MyModel getModel() {
-		return model;
 	}
 	
 }

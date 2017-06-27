@@ -15,44 +15,53 @@ public class InfoField {
 
 	
 	
-	private Font fntTitle = new Font("Arial", Font.BOLD, 14);
-	private Font fntTxt = new Font("Arial", Font.PLAIN, 15);
+	private static final Font fntTitle = new Font("Arial", Font.BOLD, 14);
+	private static final Font fntTxt = new Font("Arial", Font.PLAIN, 15);
 	
-	private Color colorInfoTitleTxt = new HexaToRGB("color.info.titel.text").parseHexToRGB();
-	private Color colorInfoTxt = new HexaToRGB("color.info.text").parseHexToRGB();
+	private static final Color colorInfoTitleTxt = new HexaToRGB("color.info.titel.text").parseHexToRGB();
+	private static final Color colorInfoTxt = new HexaToRGB("color.info.text").parseHexToRGB();
 	
 	private JLabel lTitle;
 	private JLabel lField;
 	private GridBagConstraints gbc_lTitle;
 	private GridBagConstraints gbc_lField;
 	
-
-	public InfoField() {
-		super();
+	private InfoField() {
 	}
 
-	public void createInfoField(String title, int startPosCol, int startPosRow){
-		lTitle = new JLabel(title);
+	public static InfoField createInfoField(String title, int startPosCol, int startPosRow){
+		InfoField field = new InfoField();
+		JLabel lTitle = new JLabel(title);
 		lTitle.setFont(fntTitle);
 		lTitle.setForeground(colorInfoTitleTxt);
-		gbc_lTitle = new GridBagConstraints();
+		
+		field.lTitle = lTitle;
+		
+		GridBagConstraints gbc_lTitle = new GridBagConstraints();
 		gbc_lTitle.anchor = GridBagConstraints.NORTH;
 		gbc_lTitle.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lTitle.insets = new Insets(20, 0, 0, 0);
 		gbc_lTitle.gridx = startPosCol;
 		gbc_lTitle.gridy = startPosRow;
 		
-		lField = new JLabel();
+		field.gbc_lTitle = gbc_lTitle;
+		
+		JLabel lField = new JLabel();
 		lField.setFont(fntTxt);
 		lField.setForeground(colorInfoTxt);
-		gbc_lField = new GridBagConstraints();
+		
+		field.lField = lField;
+		
+		GridBagConstraints gbc_lField = new GridBagConstraints();
 		gbc_lField.anchor = GridBagConstraints.NORTH;
 		gbc_lField.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lField.insets = new Insets(0, 20, 0, 0);
 		gbc_lField.gridx = startPosCol;
 		gbc_lField.gridy = startPosRow+1;
 				
+		field.gbc_lField = gbc_lField;
 		
+		return field;
 	}
 	
 	

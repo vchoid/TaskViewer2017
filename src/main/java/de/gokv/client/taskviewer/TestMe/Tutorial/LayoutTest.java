@@ -125,6 +125,7 @@ public class LayoutTest extends JFrame {
 		fileChooser.addActionListener(butHand);
 		dropDownMenu.addItemListener(new ItemHandler());
 		jListe.addListSelectionListener(new ListenHandler());
+		pic.addMouseListener(new MouseHandler());
 		
 
 		add(a);
@@ -210,31 +211,36 @@ public class LayoutTest extends JFrame {
 
 		@Override
 		public void mouseClicked(MouseEvent arg0) {
-			// TODO Auto-generated method stub
+			System.out.println("mouse klicked");
+			if( pic.i == pic.setIcon(ic2))
 			
 		}
 
 		@Override
 		public void mouseEntered(MouseEvent arg0) {
 			// TODO Auto-generated method stub
+			System.out.println("mouse entered");
 			
 		}
 
 		@Override
 		public void mouseExited(MouseEvent arg0) {
 			// TODO Auto-generated method stub
+			System.out.println("mouse exit");
 			
 		}
 
 		@Override
 		public void mousePressed(MouseEvent arg0) {
 			// TODO Auto-generated method stub
+			System.out.println("mouse pressed");
 			
 		}
 
 		@Override
 		public void mouseReleased(MouseEvent arg0) {
 			// TODO Auto-generated method stub
+			System.out.println("mouse rel");
 			
 		}
 		

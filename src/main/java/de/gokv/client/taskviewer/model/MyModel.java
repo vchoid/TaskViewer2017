@@ -19,7 +19,7 @@ public class MyModel {
 	private List<String> filteredTasks;
 	private Task filteredCriteria;
 	public int countValidTasks;
-	public static int countInvalidTasks;
+	public int countInvalidTasks;
 	public String kvnr;
 	public String name;
 	public String vName;

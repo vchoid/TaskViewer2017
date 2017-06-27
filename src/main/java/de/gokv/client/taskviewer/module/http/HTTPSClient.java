@@ -143,7 +143,7 @@ public class HTTPSClient {
 		trustedCertficates = ClientCertificate.readCertificateFromPKCS7(filename);
 	}
 
-	public void testConnection(String taskID) {
+	public void loadTaskDetails(String taskID) {
 		try {
 			JSONObject taskDetails = getTaskDetails(taskID);
 			JSONArray results = taskDetails.getJSONArray("results");
