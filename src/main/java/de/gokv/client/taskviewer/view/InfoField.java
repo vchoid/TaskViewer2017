@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
+import java.awt.Insets;
 import java.util.List;
 
 import javax.swing.JLabel;
@@ -29,7 +30,6 @@ public class InfoField {
 	public InfoField() {
 		super();
 	}
-	
 
 	public void createInfoField(String title, int startPosCol, int startPosRow){
 		lTitle = new JLabel(title);
@@ -38,6 +38,7 @@ public class InfoField {
 		gbc_lTitle = new GridBagConstraints();
 		gbc_lTitle.anchor = GridBagConstraints.NORTH;
 		gbc_lTitle.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lTitle.insets = new Insets(20, 0, 0, 0);
 		gbc_lTitle.gridx = startPosCol;
 		gbc_lTitle.gridy = startPosRow;
 		
@@ -47,8 +48,9 @@ public class InfoField {
 		gbc_lField = new GridBagConstraints();
 		gbc_lField.anchor = GridBagConstraints.NORTH;
 		gbc_lField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_lField.gridx = startPosCol+1;
-		gbc_lField.gridy = startPosRow;
+		gbc_lField.insets = new Insets(0, 20, 0, 0);
+		gbc_lField.gridx = startPosCol;
+		gbc_lField.gridy = startPosRow+1;
 				
 		
 	}

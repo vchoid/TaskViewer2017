@@ -59,8 +59,8 @@ public class MyFrame extends JFrame {
 	public JDatePanelImpl orderDatePan = new JDatePanelImpl(model_ord);
 	public JDatePickerImpl oDatePick = new JDatePickerImpl(orderDatePan, new DateLabelFormatter());
 	public JButton filterBtn;
-	public static JButton clearFieldBtn;
-	public static MyFrameController controller;
+	public JButton clearFieldBtn;
+	public MyFrameController controller;
 	public static JTextField anzFiltTask;
 	public String valFiltMsg = "";
 	// Task Panel ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -128,7 +128,7 @@ public class MyFrame extends JFrame {
 		// Quer 3x1
 		// setSize(new Dimension(1360, 355));
 		// Quer 2x2
-		setSize(new Dimension(902, 638));
+		setSize(new Dimension(902, 670));
 		// Hoch
 		// setSize(new Dimension(470, 970));
 		// Farben
@@ -360,7 +360,7 @@ public class MyFrame extends JFrame {
 		taskPanel.add(scrollTask, gbc_scrollTask);
 
 		// << Tasks reload -Button >>
-		reloadBtn = new JButton(" Taskliste neu laden  ");
+		reloadBtn = new JButton(" Liste neu laden  ");
 		pathIconReload = "/reload.png";
 		icon = new ImageIcon(getClass().getResource(pathIconReload)).getImage();
 		iconReload = new ImageIcon(icon.getScaledInstance(18, 18, 0));
@@ -398,7 +398,7 @@ public class MyFrame extends JFrame {
 		// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		GridBagLayout gbl_csvInfoPanel = new GridBagLayout();
 		gbl_csvInfoPanel.columnWidths = new int[] { 10, 206, 206, 10 };
-		gbl_csvInfoPanel.rowHeights = new int[] { 30, 30, 30, 30, 30, 30, 30, 30, 30 };
+		gbl_csvInfoPanel.rowHeights = new int[] { 40, 35, 35, 35, 35, 35, 35, 35, 10 };
 		PanelBlockTemplate infoCSV = new PanelBlockTemplate();
 		infoCSV.createPanelWithTitle("Informationen (CSV)");
 		infoCSV.setGridBagLayout(gbl_csvInfoPanel);
@@ -412,6 +412,7 @@ public class MyFrame extends JFrame {
 		GridBagConstraints gbc_taskdIDLabel = new GridBagConstraints();
 		gbc_taskdIDLabel.anchor = GridBagConstraints.NORTH;
 		gbc_taskdIDLabel.fill = GridBagConstraints.HORIZONTAL;
+		gbc_taskdIDLabel.insets = new Insets(15, 0, 0, 0);
 		gbc_taskdIDLabel.gridx = 1;
 		gbc_taskdIDLabel.gridy = 1;
 		csvInfoPanel.add(taskID, gbc_taskdIDLabel);
@@ -422,6 +423,7 @@ public class MyFrame extends JFrame {
 		GridBagConstraints gbc_taskID_field = new GridBagConstraints();
 		gbc_taskID_field.anchor = GridBagConstraints.NORTH;
 		gbc_taskID_field.fill = GridBagConstraints.HORIZONTAL;
+		gbc_taskID_field.insets = new Insets(0, 20, 0, 0);
 		gbc_taskID_field.gridwidth = 2;
 		gbc_taskID_field.gridx = 1;
 		gbc_taskID_field.gridy = 2;
@@ -429,24 +431,24 @@ public class MyFrame extends JFrame {
 		
 		// 2. KvNr
 		kvnr = new InfoField();
-		kvnr.createInfoField("KvNr:", 1, 3);
+		kvnr.createInfoField("KvNr:", 1, 2);
 		csvInfoPanel.add(kvnr.getlTitle(), kvnr.getGbc_lTitle());
 		csvInfoPanel.add(kvnr.getlField(), kvnr.getGbc_lField());
 		
 		// 3. Name
 		name = new InfoField();
-		name.createInfoField("Name:", 1, 4);
+		name.createInfoField("Name:", 1, 3);
 		csvInfoPanel.add(name.getlTitle(), name.getGbc_lTitle());
 		csvInfoPanel.add(name.getlField(), name.getGbc_lField());
 		// 4. Vorname
 		vName = new InfoField();
-		vName.createInfoField("Vorname:", 1, 5);
+		vName.createInfoField("Vorname:", 1, 4);
 		csvInfoPanel.add(vName.getlTitle(), vName.getGbc_lTitle());
 		csvInfoPanel.add(vName.getlField(), vName.getGbc_lField());
 		
 		// 5. Geburtsdatum
 		gebDate = new InfoField();
-		gebDate.createInfoField("Geburtsdatum:", 1, 6);
+		gebDate.createInfoField("Geburtsdatum:", 1,5);
 		csvInfoPanel.add(gebDate.getlTitle(), gebDate.getGbc_lTitle());
 		csvInfoPanel.add(gebDate.getlField(), gebDate.getGbc_lField());
 		
@@ -455,7 +457,7 @@ public class MyFrame extends JFrame {
 		// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		GridBagLayout gbl_taskInfoPanel = new GridBagLayout();
 		gbl_taskInfoPanel.columnWidths = new int[] { 10, 206, 206, 10 };
-		gbl_taskInfoPanel.rowHeights = new int[] {30,30,30,30,30,30,30,30,30 };
+		gbl_taskInfoPanel.rowHeights = new int[] {15,30,30,30,30,30,30,30,29 };
 		PanelBlockTemplate infoTask = new PanelBlockTemplate();
 		infoTask.createPanelWithTitle("Informationen (Task)");
 		infoTask.setGridBagLayout(gbl_taskInfoPanel);
@@ -511,7 +513,7 @@ public class MyFrame extends JFrame {
 					JOptionPane.WARNING_MESSAGE);
 		}
 
-		// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setVisible(true);
 		setLocationRelativeTo(null);

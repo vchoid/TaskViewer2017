@@ -70,7 +70,6 @@ public class LoadTaskDetailsController implements ActionListener, ListSelectionL
 
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
-		//TODO Inhalt soll auch bei Benutzung durch die Pfeiltasten angezeigt werden
 		if(e.getValueIsAdjusting()){
 			taskID = frame.taskList.getSelectedValue();
 			model.getTaskValueByID(taskID);
@@ -82,13 +81,13 @@ public class LoadTaskDetailsController implements ActionListener, ListSelectionL
 		}
 			// Löschen ---------------------------------------------------------------------------------------------
 //			iniClient();
-//			MyFrame.orderDate_field.setText(DateUtil.datetoString((HTTPSClient.task.get("orderedDate").toString())));
-//			MyFrame.state_field.setText(HTTPSClient.task.get("state").toString());
-//			MyFrame.taskType_field.setText(HTTPSClient.task.get("type").toString());
-//			MyFrame.evInProgs_field.setText(HTTPSClient.task.get("eventInProgress").toString());
-//			MyFrame.evCompl_field.setText(HTTPSClient.task.get("eventCompleted").toString());
-//			MyFrame.evReceived_field.setText(HTTPSClient.task.get("eventReceived").toString());
-//			MyFrame.evResult_field.setText(HTTPSClient.task.get("eventResult").toString());
+//			MyFrame.state.setlField(HTTPSClient.task.get("state").toString());
+//			MyFrame.taskType.setlField(HTTPSClient.task.get("type").toString());
+//			MyFrame.orderDate.setlField(DateUtil.datetoString((HTTPSClient.task.get("orderedDate").toString())));
+//			MyFrame.evInProgs.setlField(HTTPSClient.task.get("eventInProgress").toString());
+//			MyFrame.evCompl.setlField(HTTPSClient.task.get("eventCompleted").toString());
+//			MyFrame.evReceived.setlField(HTTPSClient.task.get("eventReceived").toString());
+//			MyFrame.evResult.setlField(HTTPSClient.task.get("eventResult").toString());
 			//-------------------------------------------------------------------------------------------------------
 		
 	}
