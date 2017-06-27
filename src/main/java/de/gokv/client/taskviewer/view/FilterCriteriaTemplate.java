@@ -190,7 +190,7 @@ public class FilterCriteriaTemplate extends PanelBlockTemplate {
 		GridBagConstraints gbc_anzFiltTask = new GridBagConstraints();
 		gbc_anzFiltTask.anchor = GridBagConstraints.NORTH;
 		gbc_anzFiltTask.fill = GridBagConstraints.HORIZONTAL;
-		gbc_anzFiltTask.insets = new Insets(0, 0, 0, 0);
+		gbc_anzFiltTask.insets = new Insets(5, 0, 0, 0);
 		gbc_anzFiltTask.gridwidth = 1;
 		gbc_anzFiltTask.gridx = 1;
 		gbc_anzFiltTask.gridy = 7;

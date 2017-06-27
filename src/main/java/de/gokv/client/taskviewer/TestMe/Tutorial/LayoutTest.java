@@ -211,14 +211,14 @@ public class LayoutTest extends JFrame {
 
 		@Override
 		public void mouseClicked(MouseEvent arg0) {
-			System.out.println("mouse klicked");
-			if( pic.i == pic.setIcon(ic2))
+			
 			
 		}
 
 		@Override
 		public void mouseEntered(MouseEvent arg0) {
 			// TODO Auto-generated method stub
+			pic.setIcon(ic2);
 			System.out.println("mouse entered");
 			
 		}
@@ -226,6 +226,7 @@ public class LayoutTest extends JFrame {
 		@Override
 		public void mouseExited(MouseEvent arg0) {
 			// TODO Auto-generated method stub
+			pic.setIcon(ic1);
 			System.out.println("mouse exit");
 			
 		}

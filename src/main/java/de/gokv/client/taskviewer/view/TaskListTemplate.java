@@ -46,21 +46,6 @@ public class TaskListTemplate extends PanelBlockTemplate{
 		TaskListController taskListCont = new TaskListController();
 		LoadTaskDetailsController loadTaskDetailsCont = new LoadTaskDetailsController();
 		LoadTaskDetailsKeyHandler loadTaskDetailKey = new LoadTaskDetailsKeyHandler();
-		
-		anzTasks = new JTextField(TaskListController.getValidEntries() + TaskListController.getInvalidEntries());
-		anzTasks.setForeground(colorEntryTxt);
-		anzTasks.setBorder(emptyBorder);
-		anzTasks.setOpaque(false);
-		anzTasks.addActionListener(taskListCont);
-		this.add(anzTasks);
-		GridBagConstraints gbc_anzTask = new GridBagConstraints();
-		gbc_anzTask.anchor = GridBagConstraints.NORTH;
-		gbc_anzTask.fill = GridBagConstraints.HORIZONTAL;
-		gbc_anzTask.insets = new Insets(0, 10, 0, 0);
-		gbc_anzTask.gridwidth = 2;
-		gbc_anzTask.gridx = 2;
-		gbc_anzTask.gridy = 4;
-		this.add(anzTasks, gbc_anzTask);
 
 		// << Task-Liste >>
 		taskList = new JList<>(controller.getFilteredTasks());
@@ -111,6 +96,22 @@ public class TaskListTemplate extends PanelBlockTemplate{
 		gbc_detailBtn.gridx = 1;
 		gbc_detailBtn.gridy = 3;
 		this.add(taskLoadBtn, gbc_detailBtn);
+		
+		// << Anzahl der TaskID´s in der Liste und der Fehlerhaften >>
+		anzTasks = new JTextField(TaskListController.getValidEntries() + TaskListController.getInvalidEntries());
+		anzTasks.setForeground(colorEntryTxt);
+		anzTasks.setBorder(emptyBorder);
+		anzTasks.setOpaque(false);
+		anzTasks.addActionListener(taskListCont);
+		this.add(anzTasks);
+		GridBagConstraints gbc_anzTask = new GridBagConstraints();
+		gbc_anzTask.anchor = GridBagConstraints.NORTH;
+		gbc_anzTask.fill = GridBagConstraints.HORIZONTAL;
+		gbc_anzTask.insets = new Insets(5, 10, 0, 0);
+		gbc_anzTask.gridwidth = 2;
+		gbc_anzTask.gridx = 2;
+		gbc_anzTask.gridy = 4;
+		this.add(anzTasks, gbc_anzTask);
 	}
 
 }

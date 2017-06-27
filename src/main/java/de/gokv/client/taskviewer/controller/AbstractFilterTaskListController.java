@@ -37,9 +37,9 @@ public class AbstractFilterTaskListController extends AbstractController {
 			model.setFilterCriteria(t);
 			frame.taskMask.taskList.setListData(model.getFilteredTaskID());
 			if(model.getFilteredTaskID().length == 1){
-				criteria.anzFiltTask.setText(model.getFilteredTaskID().length + " Eintrag");
+				criteria.anzFiltTask.setText("Einen Eintrag gefunden");
 			}else {
-				criteria.anzFiltTask.setText(model.getFilteredTaskID().length + " Einträge");
+				criteria.anzFiltTask.setText(model.getFilteredTaskID().length + " Einträge gefunden");
 			}
 
 		} catch (InvalidDateException e1) {
