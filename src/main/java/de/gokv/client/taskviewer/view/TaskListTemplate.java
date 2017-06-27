@@ -40,7 +40,7 @@ public class TaskListTemplate extends PanelBlockTemplate{
 	public GridBagLayout getLayout() {
 		GridBagLayout layout = new GridBagLayout();
 		layout.columnWidths = new int[] { 10, 210, 210, 10 };
-		layout.rowHeights = new int[] { 50, 0, 157, 30, 50 };
+		layout.rowHeights = new int[] { 40, 0, 177, 35, 40 };
 		return layout;
 	}
 
@@ -67,7 +67,7 @@ public class TaskListTemplate extends PanelBlockTemplate{
 
 		// << Task-Liste >>
 		taskList = new JList<>(controller.getFilteredTasks());
-		taskList.setVisibleRowCount(7);
+		taskList.setVisibleRowCount(8);
 		taskList.setFont(fontTxt);
 		taskList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		taskList.addListSelectionListener(loadTaskDetailsCont);
@@ -83,7 +83,6 @@ public class TaskListTemplate extends PanelBlockTemplate{
 
 		// << Tasks reload -Button >>
 		reloadBtn = new JButton(" Liste neu laden  ");
-		
 		pathIconReload = "/reload.png";
 		iconReload = new ImageIcon(getClass().getResource(pathIconReload)).getImage();
 		iconReloadScaled = new ImageIcon(iconReload.getScaledInstance(18, 18, 0));

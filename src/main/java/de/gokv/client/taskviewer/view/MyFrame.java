@@ -36,34 +36,22 @@ public class MyFrame extends JFrame {
 	private String pathAppIcon;
 	private Color colorPanContBG;
 
-	/**
-	 * Konstruktor
-	 */
 	public MyFrame() {
 		controller = new MyFrameController(this);
-		
 		pathAppIcon = "/taskViewer.png";
 		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(pathAppIcon)));
 		setTitle("bitGo_KV-TaskViewer");
 		setAlwaysOnTop(true);
-
 		// Properties
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-		// Fenstergröße-------------------------
-		// Quer 3x1
-//		 setSize(new Dimension(1400, 455));
-		// Quer 2x2
-		setSize(new Dimension(930, 740));
-		// Hoch
-		// setSize(new Dimension(470, 970));
-		
+		// Fenstergröße------------------
+		setSize(new Dimension(918, 727));
 		// Farben ----------------------------------------------------------------------
 		colorPanContBG = new HexaToRGB("color.panel.content.background").parseHexToRGB();
-
+		
 		// Content-Panel
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		contPanel = new JPanel();
-		
 		FlowLayout fl_contPanel = new FlowLayout();
 		fl_contPanel.setAlignment(FlowLayout.LEFT);
 		contPanel.setLayout(fl_contPanel);

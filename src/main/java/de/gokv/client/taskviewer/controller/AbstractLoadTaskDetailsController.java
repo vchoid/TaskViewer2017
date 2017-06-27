@@ -23,7 +23,7 @@ public class AbstractLoadTaskDetailsController extends AbstractController {
 
 	public AbstractLoadTaskDetailsController() {
 		super();
-		if (client == null)
+//		if (client == null)
 			try {
 				client = new HTTPSClient(new URL("http://localhost:9080/gokv-tenant/api"));
 			} catch (ServerException | GeneralSecurityException | IOException | ClientCertificateException
@@ -36,6 +36,7 @@ public class AbstractLoadTaskDetailsController extends AbstractController {
 	}
 
 	protected void loadTaskDetails() {
+		taskID = taskMask.taskList.getSelectedValue();
 		client.loadTaskDetails(taskID);
 		infoTask.state.setlField(HTTPSClient.task.get("state").toString());
 		infoTask.taskType.setlField(HTTPSClient.task.get("type").toString());

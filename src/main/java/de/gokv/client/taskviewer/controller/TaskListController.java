@@ -11,28 +11,41 @@ public class TaskListController extends AbstractController implements ActionList
 	public static String valEntMsg = "";
 	public int invalEnt;
 	public static String invalEntMsg = "";
-
+	private TaskListTemplate taskMask;
+	
 	public TaskListController() {
 		super();
+		taskMask = frame.taskMask;
 	}
 
+	public void countvalidEntries(){
+		if (model.countInvalidTasks > 0) {
+			getInvalidEntries();
+		} else {
+			invalEntMsg = "";
+		}
+		if (model.countValidTasks > 0) {
+			getValidEntries();
+		} else {
+			valEntMsg = "";
+		}
+		taskMask.anzTasks.setText(valEntMsg + invalEntMsg);
+		
+	}
+	
+	public String getInvalidEntries(){
+		return invalEntMsg = "(davon fehlerhaft: " + model.countInvalidTasks + ")";
+	}
+	
+	public String getValidEntries(){
+		return valEntMsg = model.countValidTasks + " Einträge ";
+	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		TaskListTemplate taskMask = frame.taskMask;
 		if (e.getSource() == taskMask.reloadBtn) {
 			model.reload();
-			if (model.countInvalidTasks > 0) {
-				invalEntMsg = "(davon fehlerhaft: " + model.countInvalidTasks + ")";
-			} else {
-				invalEntMsg = "";
-			}
-			if (model.countValidTasks > 0) {
-				valEntMsg = model.countValidTasks + " Einträge ";
-			} else {
-				valEntMsg = "";
-			}
-			taskMask.anzTasks.setText(valEntMsg + invalEntMsg);
 			taskMask.taskList.setListData(model.getFilteredTaskID());
+			
 		}
 	}
 }

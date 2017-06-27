@@ -47,7 +47,7 @@ public class FilterCriteriaTemplate extends PanelBlockTemplate {
 	public GridBagLayout getLayout() {
 		GridBagLayout layout = new GridBagLayout();
 		layout.columnWidths = new int[] { 10, 210, 210, 10 };
-		layout.rowHeights = new int[] {50,30,30,30,30,30,30,50 };
+		layout.rowHeights = new int[] {40,35,35,35,35,35,35,40 };
 		return layout;
 	}
 
@@ -108,7 +108,7 @@ public class FilterCriteriaTemplate extends PanelBlockTemplate {
 		gbc_gDateLabel.gridy = 3;
 		this.add(gDateLabel, gbc_gDateLabel);
 		GridBagConstraints gbc_gebDate = new GridBagConstraints();
-		gbc_gebDate.insets = new Insets(0, 8, 5, 0);
+		gbc_gebDate.insets = new Insets(0, 8, 10, 0);
 		gbc_gebDate.gridx = 2;
 		gbc_gebDate.gridy = 3;
 		gDatePick.setTextEditable(true);

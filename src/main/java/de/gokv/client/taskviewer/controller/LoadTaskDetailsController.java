@@ -34,17 +34,6 @@ public class LoadTaskDetailsController extends AbstractLoadTaskDetailsController
 		if (e.getValueIsAdjusting()) {
 			selectTaskItem();
 		}
-		// Löschen
-		// ---------------------------------------------------------------------------------------------
-		// iniClient();
-		// MyFrame.state.setlField(HTTPSClient.task.get("state").toString());
-		// MyFrame.taskType.setlField(HTTPSClient.task.get("type").toString());
-		// MyFrame.orderDate.setlField(DateUtil.datetoString((HTTPSClient.task.get("orderedDate").toString())));
-		// MyFrame.evInProgs.setlField(HTTPSClient.task.get("eventInProgress").toString());
-		// MyFrame.evCompl.setlField(HTTPSClient.task.get("eventCompleted").toString());
-		// MyFrame.evReceived.setlField(HTTPSClient.task.get("eventReceived").toString());
-		// MyFrame.evResult.setlField(HTTPSClient.task.get("eventResult").toString());
-		// -------------------------------------------------------------------------------------------------------
 
 	}
 
