@@ -7,10 +7,10 @@ import de.gokv.client.taskviewer.view.FilterCriteriaTemplate;
 
 public class FilterTaskListController extends AbstractFilterTaskListController implements ActionListener {
 
-	private FilterCriteriaTemplate criteria;
+	
 	
 	public FilterTaskListController() {
-		criteria = frame.filterMask;
+		
 	}
 
 	@Override
@@ -21,7 +21,7 @@ public class FilterTaskListController extends AbstractFilterTaskListController i
 		} else if (e.getSource() == criteria.clearAllBtn) {
 			resetForm();
 			setFilteredTask();
-			criteria.anzFiltTask.setText(null);
+			frame.filterMask.anzFiltTask.setText(null);
 			
 			
 		}

@@ -36,7 +36,7 @@ public class TaskListController extends AbstractController implements ActionList
 	}
 	
 	public static String getInvalidEntries(){
-		return invalEntMsg = "(davon fehlerhaft: " + model.countInvalidTasks + ")";
+		return invalEntMsg = "(+ " + model.countInvalidTasks + " fehlerhaft)";
 	}
 	
 	public static String getValidEntries(){
