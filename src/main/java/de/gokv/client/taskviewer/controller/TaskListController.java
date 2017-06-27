@@ -20,25 +20,31 @@ public class TaskListController extends AbstractController implements ActionList
 
 	public void getAllEntries(){
 		if (model.countInvalidTasks > 0) {
-			System.out.println(getInvalidEntries());
+			getInvalidEntries();
 		} else {
 			invalEntMsg = "";
 		}
 		if (model.countValidTasks > 0) {
-			System.out.println(getValidEntries());
+			getValidEntries();
 		} else {
 			valEntMsg = "";
 		}
+		setAllEntries();
+	}
+	public void setAllEntries(){
 		taskMask.anzTasks.setText(valEntMsg + invalEntMsg);
-		
 	}
 	
-	public String getInvalidEntries(){
+	public static String getInvalidEntries(){
 		return invalEntMsg = "(davon fehlerhaft: " + model.countInvalidTasks + ")";
 	}
 	
-	public String getValidEntries(){
-		return valEntMsg = model.countValidTasks + " Einträge ";
+	public static String getValidEntries(){
+		if(model.countValidTasks == 1){
+			return valEntMsg = model.countValidTasks + " Eintrag ";
+		} else {
+			return valEntMsg = model.countValidTasks + " Einträge ";
+		}
 	}
 	
 	@Override

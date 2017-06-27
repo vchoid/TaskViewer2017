@@ -29,9 +29,6 @@ public class TaskListTemplate extends PanelBlockTemplate{
 	private String pathIconReload;
 	private ImageIcon iconReloadScaled;
 	
-	public String invalEntMsg = "";
-	public String valEntMsg = "";
-	
 	protected TaskListTemplate(MyFrameController controller) {
 		super("Tasks", controller);
 	}
@@ -50,7 +47,7 @@ public class TaskListTemplate extends PanelBlockTemplate{
 		LoadTaskDetailsController loadTaskDetailsCont = new LoadTaskDetailsController();
 		LoadTaskDetailsKeyHandler loadTaskDetailKey = new LoadTaskDetailsKeyHandler();
 		
-		anzTasks = new JTextField(valEntMsg + invalEntMsg);
+		anzTasks = new JTextField(TaskListController.getValidEntries() + TaskListController.getInvalidEntries());
 		anzTasks.setForeground(colorEntryTxt);
 		anzTasks.setBorder(emptyBorder);
 		anzTasks.setOpaque(false);

@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 import de.gokv.client.taskviewer.controller.FilterTaskListController;
 import de.gokv.client.taskviewer.controller.FilterTaskListKeyHandler;
 import de.gokv.client.taskviewer.controller.MyFrameController;
+import de.gokv.client.taskviewer.controller.TaskListController;
 import de.gokv.client.taskviewer.utils.HexaToRGB;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
@@ -178,7 +179,7 @@ public class FilterCriteriaTemplate extends PanelBlockTemplate {
 		this.add(clearAllBtn, gbc_clearFieldBtn);
 
 		// Anzahl der gefilterten Tasks
-		anzFiltTask = new JTextField(controller.getFilteredTasks().length + " Einträge ");
+		anzFiltTask = new JTextField();
 		anzFiltTask.setForeground(colorEntryTxt);
 		anzFiltTask.setBorder(emptyBorder);
 		anzFiltTask.addActionListener(filtTaskCont);
@@ -189,9 +190,9 @@ public class FilterCriteriaTemplate extends PanelBlockTemplate {
 		GridBagConstraints gbc_anzFiltTask = new GridBagConstraints();
 		gbc_anzFiltTask.anchor = GridBagConstraints.NORTH;
 		gbc_anzFiltTask.fill = GridBagConstraints.HORIZONTAL;
-		gbc_anzFiltTask.insets = new Insets(0, 10, 0, 0);
-		gbc_anzFiltTask.gridwidth = 2;
-		gbc_anzFiltTask.gridx = 2;
+		gbc_anzFiltTask.insets = new Insets(0, 0, 0, 0);
+		gbc_anzFiltTask.gridwidth = 1;
+		gbc_anzFiltTask.gridx = 1;
 		gbc_anzFiltTask.gridy = 7;
 		this.add(anzFiltTask, gbc_anzFiltTask);
 	}

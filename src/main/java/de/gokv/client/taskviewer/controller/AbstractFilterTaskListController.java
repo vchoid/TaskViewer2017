@@ -36,7 +36,11 @@ public class AbstractFilterTaskListController extends AbstractController {
 
 			model.setFilterCriteria(t);
 			frame.taskMask.taskList.setListData(model.getFilteredTaskID());
-			criteria.anzFiltTask.setText(model.getFilteredTaskID().length + " Einträge");
+			if(model.getFilteredTaskID().length == 1){
+				criteria.anzFiltTask.setText(model.getFilteredTaskID().length + " Eintrag");
+			}else {
+				criteria.anzFiltTask.setText(model.getFilteredTaskID().length + " Einträge");
+			}
 
 		} catch (InvalidDateException e1) {
 			// DO NOTHING
@@ -60,6 +64,7 @@ public class AbstractFilterTaskListController extends AbstractController {
 		criteria.pTaskID.setText(null);
 		criteria.model_geb.setValue(null);
 		criteria.model_ord.setValue(null);
+		
 	}
 
 	private void clearCSVInfoPanel() {

@@ -8,7 +8,6 @@ public class FilterTaskListKeyHandler extends AbstractFilterTaskListController i
 	public FilterTaskListKeyHandler() {
 		super();
 	}
-
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
