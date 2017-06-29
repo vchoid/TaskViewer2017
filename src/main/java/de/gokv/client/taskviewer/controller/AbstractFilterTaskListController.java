@@ -9,37 +9,37 @@ import de.gokv.client.taskviewer.view.InfoTaskTemplate;
 
 public class AbstractFilterTaskListController extends AbstractController {
 
-	private FilterCriteriaTemplate criteria;
-	private InfoCSVTemplate infoCSV;
-	private InfoTaskTemplate infoTask;
+	private FilterCriteriaTemplate criteriaTemplate;
+	private InfoCSVTemplate infoCSVTemplate;
+	private InfoTaskTemplate infoTaskTemplate;
 
 	public AbstractFilterTaskListController() {
 		super();
-		criteria = frame.filterMask;
-		infoCSV = frame.infoCSV;
-		infoTask = frame.infoTask;
+		criteriaTemplate = frame.filterMask;
+		infoCSVTemplate = frame.infoCSV;
+		infoTaskTemplate = frame.infoTask;
 	}
 
 	public void setFilteredTask() {
 		try {
 			Task t = new Task();
-			t.setName(criteria.pName.getText());
-			t.setvName(criteria.pVname.getText());
-			t.setKvnr(criteria.pKvnr.getText());
-			t.setTaskId(criteria.pTaskID.getText());
-			if (criteria.model_geb.getValue() != null) {
-				t.setGebDat(DateUtil.parseDate(criteria.model_geb.getValue()));
+			t.setName(criteriaTemplate.pName.getText());
+			t.setvName(criteriaTemplate.pVname.getText());
+			t.setKvnr(criteriaTemplate.pKvnr.getText());
+			t.setTaskId(criteriaTemplate.pTaskID.getText());
+			if (criteriaTemplate.model_geb.getValue() != null) {
+				t.setGebDat(DateUtil.parseDate(criteriaTemplate.model_geb.getValue()));
 			}
-			if (criteria.model_ord.getValue() != null) {
-				t.setOrderedDate(DateUtil.parseDate(criteria.model_ord.getValue()));
+			if (criteriaTemplate.model_ord.getValue() != null) {
+				t.setOrderedDate(DateUtil.parseDate(criteriaTemplate.model_ord.getValue()));
 			}
 
 			model.setFilterCriteria(t);
 			frame.taskMask.taskList.setListData(model.getFilteredTaskID());
 			if(model.getFilteredTaskID().length == 1){
-				criteria.anzFiltTask.setText("Einen Eintrag gefunden");
+				criteriaTemplate.anzFiltTask.setText("Einen Eintrag gefunden");
 			}else {
-				criteria.anzFiltTask.setText(model.getFilteredTaskID().length + " Einträge gefunden");
+				criteriaTemplate.anzFiltTask.setText(model.getFilteredTaskID().length + " Einträge gefunden");
 			}
 
 		} catch (InvalidDateException e1) {
@@ -58,31 +58,31 @@ public class AbstractFilterTaskListController extends AbstractController {
 	}
 
 	private void clearCriterias() {
-		criteria.pName.setText(null);
-		criteria.pVname.setText(null);
-		criteria.pKvnr.setText(null);
-		criteria.pTaskID.setText(null);
-		criteria.model_geb.setValue(null);
-		criteria.model_ord.setValue(null);
+		criteriaTemplate.pName.setText(null);
+		criteriaTemplate.pVname.setText(null);
+		criteriaTemplate.pKvnr.setText(null);
+		criteriaTemplate.pTaskID.setText(null);
+		criteriaTemplate.model_geb.setValue(null);
+		criteriaTemplate.model_ord.setValue(null);
 		
 	}
 
 	private void clearCSVInfoPanel() {
-		infoCSV.taskID_field.setText(null);
-		infoCSV.kvnr.setlField(null);
-		infoCSV.name.setlField(null);
-		infoCSV.vName.setlField(null);
-		infoCSV.gebDate.setlField(null);
+		infoCSVTemplate.taskID_field.setText(null);
+		infoCSVTemplate.kvnr.setlField(null);
+		infoCSVTemplate.name.setlField(null);
+		infoCSVTemplate.vName.setlField(null);
+		infoCSVTemplate.gebDate.setlField(null);
 	}
 
 	private void clearTaskInfoPanel() {
-		infoTask.state.setlField(null);
-		infoTask.taskType.setlField(null);
-		infoTask.orderDate.setlField(null);
-		infoTask.evInProgs.setlField(null);
-		infoTask.evCompl.setlField(null);
-		infoTask.evReceived.setlField(null);
-		infoTask.evResult.setlField(null);
+		infoTaskTemplate.state.setlField(null);
+		infoTaskTemplate.taskType.setlField(null);
+		infoTaskTemplate.orderDate.setlField(null);
+		infoTaskTemplate.evInProgs.setlField(null);
+		infoTaskTemplate.evCompl.setlField(null);
+		infoTaskTemplate.evReceived.setlField(null);
+		infoTaskTemplate.evResult.setlField(null);
 	}
 
 }

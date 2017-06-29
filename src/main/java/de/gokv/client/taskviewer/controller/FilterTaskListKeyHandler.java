@@ -15,19 +15,16 @@ public class FilterTaskListKeyHandler extends AbstractFilterTaskListController i
 	}
 	@Override
 	public void keyPressed(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-			setFilteredTask();
-		} else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-			resetForm();
-			setFilteredTask();
-			frame.filterMask.anzFiltTask.setText(null);
-		}
+		
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-
+		if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+			resetForm();
+			frame.filterMask.anzFiltTask.setText(null);
+		}
+		setFilteredTask();
 	}
 
 	@Override
