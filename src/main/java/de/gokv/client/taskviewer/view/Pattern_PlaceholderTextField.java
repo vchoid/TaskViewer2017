@@ -15,7 +15,7 @@ import de.gokv.client.taskviewer.utils.HexaToRGB;
  * @author Christoph Kiank
  *
  */
-public class Field_Placeholder extends JTextField {
+public class Pattern_PlaceholderTextField extends JTextField {
 
 	/**
 	 * 
@@ -29,10 +29,10 @@ public class Field_Placeholder extends JTextField {
 	private int lenght;
 	Font txt = new Font("Arial", Font.PLAIN, 15);
 
-	public Field_Placeholder() {
+	public Pattern_PlaceholderTextField() {
 	}
 
-	public Field_Placeholder(String pText) {
+	public Pattern_PlaceholderTextField(String pText) {
 
 	}
 

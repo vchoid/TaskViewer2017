@@ -22,14 +22,14 @@ public class Template_FilterCriteriaPanel extends Template_BlockPanel {
 	
 	private static final Color colorLabelDateTxt = new HexaToRGB("color.label.date.text").parseHexToRGB();
 	
-	public Field_Placeholder pKvnr;
-	public Field_Placeholder pName;
-	public Field_Placeholder pVname;
+	public Pattern_PlaceholderTextField pKvnr;
+	public Pattern_PlaceholderTextField pName;
+	public Pattern_PlaceholderTextField pVname;
 	public JLabel gDateLabel;
 	public UtilDateModel model_geb = new UtilDateModel();
 	public JDatePanelImpl gebDatePan = new JDatePanelImpl(model_geb);
 	public JDatePickerImpl gDatePick = new JDatePickerImpl(gebDatePan, new DateLabelFormatter());
-	public Field_Placeholder pTaskID;
+	public Pattern_PlaceholderTextField pTaskID;
 	public JLabel oDateLabel;
 	public UtilDateModel model_ord = new UtilDateModel();
 	public JDatePanelImpl orderDatePan = new JDatePanelImpl(model_ord);
@@ -57,7 +57,7 @@ public class Template_FilterCriteriaPanel extends Template_BlockPanel {
 		FilterCriteriaPanel_KeyContr filtTaskKey = new FilterCriteriaPanel_KeyContr();
 		
 		// << KVNR >>
-		pKvnr = new Field_Placeholder();
+		pKvnr = new Pattern_PlaceholderTextField();
 		pKvnr.setPlaceholder("Krankenversichertennummer (laut eGk)", getLayout().columnWidths[1]*2);
 		pKvnr.setBorder(emptyBorder);
 		pKvnr.addActionListener(filtTaskCont);
@@ -70,7 +70,7 @@ public class Template_FilterCriteriaPanel extends Template_BlockPanel {
 		this.add(pKvnr, gbc_kvnr);
 
 		// << Name >>
-		pName = new Field_Placeholder();
+		pName = new Pattern_PlaceholderTextField();
 		pName.setPlaceholder("Name", getLayout().columnWidths[1]);
 		pName.setBorder(emptyBorder);
 		pName.addActionListener(filtTaskCont);
@@ -84,7 +84,7 @@ public class Template_FilterCriteriaPanel extends Template_BlockPanel {
 		this.add(pName, gbc_name);
 
 		// << Vorname >>
-		pVname = new Field_Placeholder();
+		pVname = new Pattern_PlaceholderTextField();
 		pVname.setPlaceholder("Vorname", getLayout().columnWidths[2]-10);
 		pVname.setBorder(emptyBorder);
 		pVname.addActionListener(filtTaskCont);
@@ -116,7 +116,7 @@ public class Template_FilterCriteriaPanel extends Template_BlockPanel {
 		this.add(gDatePick, gbc_gebDate);
 
 		// << TaskID >>
-		pTaskID = new Field_Placeholder();
+		pTaskID = new Pattern_PlaceholderTextField();
 		pTaskID.setPlaceholder("TaskID", getLayout().columnWidths[1]*2);
 		pTaskID.setBorder(emptyBorder);
 		pTaskID.addActionListener(filtTaskCont);
