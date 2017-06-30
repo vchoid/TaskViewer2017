@@ -45,7 +45,7 @@ public class MyFrame extends JFrame {
 		// Properties
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		// Fenstergröße------------------
-		setSize(new Dimension(918, 727));
+		setSize(new Dimension(918, 728));
 		// Farben ----------------------------------------------------------------------
 		colorPanContBG = new HexaToRGB("color.panel.content.background").parseHexToRGB();
 		
