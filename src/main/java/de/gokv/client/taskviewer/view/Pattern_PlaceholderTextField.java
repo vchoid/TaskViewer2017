@@ -32,7 +32,7 @@ public class Pattern_PlaceholderTextField extends JTextField {
 	public Pattern_PlaceholderTextField() {
 	}
 
-	public Pattern_PlaceholderTextField(String pText) {
+	public Pattern_PlaceholderTextField(String pTitle) {
 
 	}
 

@@ -63,6 +63,7 @@ public class Template_FilterCriteriaPanel extends Template_BlockPanel {
 		kvnrPh.setPlaceholder("Krankenversichertennummer (laut eGk)", getLayout().columnWidths[1]*2);
 		kvnrPh.setBorder(emptyBorder);
 		kvnrPh.addActionListener(filtTaskContr);
+		kvnrPh.addKeyListener(filtTaskKeyContr);
 		GridBagConstraints gbc_kvnr = new GridBagConstraints();
 		gbc_kvnr.anchor = GridBagConstraints.NORTH;
 		gbc_kvnr.fill = GridBagConstraints.HORIZONTAL;
