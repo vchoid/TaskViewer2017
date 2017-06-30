@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 import de.gokv.client.taskviewer.view.Template_TaskList;
 
-public class TaskListController extends AbstractController implements ActionListener {
+public class TaskListPanel_ActionContr extends Abstract_MyFrame_Controller implements ActionListener {
 
 	public int valEnt;
 	public static String valEntMsg = "";
@@ -13,7 +13,7 @@ public class TaskListController extends AbstractController implements ActionList
 	public static String invalEntMsg = "";
 	private Template_TaskList taskMask;
 	
-	public TaskListController() {
+	public TaskListPanel_ActionContr() {
 		super();
 		taskMask = frame.taskMask;
 	}

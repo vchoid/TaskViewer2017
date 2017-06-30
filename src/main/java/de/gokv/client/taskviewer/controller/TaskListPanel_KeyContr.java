@@ -3,9 +3,9 @@ package de.gokv.client.taskviewer.controller;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class LoadTaskDetailsKeyHandler extends AbstractLoadTaskDetailsController implements KeyListener{
+public class TaskListPanel_KeyContr extends Abstract_TaskListPanel_Controller implements KeyListener{
 
-	public LoadTaskDetailsKeyHandler() {
+	public TaskListPanel_KeyContr() {
 		super();
 	}
 

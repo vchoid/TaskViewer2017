@@ -12,9 +12,9 @@ import javax.swing.event.ListSelectionListener;
  * @author Christoph Kiank
  *
  */
-public class LoadTaskDetailsController extends AbstractLoadTaskDetailsController implements ActionListener, ListSelectionListener {
+public class TaskListPanel_ActionContr_ListSelectContr extends Abstract_TaskListPanel_Controller implements ActionListener, ListSelectionListener {
 
-	public LoadTaskDetailsController() {
+	public TaskListPanel_ActionContr_ListSelectContr() {
 		super();
 	}
 

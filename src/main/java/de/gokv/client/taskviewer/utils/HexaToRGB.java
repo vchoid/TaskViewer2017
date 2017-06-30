@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import de.gokv.client.taskviewer.controller.LoadProperties;
+import de.gokv.client.taskviewer.controller.LoadViewProperties;
 
 /**
  * Umwandeln von HTML-Farbcodes in RGB-Farbwerte. Bei fehlerhaften Werten werden
@@ -36,7 +36,7 @@ public class HexaToRGB {
 
 	public static String errMsg;
 
-	private LoadProperties loadProp;
+	private LoadViewProperties loadProp;
 
 	private static final String HEX_PATTERN = "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$";
 
@@ -66,7 +66,7 @@ public class HexaToRGB {
 	public boolean isHexValid() {
 		propFile = "color.properties";
 		try {
-			loadProp = new LoadProperties(propFile, propTitle);
+			loadProp = new LoadViewProperties(propFile, propTitle);
 			propVal = loadProp.getPropertyStringVal();
 		} catch (Exception e) {
 			getDefaultColor();

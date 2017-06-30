@@ -5,11 +5,11 @@ import java.awt.event.KeyListener;
 
 import de.gokv.client.taskviewer.view.Template_FilterCriteriaPanel;
 
-public class FilterTaskListKeyHandler extends AbstractFilterTaskListController implements KeyListener {
+public class FilterCriteriaPanel_KeyContr extends Abstract_FilterCriteria_Controller implements KeyListener {
 
 	
 	
-	public FilterTaskListKeyHandler() {
+	public FilterCriteriaPanel_KeyContr() {
 		super();
 		
 	}

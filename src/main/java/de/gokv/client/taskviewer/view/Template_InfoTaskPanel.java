@@ -2,7 +2,7 @@ package de.gokv.client.taskviewer.view;
 
 import java.awt.GridBagLayout;
 
-import de.gokv.client.taskviewer.controller.MyFrameController;
+import de.gokv.client.taskviewer.controller.MyFrame_Controller;
 
 public class Template_InfoTaskPanel extends Template_BlockPanel {
 
@@ -16,7 +16,7 @@ public class Template_InfoTaskPanel extends Template_BlockPanel {
 	public InfoField evReceived;
 	public InfoField evResult;
 
-	protected Template_InfoTaskPanel(MyFrameController controller) {
+	protected Template_InfoTaskPanel(MyFrame_Controller controller) {
 		super("Informationen (Task)", controller);
 	}
 

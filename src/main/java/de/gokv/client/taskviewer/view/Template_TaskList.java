@@ -12,10 +12,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
-import de.gokv.client.taskviewer.controller.LoadTaskDetailsController;
-import de.gokv.client.taskviewer.controller.LoadTaskDetailsKeyHandler;
-import de.gokv.client.taskviewer.controller.MyFrameController;
-import de.gokv.client.taskviewer.controller.TaskListController;
+import de.gokv.client.taskviewer.controller.TaskListPanel_ActionContr_ListSelectContr;
+import de.gokv.client.taskviewer.controller.TaskListPanel_KeyContr;
+import de.gokv.client.taskviewer.controller.MyFrame_Controller;
+import de.gokv.client.taskviewer.controller.TaskListPanel_ActionContr;
 
 public class Template_TaskList extends Template_BlockPanel{
 	private static final long serialVersionUID = 1L;
@@ -29,7 +29,7 @@ public class Template_TaskList extends Template_BlockPanel{
 	private String pathIconReload;
 	private ImageIcon iconReloadScaled;
 	
-	protected Template_TaskList(MyFrameController controller) {
+	protected Template_TaskList(MyFrame_Controller controller) {
 		super("Tasks", controller);
 	}
 
@@ -43,9 +43,9 @@ public class Template_TaskList extends Template_BlockPanel{
 
 	@Override
 	public void init() {
-		TaskListController taskListCont = new TaskListController();
-		LoadTaskDetailsController loadTaskDetailsCont = new LoadTaskDetailsController();
-		LoadTaskDetailsKeyHandler loadTaskDetailKey = new LoadTaskDetailsKeyHandler();
+		TaskListPanel_ActionContr taskListCont = new TaskListPanel_ActionContr();
+		TaskListPanel_ActionContr_ListSelectContr loadTaskDetailsCont = new TaskListPanel_ActionContr_ListSelectContr();
+		TaskListPanel_KeyContr loadTaskDetailKey = new TaskListPanel_KeyContr();
 
 		// << Task-Liste >>
 		taskList = new JList<>(controller.getFilteredTasks());
@@ -98,7 +98,7 @@ public class Template_TaskList extends Template_BlockPanel{
 		this.add(taskLoadBtn, gbc_detailBtn);
 		
 		// << Anzahl der TaskID´s in der Liste und der Fehlerhaften >>
-		anzTasks = new JTextField(TaskListController.getValidEntries() + TaskListController.getInvalidEntries());
+		anzTasks = new JTextField(TaskListPanel_ActionContr.getValidEntries() + TaskListPanel_ActionContr.getInvalidEntries());
 		anzTasks.setForeground(colorEntryTxt);
 		anzTasks.setBorder(emptyBorder);
 		anzTasks.setOpaque(false);

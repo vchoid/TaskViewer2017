@@ -9,7 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import de.gokv.client.taskviewer.controller.MyFrameController;
+import de.gokv.client.taskviewer.controller.MyFrame_Controller;
 import de.gokv.client.taskviewer.utils.HexaToRGB;
 
 /**
@@ -22,7 +22,7 @@ public class MyFrame extends JFrame {
 
 	// Content Panel ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	private JPanel contPanel;
-	private MyFrameController controller;
+	private MyFrame_Controller controller;
 	// Filter Panel ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	public Template_FilterCriteriaPanel filterMask;
 	// Task Panel ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -37,7 +37,7 @@ public class MyFrame extends JFrame {
 	private Color colorPanContBG;
 
 	public MyFrame() {
-		controller = new MyFrameController(this);
+		controller = new MyFrame_Controller(this);
 		pathAppIcon = "/taskViewer.png";
 		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(pathAppIcon)));
 		setTitle("bitGo_KV-TaskViewer");
@@ -90,7 +90,7 @@ public class MyFrame extends JFrame {
 		setResizable(false);
 	}
 
-	public MyFrameController getController() {
+	public MyFrame_Controller getController() {
 		return controller;
 	}
 

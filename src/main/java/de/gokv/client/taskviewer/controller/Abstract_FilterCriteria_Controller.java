@@ -7,13 +7,13 @@ import de.gokv.client.taskviewer.view.Template_FilterCriteriaPanel;
 import de.gokv.client.taskviewer.view.Template_InfoCSVPanel;
 import de.gokv.client.taskviewer.view.Template_InfoTaskPanel;
 
-public class AbstractFilterTaskListController extends AbstractController {
+public class Abstract_FilterCriteria_Controller extends Abstract_MyFrame_Controller {
 
 	private Template_FilterCriteriaPanel criteriaTemplate;
 	private Template_InfoCSVPanel infoCSVTemplate;
 	private Template_InfoTaskPanel infoTaskTemplate;
 
-	public AbstractFilterTaskListController() {
+	public Abstract_FilterCriteria_Controller() {
 		super();
 		criteriaTemplate = frame.filterMask;
 		infoCSVTemplate = frame.infoCSV;

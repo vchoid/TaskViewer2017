@@ -9,9 +9,9 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import de.gokv.client.taskviewer.controller.FilterTaskListController;
-import de.gokv.client.taskviewer.controller.FilterTaskListKeyHandler;
-import de.gokv.client.taskviewer.controller.MyFrameController;
+import de.gokv.client.taskviewer.controller.FilterCriteriaPanel_ActionContr;
+import de.gokv.client.taskviewer.controller.FilterCriteriaPanel_KeyContr;
+import de.gokv.client.taskviewer.controller.MyFrame_Controller;
 import de.gokv.client.taskviewer.utils.HexaToRGB;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
@@ -39,7 +39,7 @@ public class Template_FilterCriteriaPanel extends Template_BlockPanel {
 	public JTextField anzFiltTask;
 	public String valFiltMsg = "";
 	
-	public Template_FilterCriteriaPanel(MyFrameController controller) {
+	public Template_FilterCriteriaPanel(MyFrame_Controller controller) {
 		super("Filter Maske", controller);
 	}
 
@@ -53,8 +53,8 @@ public class Template_FilterCriteriaPanel extends Template_BlockPanel {
 
 	@Override
 	public void init() {
-		FilterTaskListController filtTaskCont = new FilterTaskListController();
-		FilterTaskListKeyHandler filtTaskKey = new FilterTaskListKeyHandler();
+		FilterCriteriaPanel_ActionContr filtTaskCont = new FilterCriteriaPanel_ActionContr();
+		FilterCriteriaPanel_KeyContr filtTaskKey = new FilterCriteriaPanel_KeyContr();
 		
 		// << KVNR >>
 		pKvnr = new Field_Placeholder();

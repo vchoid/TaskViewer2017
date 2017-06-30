@@ -3,17 +3,17 @@ package de.gokv.client.taskviewer.controller;
 import de.gokv.client.taskviewer.model.MyModel;
 import de.gokv.client.taskviewer.view.MyFrame;
 
-public class AbstractController {
+public class Abstract_MyFrame_Controller {
 	protected static MyModel model;
 	protected static MyFrame frame;
 	
-	public AbstractController(MyModel modelParam, MyFrame frameParam) {
+	public Abstract_MyFrame_Controller(MyModel modelParam, MyFrame frameParam) {
 		this();
 		model = modelParam;
 		frame = frameParam;
 	}
 	
-	public AbstractController() {
+	public Abstract_MyFrame_Controller() {
 	}
 	
 	/**

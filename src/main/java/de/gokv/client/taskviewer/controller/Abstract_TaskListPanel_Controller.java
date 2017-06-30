@@ -14,14 +14,14 @@ import de.gokv.client.taskviewer.view.Template_InfoTaskPanel;
 import de.gokv.client.taskviewer.view.MyFrame;
 import de.gokv.client.taskviewer.view.Template_TaskList;
 
-public class AbstractLoadTaskDetailsController extends AbstractController {
+public class Abstract_TaskListPanel_Controller extends Abstract_MyFrame_Controller {
 	protected static HTTPSClient client;
 	protected String taskID;
 	protected final Template_TaskList taskMask;
 	protected final Template_InfoCSVPanel infoCSV;
 	protected final Template_InfoTaskPanel infoTask;
 
-	public AbstractLoadTaskDetailsController() {
+	public Abstract_TaskListPanel_Controller() {
 		super();
 //		if (client == null)
 			try {
