@@ -12,7 +12,7 @@ import javax.swing.border.TitledBorder;
 import de.gokv.client.taskviewer.controller.MyFrameController;
 import de.gokv.client.taskviewer.utils.HexaToRGB;
 
-public abstract class PanelBlockTemplate extends JPanel{
+public abstract class Template_BlockPanel extends JPanel{
 	private static final long serialVersionUID = 1L;
 	
 	protected final Color colorTitle = new HexaToRGB("color.panel.titeltext.foreground").parseHexToRGB();
@@ -33,7 +33,7 @@ public abstract class PanelBlockTemplate extends JPanel{
 	
 	protected final MyFrameController controller;
 	
-	protected PanelBlockTemplate(String title, MyFrameController controller){
+	protected Template_BlockPanel(String title, MyFrameController controller){
 		TitledBorder titleBorder = BorderFactory.createTitledBorder(title);
 		titleBorder.setTitleJustification(TitledBorder.TOP);
 		titleBorder.setTitleColor(colorTitle);

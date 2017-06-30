@@ -3,15 +3,15 @@ package de.gokv.client.taskviewer.controller;
 import de.gokv.client.taskviewer.Task;
 import de.gokv.client.taskviewer.exceptions.InvalidDateException;
 import de.gokv.client.taskviewer.utils.DateUtil;
-import de.gokv.client.taskviewer.view.FilterCriteriaTemplate;
-import de.gokv.client.taskviewer.view.InfoCSVTemplate;
-import de.gokv.client.taskviewer.view.InfoTaskTemplate;
+import de.gokv.client.taskviewer.view.Template_FilterCriteriaPanel;
+import de.gokv.client.taskviewer.view.Template_InfoCSVPanel;
+import de.gokv.client.taskviewer.view.Template_InfoTaskPanel;
 
 public class AbstractFilterTaskListController extends AbstractController {
 
-	private FilterCriteriaTemplate criteriaTemplate;
-	private InfoCSVTemplate infoCSVTemplate;
-	private InfoTaskTemplate infoTaskTemplate;
+	private Template_FilterCriteriaPanel criteriaTemplate;
+	private Template_InfoCSVPanel infoCSVTemplate;
+	private Template_InfoTaskPanel infoTaskTemplate;
 
 	public AbstractFilterTaskListController() {
 		super();
@@ -58,6 +58,7 @@ public class AbstractFilterTaskListController extends AbstractController {
 	}
 
 	private void clearCriterias() {
+		
 		criteriaTemplate.pName.setText(null);
 		criteriaTemplate.pVname.setText(null);
 		criteriaTemplate.pKvnr.setText(null);

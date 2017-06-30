@@ -24,13 +24,13 @@ public class MyFrame extends JFrame {
 	private JPanel contPanel;
 	private MyFrameController controller;
 	// Filter Panel ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	public FilterCriteriaTemplate filterMask;
+	public Template_FilterCriteriaPanel filterMask;
 	// Task Panel ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	public TaskListTemplate taskMask;
+	public Template_TaskList taskMask;
 	// CSV Info Panel ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	public InfoCSVTemplate infoCSV;
+	public Template_InfoCSVPanel infoCSV;
 	// Task Info Panel ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	public InfoTaskTemplate infoTask;
+	public Template_InfoTaskPanel infoTask;
 
 	// Style ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	private String pathAppIcon;
@@ -59,10 +59,10 @@ public class MyFrame extends JFrame {
 		getContentPane().setBackground(colorPanContBG);
 
 		// Dummy Objekte ------------------------------------
-		filterMask = new FilterCriteriaTemplate(controller);
-		taskMask = new TaskListTemplate(controller);
-		infoCSV = new InfoCSVTemplate(controller);
-		infoTask = new InfoTaskTemplate(controller);
+		filterMask = new Template_FilterCriteriaPanel(controller);
+		taskMask = new Template_TaskList(controller);
+		infoCSV = new Template_InfoCSVPanel(controller);
+		infoTask = new Template_InfoTaskPanel(controller);
 
 		// Initialisierung ----------------------------------
 		filterMask.init();

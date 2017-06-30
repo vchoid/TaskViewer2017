@@ -8,7 +8,7 @@ import javax.swing.JLabel;
 
 import de.gokv.client.taskviewer.controller.MyFrameController;
 
-public class InfoCSVTemplate extends PanelBlockTemplate {
+public class Template_InfoCSVPanel extends Template_BlockPanel {
 
 	private static final long serialVersionUID = 1L;
 
@@ -19,7 +19,7 @@ public class InfoCSVTemplate extends PanelBlockTemplate {
 	public InfoField vName;
 	public InfoField gebDate;
 
-	protected InfoCSVTemplate(MyFrameController controller) {
+	protected Template_InfoCSVPanel(MyFrameController controller) {
 		super("Informationen (CSV)", controller);
 	}
 

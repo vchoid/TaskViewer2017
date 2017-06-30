@@ -12,13 +12,12 @@ import javax.swing.JTextField;
 import de.gokv.client.taskviewer.controller.FilterTaskListController;
 import de.gokv.client.taskviewer.controller.FilterTaskListKeyHandler;
 import de.gokv.client.taskviewer.controller.MyFrameController;
-import de.gokv.client.taskviewer.controller.TaskListController;
 import de.gokv.client.taskviewer.utils.HexaToRGB;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
 
-public class FilterCriteriaTemplate extends PanelBlockTemplate {
+public class Template_FilterCriteriaPanel extends Template_BlockPanel {
 	private static final long serialVersionUID = 1L;
 	
 	private static final Color colorLabelDateTxt = new HexaToRGB("color.label.date.text").parseHexToRGB();
@@ -40,7 +39,7 @@ public class FilterCriteriaTemplate extends PanelBlockTemplate {
 	public JTextField anzFiltTask;
 	public String valFiltMsg = "";
 	
-	public FilterCriteriaTemplate(MyFrameController controller) {
+	public Template_FilterCriteriaPanel(MyFrameController controller) {
 		super("Filter Maske", controller);
 	}
 

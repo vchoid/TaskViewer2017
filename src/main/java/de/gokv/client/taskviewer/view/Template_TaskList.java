@@ -17,7 +17,7 @@ import de.gokv.client.taskviewer.controller.LoadTaskDetailsKeyHandler;
 import de.gokv.client.taskviewer.controller.MyFrameController;
 import de.gokv.client.taskviewer.controller.TaskListController;
 
-public class TaskListTemplate extends PanelBlockTemplate{
+public class Template_TaskList extends Template_BlockPanel{
 	private static final long serialVersionUID = 1L;
 
 	public JButton taskLoadBtn;
@@ -29,7 +29,7 @@ public class TaskListTemplate extends PanelBlockTemplate{
 	private String pathIconReload;
 	private ImageIcon iconReloadScaled;
 	
-	protected TaskListTemplate(MyFrameController controller) {
+	protected Template_TaskList(MyFrameController controller) {
 		super("Tasks", controller);
 	}
 

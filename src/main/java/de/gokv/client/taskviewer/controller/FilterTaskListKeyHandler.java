@@ -3,7 +3,7 @@ package de.gokv.client.taskviewer.controller;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import de.gokv.client.taskviewer.view.FilterCriteriaTemplate;
+import de.gokv.client.taskviewer.view.Template_FilterCriteriaPanel;
 
 public class FilterTaskListKeyHandler extends AbstractFilterTaskListController implements KeyListener {
 
@@ -22,14 +22,12 @@ public class FilterTaskListKeyHandler extends AbstractFilterTaskListController i
 	public void keyReleased(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
 			resetForm();
-			frame.filterMask.anzFiltTask.setText(null);
 		}
 		setFilteredTask();
 	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 

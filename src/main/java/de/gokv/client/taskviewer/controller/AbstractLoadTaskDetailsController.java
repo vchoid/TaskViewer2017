@@ -9,17 +9,17 @@ import de.gokv.client.taskviewer.module.http.HTTPSClient;
 import de.gokv.client.taskviewer.module.http.ssl.ClientCertificateException;
 import de.gokv.client.taskviewer.module.http.ssl.ServerException;
 import de.gokv.client.taskviewer.utils.DateUtil;
-import de.gokv.client.taskviewer.view.InfoCSVTemplate;
-import de.gokv.client.taskviewer.view.InfoTaskTemplate;
+import de.gokv.client.taskviewer.view.Template_InfoCSVPanel;
+import de.gokv.client.taskviewer.view.Template_InfoTaskPanel;
 import de.gokv.client.taskviewer.view.MyFrame;
-import de.gokv.client.taskviewer.view.TaskListTemplate;
+import de.gokv.client.taskviewer.view.Template_TaskList;
 
 public class AbstractLoadTaskDetailsController extends AbstractController {
 	protected static HTTPSClient client;
 	protected String taskID;
-	protected final TaskListTemplate taskMask;
-	protected final InfoCSVTemplate infoCSV;
-	protected final InfoTaskTemplate infoTask;
+	protected final Template_TaskList taskMask;
+	protected final Template_InfoCSVPanel infoCSV;
+	protected final Template_InfoTaskPanel infoTask;
 
 	public AbstractLoadTaskDetailsController() {
 		super();

@@ -4,7 +4,7 @@ import java.awt.GridBagLayout;
 
 import de.gokv.client.taskviewer.controller.MyFrameController;
 
-public class InfoTaskTemplate extends PanelBlockTemplate {
+public class Template_InfoTaskPanel extends Template_BlockPanel {
 
 	private static final long serialVersionUID = 1L;
 
@@ -16,7 +16,7 @@ public class InfoTaskTemplate extends PanelBlockTemplate {
 	public InfoField evReceived;
 	public InfoField evResult;
 
-	protected InfoTaskTemplate(MyFrameController controller) {
+	protected Template_InfoTaskPanel(MyFrameController controller) {
 		super("Informationen (Task)", controller);
 	}
 

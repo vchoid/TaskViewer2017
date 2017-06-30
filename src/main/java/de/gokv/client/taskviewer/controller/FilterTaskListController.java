@@ -3,7 +3,7 @@ package de.gokv.client.taskviewer.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import de.gokv.client.taskviewer.view.FilterCriteriaTemplate;
+import de.gokv.client.taskviewer.view.Template_FilterCriteriaPanel;
 
 public class FilterTaskListController extends AbstractFilterTaskListController implements ActionListener {
 
@@ -15,13 +15,14 @@ public class FilterTaskListController extends AbstractFilterTaskListController i
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		FilterCriteriaTemplate criteria = frame.filterMask;
+		Template_FilterCriteriaPanel criteria = frame.filterMask;
 		if (e.getSource() == criteria.filterBtn) {
 			setFilteredTask();
 		} else if (e.getSource() == criteria.clearAllBtn) {
 			resetForm();
 			setFilteredTask();
 			frame.filterMask.anzFiltTask.setText(null);
+			
 			
 			
 		}
