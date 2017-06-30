@@ -11,7 +11,7 @@ import javax.swing.JLabel;
 
 import de.gokv.client.taskviewer.utils.HexaToRGB;
 
-public class InfoField {
+public class Template_InfoField {
 
 	
 	
@@ -26,11 +26,11 @@ public class InfoField {
 	private GridBagConstraints gbc_lTitle;
 	private GridBagConstraints gbc_lField;
 	
-	private InfoField() {
+	private Template_InfoField() {
 	}
 
-	public static InfoField createInfoField(String title, int startPosCol, int startPosRow){
-		InfoField field = new InfoField();
+	public static Template_InfoField createInfoField(String title, int startPosCol, int startPosRow){
+		Template_InfoField field = new Template_InfoField();
 		JLabel lTitle = new JLabel(title);
 		lTitle.setFont(fntTitle);
 		lTitle.setForeground(colorInfoTitleTxt);

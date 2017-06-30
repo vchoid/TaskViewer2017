@@ -148,7 +148,7 @@ public class Template_FilterCriteriaPanel extends Template_BlockPanel {
 		this.add(oDatePick, gbc_orderDate);
 
 		// << Button "Filter anwenden" >>
-		filterBtn = new JButton("Tasks filtern");
+		filterBtn = new JButton("Filter anwenden");
 		filterBtn.setBorder(btnBorder);
 		filterBtn.setBackground(colorBtnBG);
 		filterBtn.setForeground(colorBtnTxt);
@@ -163,7 +163,7 @@ public class Template_FilterCriteriaPanel extends Template_BlockPanel {
 		this.add(filterBtn, gbc_filterBtn);
 
 		// << Button "Felder leeren" >>
-		clearAllBtn = new JButton("Alles zurücksetzen");
+		clearAllBtn = new JButton("Felder zurücksetzen");
 		clearAllBtn.setBorder(btnBorder);
 		clearAllBtn.setBackground(colorBtnBG);
 		clearAllBtn.setForeground(colorBtnTxt);
