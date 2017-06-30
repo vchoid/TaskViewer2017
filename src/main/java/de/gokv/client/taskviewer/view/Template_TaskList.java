@@ -43,17 +43,17 @@ public class Template_TaskList extends Template_BlockPanel{
 
 	@Override
 	public void init() {
-		TaskListPanel_ActionContr taskListCont = new TaskListPanel_ActionContr();
-		TaskListPanel_ActionContr_ListSelectContr loadTaskDetailsCont = new TaskListPanel_ActionContr_ListSelectContr();
-		TaskListPanel_KeyContr loadTaskDetailKey = new TaskListPanel_KeyContr();
+		TaskListPanel_ActionContr taskPanelContr = new TaskListPanel_ActionContr();
+		TaskListPanel_ActionContr_ListSelectContr taskListSelcContr = new TaskListPanel_ActionContr_ListSelectContr();
+		TaskListPanel_KeyContr taskListKeyContr = new TaskListPanel_KeyContr();
 
 		// << Task-Liste >>
 		taskList = new JList<>(controller.getFilteredTasks());
 		taskList.setVisibleRowCount(8);
 		taskList.setFont(fontTxt);
 		taskList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		taskList.addListSelectionListener(loadTaskDetailsCont);
-		taskList.addKeyListener(loadTaskDetailKey);
+		taskList.addListSelectionListener(taskListSelcContr);
+		taskList.addKeyListener(taskListKeyContr);
 		JScrollPane scrollTask = new JScrollPane(taskList);
 		GridBagConstraints gbc_scrollTask = new GridBagConstraints();
 		gbc_scrollTask.anchor = GridBagConstraints.NORTH;
@@ -63,7 +63,7 @@ public class Template_TaskList extends Template_BlockPanel{
 		gbc_scrollTask.gridy = 2;
 		this.add(scrollTask, gbc_scrollTask);
 
-		// << Tasks reload -Button >>
+		// << Tasks Reload Button >>
 		reloadBtn = new JButton(" Liste neu laden  ");
 		pathIconReload = "/reload.png";
 		iconReload = new ImageIcon(getClass().getResource(pathIconReload)).getImage();
@@ -73,7 +73,7 @@ public class Template_TaskList extends Template_BlockPanel{
 		reloadBtn.setBackground(colorBtnBG);
 		reloadBtn.setForeground(colorBtnTxt);
 		reloadBtn.setFont(fontTxt);
-		reloadBtn.addActionListener(taskListCont);
+		reloadBtn.addActionListener(taskPanelContr);
 		GridBagConstraints gbc_reloadTaskBtn = new GridBagConstraints();
 		gbc_reloadTaskBtn.anchor = GridBagConstraints.NORTH;
 		gbc_reloadTaskBtn.fill = GridBagConstraints.HORIZONTAL;
@@ -88,7 +88,7 @@ public class Template_TaskList extends Template_BlockPanel{
 		taskLoadBtn.setBackground(colorBtnBG);
 		taskLoadBtn.setForeground(colorBtnTxt);
 		taskLoadBtn.setFont(fontTxt);
-		taskLoadBtn.addActionListener(loadTaskDetailsCont);
+		taskLoadBtn.addActionListener(taskListSelcContr);
 		GridBagConstraints gbc_detailBtn = new GridBagConstraints();
 		gbc_detailBtn.anchor = GridBagConstraints.NORTH;
 		gbc_detailBtn.fill = GridBagConstraints.HORIZONTAL;
@@ -102,7 +102,7 @@ public class Template_TaskList extends Template_BlockPanel{
 		anzTasks.setForeground(colorEntryTxt);
 		anzTasks.setBorder(emptyBorder);
 		anzTasks.setOpaque(false);
-		anzTasks.addActionListener(taskListCont);
+		anzTasks.addActionListener(taskPanelContr);
 		this.add(anzTasks);
 		GridBagConstraints gbc_anzTask = new GridBagConstraints();
 		gbc_anzTask.anchor = GridBagConstraints.NORTH;

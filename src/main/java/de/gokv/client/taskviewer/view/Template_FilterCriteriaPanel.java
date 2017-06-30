@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import de.gokv.client.taskviewer.controller.FilterCriteriaPanel_ActionContr;
+import de.gokv.client.taskviewer.controller.FilterCriteriaPanel_DateContr;
 import de.gokv.client.taskviewer.controller.FilterCriteriaPanel_KeyContr;
 import de.gokv.client.taskviewer.controller.MyFrame_Controller;
 import de.gokv.client.taskviewer.utils.HexaToRGB;
@@ -22,21 +23,21 @@ public class Template_FilterCriteriaPanel extends Template_BlockPanel {
 	
 	private static final Color colorLabelDateTxt = new HexaToRGB("color.label.date.text").parseHexToRGB();
 	
-	public Pattern_PlaceholderTextField pKvnr;
-	public Pattern_PlaceholderTextField pName;
-	public Pattern_PlaceholderTextField pVname;
-	public JLabel gDateLabel;
-	public UtilDateModel model_geb = new UtilDateModel();
-	public JDatePanelImpl gebDatePan = new JDatePanelImpl(model_geb);
-	public JDatePickerImpl gDatePick = new JDatePickerImpl(gebDatePan, new DateLabelFormatter());
-	public Pattern_PlaceholderTextField pTaskID;
-	public JLabel oDateLabel;
-	public UtilDateModel model_ord = new UtilDateModel();
-	public JDatePanelImpl orderDatePan = new JDatePanelImpl(model_ord);
-	public JDatePickerImpl oDatePick = new JDatePickerImpl(orderDatePan, new DateLabelFormatter());
+	public Pattern_PlaceholderTextField kvnrPh;
+	public Pattern_PlaceholderTextField namePh;
+	public Pattern_PlaceholderTextField vnamePh;
+	public JLabel gebDateLabel;
+	public UtilDateModel gebDateModel = new UtilDateModel();
+	public JDatePanelImpl gebDatePanelImpl = new JDatePanelImpl(gebDateModel);
+	public JDatePickerImpl gebDatePickerImpl = new JDatePickerImpl(gebDatePanelImpl, new DateLabelFormatter());
+	public Pattern_PlaceholderTextField taskIdPh;
+	public JLabel orderDateLabel;
+	public UtilDateModel orderDateModel = new UtilDateModel();
+	public JDatePanelImpl orderDatePanelImpl = new JDatePanelImpl(orderDateModel);
+	public JDatePickerImpl orderDatePickerImpl = new JDatePickerImpl(orderDatePanelImpl, new DateLabelFormatter());
 	public JButton filterBtn;
 	public JButton clearAllBtn;
-	public JTextField anzFiltTask;
+	public JTextField anzFiltEntriesTf;
 	public String valFiltMsg = "";
 	
 	public Template_FilterCriteriaPanel(MyFrame_Controller controller) {
@@ -53,114 +54,102 @@ public class Template_FilterCriteriaPanel extends Template_BlockPanel {
 
 	@Override
 	public void init() {
-		FilterCriteriaPanel_ActionContr filtTaskCont = new FilterCriteriaPanel_ActionContr();
-		FilterCriteriaPanel_KeyContr filtTaskKey = new FilterCriteriaPanel_KeyContr();
+		FilterCriteriaPanel_ActionContr filtTaskContr = new FilterCriteriaPanel_ActionContr();
+		FilterCriteriaPanel_KeyContr filtTaskKeyContr = new FilterCriteriaPanel_KeyContr();
+		FilterCriteriaPanel_DateContr filtTaskDateContr = new FilterCriteriaPanel_DateContr();
 		
 		// << KVNR >>
-		pKvnr = new Pattern_PlaceholderTextField();
-		pKvnr.setPlaceholder("Krankenversichertennummer (laut eGk)", getLayout().columnWidths[1]*2);
-		pKvnr.setBorder(emptyBorder);
-		pKvnr.addActionListener(filtTaskCont);
+		kvnrPh = new Pattern_PlaceholderTextField();
+		kvnrPh.setPlaceholder("Krankenversichertennummer (laut eGk)", getLayout().columnWidths[1]*2);
+		kvnrPh.setBorder(emptyBorder);
+		kvnrPh.addActionListener(filtTaskContr);
 		GridBagConstraints gbc_kvnr = new GridBagConstraints();
 		gbc_kvnr.anchor = GridBagConstraints.NORTH;
 		gbc_kvnr.fill = GridBagConstraints.HORIZONTAL;
 		gbc_kvnr.gridwidth = 2;
 		gbc_kvnr.gridx = 1;
 		gbc_kvnr.gridy = 1;
-		this.add(pKvnr, gbc_kvnr);
+		this.add(kvnrPh, gbc_kvnr);
 
 		// << Name >>
-		pName = new Pattern_PlaceholderTextField();
-		pName.setPlaceholder("Name", getLayout().columnWidths[1]);
-		pName.setBorder(emptyBorder);
-		pName.addActionListener(filtTaskCont);
-		pName.addKeyListener(filtTaskKey);
+		namePh = new Pattern_PlaceholderTextField();
+		namePh.setPlaceholder("Name", getLayout().columnWidths[1]-5);
+		namePh.setBorder(emptyBorder);
+		namePh.addActionListener(filtTaskContr);
+		namePh.addKeyListener(filtTaskKeyContr);
 		GridBagConstraints gbc_name = new GridBagConstraints();
 		gbc_name.anchor = GridBagConstraints.NORTH;
 		gbc_name.fill = GridBagConstraints.HORIZONTAL;
 		gbc_name.insets = new Insets(0, 0, 0, 0);
 		gbc_name.gridx = 1;
 		gbc_name.gridy = 2;
-		this.add(pName, gbc_name);
+		this.add(namePh, gbc_name);
 
 		// << Vorname >>
-		pVname = new Pattern_PlaceholderTextField();
-		pVname.setPlaceholder("Vorname", getLayout().columnWidths[2]-10);
-		pVname.setBorder(emptyBorder);
-		pVname.addActionListener(filtTaskCont);
-		pVname.addKeyListener(filtTaskKey);
+		vnamePh = new Pattern_PlaceholderTextField();
+		vnamePh.setPlaceholder("Vorname", getLayout().columnWidths[2]-10);
+		vnamePh.setBorder(emptyBorder);
+		vnamePh.addActionListener(filtTaskContr);
+		vnamePh.addKeyListener(filtTaskKeyContr);
 		GridBagConstraints gbc_vName = new GridBagConstraints();
 		gbc_vName.anchor = GridBagConstraints.BASELINE_LEADING;
 		gbc_vName.fill = GridBagConstraints.HORIZONTAL;
 		gbc_vName.insets = new Insets(0, 10, 0, 0);
 		gbc_vName.gridx = 2;
 		gbc_vName.gridy = 2;
-		this.add(pVname, gbc_vName);
+		this.add(vnamePh, gbc_vName);
 
 		// << Geburtsdatum >>
-		gDateLabel = new JLabel("Geburtstag");
-		gDateLabel.setForeground(colorLabelDateTxt);
-		gDateLabel.setBorder(emptyBorder);
-		gDateLabel.setFont(fontTxt);
+		gebDateLabel = new JLabel("Geburtstag");
+		gebDateLabel.setForeground(colorLabelDateTxt);
+		gebDateLabel.setBorder(emptyBorder);
+		gebDateLabel.setFont(fontTxt);
 		GridBagConstraints gbc_gDateLabel = new GridBagConstraints();
 		gbc_gDateLabel.anchor = GridBagConstraints.BELOW_BASELINE_TRAILING;
 		gbc_gDateLabel.gridx = 1;
 		gbc_gDateLabel.gridy = 3;
-		this.add(gDateLabel, gbc_gDateLabel);
+		this.add(gebDateLabel, gbc_gDateLabel);
 		GridBagConstraints gbc_gebDate = new GridBagConstraints();
 		gbc_gebDate.insets = new Insets(0, 8, 10, 0);
 		gbc_gebDate.gridx = 2;
 		gbc_gebDate.gridy = 3;
-		gDatePick.setTextEditable(true);
-		gebDatePan.setBorder(emptyBorder);
-		this.add(gDatePick, gbc_gebDate);
+		gebDatePickerImpl.setTextEditable(true);
+		gebDatePanelImpl.setBorder(emptyBorder);
+		gebDateModel.addChangeListener(filtTaskDateContr);
+		this.add(gebDatePickerImpl, gbc_gebDate);
 
 		// << TaskID >>
-		pTaskID = new Pattern_PlaceholderTextField();
-		pTaskID.setPlaceholder("TaskID", getLayout().columnWidths[1]*2);
-		pTaskID.setBorder(emptyBorder);
-		pTaskID.addActionListener(filtTaskCont);
-		pTaskID.addKeyListener(filtTaskKey);
+		taskIdPh = new Pattern_PlaceholderTextField();
+		taskIdPh.setPlaceholder("TaskID", getLayout().columnWidths[1]*2);
+		taskIdPh.setBorder(emptyBorder);
+		taskIdPh.addActionListener(filtTaskContr);
+		taskIdPh.addKeyListener(filtTaskKeyContr);
 		GridBagConstraints gbc_taskID = new GridBagConstraints();
 		gbc_taskID.anchor = GridBagConstraints.NORTH;
 		gbc_taskID.fill = GridBagConstraints.HORIZONTAL;
 		gbc_taskID.gridwidth = 2;
 		gbc_taskID.gridx = 1;
 		gbc_taskID.gridy = 4;
-		this.add(pTaskID, gbc_taskID);
+		this.add(taskIdPh, gbc_taskID);
 
 		// << OrderedDate >>
-		oDateLabel = new JLabel("Order Date");
-		oDateLabel.setForeground(colorLabelDateTxt);
-		oDateLabel.setBorder(emptyBorder);
-		oDateLabel.setFont(fontTxt);
+		orderDateLabel = new JLabel("Order Date");
+		orderDateLabel.setForeground(colorLabelDateTxt);
+		orderDateLabel.setBorder(emptyBorder);
+		orderDateLabel.setFont(fontTxt);
 		GridBagConstraints gbc_oDateLabel = new GridBagConstraints();
 		gbc_oDateLabel.anchor = GridBagConstraints.BELOW_BASELINE_TRAILING;
 		gbc_oDateLabel.gridx = 1;
 		gbc_oDateLabel.gridy = 5;
-		this.add(oDateLabel, gbc_oDateLabel);
+		this.add(orderDateLabel, gbc_oDateLabel);
 		GridBagConstraints gbc_orderDate = new GridBagConstraints();
 		gbc_orderDate.insets = new Insets(0, 8, 10, 0);
 		gbc_orderDate.gridx = 2;
 		gbc_orderDate.gridy = 5;
-		oDatePick.setTextEditable(true);
-		orderDatePan.setBorder(emptyBorder);
-		this.add(oDatePick, gbc_orderDate);
-
-		// << Button "Filter anwenden" >>
-		filterBtn = new JButton("Filter anwenden");
-		filterBtn.setBorder(btnBorder);
-		filterBtn.setBackground(colorBtnBG);
-		filterBtn.setForeground(colorBtnTxt);
-		filterBtn.setFont(fontTxt);
-		filterBtn.addActionListener(filtTaskCont);
-		GridBagConstraints gbc_filterBtn = new GridBagConstraints();
-		gbc_filterBtn.anchor = GridBagConstraints.NORTH;
-		gbc_filterBtn.fill = GridBagConstraints.HORIZONTAL;
-		gbc_filterBtn.insets = new Insets(20, 0, 0, 5);
-		gbc_filterBtn.gridx = 1;
-		gbc_filterBtn.gridy = 6;
-		this.add(filterBtn, gbc_filterBtn);
+		orderDatePickerImpl.setTextEditable(true);
+		orderDatePanelImpl.setBorder(emptyBorder);
+		orderDateModel.addChangeListener(filtTaskDateContr);
+		this.add(orderDatePickerImpl, gbc_orderDate);
 
 		// << Button "Felder leeren" >>
 		clearAllBtn = new JButton("Felder zurücksetzen");
@@ -168,23 +157,40 @@ public class Template_FilterCriteriaPanel extends Template_BlockPanel {
 		clearAllBtn.setBackground(colorBtnBG);
 		clearAllBtn.setForeground(colorBtnTxt);
 		clearAllBtn.setFont(fontTxt);
-		clearAllBtn.addActionListener(filtTaskCont);
+		clearAllBtn.addActionListener(filtTaskContr);
 		GridBagConstraints gbc_clearFieldBtn = new GridBagConstraints();
 		gbc_clearFieldBtn.anchor = GridBagConstraints.NORTH;
 		gbc_clearFieldBtn.fill = GridBagConstraints.HORIZONTAL;
-		gbc_clearFieldBtn.insets = new Insets(20, 10, 0, 0);
-		gbc_clearFieldBtn.gridx = 2;
+		gbc_clearFieldBtn.insets = new Insets(20, 0, 0, 0);
+		gbc_clearFieldBtn.gridwidth = 2;
+		gbc_clearFieldBtn.gridx = 1;
 		gbc_clearFieldBtn.gridy = 6;
 		this.add(clearAllBtn, gbc_clearFieldBtn);
+		
+		// TODO Löschen und Listener Löschen
+		// << Button "Filter anwenden" >>
+//		filterBtn = new JButton("Filter anwenden");
+//		filterBtn.setBorder(btnBorder);
+//		filterBtn.setBackground(colorBtnBG);
+//		filterBtn.setForeground(colorBtnTxt);
+//		filterBtn.setFont(fontTxt);
+//		filterBtn.addActionListener(filtTaskCont);
+//		GridBagConstraints gbc_filterBtn = new GridBagConstraints();
+//		gbc_filterBtn.anchor = GridBagConstraints.NORTH;
+//		gbc_filterBtn.fill = GridBagConstraints.HORIZONTAL;
+//		gbc_filterBtn.insets = new Insets(20, 10, 0, 0);
+//		gbc_filterBtn.gridx = 2;
+//		gbc_filterBtn.gridy = 6;
+//		this.add(filterBtn, gbc_filterBtn);
 
 		// Anzahl der gefilterten Tasks
-		anzFiltTask = new JTextField();
-		anzFiltTask.setForeground(colorEntryTxt);
-		anzFiltTask.setBorder(emptyBorder);
-		anzFiltTask.addActionListener(filtTaskCont);
-		anzFiltTask.addKeyListener(filtTaskKey);
-		anzFiltTask.setOpaque(false);
-		this.add(anzFiltTask);
+		anzFiltEntriesTf = new JTextField();
+		anzFiltEntriesTf.setForeground(colorEntryTxt);
+		anzFiltEntriesTf.setBorder(emptyBorder);
+		anzFiltEntriesTf.addActionListener(filtTaskContr);
+		anzFiltEntriesTf.addKeyListener(filtTaskKeyContr);
+		anzFiltEntriesTf.setOpaque(false);
+		this.add(anzFiltEntriesTf);
 		
 		GridBagConstraints gbc_anzFiltTask = new GridBagConstraints();
 		gbc_anzFiltTask.anchor = GridBagConstraints.NORTH;
@@ -193,7 +199,7 @@ public class Template_FilterCriteriaPanel extends Template_BlockPanel {
 		gbc_anzFiltTask.gridwidth = 1;
 		gbc_anzFiltTask.gridx = 1;
 		gbc_anzFiltTask.gridy = 7;
-		this.add(anzFiltTask, gbc_anzFiltTask);
+		this.add(anzFiltEntriesTf, gbc_anzFiltTask);
 	}
 
 }

@@ -21,7 +21,7 @@ public class FilterCriteriaPanel_ActionContr extends Abstract_FilterCriteria_Con
 		} else if (e.getSource() == criteria.clearAllBtn) {
 			resetForm();
 			setFilteredTask();
-			frame.filterMask.anzFiltTask.setText(null);
+			frame.filterMask.anzFiltEntriesTf.setText(null);
 			
 			
 			

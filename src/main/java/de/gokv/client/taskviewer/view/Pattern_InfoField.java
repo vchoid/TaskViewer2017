@@ -29,7 +29,7 @@ public class Pattern_InfoField {
 	private Pattern_InfoField() {
 	}
 
-	public static Pattern_InfoField createInfoField(String title, int startPosCol, int startPosRow){
+	public static Pattern_InfoField createInfoField(String title, int startTitlePosCol, int startTitlePosRow, int startFieldPosCol, int startFieldPosRow, int fieldWidth){
 		Pattern_InfoField field = new Pattern_InfoField();
 		JLabel lTitle = new JLabel(title);
 		lTitle.setFont(fntTitle);
@@ -41,8 +41,8 @@ public class Pattern_InfoField {
 		gbc_lTitle.anchor = GridBagConstraints.NORTH;
 		gbc_lTitle.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lTitle.insets = new Insets(20, 0, 0, 0);
-		gbc_lTitle.gridx = startPosCol;
-		gbc_lTitle.gridy = startPosRow;
+		gbc_lTitle.gridx = startTitlePosCol;
+		gbc_lTitle.gridy = startTitlePosRow;
 		
 		field.gbc_lTitle = gbc_lTitle;
 		
@@ -55,9 +55,10 @@ public class Pattern_InfoField {
 		GridBagConstraints gbc_lField = new GridBagConstraints();
 		gbc_lField.anchor = GridBagConstraints.NORTH;
 		gbc_lField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_lField.insets = new Insets(0, 20, 0, 0);
-		gbc_lField.gridx = startPosCol;
-		gbc_lField.gridy = startPosRow+1;
+		gbc_lField.gridwidth = fieldWidth;
+		gbc_lField.insets = new Insets(0, 0, 0, 0);
+		gbc_lField.gridx = startFieldPosCol;
+		gbc_lField.gridy = startFieldPosRow;
 				
 		field.gbc_lField = gbc_lField;
 		

@@ -12,12 +12,13 @@ public class Template_InfoCSVPanel extends Template_BlockPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	public JLabel taskID;
-	public JLabel taskID_field;
+//	public JLabel taskID;
+//	public JLabel taskID_field;
 	public Pattern_InfoField kvnr;
 	public Pattern_InfoField name;
 	public Pattern_InfoField vName;
 	public Pattern_InfoField gebDate;
+	public Pattern_InfoField taskID;
 
 	protected Template_InfoCSVPanel(MyFrame_Controller controller) {
 		super("Informationen (CSV)", controller);
@@ -27,54 +28,36 @@ public class Template_InfoCSVPanel extends Template_BlockPanel {
 	public GridBagLayout getLayout() {
 		GridBagLayout layout = new GridBagLayout();
 		layout.columnWidths = new int[] { 10, 210, 210, 10 };
-		layout.rowHeights = new int[] { 30, 30, 30, 30, 30, 30, 100 };
+		layout.rowHeights = new int[] { 13, 20, 20, 20, 20, 20, 20, 20, 90};
 		return layout;
 	}
 
 	@Override
 	public void init() {
-		// 1. Task ID
-		taskID = new JLabel("TaskID");
-		taskID.setFont(fontInfoTitle);
-		taskID.setForeground(colorInfoTitleTxt);
-		GridBagConstraints gbc_taskdIDLabel = new GridBagConstraints();
-		gbc_taskdIDLabel.anchor = GridBagConstraints.NORTH;
-		gbc_taskdIDLabel.fill = GridBagConstraints.HORIZONTAL;
-		gbc_taskdIDLabel.insets = new Insets(15, 0, 0, 0);
-		gbc_taskdIDLabel.gridx = 1;
-		gbc_taskdIDLabel.gridy = 1;
-		this.add(taskID, gbc_taskdIDLabel);
 
-		taskID_field = new JLabel();
-		taskID_field.setFont(fontTxt);
-		taskID_field.setForeground(colorInfoTxt);
-		GridBagConstraints gbc_taskID_field = new GridBagConstraints();
-		gbc_taskID_field.anchor = GridBagConstraints.NORTH;
-		gbc_taskID_field.fill = GridBagConstraints.HORIZONTAL;
-		gbc_taskID_field.insets = new Insets(0, 20, 0, 0);
-		gbc_taskID_field.gridwidth = 2;
-		gbc_taskID_field.gridx = 1;
-		gbc_taskID_field.gridy = 2;
-		this.add(taskID_field, gbc_taskID_field);
-
-		// 2. KvNr
-		kvnr = Pattern_InfoField.createInfoField("KvNr:", 1, 2);
+		// 1. KvNr
+		kvnr = Pattern_InfoField.createInfoField("KvNr:", 1, 1, 1, 2, 1);
 		this.add(kvnr.getlTitle(), kvnr.getGbc_lTitle());
 		this.add(kvnr.getlField(), kvnr.getGbc_lField());
 
-		// 3. Name
-		name = Pattern_InfoField.createInfoField("Name:", 1, 3);
+		// 2. Name
+		name = Pattern_InfoField.createInfoField("Name:", 1, 3, 1, 4, 1);
 		this.add(name.getlTitle(), name.getGbc_lTitle());
 		this.add(name.getlField(), name.getGbc_lField());
-		// 4. Vorname
-		vName = Pattern_InfoField.createInfoField("Vorname:", 1, 4);
+		// 3. Vorname
+		vName = Pattern_InfoField.createInfoField("Vorname:", 2, 3, 2, 4, 1);
 		this.add(vName.getlTitle(), vName.getGbc_lTitle());
 		this.add(vName.getlField(), vName.getGbc_lField());
 
-		// 5. Geburtsdatum
-		gebDate = Pattern_InfoField.createInfoField("Geburtsdatum:", 1, 5);
+		// 4. Geburtsdatum
+		gebDate = Pattern_InfoField.createInfoField("Geburtsdatum:", 2, 5, 2, 6, 1);
 		this.add(gebDate.getlTitle(), gebDate.getGbc_lTitle());
 		this.add(gebDate.getlField(), gebDate.getGbc_lField());
+		
+		// 5. Task ID
+		taskID = Pattern_InfoField.createInfoField("TaskID", 1, 7, 1, 8, 2);
+		this.add(taskID.getlTitle(), taskID.getGbc_lTitle());
+		this.add(taskID.getlField(), taskID.getGbc_lField());
 	}
 
 }

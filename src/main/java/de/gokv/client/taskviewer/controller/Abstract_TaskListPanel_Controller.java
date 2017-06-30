@@ -50,7 +50,7 @@ public class Abstract_TaskListPanel_Controller extends Abstract_MyFrame_Controll
 	protected void selectTaskItem() {
 		taskID = taskMask.taskList.getSelectedValue();
 		model.getTaskValueByID(taskID);
-		infoCSV.taskID_field.setText(taskID);
+		infoCSV.taskID.setlField(taskID);
 		infoCSV.kvnr.setlField(model.kvnr);
 		infoCSV.name.setlField(model.name);
 		infoCSV.vName.setlField(model.vName);

@@ -23,23 +23,23 @@ public class Abstract_FilterCriteria_Controller extends Abstract_MyFrame_Control
 	public void setFilteredTask() {
 		try {
 			Task t = new Task();
-			t.setName(criteriaTemplate.pName.getText());
-			t.setvName(criteriaTemplate.pVname.getText());
-			t.setKvnr(criteriaTemplate.pKvnr.getText());
-			t.setTaskId(criteriaTemplate.pTaskID.getText());
-			if (criteriaTemplate.model_geb.getValue() != null) {
-				t.setGebDat(DateUtil.parseDate(criteriaTemplate.model_geb.getValue()));
+			t.setName(criteriaTemplate.namePh.getText());
+			t.setvName(criteriaTemplate.vnamePh.getText());
+			t.setKvnr(criteriaTemplate.kvnrPh.getText());
+			t.setTaskId(criteriaTemplate.taskIdPh.getText());
+			if (criteriaTemplate.gebDateModel.getValue() != null) {
+				t.setGebDat(DateUtil.parseDate(criteriaTemplate.gebDateModel.getValue()));
 			}
-			if (criteriaTemplate.model_ord.getValue() != null) {
-				t.setOrderedDate(DateUtil.parseDate(criteriaTemplate.model_ord.getValue()));
+			if (criteriaTemplate.orderDateModel.getValue() != null) {
+				t.setOrderedDate(DateUtil.parseDate(criteriaTemplate.orderDateModel.getValue()));
 			}
 
 			model.setFilterCriteria(t);
 			frame.taskMask.taskList.setListData(model.getFilteredTaskID());
 			if(model.getFilteredTaskID().length == 1){
-				criteriaTemplate.anzFiltTask.setText("Einen Eintrag gefunden");
+				criteriaTemplate.anzFiltEntriesTf.setText("Einen Eintrag gefunden");
 			}else {
-				criteriaTemplate.anzFiltTask.setText(model.getFilteredTaskID().length + " Einträge gefunden");
+				criteriaTemplate.anzFiltEntriesTf.setText(model.getFilteredTaskID().length + " Einträge gefunden");
 			}
 
 		} catch (InvalidDateException e1) {
@@ -59,12 +59,12 @@ public class Abstract_FilterCriteria_Controller extends Abstract_MyFrame_Control
 
 	private void clearCriterias() {
 		
-		criteriaTemplate.pName.setText(null);
-		criteriaTemplate.pVname.setText(null);
-		criteriaTemplate.pKvnr.setText(null);
-		criteriaTemplate.pTaskID.setText(null);
-		criteriaTemplate.model_geb.setValue(null);
-		criteriaTemplate.model_ord.setValue(null);
+		criteriaTemplate.namePh.setText(null);
+		criteriaTemplate.vnamePh.setText(null);
+		criteriaTemplate.kvnrPh.setText(null);
+		criteriaTemplate.taskIdPh.setText(null);
+		criteriaTemplate.gebDateModel.setValue(null);
+		criteriaTemplate.orderDateModel.setValue(null);
 		
 	}
 
