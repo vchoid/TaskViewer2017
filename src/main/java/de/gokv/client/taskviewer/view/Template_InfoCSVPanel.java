@@ -14,10 +14,10 @@ public class Template_InfoCSVPanel extends Template_BlockPanel {
 
 	public JLabel taskID;
 	public JLabel taskID_field;
-	public Template_InfoField kvnr;
-	public Template_InfoField name;
-	public Template_InfoField vName;
-	public Template_InfoField gebDate;
+	public Pattern_InfoField kvnr;
+	public Pattern_InfoField name;
+	public Pattern_InfoField vName;
+	public Pattern_InfoField gebDate;
 
 	protected Template_InfoCSVPanel(MyFrame_Controller controller) {
 		super("Informationen (CSV)", controller);
@@ -58,21 +58,21 @@ public class Template_InfoCSVPanel extends Template_BlockPanel {
 		this.add(taskID_field, gbc_taskID_field);
 
 		// 2. KvNr
-		kvnr = Template_InfoField.createInfoField("KvNr:", 1, 2);
+		kvnr = Pattern_InfoField.createInfoField("KvNr:", 1, 2);
 		this.add(kvnr.getlTitle(), kvnr.getGbc_lTitle());
 		this.add(kvnr.getlField(), kvnr.getGbc_lField());
 
 		// 3. Name
-		name = Template_InfoField.createInfoField("Name:", 1, 3);
+		name = Pattern_InfoField.createInfoField("Name:", 1, 3);
 		this.add(name.getlTitle(), name.getGbc_lTitle());
 		this.add(name.getlField(), name.getGbc_lField());
 		// 4. Vorname
-		vName = Template_InfoField.createInfoField("Vorname:", 1, 4);
+		vName = Pattern_InfoField.createInfoField("Vorname:", 1, 4);
 		this.add(vName.getlTitle(), vName.getGbc_lTitle());
 		this.add(vName.getlField(), vName.getGbc_lField());
 
 		// 5. Geburtsdatum
-		gebDate = Template_InfoField.createInfoField("Geburtsdatum:", 1, 5);
+		gebDate = Pattern_InfoField.createInfoField("Geburtsdatum:", 1, 5);
 		this.add(gebDate.getlTitle(), gebDate.getGbc_lTitle());
 		this.add(gebDate.getlField(), gebDate.getGbc_lField());
 	}
