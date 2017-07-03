@@ -291,41 +291,6 @@ public class Task {
 		this.vsWort = vsWort;
 	}
 
-	//TODO Filter anpassen auf Wildcard
-	
-	/**
-	 * Filtern der Werte nach Kriterien.
-	 * Wenn Länge der Eingabe in den Felder größer als 0 ist und Kritierien
-	 * nicht übereinstimmen wird false zurückgegeben. Ansonsten wird true zurückgegeben.
-	 * 
-	 * @param criteria
-	 * @return
-	 */
-	public boolean matchesCriteria(Task criteria) {
-		if (criteria.name.length() > 0 && criteria.name.contains("*")){
-			System.out.println("------------------------");
-			System.out.println(criteria.name);
-			if(! criteria.name.contains(".*"))
-				criteria.name = criteria.name.replaceAll("\\*", ".*");
-			System.out.println(criteria.name);
-			List<String> list = new ArrayList<String>();
-				if (name.matches(criteria.name))
-					list.add(name);
-				System.out.println(list);
-				return false;
-		}
-		if (criteria.vName.length() > 0 && !criteria.vName.equals(this.vName))
-			return false;
-		if (criteria.kvnr.length() > 0 && !criteria.kvnr.equals(this.kvnr))
-			return false;
-		if (criteria.taskId.length() > 0 && !criteria.taskId.equals(this.taskId))
-			return false;
-		if (criteria.gebDat != null && !criteria.gebDat.equals(this.gebDat))
-			return false;
-		if (criteria.orderedDate != null && !criteria.orderedDate.equals(this.orderedDate))
-			return false;
-		return true;
-	}
 
 	
 }
