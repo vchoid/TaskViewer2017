@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.gokv.client.taskviewer.CSVReader;
+import de.gokv.client.taskviewer.Criteria;
 import de.gokv.client.taskviewer.Task;
 
 /**
@@ -17,7 +18,7 @@ public class MyModel {
 	private CSVReader reader;
 	public static List<Task> tasks;
 	private List<String> filteredTasks;
-	private Task filteredCriteria;
+	private Criteria filteredCriteria;
 	public int countValidTasks;
 	public int countInvalidTasks;
 	public String kvnr;
@@ -66,7 +67,7 @@ public class MyModel {
 	}
 	
 	/**
-	 * fabian fragen...
+	 * 
 	 * @return
 	 */
 	public String[] getFilteredTaskID() {
@@ -74,7 +75,7 @@ public class MyModel {
 		for (Task task : tasks) {
 			// criterias
 			if (filteredCriteria != null) {
-				if (!task.matchesCriteria(filteredCriteria))
+				if (! filteredCriteria.matchesTask(task))
 					continue;
 			}
 			filteredTasks.add(task.getTaskId());
@@ -83,8 +84,8 @@ public class MyModel {
 		return filteredTasks.toArray(new String[0]);
 	}
 
-	public void setFilterCriteria(Task t) {
-		filteredCriteria = t;
+	public void setFilterCriteria(Criteria c) {
+		filteredCriteria = c;
 	}
 
 	public String getKvnr() {

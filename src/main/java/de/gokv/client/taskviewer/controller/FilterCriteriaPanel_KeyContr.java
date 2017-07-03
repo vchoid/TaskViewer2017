@@ -3,10 +3,13 @@ package de.gokv.client.taskviewer.controller;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import org.apache.commons.lang.ArrayUtils;
+
 import de.gokv.client.taskviewer.view.Template_FilterCriteriaPanel;
 
 public class FilterCriteriaPanel_KeyContr extends Abstract_FilterCriteria_Controller implements KeyListener {
 
+	private final int[] ignoredKeys = {KeyEvent.VK_CAPS_LOCK, KeyEvent.VK_SHIFT};
 	
 	
 	public FilterCriteriaPanel_KeyContr() {
@@ -20,7 +23,10 @@ public class FilterCriteriaPanel_KeyContr extends Abstract_FilterCriteria_Contro
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+		int keyCode = e.getKeyCode();
+		if(ArrayUtils.contains(ignoredKeys, keyCode))
+			return;
+		if (keyCode == KeyEvent.VK_ESCAPE) {
 			resetForm();
 		}
 		setFilteredTask();

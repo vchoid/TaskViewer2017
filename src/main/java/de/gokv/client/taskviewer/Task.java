@@ -3,6 +3,8 @@ package de.gokv.client.taskviewer;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import org.apache.commons.csv.CSVRecord;
@@ -300,8 +302,18 @@ public class Task {
 	 * @return
 	 */
 	public boolean matchesCriteria(Task criteria) {
-		if (criteria.name.length() > 0 && !criteria.name.equals(this.name))
-			return false;
+		if (criteria.name.length() > 0 && criteria.name.contains("*")){
+			System.out.println("------------------------");
+			System.out.println(criteria.name);
+			if(! criteria.name.contains(".*"))
+				criteria.name = criteria.name.replaceAll("\\*", ".*");
+			System.out.println(criteria.name);
+			List<String> list = new ArrayList<String>();
+				if (name.matches(criteria.name))
+					list.add(name);
+				System.out.println(list);
+				return false;
+		}
 		if (criteria.vName.length() > 0 && !criteria.vName.equals(this.vName))
 			return false;
 		if (criteria.kvnr.length() > 0 && !criteria.kvnr.equals(this.kvnr))
@@ -315,4 +327,5 @@ public class Task {
 		return true;
 	}
 
+	
 }

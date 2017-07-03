@@ -1,6 +1,6 @@
 package de.gokv.client.taskviewer.controller;
 
-import de.gokv.client.taskviewer.Task;
+import de.gokv.client.taskviewer.Criteria;
 import de.gokv.client.taskviewer.exceptions.InvalidDateException;
 import de.gokv.client.taskviewer.utils.DateUtil;
 import de.gokv.client.taskviewer.view.Template_FilterCriteriaPanel;
@@ -20,32 +20,32 @@ public class Abstract_FilterCriteria_Controller extends Abstract_MyFrame_Control
 		infoTaskTemplate = frame.infoTask;
 	}
 
-	public void setFilteredTask() {
-		try {
-			Task t = new Task();
-			t.setName(criteriaTemplate.namePh.getText());
-			t.setvName(criteriaTemplate.vnamePh.getText());
-			t.setKvnr(criteriaTemplate.kvnrPh.getText());
-			t.setTaskId(criteriaTemplate.taskIdPh.getText());
-			if (criteriaTemplate.gebDateModel.getValue() != null) {
-				t.setGebDat(DateUtil.parseDate(criteriaTemplate.gebDateModel.getValue()));
-			}
-			if (criteriaTemplate.orderDateModel.getValue() != null) {
-				t.setOrderedDate(DateUtil.parseDate(criteriaTemplate.orderDateModel.getValue()));
-			}
+	public void setFilteredTask(){
+//		try {
+			Criteria criteria = new Criteria();
+			criteria.setnName(criteriaTemplate.namePh.getText());
+			criteria.setvName(criteriaTemplate.vnamePh.getText());
+			criteria.setKvnr(criteriaTemplate.kvnrPh.getText());
+			criteria.setTaskID(criteriaTemplate.taskIdPh.getText());
+//			if (criteriaTemplate.gebDateModel.getValue() != null) {
+//				criteria.setGebDate(DateUtil.parseDate(criteriaTemplate.gebDateModel.getValue()).toString());
+//			}
+//			if (criteriaTemplate.orderDateModel.getValue() != null) {
+//				criteria.setOrderedDate(DateUtil.parseDate(criteriaTemplate.orderDateModel.getValue()));
+//			}
 
-			model.setFilterCriteria(t);
+			model.setFilterCriteria(criteria);
 			frame.taskMask.taskList.setListData(model.getFilteredTaskID());
 			if(model.getFilteredTaskID().length == 1){
 				criteriaTemplate.anzFiltEntriesTf.setText("Einen Eintrag gefunden");
 			}else {
 				criteriaTemplate.anzFiltEntriesTf.setText(model.getFilteredTaskID().length + " Einträge gefunden");
 			}
-
-		} catch (InvalidDateException e1) {
-			// DO NOTHING
-			e1.printStackTrace();
-		}
+//
+//		} catch (InvalidDateException e1) {
+//			// DO NOTHING
+//			e1.printStackTrace();
+//		}
 	}
 
 	public void resetForm() {
