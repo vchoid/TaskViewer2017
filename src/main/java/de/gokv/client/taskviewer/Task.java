@@ -289,6 +289,8 @@ public class Task {
 		this.vsWort = vsWort;
 	}
 
+	//TODO Filter anpassen auf Wildcard
+	
 	/**
 	 * Filtern der Werte nach Kriterien.
 	 * Wenn Länge der Eingabe in den Felder größer als 0 ist und Kritierien
