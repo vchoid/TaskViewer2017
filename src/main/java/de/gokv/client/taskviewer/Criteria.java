@@ -8,7 +8,9 @@ public class Criteria {
 	private String nName;
 	private String vName;
 	private String taskID;
-	private String gebDate;
+	private LocalDate gebDate;
+	private LocalDate orderDate;
+
 
 	public Criteria() {
 
@@ -47,7 +49,13 @@ public class Criteria {
 		criteria = criteria.replaceAll("\\*", ".*");
 		return criteria;
 	}
-
+	
+	private LocalDate formatCriteria(LocalDate dateCriteria) {
+		//TODO überprüfe Tag, Monat , Jahr
+		return dateCriteria;
+	}
+	
+	// Text - String
 	public String getKvnr() {
 		return kvnr;
 	}
@@ -80,4 +88,20 @@ public class Criteria {
 		this.taskID = formatCriteria(taskID);
 	}
 
+	// Datum - LocalDate
+	public LocalDate getGebDate() {
+		return gebDate;
+	}
+	
+	public void setGebDate(LocalDate gebDate) {
+		this.gebDate = gebDate;
+	}
+	
+	public LocalDate getOrderDate() {
+		return orderDate;
+	}
+	
+	public void setOrderDate(LocalDate orderDate) {
+		this.orderDate = orderDate;
+	}
 }
