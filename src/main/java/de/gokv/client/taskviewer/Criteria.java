@@ -24,7 +24,6 @@ public class Criteria {
 
 		if (this.nName.length() > 0) {
 			if (!task.getName().matches(nName)) {
-				System.out.println(nName);
 				return false;
 			}
 		}
@@ -36,7 +35,6 @@ public class Criteria {
 		}
 
 		if (this.taskID.length() > 0) {
-			System.out.println(taskID);
 			if (!task.getTaskId().matches(taskID)) {
 				return false;
 			}
