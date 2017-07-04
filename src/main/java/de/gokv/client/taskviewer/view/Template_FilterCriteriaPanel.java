@@ -59,18 +59,8 @@ public class Template_FilterCriteriaPanel extends Template_BlockPanel {
 		FilterCriteriaPanel_DateContr filtTaskDateContr = new FilterCriteriaPanel_DateContr();
 		
 		// << KVNR >>
-		kvnrPh = new Pattern_PlaceholderTextField();
-		kvnrPh.setPlaceholder("Krankenversichertennummer (laut eGk)", getLayout().columnWidths[1]*2);
-		kvnrPh.setBorder(emptyBorder);
-		kvnrPh.addActionListener(filtTaskContr);
-		kvnrPh.addKeyListener(filtTaskKeyContr);
-		GridBagConstraints gbc_kvnr = new GridBagConstraints();
-		gbc_kvnr.anchor = GridBagConstraints.NORTH;
-		gbc_kvnr.fill = GridBagConstraints.HORIZONTAL;
-		gbc_kvnr.gridwidth = 2;
-		gbc_kvnr.gridx = 1;
-		gbc_kvnr.gridy = 1;
-		this.add(kvnrPh, gbc_kvnr);
+		kvnrPh = new Pattern_PlaceholderTextField("Krankenversichertennummer (laut eGk)", getLayout().columnWidths[1]*2, 1, 1, 2 );
+		this.add(kvnrPh, kvnrPh.getGbc_placeholder());
 
 		// << Name >>
 		namePh = new Pattern_PlaceholderTextField();

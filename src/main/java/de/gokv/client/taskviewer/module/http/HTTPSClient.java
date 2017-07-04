@@ -139,7 +139,7 @@ public class HTTPSClient {
 	}
 
 	private void configureTrustedServerCertficate() throws ClientCertificateException {
-		String filename = "";
+		String filename = "/trusted.cer";
 		trustedCertficates = ClientCertificate.readCertificateFromPKCS7(filename);
 	}
 
