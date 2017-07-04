@@ -21,18 +21,18 @@ public class Abstract_FilterCriteria_Controller extends Abstract_MyFrame_Control
 	}
 
 	public void setFilteredTask(){
-//		try {
+		try {
 			Criteria criteria = new Criteria();
 			criteria.setnName(criteriaTemplate.namePh.getText());
 			criteria.setvName(criteriaTemplate.vnamePh.getText());
 			criteria.setKvnr(criteriaTemplate.kvnrPh.getText());
 			criteria.setTaskID(criteriaTemplate.taskIdPh.getText());
-//			if (criteriaTemplate.gebDateModel.getValue() != null) {
-//				criteria.setGebDate(DateUtil.parseDate(criteriaTemplate.gebDateModel.getValue()).toString());
-//			}
-//			if (criteriaTemplate.orderDateModel.getValue() != null) {
-//				criteria.setOrderedDate(DateUtil.parseDate(criteriaTemplate.orderDateModel.getValue()));
-//			}
+			if (criteriaTemplate.gebDateModel.getValue() != null) {
+				criteria.setGebDate(DateUtil.parseDate(criteriaTemplate.gebDateModel.getValue()));
+			}
+			if (criteriaTemplate.orderDateModel.getValue() != null) {
+				criteria.setOrderDate(DateUtil.parseDate(criteriaTemplate.orderDateModel.getValue()));
+			}
 
 			model.setFilterCriteria(criteria);
 			frame.taskMask.taskList.setListData(model.getFilteredTaskID());
@@ -41,11 +41,11 @@ public class Abstract_FilterCriteria_Controller extends Abstract_MyFrame_Control
 			}else {
 				criteriaTemplate.anzFiltEntriesTf.setText(model.getFilteredTaskID().length + " Einträge gefunden");
 			}
-//
-//		} catch (InvalidDateException e1) {
-//			// DO NOTHING
-//			e1.printStackTrace();
-//		}
+
+		} catch (InvalidDateException e1) {
+			// DO NOTHING
+			e1.printStackTrace();
+		}
 	}
 
 	public void resetForm() {

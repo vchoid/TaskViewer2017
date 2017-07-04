@@ -41,7 +41,18 @@ public class Criteria {
 				return false;
 			}
 		}
-
+		
+		if (this.orderDate != null) {
+			if (!task.getOrderedDate().equals(orderDate)) {
+				return false;
+			}
+		}
+		
+		if (this.gebDate != null) {
+			if (!task.getGebDat().equals(gebDate)) {
+				return false;
+			}
+		}
 		return true;
 	}
 
