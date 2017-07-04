@@ -71,9 +71,11 @@ public class Abstract_FilterCriteria_Controller extends Abstract_MyFrame_Control
 
 	private void clearCSVInfoPanel() {
 		infoCSVTemplate.taskID.setlField(null);
+		infoCSVTemplate.orderDate.setlField(null);
 		infoCSVTemplate.kvnr.setlField(null);
 		infoCSVTemplate.name.setlField(null);
 		infoCSVTemplate.vName.setlField(null);
+		infoCSVTemplate.taskType.setlField(null);
 		infoCSVTemplate.gebDate.setlField(null);
 	}
 

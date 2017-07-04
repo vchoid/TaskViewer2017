@@ -85,6 +85,7 @@ public class Template_FilterCriteriaPanel extends Template_BlockPanel {
 		// << OrderedDate >>
 		orderDatePickerField = new Pattern_DatePickerField("Order Date",1 ,5);
 		this.add(orderDatePickerField.getDateLabel(), orderDatePickerField.getGbc_dateLabel());
+		this.add(orderDatePickerField.getDatePickerImpl(), orderDatePickerField.getGbc_date());
 
 		// << Button "Felder leeren" >>
 		clearAllBtn = new JButton("Felder zurücksetzen");
