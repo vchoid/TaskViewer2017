@@ -48,7 +48,7 @@ public class Pattern_PlaceholderTextField extends JTextField {
 		g = (Graphics2D) pG;
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g.setColor(colorPlaceholderTxt);
-		g.drawString(placeholder, getInsets().left + 3, pG.getFontMetrics().getMaxAscent() + getInsets().top);
+		g.drawString(placeholder, getInsets().left + 3, pG.getFontMetrics().getMaxAscent() + 3 + getInsets().top);
 
 	}
 
