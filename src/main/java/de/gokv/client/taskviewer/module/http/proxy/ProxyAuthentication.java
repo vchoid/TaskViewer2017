@@ -24,10 +24,11 @@ public class ProxyAuthentication {
 	private static Map<String, String> params = new HashMap<String, String>();
 
 	public static void initialize(Properties proxyProperties) throws MissingProxyPropertyException {
-		PROXY = true;
 		AUTHENTICATIONREQUIRED = parseBoolean(proxyProperties.getProperty("authentication-required"));
-		fillField(SERVER_KEY, proxyProperties, "proxy-host", true);
-		fillField(PORT_KEY, proxyProperties, "proxy-port", true);
+		fillField(SERVER_KEY, proxyProperties, "proxy-host", false);
+		fillField(PORT_KEY, proxyProperties, "proxy-port", false);
+		if(params.get(SERVER_KEY) != null && params.get(PORT_KEY) != null)
+			PROXY = true;
 		fillField(AUTHUSER_KEY, proxyProperties, "proxy-user", AUTHENTICATIONREQUIRED);
 		fillField(AUTHPASSWORD_KEY, proxyProperties, "proxy-password", AUTHENTICATIONREQUIRED);
 	}

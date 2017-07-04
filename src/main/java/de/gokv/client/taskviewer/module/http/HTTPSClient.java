@@ -54,13 +54,14 @@ public class HTTPSClient {
 	private X509Certificate[] trustedCertficates;
 	public static JSONObject task;
 
+	public static String errMsg;
+
 	@SuppressWarnings("deprecation")
 	public HTTPSClient(URL apiURL)
 			throws ServerException, KeyManagementException, UnrecoverableKeyException, NoSuchAlgorithmException,
 			KeyStoreException, GeneralSecurityException, IOException, ClientCertificateException, URISyntaxException {
 
 		clientCertificate = ClientCertificate.readCertificate();
-		System.out.println(clientCertificate);
 		apiEntryPoint = apiURL.toURI();
 
 		downloadPool = Executors.newFixedThreadPool(3);
@@ -85,7 +86,6 @@ public class HTTPSClient {
 		HttpClientBuilder httpClientBuilder = HttpClients.custom().setConnectionManager(connectionManager);
 
 		if (ProxyAuthentication.isProxy()) {
-			System.out.println("IS PROXY");
 			httpClientBuilder.setProxy(ProxyAuthentication.buildProxy());
 			if (ProxyAuthentication.isAuthentication()) {
 				httpClientBuilder.setDefaultCredentialsProvider(ProxyAuthentication.buildCredentials());
@@ -149,8 +149,9 @@ public class HTTPSClient {
 			JSONObject taskDetails = getTaskDetails(taskID);
 			JSONArray results = taskDetails.getJSONArray("results");
 			task = results.getJSONObject(0);
-		} catch (ServerException e) {
+		} catch (ServerException | IndexOutOfBoundsException e) {
 			e.printStackTrace();
+			//TODO errMsg zum View schicken, wenn keine task vorhanden bzw IndexOutOfBound
 		}
 	}
 
@@ -187,8 +188,7 @@ public class HTTPSClient {
 			JSONObject info = get(apiEntryPoint, ResponseFormat.JSON);
 			apiAdminEntryPoint = JSONEntityUtil.getLink(apiEntryPoint, info, "gokv:admin");
 		} catch (ServerException e) {
-			// TODO Message
-			throw new ServerException("", e);
+			throw new ServerException("Der Serverpfad wurde nicht gefunden", e);
 		}
 	}
 
@@ -205,7 +205,7 @@ public class HTTPSClient {
 			info = get(getApiAdminEntryPoint(), ResponseFormat.JSON);
 			apiTaskEntryPoint = JSONEntityUtil.getLink(apiAdminEntryPoint, info, "gokv:task");
 		} catch (ServerException e) {
-			throw new ServerException("", e);
+			throw new ServerException("Der Serverpfad wurde nicht gefunden", e);
 		}
 	}
 

@@ -22,8 +22,10 @@ public class MyModel {
 	public int countValidTasks;
 	public int countInvalidTasks;
 	public String kvnr;
+	public LocalDate orderDate;
 	public String name;
 	public String vName;
+	public String taskType;
 	public LocalDate gebDate;
 	
 	public MyModel() {
@@ -59,8 +61,10 @@ public class MyModel {
 		for(Task t : tasks){
 			if(taskID.equals(t.getTaskId())){
 				kvnr = t.getKvnr();
+				orderDate = t.getOrderedDate();
 				name = t.getName();
 				vName = t.getvName();
+				taskType = t.getTaskType();
 				gebDate = t.getGebDat();
 			}
 		}

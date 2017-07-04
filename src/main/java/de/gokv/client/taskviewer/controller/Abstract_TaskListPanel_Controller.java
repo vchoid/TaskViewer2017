@@ -7,6 +7,7 @@ import java.net.URL;
 import java.security.GeneralSecurityException;
 import java.util.Properties;
 
+import de.gokv.client.taskviewer.exceptions.ClientConfigurationExeception;
 import de.gokv.client.taskviewer.module.http.HTTPSClient;
 import de.gokv.client.taskviewer.module.http.proxy.MissingProxyPropertyException;
 import de.gokv.client.taskviewer.module.http.proxy.ProxyAuthentication;
@@ -23,28 +24,40 @@ public class Abstract_TaskListPanel_Controller extends Abstract_MyFrame_Controll
 	protected final Template_TaskList taskMask;
 	protected final Template_InfoCSVPanel infoCSV;
 	protected final Template_InfoTaskPanel infoTask;
+	
+	private LoadProperties loadProps;
+	protected static final String FILE_PROPS = "http.properties";
+	protected static final String TITLE_OF_VAL_PROPS = "http.local.url";
+//	protected static final String TITLE_OF_VAL_PROPS = "http.url";
+	protected final String valProps;
+	public String errMsg;
 
-	public Abstract_TaskListPanel_Controller() {
+	public Abstract_TaskListPanel_Controller() throws ClientConfigurationExeception {
 		super();
+		loadProps = new LoadProperties(FILE_PROPS, TITLE_OF_VAL_PROPS);
+		valProps = loadProps.getPropertyStringVal();
 		InputStream stream = Abstract_TaskListPanel_Controller.class.getResourceAsStream("/proxyconfig.properties");
 		if(stream != null){
 			try {
 				Properties properties = new Properties();
 				properties.load(stream);
 				ProxyAuthentication.initialize(properties);
+				throw new MissingProxyPropertyException("", null);
 			} catch (IOException | MissingProxyPropertyException e) {
 				//TODO saubere Exception Werfen Client-Configuration Exception
-				e.printStackTrace();
+//				e.printStackTrace();
+				throw new ClientConfigurationExeception();
 			}
 		}
 			
 		if (client == null){
 			try {
-				client = new HTTPSClient(new URL("https://gokv.bitmarck.de:444/gokv-tenant/api"));
+				client = new HTTPSClient(new URL(valProps));
 			} catch (ServerException | GeneralSecurityException | IOException | ClientCertificateException
 					| URISyntaxException e) {
 				//TODO saubere Exception Werfen Client-Configuration Exception
-				e.printStackTrace();
+//				e.printStackTrace();
+				System.out.println("Test 2 <------------------------------------------------- 2");
 			}
 		}
 		taskMask = frame.taskMask;
@@ -67,10 +80,12 @@ public class Abstract_TaskListPanel_Controller extends Abstract_MyFrame_Controll
 	protected void selectTaskItem() {
 		taskID = taskMask.taskList.getSelectedValue();
 		model.getTaskValueByID(taskID);
-		infoCSV.taskID.setlField(taskID);
 		infoCSV.kvnr.setlField(model.kvnr);
+		infoCSV.orderDate.setlField(DateUtil.localDateToString(model.orderDate));
 		infoCSV.name.setlField(model.name);
 		infoCSV.vName.setlField(model.vName);
+		infoCSV.taskType.setlField(model.taskType);
 		infoCSV.gebDate.setlField(DateUtil.localDateToString(model.gebDate));
+		infoCSV.taskID.setlField(taskID);
 	}
 }

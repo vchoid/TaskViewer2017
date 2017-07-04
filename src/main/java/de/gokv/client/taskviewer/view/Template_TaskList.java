@@ -8,12 +8,15 @@ import java.awt.Insets;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
 import de.gokv.client.taskviewer.controller.TaskListPanel_ActionContr_ListSelectContr;
 import de.gokv.client.taskviewer.controller.TaskListPanel_KeyContr;
+import de.gokv.client.taskviewer.exceptions.ClientConfigurationExeception;
+import de.gokv.client.taskviewer.utils.HexaToRGB;
 import de.gokv.client.taskviewer.controller.MyFrame_Controller;
 import de.gokv.client.taskviewer.controller.TaskListPanel_ActionContr;
 
@@ -42,10 +45,16 @@ public class Template_TaskList extends Template_BlockPanel{
 	}
 
 	@Override
-	public void init() {
+	public void init()  {
 		TaskListPanel_ActionContr taskPanelContr = new TaskListPanel_ActionContr();
-		TaskListPanel_ActionContr_ListSelectContr taskListSelcContr = new TaskListPanel_ActionContr_ListSelectContr();
-		TaskListPanel_KeyContr taskListKeyContr = new TaskListPanel_KeyContr();
+		TaskListPanel_ActionContr_ListSelectContr taskListSelcContr;
+		TaskListPanel_KeyContr taskListKeyContr;
+		try {
+			taskListKeyContr = new TaskListPanel_KeyContr();
+			taskListSelcContr = new TaskListPanel_ActionContr_ListSelectContr();
+		} catch (ClientConfigurationExeception e) {
+			//TODO optionPane mit errMsg
+		}
 
 		// << Task-Liste >>
 		taskList = new JList<>(controller.getFilteredTasks());

@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import de.gokv.client.taskviewer.controller.LoadViewProperties;
+import de.gokv.client.taskviewer.controller.LoadProperties;
 
 /**
  * Umwandeln von HTML-Farbcodes in RGB-Farbwerte. Bei fehlerhaften Werten werden
@@ -16,7 +16,8 @@ import de.gokv.client.taskviewer.controller.LoadViewProperties;
  * <ul>
  * <li><b>{@link #isHexValid()}</b>: Prüft ein Hex-Farbwert auf syntaktische
  * Korrektheit und liefert ein boolischen Wert</li>
- * <li><b>{@link #parseHexToRGB()}</b>: Wandelt ein Hex-Farbwert in ein RGB-Farbwert um.</li>
+ * <li><b>{@link #parseHexToRGB()}</b>: Wandelt ein Hex-Farbwert in ein
+ * RGB-Farbwert um.</li>
  * <li><b>{@link #getDefaultColor()}</b>: Setzt Default-Werte.</li>
  * </ul>
  * </p>
@@ -36,7 +37,7 @@ public class HexaToRGB {
 
 	public static String errMsg;
 
-	private LoadViewProperties loadProp;
+	private LoadProperties loadProp;
 
 	private static final String HEX_PATTERN = "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$";
 
@@ -66,12 +67,12 @@ public class HexaToRGB {
 	public boolean isHexValid() {
 		propFile = "color.properties";
 		try {
-			loadProp = new LoadViewProperties(propFile, propTitle);
+			loadProp = new LoadProperties(propFile, propTitle);
 			propVal = loadProp.getPropertyStringVal();
 		} catch (Exception e) {
 			getDefaultColor();
 		}
-		
+
 		if (propVal == null) {
 			getDefaultColor();
 		}
@@ -81,8 +82,8 @@ public class HexaToRGB {
 	}
 
 	/**
-	 * Prüft zuerst ob der Wert valide ist. Wenn ja, dann wandel den
-	 * Hexfarbcode in ein RGB-Wert um und gib ihn zurück. Wenn nein, dann setze den Default
+	 * Prüft zuerst ob der Wert valide ist. Wenn ja, dann wandel den Hexfarbcode
+	 * in ein RGB-Wert um und gib ihn zurück. Wenn nein, dann setze den Default
 	 * Wert ein und gib ihn zurück.
 	 * 
 	 * @return {@link Color}
@@ -125,52 +126,47 @@ public class HexaToRGB {
 			return propVal;
 		case "color.panel.block.background":
 			errMsg = "Fehler: Der Farbwert '" + this.propVal + "' von '" + this.propTitle
-			+ "' wurde auf den Standardwert zurück gesetzt";
+					+ "' wurde auf den Standardwert zurück gesetzt";
 			propVal = "#bebebe";
 			return propVal;
 		case "color.panel.titeltext.foreground":
 			errMsg = "Fehler: Der Farbwert '" + this.propVal + "' von '" + this.propTitle
-			+ "' wurde auf den Standardwert zurück gesetzt";
+					+ "' wurde auf den Standardwert zurück gesetzt";
 			propVal = "#232d8d";
 			return propVal;
 		case "color.button.background":
 			errMsg = "Fehler: Der Farbwert '" + this.propVal + "' von '" + this.propTitle
-			+ "' wurde auf den Standardwert zurück gesetzt";
+					+ "' wurde auf den Standardwert zurück gesetzt";
 			propVal = "#A61F7D";
 			return propVal;
 		case "color.button.text":
 			errMsg = "Fehler: Der Farbwert '" + this.propVal + "' von '" + this.propTitle
-			+ "' wurde auf den Standardwert zurück gesetzt";
+					+ "' wurde auf den Standardwert zurück gesetzt";
 			propVal = "#ffffff";
 			return propVal;
 		case "color.entries.text":
 			errMsg = "Fehler: Der Farbwert '" + this.propVal + "' von '" + this.propTitle
-			+ "' wurde auf den Standardwert zurück gesetzt";
+					+ "' wurde auf den Standardwert zurück gesetzt";
 			propVal = "#6e6e6e";
 			return propVal;
 		case "color.label.date.text":
 			errMsg = "Fehler: Der Farbwert '" + this.propVal + "' von '" + this.propTitle
-			+ "' wurde auf den Standardwert zurück gesetzt";
+					+ "' wurde auf den Standardwert zurück gesetzt";
 			propVal = "#6e6e6e";
 			return propVal;
 		case "color.info.titel.text":
 			errMsg = "Fehler: Der Farbwert '" + this.propVal + "' von '" + this.propTitle
-			+ "' wurde auf den Standardwert zurück gesetzt";
+					+ "' wurde auf den Standardwert zurück gesetzt";
 			propVal = "#000000";
 			return propVal;
 		case "color.info.text":
 			errMsg = "Fehler: Der Farbwert '" + this.propVal + "' von '" + this.propTitle
-			+ "' wurde auf den Standardwert zurück gesetzt";
+					+ "' wurde auf den Standardwert zurück gesetzt";
 			propVal = "#232d8d";
-			return propVal;
-		case "color.ErrorMsg.text":
-			errMsg = "Fehler: Der Farbwert '" + this.propVal + "' von '" + this.propTitle
-			+ "' wurde auf den Standardwert zurück gesetzt";
-			propVal = "#a61f7d";
 			return propVal;
 		case "color.placeholder.text":
 			errMsg = "Fehler: Der Farbwert '" + this.propVal + "' von '" + this.propTitle
-			+ "' wurde auf den Standardwert zurück gesetzt";
+					+ "' wurde auf den Standardwert zurück gesetzt";
 			propVal = "#6e6e6e";
 			return propVal;
 		}

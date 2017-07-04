@@ -10,10 +10,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
- 
-public class DatePickerSample extends Application {
- 
-    public Stage stage;
+
+public class date extends Application{
+
+	public Stage stage;
     public DatePicker checkInDatePicker;
     public static void main(String[] args) {
         Locale.setDefault(Locale.GERMANY);

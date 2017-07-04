@@ -23,9 +23,10 @@ public class Abstract_FilterCriteria_Controller extends Abstract_MyFrame_Control
 	public void setFilteredTask(){
 		try {
 			Criteria criteria = new Criteria();
+			criteria.setKvnr(criteriaTemplate.kvnrPh.getText());
+			criteria.setKvnr(criteriaTemplate.kvnrPh.getText());
 			criteria.setnName(criteriaTemplate.namePh.getText());
 			criteria.setvName(criteriaTemplate.vnamePh.getText());
-			criteria.setKvnr(criteriaTemplate.kvnrPh.getText());
 			criteria.setTaskID(criteriaTemplate.taskIdPh.getText());
 			if (criteriaTemplate.gebDateModel.getValue() != null) {
 				criteria.setGebDate(DateUtil.parseDate(criteriaTemplate.gebDateModel.getValue()));

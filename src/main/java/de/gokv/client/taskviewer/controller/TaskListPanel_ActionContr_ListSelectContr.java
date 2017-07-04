@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import de.gokv.client.taskviewer.exceptions.ClientConfigurationExeception;
+
 /**
  * 
  * 
@@ -14,7 +16,7 @@ import javax.swing.event.ListSelectionListener;
  */
 public class TaskListPanel_ActionContr_ListSelectContr extends Abstract_TaskListPanel_Controller implements ActionListener, ListSelectionListener {
 
-	public TaskListPanel_ActionContr_ListSelectContr() {
+	public TaskListPanel_ActionContr_ListSelectContr() throws ClientConfigurationExeception {
 		super();
 	}
 

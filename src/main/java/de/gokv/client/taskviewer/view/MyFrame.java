@@ -9,7 +9,10 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+import org.apache.http.client.HttpClient;
+
 import de.gokv.client.taskviewer.controller.MyFrame_Controller;
+import de.gokv.client.taskviewer.module.http.HTTPSClient;
 import de.gokv.client.taskviewer.utils.HexaToRGB;
 
 /**
@@ -78,11 +81,12 @@ public class MyFrame extends JFrame {
 
 		// Error Message
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+		// color.properties
 		if (HexaToRGB.errMsg != null) {
 			JOptionPane.showMessageDialog(null, HexaToRGB.errMsg, "Fehler in der color.properties Datei",
 					JOptionPane.WARNING_MESSAGE);
 		}
-
+		//TODO errMsg auffangen bei laden der task
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setVisible(true);

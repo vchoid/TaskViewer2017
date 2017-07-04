@@ -9,7 +9,7 @@ import java.util.Properties;
 
 import de.gokv.client.taskviewer.exceptions.ClientException;
 
-public class LoadViewProperties{
+public class LoadProperties{
 
 	private File file;
 	private String propVal;
@@ -20,9 +20,7 @@ public class LoadViewProperties{
 	private BufferedInputStream bis;
 	
 	// Konstruktor +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-	
-	
-	public LoadViewProperties(String propFileName, String propTitle) {
+	public LoadProperties(String propFileName, String propTitle) {
 		this.propFileName = propFileName;
 		this.propTitle = propTitle;
 		try {
@@ -33,7 +31,7 @@ public class LoadViewProperties{
 		}
 	}
 	
-	public LoadViewProperties(String propFileName, String propTitle, String filePath) {
+	public LoadProperties(String propFileName, String propTitle, String filePath) {
 		this(propFileName, propTitle);
 		try {
 			file = new File(filePath+propFileName);
