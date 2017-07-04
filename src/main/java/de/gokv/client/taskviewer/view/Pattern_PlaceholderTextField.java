@@ -37,7 +37,6 @@ public class Pattern_PlaceholderTextField extends JTextField {
 	private String placeholderText;
 	private int textWidth;
 	private GridBagConstraints gbc_placeholder;
-	private Insets gbc_Insets;
 
 	public Pattern_PlaceholderTextField() {
 	}
@@ -56,18 +55,6 @@ public class Pattern_PlaceholderTextField extends JTextField {
 		gbc_placeholder.gridwidth = gridWidth;
 	}
 	
-//	public Pattern_PlaceholderTextField(String placeholderText, int textWidth, int startPosColumn, int startPosRow, int gridWidth, int x, int y, int w, int h) {
-//		this.setBorder(emptyBorder);
-//		this.addActionListener(filtTaskContr);
-//		this.addKeyListener(filtTaskKeyContr);
-//		gbc_placeholder = new GridBagConstraints();
-//		gbc_placeholder.anchor = GridBagConstraints.NORTH;
-//		gbc_placeholder.fill = GridBagConstraints.HORIZONTAL;
-//		gbc_placeholder.gridx = startPosColumn;
-//		gbc_placeholder.gridy = startPosRow;
-//		gbc_placeholder.gridwidth = gridWidth;
-//		gbc_placeholder.insets = new Insets(x, y, w, h);
-//	}
 	
 	public GridBagConstraints getGbc_placeholder() {
 		return gbc_placeholder;

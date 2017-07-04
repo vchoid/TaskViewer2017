@@ -46,7 +46,7 @@ public class Abstract_TaskListPanel_Controller extends Abstract_MyFrame_Controll
 			} catch (IOException | MissingProxyPropertyException e) {
 				//TODO saubere Exception Werfen Client-Configuration Exception
 //				e.printStackTrace();
-				throw new ClientConfigurationExeception();
+//				throw new ClientConfigurationExeception();
 			}
 		}
 			

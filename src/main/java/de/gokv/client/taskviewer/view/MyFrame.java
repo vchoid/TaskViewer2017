@@ -9,10 +9,8 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import org.apache.http.client.HttpClient;
-
 import de.gokv.client.taskviewer.controller.MyFrame_Controller;
-import de.gokv.client.taskviewer.module.http.HTTPSClient;
+import de.gokv.client.taskviewer.exceptions.ClientConfigurationExeception;
 import de.gokv.client.taskviewer.utils.HexaToRGB;
 
 /**
@@ -69,7 +67,12 @@ public class MyFrame extends JFrame {
 
 		// Initialisierung ----------------------------------
 		filterMask.init();
-		taskMask.init();
+		try {
+			taskMask.init();
+		} catch (ClientConfigurationExeception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		infoCSV.init();
 		infoTask.init();
 		

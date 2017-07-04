@@ -63,32 +63,13 @@ public class Template_FilterCriteriaPanel extends Template_BlockPanel {
 		this.add(kvnrPh, kvnrPh.getGbc_placeholder());
 
 		// << Name >>
-		namePh = new Pattern_PlaceholderTextField();
-		namePh.setPlaceholder("Name", getLayout().columnWidths[1]-5);
-		namePh.setBorder(emptyBorder);
-		namePh.addActionListener(filtTaskContr);
-		namePh.addKeyListener(filtTaskKeyContr);
-		GridBagConstraints gbc_name = new GridBagConstraints();
-		gbc_name.anchor = GridBagConstraints.NORTH;
-		gbc_name.fill = GridBagConstraints.HORIZONTAL;
-		gbc_name.insets = new Insets(0, 0, 0, 0);
-		gbc_name.gridx = 1;
-		gbc_name.gridy = 2;
-		this.add(namePh, gbc_name);
+		namePh = new Pattern_PlaceholderTextField("Name", getLayout().columnWidths[1]-5,1,2,1);
+		this.add(namePh, namePh.getGbc_placeholder());
 
 		// << Vorname >>
-		vnamePh = new Pattern_PlaceholderTextField();
-		vnamePh.setPlaceholder("Vorname", getLayout().columnWidths[2]-10);
-		vnamePh.setBorder(emptyBorder);
-		vnamePh.addActionListener(filtTaskContr);
-		vnamePh.addKeyListener(filtTaskKeyContr);
-		GridBagConstraints gbc_vName = new GridBagConstraints();
-		gbc_vName.anchor = GridBagConstraints.BASELINE_LEADING;
-		gbc_vName.fill = GridBagConstraints.HORIZONTAL;
-		gbc_vName.insets = new Insets(0, 10, 0, 0);
-		gbc_vName.gridx = 2;
-		gbc_vName.gridy = 2;
-		this.add(vnamePh, gbc_vName);
+		vnamePh = new Pattern_PlaceholderTextField("Vorname", getLayout().columnWidths[2]-10,2,2,1);
+		vnamePh.getGbc_placeholder().insets = new Insets(0, 10, 0, 0);
+		this.add(vnamePh, vnamePh.getGbc_placeholder());
 
 		// << Geburtsdatum >>
 		gebDateLabel = new JLabel("Geburtstag");
@@ -111,18 +92,8 @@ public class Template_FilterCriteriaPanel extends Template_BlockPanel {
 		this.add(gebDatePickerImpl, gbc_gebDate);
 
 		// << TaskID >>
-		taskIdPh = new Pattern_PlaceholderTextField();
-		taskIdPh.setPlaceholder("TaskID", getLayout().columnWidths[1]*2);
-		taskIdPh.setBorder(emptyBorder);
-		taskIdPh.addActionListener(filtTaskContr);
-		taskIdPh.addKeyListener(filtTaskKeyContr);
-		GridBagConstraints gbc_taskID = new GridBagConstraints();
-		gbc_taskID.anchor = GridBagConstraints.NORTH;
-		gbc_taskID.fill = GridBagConstraints.HORIZONTAL;
-		gbc_taskID.gridwidth = 2;
-		gbc_taskID.gridx = 1;
-		gbc_taskID.gridy = 4;
-		this.add(taskIdPh, gbc_taskID);
+		taskIdPh = new Pattern_PlaceholderTextField("TaskID", getLayout().columnWidths[1]*2,1,4,2);
+		this.add(taskIdPh, taskIdPh.getGbc_placeholder());
 
 		// << OrderedDate >>
 		orderDateLabel = new JLabel("Order Date");

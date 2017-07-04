@@ -10,6 +10,7 @@ import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
 import de.gokv.client.taskviewer.controller.MyFrame_Controller;
+import de.gokv.client.taskviewer.exceptions.ClientConfigurationExeception;
 import de.gokv.client.taskviewer.utils.HexaToRGB;
 
 public abstract class Template_BlockPanel extends JPanel{
@@ -47,5 +48,5 @@ public abstract class Template_BlockPanel extends JPanel{
 	
 	public abstract GridBagLayout getLayout();
 	
-	public abstract void init();
+	public abstract void init() throws ClientConfigurationExeception;
 }

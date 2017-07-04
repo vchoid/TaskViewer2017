@@ -45,13 +45,13 @@ public class Template_TaskList extends Template_BlockPanel{
 	}
 
 	@Override
-	public void init()  {
+	public void init() throws ClientConfigurationExeception  {
 		TaskListPanel_ActionContr taskPanelContr = new TaskListPanel_ActionContr();
-		TaskListPanel_ActionContr_ListSelectContr taskListSelcContr;
-		TaskListPanel_KeyContr taskListKeyContr;
+		TaskListPanel_ActionContr_ListSelectContr taskListSelcContr = new TaskListPanel_ActionContr_ListSelectContr();
+		TaskListPanel_KeyContr taskListKeyContr = new TaskListPanel_KeyContr();
 		try {
-			taskListKeyContr = new TaskListPanel_KeyContr();
 			taskListSelcContr = new TaskListPanel_ActionContr_ListSelectContr();
+			taskListKeyContr = new TaskListPanel_KeyContr();
 		} catch (ClientConfigurationExeception e) {
 			//TODO optionPane mit errMsg
 		}

@@ -1,19 +1,17 @@
 package de.gokv.client.taskviewer.view;
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.util.List;
 
 import javax.swing.JLabel;
 
 import de.gokv.client.taskviewer.utils.HexaToRGB;
 
-public class Pattern_InfoField {
-
+public class Pattern_InfoField extends JLabel{
 	
+	private static final long serialVersionUID = 1L;
 	
 	private static final Font fntTitle = new Font("Arial", Font.BOLD, 14);
 	private static final Font fntTxt = new Font("Arial", Font.PLAIN, 15);
