@@ -19,8 +19,10 @@ public class MyModel {
 	public static List<Task> tasks;
 	private List<String> filteredTasks;
 	private Criteria filteredCriteria;
+	
 	public int countValidTasks;
 	public int countInvalidTasks;
+	
 	public String kvnr;
 	public LocalDate orderDate;
 	public String name;
@@ -96,6 +98,10 @@ public class MyModel {
 		return kvnr;
 	}
 	
+	public LocalDate getOrderDate() {
+		return orderDate;
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -106,5 +112,9 @@ public class MyModel {
 	
 	public LocalDate getGebDate() {
 		return gebDate;
+	}
+	
+	public String getTaskType() {
+		return taskType;
 	}
 }

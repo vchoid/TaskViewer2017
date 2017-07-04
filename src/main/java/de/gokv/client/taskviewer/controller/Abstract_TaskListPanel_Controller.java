@@ -42,10 +42,10 @@ public class Abstract_TaskListPanel_Controller extends Abstract_MyFrame_Controll
 				Properties properties = new Properties();
 				properties.load(stream);
 				ProxyAuthentication.initialize(properties);
-				throw new MissingProxyPropertyException("", null);
+//				throw new MissingProxyPropertyException("", null);
 			} catch (IOException | MissingProxyPropertyException e) {
-				//TODO saubere Exception Werfen Client-Configuration Exception
-//				e.printStackTrace();
+				//TODO saubere Exception werfen Client-Configuration Exception --> PopUP Dialog
+				e.printStackTrace();
 //				throw new ClientConfigurationExeception();
 			}
 		}
@@ -53,11 +53,11 @@ public class Abstract_TaskListPanel_Controller extends Abstract_MyFrame_Controll
 		if (client == null){
 			try {
 				client = new HTTPSClient(new URL(valProps));
+//				throw new ServerException("server doof");
 			} catch (ServerException | GeneralSecurityException | IOException | ClientCertificateException
 					| URISyntaxException e) {
-				//TODO saubere Exception Werfen Client-Configuration Exception
-//				e.printStackTrace();
-				System.out.println("Test 2 <------------------------------------------------- 2");
+				//TODO saubere Exception werfen Client-Configuration Exception --> PopUP Dialog
+				e.printStackTrace();
 			}
 		}
 		taskMask = frame.taskMask;

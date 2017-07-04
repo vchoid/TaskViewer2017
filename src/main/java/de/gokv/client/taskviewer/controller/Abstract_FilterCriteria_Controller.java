@@ -28,11 +28,11 @@ public class Abstract_FilterCriteria_Controller extends Abstract_MyFrame_Control
 			criteria.setnName(criteriaTemplate.namePh.getText());
 			criteria.setvName(criteriaTemplate.vnamePh.getText());
 			criteria.setTaskID(criteriaTemplate.taskIdPh.getText());
-			if (criteriaTemplate.gebDateModel.getValue() != null) {
-				criteria.setGebDate(DateUtil.parseDate(criteriaTemplate.gebDateModel.getValue()));
+			if (criteriaTemplate.gebDatePickerField.dateModel.getValue() != null) {
+				criteria.setGebDate(DateUtil.parseDate(criteriaTemplate.gebDatePickerField.dateModel.getValue()));
 			}
-			if (criteriaTemplate.orderDateModel.getValue() != null) {
-				criteria.setOrderDate(DateUtil.parseDate(criteriaTemplate.orderDateModel.getValue()));
+			if (criteriaTemplate.orderDatePickerField.dateModel.getValue() != null) {
+				criteria.setOrderDate(DateUtil.parseDate(criteriaTemplate.orderDatePickerField.dateModel.getValue()));
 			}
 
 			model.setFilterCriteria(criteria);
@@ -64,8 +64,8 @@ public class Abstract_FilterCriteria_Controller extends Abstract_MyFrame_Control
 		criteriaTemplate.vnamePh.setText(null);
 		criteriaTemplate.kvnrPh.setText(null);
 		criteriaTemplate.taskIdPh.setText(null);
-		criteriaTemplate.gebDateModel.setValue(null);
-		criteriaTemplate.orderDateModel.setValue(null);
+		criteriaTemplate.gebDatePickerField.dateModel.setValue(null);
+		criteriaTemplate.orderDatePickerField.dateModel.setValue(null);
 		
 	}
 

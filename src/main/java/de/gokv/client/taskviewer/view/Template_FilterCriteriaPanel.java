@@ -26,8 +26,8 @@ public class Template_FilterCriteriaPanel extends Template_BlockPanel {
 	public Pattern_PlaceholderTextField kvnrPh;
 	public Pattern_PlaceholderTextField namePh;
 	public Pattern_PlaceholderTextField vnamePh;
-	public Pattern_DatePickerField gebDatePicker;
-	public Pattern_DatePickerField orderDatePicker;
+	public Pattern_DatePickerField gebDatePickerField;
+	public Pattern_DatePickerField orderDatePickerField;
 	public JLabel gebDateLabel;
 	public UtilDateModel gebDateModel = new UtilDateModel();
 	public JDatePanelImpl gebDatePanelImpl = new JDatePanelImpl(gebDateModel);
@@ -74,58 +74,17 @@ public class Template_FilterCriteriaPanel extends Template_BlockPanel {
 		this.add(vnamePh, vnamePh.getGbc_placeholder());
 
 		// << Geburtsdatum >>
-		//__________________________________________________________________________
-//		gebDatePicker = new Pattern_DatePickerField("Geburtstag",1 ,3);
-//		this.add(gebDatePicker.getDateLabel(), gebDatePicker.getGbc_dateLabel());
-//		this.add(gebDatePicker.getDatePickerImpl(), gebDatePicker.getGbc_date());
-		//__________________________________________________________________________
-		gebDateLabel = new JLabel("Geburtstag");
-		gebDateLabel.setForeground(colorLabelDateTxt);
-		gebDateLabel.setBorder(emptyBorder);
-		gebDateLabel.setFont(fontTxt);
-		GridBagConstraints gbc_gDateLabel = new GridBagConstraints();
-		gbc_gDateLabel.anchor = GridBagConstraints.BELOW_BASELINE_TRAILING;
-		gbc_gDateLabel.insets = new Insets(0, 0, 10, 5);
-		gbc_gDateLabel.gridx = 1;
-		gbc_gDateLabel.gridy = 3;
-		this.add(gebDateLabel, gbc_gDateLabel);
-		GridBagConstraints gbc_gebDate = new GridBagConstraints();
-		gbc_gebDate.insets = new Insets(0, 8, 10, 0);
-		gbc_gebDate.gridx = 2;
-		gbc_gebDate.gridy = 3;
-		gebDatePickerImpl.setTextEditable(true);
-		gebDatePanelImpl.setBorder(emptyBorder);
-		gebDateModel.addChangeListener(filtTaskDateContr);
-		this.add(gebDatePickerImpl, gbc_gebDate);
+		gebDatePickerField = new Pattern_DatePickerField("Geburtstag",1 ,3);
+		this.add(gebDatePickerField.getDateLabel(), gebDatePickerField.getGbc_dateLabel());
+		this.add(gebDatePickerField.getDatePickerImpl(), gebDatePickerField.getGbc_date());
 
 		// << TaskID >>
 		taskIdPh = new Pattern_PlaceholderTextField("TaskID", getLayout().columnWidths[1]*2,1,4,2);
 		this.add(taskIdPh, taskIdPh.getGbc_placeholder());
 
 		// << OrderedDate >>
-		//__________________________________________________________________________
-//		orderDatePicker = new Pattern_DatePickerField("Geburtstag",1 ,5);
-//		this.add(orderDatePicker.getDateLabel(), orderDatePicker.getGbc_dateLabel());
-//		this.add(orderDatePicker.getDatePickerImpl(), orderDatePicker.getGbc_date());
-		//__________________________________________________________________________
-		orderDateLabel = new JLabel("Order Date");
-		orderDateLabel.setForeground(colorLabelDateTxt);
-		orderDateLabel.setBorder(emptyBorder);
-		orderDateLabel.setFont(fontTxt);
-		GridBagConstraints gbc_oDateLabel = new GridBagConstraints();
-		gbc_oDateLabel.anchor = GridBagConstraints.BELOW_BASELINE_TRAILING;
-		gbc_oDateLabel.insets = new Insets(0, 0, 10, 5);
-		gbc_oDateLabel.gridx = 1;
-		gbc_oDateLabel.gridy = 5;
-		this.add(orderDateLabel, gbc_oDateLabel);
-		GridBagConstraints gbc_orderDate = new GridBagConstraints();
-		gbc_orderDate.insets = new Insets(0, 8, 10, 0);
-		gbc_orderDate.gridx = 2;
-		gbc_orderDate.gridy = 5;
-		orderDatePickerImpl.setTextEditable(true);
-		orderDatePanelImpl.setBorder(emptyBorder);
-		orderDateModel.addChangeListener(filtTaskDateContr);
-		this.add(orderDatePickerImpl, gbc_orderDate);
+		orderDatePickerField = new Pattern_DatePickerField("Order Date",1 ,5);
+		this.add(orderDatePickerField.getDateLabel(), orderDatePickerField.getGbc_dateLabel());
 
 		// << Button "Felder leeren" >>
 		clearAllBtn = new JButton("Felder zurücksetzen");
@@ -143,7 +102,7 @@ public class Template_FilterCriteriaPanel extends Template_BlockPanel {
 		gbc_clearFieldBtn.gridy = 6;
 		this.add(clearAllBtn, gbc_clearFieldBtn);
 		
-		// TODO Löschen und Listener Löschen
+		// TODO Löschen
 		// << Button "Filter anwenden" >>
 //		filterBtn = new JButton("Filter anwenden");
 //		filterBtn.setBorder(btnBorder);
@@ -167,7 +126,6 @@ public class Template_FilterCriteriaPanel extends Template_BlockPanel {
 		anzFiltEntriesTf.addKeyListener(filtTaskKeyContr);
 		anzFiltEntriesTf.setOpaque(false);
 		this.add(anzFiltEntriesTf);
-		
 		GridBagConstraints gbc_anzFiltTask = new GridBagConstraints();
 		gbc_anzFiltTask.anchor = GridBagConstraints.NORTH;
 		gbc_anzFiltTask.fill = GridBagConstraints.HORIZONTAL;
