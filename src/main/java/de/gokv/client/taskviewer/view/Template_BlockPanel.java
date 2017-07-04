@@ -28,7 +28,6 @@ public abstract class Template_BlockPanel extends JPanel{
 	protected final Font fontInfoTitle = new Font("Arial", Font.BOLD, 14);
 	protected final Font fontTxt = new Font("Arial", Font.PLAIN, 15);
 
-	
 	protected final Border emptyBorder = BorderFactory.createEmptyBorder();
 	protected final Border btnBorder = BorderFactory.createEmptyBorder(8, 5, 8, 5);
 	

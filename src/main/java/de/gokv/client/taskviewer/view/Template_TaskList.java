@@ -8,23 +8,22 @@ import java.awt.Insets;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JList;
-import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
+import de.gokv.client.taskviewer.controller.MyFrame_Controller;
+import de.gokv.client.taskviewer.controller.TaskListPanel_ActionContr;
 import de.gokv.client.taskviewer.controller.TaskListPanel_ActionContr_ListSelectContr;
 import de.gokv.client.taskviewer.controller.TaskListPanel_KeyContr;
 import de.gokv.client.taskviewer.exceptions.ClientConfigurationExeception;
-import de.gokv.client.taskviewer.utils.HexaToRGB;
-import de.gokv.client.taskviewer.controller.MyFrame_Controller;
-import de.gokv.client.taskviewer.controller.TaskListPanel_ActionContr;
 
 public class Template_TaskList extends Template_BlockPanel{
 	private static final long serialVersionUID = 1L;
 
-	public JButton taskLoadBtn;
-	public JButton reloadBtn;
+	public Pattern_Button taskLoadBtn;
+	public Pattern_Button reloadBtn;
+	
 	public JList<String> taskList;
 	public JTextField anzTasks;
 	
@@ -72,40 +71,20 @@ public class Template_TaskList extends Template_BlockPanel{
 		gbc_scrollTask.gridy = 2;
 		this.add(scrollTask, gbc_scrollTask);
 
-		// << Tasks Reload Button >>
-		reloadBtn = new JButton(" Liste neu laden  ");
+		// << Tasks laden - Button >>
+		taskLoadBtn = new Pattern_Button("Task laden", 1,3,1, taskListSelcContr);
+		taskLoadBtn.getGbc_button().insets = new Insets(20, 0, 0, 5);
+		this.add(taskLoadBtn.getButton(), taskLoadBtn.getGbc_button());
+		
+		// << Tasksliste Neu Laden - Button >>
+		reloadBtn = new Pattern_Button(" Liste neu laden  ", 2, 3, 1, taskPanelContr);
+		reloadBtn.getGbc_button().insets = new Insets(20, 10, 0, 0);
 		pathIconReload = "/reload.png";
 		iconReload = new ImageIcon(getClass().getResource(pathIconReload)).getImage();
 		iconReloadScaled = new ImageIcon(iconReload.getScaledInstance(18, 18, 0));
-		reloadBtn.setIcon(iconReloadScaled);
-		reloadBtn.setBorder(btnBorder);
-		reloadBtn.setBackground(colorBtnBG);
-		reloadBtn.setForeground(colorBtnTxt);
-		reloadBtn.setFont(fontTxt);
-		reloadBtn.addActionListener(taskPanelContr);
-		GridBagConstraints gbc_reloadTaskBtn = new GridBagConstraints();
-		gbc_reloadTaskBtn.anchor = GridBagConstraints.NORTH;
-		gbc_reloadTaskBtn.fill = GridBagConstraints.HORIZONTAL;
-		gbc_reloadTaskBtn.insets = new Insets(20, 10, 0, 0);
-		gbc_reloadTaskBtn.gridx = 2;
-		gbc_reloadTaskBtn.gridy = 3;
-		this.add(reloadBtn, gbc_reloadTaskBtn);
+		reloadBtn.getButton().setIcon(iconReloadScaled);
+		this.add(reloadBtn.getButton(), reloadBtn.getGbc_button());
 
-		// << Tasks laden -Button >>
-		taskLoadBtn = new JButton("Task laden");
-		taskLoadBtn.setBorder(btnBorder);
-		taskLoadBtn.setBackground(colorBtnBG);
-		taskLoadBtn.setForeground(colorBtnTxt);
-		taskLoadBtn.setFont(fontTxt);
-		taskLoadBtn.addActionListener(taskListSelcContr);
-		GridBagConstraints gbc_detailBtn = new GridBagConstraints();
-		gbc_detailBtn.anchor = GridBagConstraints.NORTH;
-		gbc_detailBtn.fill = GridBagConstraints.HORIZONTAL;
-		gbc_detailBtn.insets = new Insets(20, 0, 0, 5);
-		gbc_detailBtn.gridx = 1;
-		gbc_detailBtn.gridy = 3;
-		this.add(taskLoadBtn, gbc_detailBtn);
-		
 		// << Anzahl der TaskID´s in der Liste und der Fehlerhaften >>
 		anzTasks = new JTextField(TaskListPanel_ActionContr.getValidEntries() + TaskListPanel_ActionContr.getInvalidEntries());
 		anzTasks.setForeground(colorEntryTxt);

@@ -49,7 +49,7 @@ public class TaskListPanel_ActionContr extends Abstract_MyFrame_Controller imple
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == taskMask.reloadBtn) {
+		if (e.getSource() == taskMask.reloadBtn.getButton()) {
 			model.reload();
 			getAllEntries();
 			taskMask.taskList.setListData(model.getFilteredTaskID());

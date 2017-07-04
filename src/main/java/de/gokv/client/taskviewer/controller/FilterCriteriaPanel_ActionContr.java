@@ -16,15 +16,11 @@ public class FilterCriteriaPanel_ActionContr extends Abstract_FilterCriteria_Con
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Template_FilterCriteriaPanel criteria = frame.filterMask;
-		if (e.getSource() == criteria.filterBtn) {
-			setFilteredTask();
-		} else if (e.getSource() == criteria.clearAllBtn) {
+		 if (e.getSource() == criteria.clearAllBtn.getButton()) {
 			resetForm();
 			setFilteredTask();
 			frame.filterMask.anzFiltEntriesTf.setText(null);
-			
-			
-			
 		}
+		setFilteredTask();
 	}
 }

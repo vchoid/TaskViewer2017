@@ -26,7 +26,7 @@ public class TaskListPanel_ActionContr_ListSelectContr extends Abstract_TaskList
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == frame.taskMask.taskLoadBtn && taskMask.taskList.isSelectedIndex(taskMask.taskList.getSelectedIndex())) {
+		if (e.getSource() == frame.taskMask.taskLoadBtn.getButton() && taskMask.taskList.isSelectedIndex(taskMask.taskList.getSelectedIndex())) {
 			loadTaskDetails();
 		}
 	}
