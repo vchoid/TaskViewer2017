@@ -1,17 +1,20 @@
 package de.gokv.client.taskviewer.controller;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.security.GeneralSecurityException;
+import java.util.Properties;
 
 import de.gokv.client.taskviewer.module.http.HTTPSClient;
+import de.gokv.client.taskviewer.module.http.proxy.MissingProxyPropertyException;
+import de.gokv.client.taskviewer.module.http.proxy.ProxyAuthentication;
 import de.gokv.client.taskviewer.module.http.ssl.ClientCertificateException;
 import de.gokv.client.taskviewer.module.http.ssl.ServerException;
 import de.gokv.client.taskviewer.utils.DateUtil;
 import de.gokv.client.taskviewer.view.Template_InfoCSVPanel;
 import de.gokv.client.taskviewer.view.Template_InfoTaskPanel;
-import de.gokv.client.taskviewer.view.MyFrame;
 import de.gokv.client.taskviewer.view.Template_TaskList;
 
 public class Abstract_TaskListPanel_Controller extends Abstract_MyFrame_Controller {
@@ -23,13 +26,27 @@ public class Abstract_TaskListPanel_Controller extends Abstract_MyFrame_Controll
 
 	public Abstract_TaskListPanel_Controller() {
 		super();
-//		if (client == null)
+		InputStream stream = Abstract_TaskListPanel_Controller.class.getResourceAsStream("/proxyconfig.properties");
+		if(stream != null){
 			try {
-				client = new HTTPSClient(new URL("http://localhost:9080/gokv-tenant/api"));
-			} catch (ServerException | GeneralSecurityException | IOException | ClientCertificateException
-					| URISyntaxException e) {
+				Properties properties = new Properties();
+				properties.load(stream);
+				ProxyAuthentication.initialize(properties);
+			} catch (IOException | MissingProxyPropertyException e) {
+				//TODO saubere Exception Werfen Client-Configuration Exception
 				e.printStackTrace();
 			}
+		}
+			
+		if (client == null){
+			try {
+				client = new HTTPSClient(new URL("https://gokv.bitmarck.de:444/gokv-tenant/api"));
+			} catch (ServerException | GeneralSecurityException | IOException | ClientCertificateException
+					| URISyntaxException e) {
+				//TODO saubere Exception Werfen Client-Configuration Exception
+				e.printStackTrace();
+			}
+		}
 		taskMask = frame.taskMask;
 		infoCSV = frame.infoCSV;
 		infoTask = frame.infoTask;

@@ -44,7 +44,7 @@ import net.sf.json.JSONObject;
 
 public class HTTPSClient {
 
-	private static final char[] KEYSTORE_PASSWORD = null;
+	private static final char[] KEYSTORE_PASSWORD = String.valueOf(System.currentTimeMillis()).toCharArray();
 	private ClientCertificate clientCertificate;
 	private URI apiEntryPoint;
 	private URI apiAdminEntryPoint;
@@ -60,7 +60,7 @@ public class HTTPSClient {
 			KeyStoreException, GeneralSecurityException, IOException, ClientCertificateException, URISyntaxException {
 
 		clientCertificate = ClientCertificate.readCertificate();
-
+		System.out.println(clientCertificate);
 		apiEntryPoint = apiURL.toURI();
 
 		downloadPool = Executors.newFixedThreadPool(3);
@@ -85,6 +85,7 @@ public class HTTPSClient {
 		HttpClientBuilder httpClientBuilder = HttpClients.custom().setConnectionManager(connectionManager);
 
 		if (ProxyAuthentication.isProxy()) {
+			System.out.println("IS PROXY");
 			httpClientBuilder.setProxy(ProxyAuthentication.buildProxy());
 			if (ProxyAuthentication.isAuthentication()) {
 				httpClientBuilder.setDefaultCredentialsProvider(ProxyAuthentication.buildCredentials());

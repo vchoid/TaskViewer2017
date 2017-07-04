@@ -127,7 +127,7 @@ public class ClientCertificate {
 
 	public static ClientCertificate readCertificate()
 			throws ClientCertificateException {
-		String pathCert = "/clientPass.p7b";
+		String pathCert = "/clientCert.p7b";
 		String pathKey = "/clientKey.pk8";
 		return ClientCertificate.readKeyAndCertficateFromPKCS7_8(pathCert, pathKey);
 	}
