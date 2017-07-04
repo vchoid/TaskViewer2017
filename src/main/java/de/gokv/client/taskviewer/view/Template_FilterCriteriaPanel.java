@@ -107,6 +107,7 @@ public class Template_FilterCriteriaPanel extends Template_BlockPanel {
 		gebDateLabel.setFont(fontTxt);
 		GridBagConstraints gbc_gDateLabel = new GridBagConstraints();
 		gbc_gDateLabel.anchor = GridBagConstraints.BELOW_BASELINE_TRAILING;
+		gbc_gDateLabel.insets = new Insets(0, 0, 10, 5);
 		gbc_gDateLabel.gridx = 1;
 		gbc_gDateLabel.gridy = 3;
 		this.add(gebDateLabel, gbc_gDateLabel);
@@ -140,6 +141,7 @@ public class Template_FilterCriteriaPanel extends Template_BlockPanel {
 		orderDateLabel.setFont(fontTxt);
 		GridBagConstraints gbc_oDateLabel = new GridBagConstraints();
 		gbc_oDateLabel.anchor = GridBagConstraints.BELOW_BASELINE_TRAILING;
+		gbc_oDateLabel.insets = new Insets(0, 0, 10, 5);
 		gbc_oDateLabel.gridx = 1;
 		gbc_oDateLabel.gridy = 5;
 		this.add(orderDateLabel, gbc_oDateLabel);
