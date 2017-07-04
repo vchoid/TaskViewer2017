@@ -26,6 +26,8 @@ public class Template_FilterCriteriaPanel extends Template_BlockPanel {
 	public Pattern_PlaceholderTextField kvnrPh;
 	public Pattern_PlaceholderTextField namePh;
 	public Pattern_PlaceholderTextField vnamePh;
+	public Pattern_DatePickerField gebDatePicker;
+	public Pattern_DatePickerField orderDatePicker;
 	public JLabel gebDateLabel;
 	public UtilDateModel gebDateModel = new UtilDateModel();
 	public JDatePanelImpl gebDatePanelImpl = new JDatePanelImpl(gebDateModel);
@@ -72,6 +74,11 @@ public class Template_FilterCriteriaPanel extends Template_BlockPanel {
 		this.add(vnamePh, vnamePh.getGbc_placeholder());
 
 		// << Geburtsdatum >>
+		//__________________________________________________________________________
+//		gebDatePicker = new Pattern_DatePickerField("Geburtstag",1 ,3);
+//		this.add(gebDatePicker.getDateLabel(), gebDatePicker.getGbc_dateLabel());
+//		this.add(gebDatePicker.getDatePickerImpl(), gebDatePicker.getGbc_date());
+		//__________________________________________________________________________
 		gebDateLabel = new JLabel("Geburtstag");
 		gebDateLabel.setForeground(colorLabelDateTxt);
 		gebDateLabel.setBorder(emptyBorder);
@@ -96,6 +103,11 @@ public class Template_FilterCriteriaPanel extends Template_BlockPanel {
 		this.add(taskIdPh, taskIdPh.getGbc_placeholder());
 
 		// << OrderedDate >>
+		//__________________________________________________________________________
+//		orderDatePicker = new Pattern_DatePickerField("Geburtstag",1 ,5);
+//		this.add(orderDatePicker.getDateLabel(), orderDatePicker.getGbc_dateLabel());
+//		this.add(orderDatePicker.getDatePickerImpl(), orderDatePicker.getGbc_date());
+		//__________________________________________________________________________
 		orderDateLabel = new JLabel("Order Date");
 		orderDateLabel.setForeground(colorLabelDateTxt);
 		orderDateLabel.setBorder(emptyBorder);
