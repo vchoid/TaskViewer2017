@@ -68,11 +68,11 @@ public class Abstract_TaskListPanel_Controller extends Abstract_MyFrame_Controll
 		infoTask.state.setlField(HTTPSClient.task.get("state").toString());
 		infoTask.taskType.setlField(HTTPSClient.task.get("type").toString());
 		
-		infoTask.orderDate.setlField(DateUtil.dateFromHttpsClientToString("orderedDate"));
-		infoTask.evInProgs.setlField(DateUtil.dateFromHttpsClientToString("eventInProgress"));
-		infoTask.evCompl.setlField(DateUtil.dateFromHttpsClientToString("eventCompleted"));
-		infoTask.evReceived.setlField(DateUtil.dateFromHttpsClientToString("eventReceived"));
-		infoTask.evResult.setlField(DateUtil.dateFromHttpsClientToString("eventResult"));
+		infoTask.orderDate.setlField(DateUtil.dateWithTimeFromHttpsClientToString("orderedDate"));
+		infoTask.evInProgs.setlField(DateUtil.dateWithTimeFromHttpsClientToString("eventInProgress"));
+		infoTask.evCompl.setlField(DateUtil.dateWithTimeFromHttpsClientToString("eventCompleted"));
+		infoTask.evReceived.setlField(DateUtil.dateWithTimeFromHttpsClientToString("eventReceived"));
+		infoTask.evResult.setlField(DateUtil.dateWithTimeFromHttpsClientToString("eventResult"));
 		
 //		infoTask.evInProgs.setlField(HTTPSClient.task.get("eventInProgress").toString());
 //		infoTask.evCompl.setlField(HTTPSClient.task.get("eventCompleted").toString());

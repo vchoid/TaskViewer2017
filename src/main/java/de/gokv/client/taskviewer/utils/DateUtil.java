@@ -96,6 +96,14 @@ public class DateUtil {
 		String httpClient = HTTPSClient.task.get(httpClientTitle).toString();
 		if(!(httpClient.equals("empty"))){
 			LocalDateTime lDate = LocalDateTime.parse(httpClient, DateUtil.dTf_request);
+			httpClient = lDate.getDayOfMonth() + "." + lDate.getMonthValue() + "." + lDate.getYear();
+		}
+		return httpClient;
+	}
+	public static String dateWithTimeFromHttpsClientToString(String httpClientTitle){
+		String httpClient = HTTPSClient.task.get(httpClientTitle).toString();
+		if(!(httpClient.equals("empty"))){
+			LocalDateTime lDate = LocalDateTime.parse(httpClient, DateUtil.dTf_request);
 			httpClient = lDate.getDayOfMonth() + "." + lDate.getMonthValue() + "." + lDate.getYear() + " (Uhrzeit: " + lDate.getHour() + ":" + lDate.getMinute() + ":" + lDate.getSecond() + ")";
 		}
 		return httpClient;
