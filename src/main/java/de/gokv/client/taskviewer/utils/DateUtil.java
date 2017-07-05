@@ -89,8 +89,14 @@ public class DateUtil {
 	 * @param strDate
 	 * @return
 	 */
+	public static String dateFromHttpsClientToString(String httpClientTitle){
+		String httpClient = HTTPSClient.task.get(httpClientTitle).toString();
+		LocalDate lDate = LocalDate.parse(httpClient, DateUtil.dTf_request);
+		httpClient = lDate.getDayOfMonth() + "." + lDate.getMonthValue() + "." + lDate.getYear();
+		return httpClient;
+	}
 	public static String datetoString(String strDate){
-		LocalDate lDate = LocalDate.parse(HTTPSClient.task.get("orderedDate").toString(), DateUtil.dTf_request);
+		LocalDate lDate = LocalDate.parse(strDate, DateUtil.dTf_request);
 		strDate = lDate.getDayOfMonth() + "." + lDate.getMonthValue() + "." + lDate.getYear();
 		return strDate;
 	}
