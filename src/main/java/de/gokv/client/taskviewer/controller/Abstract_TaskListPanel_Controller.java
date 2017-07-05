@@ -32,7 +32,7 @@ public class Abstract_TaskListPanel_Controller extends Abstract_MyFrame_Controll
 	protected final String valProps;
 	public String errMsg;
 
-	public Abstract_TaskListPanel_Controller() {
+	public Abstract_TaskListPanel_Controller() throws ClientConfigurationExeception {
 		super();
 		loadProps = new LoadProperties(FILE_PROPS, TITLE_OF_VAL_PROPS);
 		valProps = loadProps.getPropertyStringVal();
@@ -42,10 +42,9 @@ public class Abstract_TaskListPanel_Controller extends Abstract_MyFrame_Controll
 				Properties properties = new Properties();
 				properties.load(stream);
 				ProxyAuthentication.initialize(properties);
-//				throw new MissingProxyPropertyException("", null);
+//				throw new MissingProxyPropertyException("MissingProxyPropertyException", null);
 			} catch (IOException | MissingProxyPropertyException e) {
-				//TODO saubere Exception werfen Client-Configuration Exception --> PopUP Dialog
-//				throw new ClientConfigurationExeception(e, "Fehler in der Proxy-Datei");
+				throw new ClientConfigurationExeception(e, "Fehler in der Proxy-Datei");
 			}
 		}
 			
@@ -55,8 +54,7 @@ public class Abstract_TaskListPanel_Controller extends Abstract_MyFrame_Controll
 //				throw new ServerException("server doof");
 			} catch (ServerException | GeneralSecurityException | IOException | ClientCertificateException
 					| URISyntaxException e) {
-				//TODO saubere Exception werfen Client-Configuration Exception --> PopUP Dialog
-//				throw new ClientConfigurationExeception(e, "Verbindungsfehler zum Server");
+				throw new ClientConfigurationExeception(e, "Verbindungsfehler zum Server");
 			}
 		}
 		taskMask = frame.taskMask;

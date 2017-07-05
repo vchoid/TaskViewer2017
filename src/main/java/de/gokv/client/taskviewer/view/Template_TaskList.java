@@ -12,6 +12,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
+import org.oxbow.swingbits.dialog.task.TaskDialogs;
+
 import de.gokv.client.taskviewer.controller.MyFrame_Controller;
 import de.gokv.client.taskviewer.controller.TaskListPanel_ActionContr;
 import de.gokv.client.taskviewer.controller.TaskListPanel_ActionContr_ListSelectContr;
@@ -31,6 +33,8 @@ public class Template_TaskList extends Template_BlockPanel{
 	private String pathIconReload;
 	private ImageIcon iconReloadScaled;
 	
+	private Throwable throwEx;
+	
 	protected Template_TaskList(MyFrame_Controller controller) {
 		super("Tasks", controller);
 	}
@@ -46,8 +50,14 @@ public class Template_TaskList extends Template_BlockPanel{
 	@Override
 	public void init() {
 		TaskListPanel_ActionContr taskPanelContr = new TaskListPanel_ActionContr();
-		TaskListPanel_ActionContr_ListSelectContr taskListSelcContr = new TaskListPanel_ActionContr_ListSelectContr();
-		TaskListPanel_KeyContr taskListKeyContr = new TaskListPanel_KeyContr();
+		TaskListPanel_ActionContr_ListSelectContr taskListSelcContr = null;
+		TaskListPanel_KeyContr taskListKeyContr = null;
+		try {
+			taskListSelcContr = new TaskListPanel_ActionContr_ListSelectContr();
+			taskListKeyContr = new TaskListPanel_KeyContr();
+		} catch (ClientConfigurationExeception e) {
+			throwEx = e;
+		}
 
 		// << Task-Liste >>
 		taskList = new JList<>(controller.getFilteredTasks());
@@ -94,6 +104,10 @@ public class Template_TaskList extends Template_BlockPanel{
 		gbc_anzTask.gridx = 2;
 		gbc_anzTask.gridy = 4;
 		this.add(anzTasks, gbc_anzTask);
+		
+		if(throwEx != null){
+			TaskDialogs.showException(throwEx);
+		}
 	}
 
 }
