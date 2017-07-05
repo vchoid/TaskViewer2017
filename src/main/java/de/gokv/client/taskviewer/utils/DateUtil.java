@@ -2,6 +2,7 @@ package de.gokv.client.taskviewer.utils;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
@@ -85,16 +86,25 @@ public class DateUtil {
 		return lDate.getDayOfMonth() + "." + lDate.getMonthValue() + "." + lDate.getYear();
 	}
 	/**
-	 * Konvertiert ein Datum(String) zu einem String im Format "mm.dd.yyyy".
+	 * Holt ein Datum über den HTTPSClient im Format String und speichert es in einer Variable.
+	 * Wandelt das Datum in eine LocalDate-Format um.
+	 * Überschreibt die String Variable im Format "mm.dd.yyyy" und gibt sie zurück.
 	 * @param strDate
 	 * @return
 	 */
 	public static String dateFromHttpsClientToString(String httpClientTitle){
 		String httpClient = HTTPSClient.task.get(httpClientTitle).toString();
-		LocalDate lDate = LocalDate.parse(httpClient, DateUtil.dTf_request);
-		httpClient = lDate.getDayOfMonth() + "." + lDate.getMonthValue() + "." + lDate.getYear();
+		if(!(httpClient.equals("empty"))){
+			LocalDateTime lDate = LocalDateTime.parse(httpClient, DateUtil.dTf_request);
+			httpClient = lDate.getDayOfMonth() + "." + lDate.getMonthValue() + "." + lDate.getYear() + " (Uhrzeit: " + lDate.getHour() + ":" + lDate.getMinute() + ":" + lDate.getSecond() + ")";
+		}
 		return httpClient;
 	}
+	/**
+	 * Konvertiert ein Datum(String) zu einem String im Format "mm.dd.yyyy".
+	 * @param strDate
+	 * @return
+	 */
 	public static String datetoString(String strDate){
 		LocalDate lDate = LocalDate.parse(strDate, DateUtil.dTf_request);
 		strDate = lDate.getDayOfMonth() + "." + lDate.getMonthValue() + "." + lDate.getYear();
