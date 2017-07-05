@@ -14,7 +14,7 @@ import javax.swing.ListSelectionModel;
 
 import org.oxbow.swingbits.dialog.task.TaskDialogs;
 
-import de.gokv.client.taskviewer.controller.MyFrame_Controller;
+import de.gokv.client.taskviewer.controller.FrameTaskViewer_Controller;
 import de.gokv.client.taskviewer.controller.TaskListPanel_ActionContr;
 import de.gokv.client.taskviewer.controller.TaskListPanel_ActionContr_ListSelectContr;
 import de.gokv.client.taskviewer.controller.TaskListPanel_KeyContr;
@@ -35,7 +35,7 @@ public class Template_TaskList extends Template_BlockPanel{
 	
 	private Throwable throwEx;
 	
-	protected Template_TaskList(MyFrame_Controller controller) {
+	protected Template_TaskList(FrameTaskViewer_Controller controller) {
 		super("Tasks", controller);
 	}
 

@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
-import de.gokv.client.taskviewer.controller.MyFrame_Controller;
+import de.gokv.client.taskviewer.controller.FrameTaskViewer_Controller;
 import de.gokv.client.taskviewer.exceptions.ClientConfigurationExeception;
 import de.gokv.client.taskviewer.utils.HexaToRGB;
 
@@ -31,9 +31,9 @@ public abstract class Template_BlockPanel extends JPanel{
 	protected final Border emptyBorder = BorderFactory.createEmptyBorder();
 	protected final Border btnBorder = BorderFactory.createEmptyBorder(8, 5, 8, 5);
 	
-	protected final MyFrame_Controller controller;
+	protected final FrameTaskViewer_Controller controller;
 	
-	protected Template_BlockPanel(String title, MyFrame_Controller controller){
+	protected Template_BlockPanel(String title, FrameTaskViewer_Controller controller){
 		TitledBorder titleBorder = BorderFactory.createTitledBorder(title);
 		titleBorder.setTitleJustification(TitledBorder.TOP);
 		titleBorder.setTitleColor(colorTitle);

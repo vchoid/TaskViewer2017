@@ -85,4 +85,14 @@ public class Abstract_TaskListPanel_Controller extends Abstract_MyFrame_Controll
 		infoCSV.gebDate.setlField(DateUtil.localDateToString(model.gebDate));
 		infoCSV.taskID.setlField(taskID);
 	}
+	
+	public void clearTaskInfoPanel() {
+		infoTask.state.setlField(null);
+		infoTask.taskType.setlField(null);
+		infoTask.orderDate.setlField(null);
+		infoTask.evInProgs.setlField(null);
+		infoTask.evCompl.setlField(null);
+		infoTask.evReceived.setlField(null);
+		infoTask.evResult.setlField(null);
+	}
 }

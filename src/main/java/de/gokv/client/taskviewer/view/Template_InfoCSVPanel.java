@@ -6,7 +6,7 @@ import java.awt.Insets;
 
 import javax.swing.JLabel;
 
-import de.gokv.client.taskviewer.controller.MyFrame_Controller;
+import de.gokv.client.taskviewer.controller.FrameTaskViewer_Controller;
 
 public class Template_InfoCSVPanel extends Template_BlockPanel {
 
@@ -22,7 +22,7 @@ public class Template_InfoCSVPanel extends Template_BlockPanel {
 	public Pattern_InfoField gebDate;
 	public Pattern_InfoField taskID;
 
-	protected Template_InfoCSVPanel(MyFrame_Controller controller) {
+	protected Template_InfoCSVPanel(FrameTaskViewer_Controller controller) {
 		super("Informationen (CSV)", controller);
 	}
 

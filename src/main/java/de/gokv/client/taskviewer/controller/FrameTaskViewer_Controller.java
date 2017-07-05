@@ -1,19 +1,19 @@
 package de.gokv.client.taskviewer.controller;
 
 import de.gokv.client.taskviewer.model.MyModel;
-import de.gokv.client.taskviewer.view.MyFrame;
+import de.gokv.client.taskviewer.view.Frame_TaskViewer;
 /**
  * 
  * @author Christoph Kiank
  *
  */
-public class MyFrame_Controller extends Abstract_MyFrame_Controller{
+public class FrameTaskViewer_Controller extends Abstract_MyFrame_Controller{
 
 	/**
 	 * Konstruktor legt ein neues Model-Objekt an und dieses startet das lesen der CSV-Datei.
 	 * @param frame
 	 */
-	public MyFrame_Controller(MyFrame frame) {
+	public FrameTaskViewer_Controller(Frame_TaskViewer frame) {
 		super(new MyModel(), frame);
 		model.readFiles();
 	}

@@ -33,6 +33,7 @@ public class TaskListPanel_ActionContr_ListSelectContr extends Abstract_TaskList
 
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
+		clearTaskInfoPanel();
 		if (e.getValueIsAdjusting()) {
 			selectTaskItem();
 		}

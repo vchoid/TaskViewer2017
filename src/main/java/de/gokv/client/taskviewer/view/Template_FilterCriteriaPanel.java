@@ -9,7 +9,7 @@ import javax.swing.JTextField;
 
 import de.gokv.client.taskviewer.controller.FilterCriteriaPanel_ActionContr;
 import de.gokv.client.taskviewer.controller.FilterCriteriaPanel_KeyContr;
-import de.gokv.client.taskviewer.controller.MyFrame_Controller;
+import de.gokv.client.taskviewer.controller.FrameTaskViewer_Controller;
 
 public class Template_FilterCriteriaPanel extends Template_BlockPanel {
 	private static final long serialVersionUID = 1L;
@@ -28,7 +28,7 @@ public class Template_FilterCriteriaPanel extends Template_BlockPanel {
 	public JTextField anzFiltEntriesTf;
 	public String valFiltMsg = "";
 	
-	public Template_FilterCriteriaPanel(MyFrame_Controller controller) {
+	public Template_FilterCriteriaPanel(FrameTaskViewer_Controller controller) {
 		super("Filter Maske", controller);
 	}
 
