@@ -20,6 +20,7 @@ public class FilterCriteriaPanel_KeyContr extends Abstract_FilterCriteria_Contro
 	public void keyPressed(KeyEvent e) {
 		clearCSVInfoPanel();
 		clearTaskInfoPanel();
+		// Counter löschen
 		
 	}
 

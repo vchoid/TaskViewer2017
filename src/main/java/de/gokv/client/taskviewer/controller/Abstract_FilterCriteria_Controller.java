@@ -56,8 +56,7 @@ public class Abstract_FilterCriteria_Controller extends Abstract_MyFrame_Control
 		 clearCSVInfoPanel();
 		// Task Info-Panel
 		 clearTaskInfoPanel();
-		// Counter löschen
-		criteriaTemplate.anzFiltEntriesTf.setText(null);
+		
 	}
 
 	public void clearCriterias() {
@@ -69,8 +68,7 @@ public class Abstract_FilterCriteria_Controller extends Abstract_MyFrame_Control
 		criteriaTemplate.gebDatePickerField.dateModel.setValue(null);
 		criteriaTemplate.orderDatePickerField.dateModel.setValue(null);
 		
-		// Counter löschen
-		criteriaTemplate.anzFiltEntriesTf.setText(null);
+		
 	}
 
 	public void clearCSVInfoPanel() {
