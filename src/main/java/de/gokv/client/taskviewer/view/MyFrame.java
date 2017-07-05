@@ -47,9 +47,10 @@ public class MyFrame extends JFrame {
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		// Fenstergröße------------------
 		setSize(new Dimension(918, 728));
-		// Farben ----------------------------------------------------------------------
+		// Farben
+		// ----------------------------------------------------------------------
 		colorPanContBG = new HexaToRGB("color.panel.content.background").parseHexToRGB();
-		
+
 		// Content-Panel
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		contPanel = new JPanel();
@@ -67,15 +68,10 @@ public class MyFrame extends JFrame {
 
 		// Initialisierung ----------------------------------
 		filterMask.init();
-		try {
-			taskMask.init();
-		} catch (ClientConfigurationExeception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		taskMask.init();
 		infoCSV.init();
 		infoTask.init();
-		
+
 		// Ergänzen auf Panel -------------------------------
 		contPanel.add(filterMask);
 		contPanel.add(taskMask);
@@ -89,7 +85,7 @@ public class MyFrame extends JFrame {
 			JOptionPane.showMessageDialog(null, HexaToRGB.errMsg, "Fehler in der color.properties Datei",
 					JOptionPane.WARNING_MESSAGE);
 		}
-		//TODO errMsg auffangen bei laden der task
+		// TODO errMsg auffangen bei laden der task
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setVisible(true);

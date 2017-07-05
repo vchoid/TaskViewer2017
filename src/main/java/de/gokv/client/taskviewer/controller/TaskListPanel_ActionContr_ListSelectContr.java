@@ -16,7 +16,7 @@ import de.gokv.client.taskviewer.exceptions.ClientConfigurationExeception;
  */
 public class TaskListPanel_ActionContr_ListSelectContr extends Abstract_TaskListPanel_Controller implements ActionListener, ListSelectionListener {
 
-	public TaskListPanel_ActionContr_ListSelectContr() throws ClientConfigurationExeception {
+	public TaskListPanel_ActionContr_ListSelectContr() {
 		super();
 	}
 

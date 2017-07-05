@@ -13,6 +13,7 @@ import javax.swing.border.Border;
 
 import de.gokv.client.taskviewer.controller.FilterCriteriaPanel_ActionContr;
 import de.gokv.client.taskviewer.controller.FilterCriteriaPanel_KeyContr;
+import de.gokv.client.taskviewer.controller.FilterCriteriaPanel_MouseContr;
 import de.gokv.client.taskviewer.utils.HexaToRGB;
 
 /**
@@ -31,6 +32,8 @@ public class Pattern_PlaceholderTextField extends JTextField {
 	
 	private static FilterCriteriaPanel_ActionContr filtTaskContr = new FilterCriteriaPanel_ActionContr();
 	private static FilterCriteriaPanel_KeyContr filtTaskKeyContr = new FilterCriteriaPanel_KeyContr();
+	private static FilterCriteriaPanel_MouseContr filtTaskMouseContr = new FilterCriteriaPanel_MouseContr();
+	
 	
 	private Graphics2D g;
 	private String placeholderText;
@@ -46,6 +49,7 @@ public class Pattern_PlaceholderTextField extends JTextField {
 		this.setBorder(emptyBorder);
 		this.addActionListener(filtTaskContr);
 		this.addKeyListener(filtTaskKeyContr);
+		this.addMouseListener(filtTaskMouseContr);
 		gbc_placeholder = new GridBagConstraints();
 		gbc_placeholder.anchor = GridBagConstraints.NORTH;
 		gbc_placeholder.fill = GridBagConstraints.HORIZONTAL;
