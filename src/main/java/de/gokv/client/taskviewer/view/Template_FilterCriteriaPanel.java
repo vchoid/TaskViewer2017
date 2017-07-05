@@ -24,7 +24,7 @@ public class Template_FilterCriteriaPanel extends Template_BlockPanel {
 	public Pattern_DatePickerField orderDatePickerField;
 	
 	public Pattern_Button clearAllBtn;
-//	public JButton filterBtn;
+	public Pattern_Button filterBtn;
 	public JTextField anzFiltEntriesTf;
 	public String valFiltMsg = "";
 	
@@ -79,19 +79,9 @@ public class Template_FilterCriteriaPanel extends Template_BlockPanel {
 		
 		// TODO Löschen
 		// << Button "Filter anwenden" >>
-//		filterBtn = new JButton("Filter anwenden");
-//		filterBtn.setBorder(btnBorder);
-//		filterBtn.setBackground(colorBtnBG);
-//		filterBtn.setForeground(colorBtnTxt);
-//		filterBtn.setFont(fontTxt);
-//		filterBtn.addActionListener(filtCPActContr);
-//		GridBagConstraints gbc_filterBtn = new GridBagConstraints();
-//		gbc_filterBtn.anchor = GridBagConstraints.NORTH;
-//		gbc_filterBtn.fill = GridBagConstraints.HORIZONTAL;
-//		gbc_filterBtn.insets = new Insets(20, 10, 0, 0);
-//		gbc_filterBtn.gridx = 2;
-//		gbc_filterBtn.gridy = 6;
-//		this.add(filterBtn, gbc_filterBtn);
+//		filterBtn = new Pattern_Button("Filter anwenden", 2, 6, 1, filtCPActContr);
+//		filterBtn.getGbc_button().insets = new Insets(20, 10, 0, 0);
+//		this.add(filterBtn.getButton(), filterBtn.getGbc_button());
 
 		// Anzahl der gefilterten Tasks
 		anzFiltEntriesTf = new JTextField();

@@ -18,7 +18,6 @@ import net.sourceforge.jdatepicker.impl.UtilDateModel;
 public class Pattern_DatePickerField {
 
 	public JLabel dateLabel;
-	private String labelTitle;
 	private GridBagConstraints gbc_dateLabel;
 	private GridBagConstraints gbc_date;
 	public UtilDateModel dateModel = new UtilDateModel();

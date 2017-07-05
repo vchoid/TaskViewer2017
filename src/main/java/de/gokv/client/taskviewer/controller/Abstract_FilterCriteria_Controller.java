@@ -56,9 +56,11 @@ public class Abstract_FilterCriteria_Controller extends Abstract_MyFrame_Control
 		 clearCSVInfoPanel();
 		// Task Info-Panel
 		 clearTaskInfoPanel();
+		// Counter löschen
+		criteriaTemplate.anzFiltEntriesTf.setText(null);
 	}
 
-	private void clearCriterias() {
+	public void clearCriterias() {
 		
 		criteriaTemplate.namePh.setText(null);
 		criteriaTemplate.vnamePh.setText(null);
@@ -67,9 +69,11 @@ public class Abstract_FilterCriteria_Controller extends Abstract_MyFrame_Control
 		criteriaTemplate.gebDatePickerField.dateModel.setValue(null);
 		criteriaTemplate.orderDatePickerField.dateModel.setValue(null);
 		
+		// Counter löschen
+		criteriaTemplate.anzFiltEntriesTf.setText(null);
 	}
 
-	private void clearCSVInfoPanel() {
+	public void clearCSVInfoPanel() {
 		infoCSVTemplate.taskID.setlField(null);
 		infoCSVTemplate.orderDate.setlField(null);
 		infoCSVTemplate.kvnr.setlField(null);
@@ -79,7 +83,7 @@ public class Abstract_FilterCriteria_Controller extends Abstract_MyFrame_Control
 		infoCSVTemplate.gebDate.setlField(null);
 	}
 
-	private void clearTaskInfoPanel() {
+	public void clearTaskInfoPanel() {
 		infoTaskTemplate.state.setlField(null);
 		infoTaskTemplate.taskType.setlField(null);
 		infoTaskTemplate.orderDate.setlField(null);

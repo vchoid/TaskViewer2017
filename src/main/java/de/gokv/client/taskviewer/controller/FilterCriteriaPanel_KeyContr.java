@@ -18,6 +18,8 @@ public class FilterCriteriaPanel_KeyContr extends Abstract_FilterCriteria_Contro
 	}
 	@Override
 	public void keyPressed(KeyEvent e) {
+		clearCSVInfoPanel();
+		clearTaskInfoPanel();
 		
 	}
 
@@ -30,6 +32,7 @@ public class FilterCriteriaPanel_KeyContr extends Abstract_FilterCriteria_Contro
 			resetForm();
 		}
 		setFilteredTask();
+		
 	}
 
 	@Override
