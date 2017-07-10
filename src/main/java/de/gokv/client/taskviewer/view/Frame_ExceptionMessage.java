@@ -1,12 +1,10 @@
 package de.gokv.client.taskviewer.view;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
-import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -14,11 +12,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.UIManager;
-import javax.swing.border.Border;
 
 import org.oxbow.swingbits.util.Strings;
-
-import de.gokv.client.taskviewer.utils.HexaToRGB;
 
 public class Frame_ExceptionMessage extends JFrame {
 
@@ -52,13 +47,9 @@ public class Frame_ExceptionMessage extends JFrame {
 	public JScrollPane getStackTraceAsScrollPane(Throwable e) {
 		JTextArea text = new JTextArea();
 		text.setEditable(false);
-		text.setFont(UIManager.getFont("Label.font"));
 		text.setText(Strings.stackStraceAsString(e));
-		text.setCaretPosition(0);
-
 		JScrollPane scroller = new JScrollPane(text);
 		scroller.setPreferredSize(new Dimension(600, 200));
-
 		return scroller;
 	}
 
