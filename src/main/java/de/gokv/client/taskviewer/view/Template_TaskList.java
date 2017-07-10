@@ -12,6 +12,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
+import org.oxbow.swingbits.dialog.task.TaskDialog;
 import org.oxbow.swingbits.dialog.task.TaskDialogs;
 
 import de.gokv.client.taskviewer.controller.FrameTaskViewer_Controller;
@@ -106,7 +107,10 @@ public class Template_TaskList extends Template_BlockPanel{
 		this.add(anzTasks, gbc_anzTask);
 		
 		if(throwEx != null){
-			TaskDialogs.showException(throwEx);
+			new Frame_ExceptionMessage(throwEx);
+			
+			
+//			TaskDialogs.showException(throwEx);
 		}
 	}
 

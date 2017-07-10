@@ -60,15 +60,12 @@ public class Abstract_FilterCriteria_Controller extends Abstract_MyFrame_Control
 	}
 
 	public void clearCriterias() {
-		
 		criteriaTemplate.namePh.setText(null);
 		criteriaTemplate.vnamePh.setText(null);
 		criteriaTemplate.kvnrPh.setText(null);
 		criteriaTemplate.taskIdPh.setText(null);
 		criteriaTemplate.gebDatePickerField.dateModel.setValue(null);
 		criteriaTemplate.orderDatePickerField.dateModel.setValue(null);
-		
-		
 	}
 
 	public void clearCSVInfoPanel() {

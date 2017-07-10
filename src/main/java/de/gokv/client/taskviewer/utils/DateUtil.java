@@ -181,7 +181,15 @@ public class DateUtil {
 		}
 		return httpClient;
 	}
-
+	/**
+	 * Holt ein Datum über den HTTPSClient im Format String und speichert es in
+	 * einer Variable. Wandelt das Datum in eine LocalDateTime-Format um.
+	 * Überschreibt die String Variable im Format "mm.dd.yyyy hh:mm:ss" und gibt sie
+	 * zurück.
+	 * 
+	 * @param httpClientTitle
+	 * @return
+	 */
 	public static String dateWithTimeFromHttpsClientToString(String httpClientTitle) {
 		String httpClient = HTTPSClient.task.get(httpClientTitle).toString();
 		if (!(httpClient.equals("empty"))) {

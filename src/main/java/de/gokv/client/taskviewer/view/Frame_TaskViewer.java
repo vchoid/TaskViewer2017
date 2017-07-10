@@ -42,7 +42,7 @@ public class Frame_TaskViewer extends JFrame {
 		pathAppIcon = "/taskViewer.png";
 		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(pathAppIcon)));
 		setTitle("bitGo_KV-TaskViewer");
-		setAlwaysOnTop(true);
+//		setAlwaysOnTop(true);
 		// Properties
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		// Fenstergröße------------------
@@ -78,6 +78,7 @@ public class Frame_TaskViewer extends JFrame {
 		contPanel.add(infoCSV);
 		contPanel.add(infoTask);
 
+		// TODO Error Message in Extra Frame anzeigen!
 		// Error Message
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		// color.properties
@@ -85,7 +86,6 @@ public class Frame_TaskViewer extends JFrame {
 			JOptionPane.showMessageDialog(null, HexaToRGB.errMsg, "Fehler in der color.properties Datei",
 					JOptionPane.WARNING_MESSAGE);
 		}
-		// TODO errMsg auffangen bei laden der task
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setVisible(true);
