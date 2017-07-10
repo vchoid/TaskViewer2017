@@ -42,7 +42,7 @@ public class Abstract_TaskListPanel_Controller extends Abstract_MyFrame_Controll
 				Properties properties = new Properties();
 				properties.load(stream);
 				ProxyAuthentication.initialize(properties);
-//				throw new MissingProxyPropertyException("MissingProxyPropertyException", null);
+				throw new MissingProxyPropertyException("MissingProxyPropertyException", null);
 			} catch (IOException | MissingProxyPropertyException e) {
 				throw new ClientConfigurationExeception(e, "Fehler in der Proxy-Datei");
 			}
@@ -74,10 +74,13 @@ public class Abstract_TaskListPanel_Controller extends Abstract_MyFrame_Controll
 		infoTask.evReceived.setlField(DateUtil.dateWithTimeFromHttpsClientToString("eventReceived"));
 		infoTask.evResult.setlField(DateUtil.dateWithTimeFromHttpsClientToString("eventResult"));
 		
+		//TODO evtl löschen.
+		// unkonvertierter String in Bezug auf der Ausgabe -----------------------------
 //		infoTask.evInProgs.setlField(HTTPSClient.task.get("eventInProgress").toString());
 //		infoTask.evCompl.setlField(HTTPSClient.task.get("eventCompleted").toString());
 //		infoTask.evReceived.setlField(HTTPSClient.task.get("eventReceived").toString());
 //		infoTask.evResult.setlField(HTTPSClient.task.get("eventResult").toString());
+		// -----------------------------------------------------------------------------
 	}
 
 	protected void selectTaskItem() {

@@ -17,7 +17,6 @@ import de.gokv.client.taskviewer.module.http.HTTPSClient;
  * Beinhaltet eine Methode zum Überprüfen des richtigen Formates (DD.MM.YYYY)
  * und zwei Methoden zum umwandeln von einem String in eine {@link LocalDate}-
  * Format.
- * 
  * <p>
  * <b>Methoden:</b>
  * <ul>
@@ -28,11 +27,16 @@ import de.gokv.client.taskviewer.module.http.HTTPSClient;
  * <li><b>{@link #parseDate(String, String)}</b>: wandelt einen {@link String}
  * in ein {@link LocalDate} um und gibt den Spaltennamen in der Fehlermeldung
  * zurück</li>
+ * TODO JAVADOC fertig schreiben.
+ * <li><b>{@link #datetoString(String)}</b>: ...</li>
+ * <li><b>{@link #localDateToString(LocalDate)}</b>: ...</li>
+ * <li><b>{@link #dateFromHttpsClientToString(String)}</b>: ...</li>
+ * <li><b>{@link #dateWithTimeFromHttpsClientToString(String)}</b>: ...</li>
  * </ul>
  * </p>
  * 
  * @author Christoph Kiank
- * @version 1.0.0
+ * @version 1.0.1
  * @see java.time.LocalDate
  *
  */
@@ -76,47 +80,6 @@ public class DateUtil {
 		} catch (DateTimeParseException e) {
 			return false;
 		}
-	}
-	/**
-	 * Konvertiert ein Datum(LocalDate) zu einem String im Format "mm.dd.yyyy".
-	 * @param lDate
-	 * @return
-	 */
-	public static String localDateToString(LocalDate lDate){
-		return lDate.getDayOfMonth() + "." + lDate.getMonthValue() + "." + lDate.getYear();
-	}
-	/**
-	 * Holt ein Datum über den HTTPSClient im Format String und speichert es in einer Variable.
-	 * Wandelt das Datum in eine LocalDate-Format um.
-	 * Überschreibt die String Variable im Format "mm.dd.yyyy" und gibt sie zurück.
-	 * @param strDate
-	 * @return
-	 */
-	public static String dateFromHttpsClientToString(String httpClientTitle){
-		String httpClient = HTTPSClient.task.get(httpClientTitle).toString();
-		if(!(httpClient.equals("empty"))){
-			LocalDateTime lDate = LocalDateTime.parse(httpClient, DateUtil.dTf_request);
-			httpClient = lDate.getDayOfMonth() + "." + lDate.getMonthValue() + "." + lDate.getYear();
-		}
-		return httpClient;
-	}
-	public static String dateWithTimeFromHttpsClientToString(String httpClientTitle){
-		String httpClient = HTTPSClient.task.get(httpClientTitle).toString();
-		if(!(httpClient.equals("empty"))){
-			LocalDateTime lDate = LocalDateTime.parse(httpClient, DateUtil.dTf_request);
-			httpClient = lDate.getDayOfMonth() + "." + lDate.getMonthValue() + "." + lDate.getYear() + " (Uhrzeit: " + lDate.getHour() + ":" + lDate.getMinute() + ":" + lDate.getSecond() + ")";
-		}
-		return httpClient;
-	}
-	/**
-	 * Konvertiert ein Datum(String) zu einem String im Format "mm.dd.yyyy".
-	 * @param strDate
-	 * @return
-	 */
-	public static String datetoString(String strDate){
-		LocalDate lDate = LocalDate.parse(strDate, DateUtil.dTf_request);
-		strDate = lDate.getDayOfMonth() + "." + lDate.getMonthValue() + "." + lDate.getYear();
-		return strDate;
 	}
 	/**
 	 * Überprüft zuerst mit der {@link #isDateValid(String) is DateValid()}-Methode
@@ -177,5 +140,55 @@ public class DateUtil {
 					columnName);
 			throw new InvalidDateException(msg, date);
 		}
+	}
+
+	/**
+	 * Konvertiert ein Datum(String) zu einem String im Format "mm.dd.yyyy".
+	 * 
+	 * @param strDate
+	 * @return
+	 */
+	public static String datetoString(String strDate) {
+		LocalDate lDate = LocalDate.parse(strDate, DateUtil.dTf_request);
+		strDate = lDate.getDayOfMonth() + "." + lDate.getMonthValue() + "." + lDate.getYear();
+		return strDate;
+	}
+
+	/**
+	 * Konvertiert ein Datum(LocalDate) zu einem String im Format "mm.dd.yyyy".
+	 * 
+	 * @param lDate
+	 * @return
+	 */
+	public static String localDateToString(LocalDate lDate) {
+		return lDate.getDayOfMonth() + "." + lDate.getMonthValue() + "." + lDate.getYear();
+	}
+
+	/**
+	 * Holt ein Datum über den HTTPSClient im Format String und speichert es in
+	 * einer Variable. Wandelt das Datum in eine LocalDate-Format um.
+	 * Überschreibt die String Variable im Format "mm.dd.yyyy" und gibt sie
+	 * zurück.
+	 * 
+	 * @param strDate
+	 * @return
+	 */
+	public static String dateFromHttpsClientToString(String httpClientTitle) {
+		String httpClient = HTTPSClient.task.get(httpClientTitle).toString();
+		if (!(httpClient.equals("empty"))) {
+			LocalDateTime lDate = LocalDateTime.parse(httpClient, DateUtil.dTf_request);
+			httpClient = lDate.getDayOfMonth() + "." + lDate.getMonthValue() + "." + lDate.getYear();
+		}
+		return httpClient;
+	}
+
+	public static String dateWithTimeFromHttpsClientToString(String httpClientTitle) {
+		String httpClient = HTTPSClient.task.get(httpClientTitle).toString();
+		if (!(httpClient.equals("empty"))) {
+			LocalDateTime lDate = LocalDateTime.parse(httpClient, DateUtil.dTf_request);
+			httpClient = lDate.getDayOfMonth() + "." + lDate.getMonthValue() + "." + lDate.getYear() + " (Uhrzeit: "
+					+ lDate.getHour() + ":" + lDate.getMinute() + ":" + lDate.getSecond() + ")";
+		}
+		return httpClient;
 	}
 }
