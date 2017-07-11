@@ -6,14 +6,10 @@ import java.awt.Image;
 import java.awt.Insets;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
-
-import org.oxbow.swingbits.dialog.task.TaskDialog;
-import org.oxbow.swingbits.dialog.task.TaskDialogs;
 
 import de.gokv.client.taskviewer.controller.FrameTaskViewer_Controller;
 import de.gokv.client.taskviewer.controller.TaskListPanel_ActionContr;
@@ -21,21 +17,21 @@ import de.gokv.client.taskviewer.controller.TaskListPanel_ActionContr_ListSelect
 import de.gokv.client.taskviewer.controller.TaskListPanel_KeyContr;
 import de.gokv.client.taskviewer.exceptions.ClientConfigurationExeception;
 
-public class Template_TaskList extends Template_BlockPanel{
+public class Template_TaskList extends Template_BlockPanel {
 	private static final long serialVersionUID = 1L;
 
 	public Pattern_GridBagButton taskLoadBtn;
 	public Pattern_GridBagButton reloadBtn;
-	
+
 	public JList<String> taskList;
 	public JTextField anzTasks;
-	
+
 	private Image iconReload;
 	private String pathIconReload;
 	private ImageIcon iconReloadScaled;
-	
+
 	private Throwable throwEx;
-	
+
 	protected Template_TaskList(FrameTaskViewer_Controller controller) {
 		super("Tasks", controller);
 	}
@@ -106,9 +102,11 @@ public class Template_TaskList extends Template_BlockPanel{
 		gbc_anzTask.gridy = 4;
 		this.add(anzTasks, gbc_anzTask);
 		
+		
+		
 		if(throwEx != null){
 //			new Frame_ExceptionMessage(throwEx);
-			new Frame_ExceptionMsg(throwEx);
+			new Frame_ExceptionMsg().setMessageDialog(throwEx);;
 //			TaskDialogs.showException(throwEx);
 		}
 	}

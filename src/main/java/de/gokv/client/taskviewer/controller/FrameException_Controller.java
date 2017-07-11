@@ -10,7 +10,8 @@ public class FrameException_Controller implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == Frame_ExceptionMsg.details){
-			System.out.println("details");
+			Frame_ExceptionMsg.midPane.setVisible(true);
+			Frame_ExceptionMsg.fExMsg.pack();
 			
 		} 
 		
