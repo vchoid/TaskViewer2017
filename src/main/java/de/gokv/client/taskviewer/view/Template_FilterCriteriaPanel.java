@@ -23,8 +23,8 @@ public class Template_FilterCriteriaPanel extends Template_BlockPanel {
 	public Pattern_DatePickerField gebDatePickerField;
 	public Pattern_DatePickerField orderDatePickerField;
 	
-	public Pattern_Button clearAllBtn;
-	public Pattern_Button filterBtn;
+	public Pattern_GridBagButton clearAllBtn;
+	public Pattern_GridBagButton filterBtn;
 	public JTextField anzFiltEntriesTf;
 	public String valFiltMsg = "";
 	
@@ -73,7 +73,7 @@ public class Template_FilterCriteriaPanel extends Template_BlockPanel {
 		this.add(orderDatePickerField.getDatePickerImpl(), orderDatePickerField.getGbc_date());
 
 		// << Button "Felder leeren" >>
-		clearAllBtn = new Pattern_Button("Felder zurücksetzen", 1, 6, 2, filtCPActContr);
+		clearAllBtn = new Pattern_GridBagButton("Felder zurücksetzen", 1, 6, 2, filtCPActContr);
 		clearAllBtn.getGbc_button().insets = new Insets(20, 0, 0, 0);
 		this.add(clearAllBtn.getButton(), clearAllBtn.getGbc_button());
 		

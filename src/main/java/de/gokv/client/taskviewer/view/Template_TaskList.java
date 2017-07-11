@@ -24,8 +24,8 @@ import de.gokv.client.taskviewer.exceptions.ClientConfigurationExeception;
 public class Template_TaskList extends Template_BlockPanel{
 	private static final long serialVersionUID = 1L;
 
-	public Pattern_Button taskLoadBtn;
-	public Pattern_Button reloadBtn;
+	public Pattern_GridBagButton taskLoadBtn;
+	public Pattern_GridBagButton reloadBtn;
 	
 	public JList<String> taskList;
 	public JTextField anzTasks;
@@ -77,12 +77,12 @@ public class Template_TaskList extends Template_BlockPanel{
 		this.add(scrollTask, gbc_scrollTask);
 
 		// << Tasks laden - Button >>
-		taskLoadBtn = new Pattern_Button("Task laden", 1,3,1, taskListSelcContr);
+		taskLoadBtn = new Pattern_GridBagButton("Task laden", 1,3,1, taskListSelcContr);
 		taskLoadBtn.getGbc_button().insets = new Insets(20, 0, 0, 5);
 		this.add(taskLoadBtn.getButton(), taskLoadBtn.getGbc_button());
 		
 		// << Tasksliste Neu Laden - Button >>
-		reloadBtn = new Pattern_Button(" Liste neu laden  ", 2, 3, 1, taskPanelContr);
+		reloadBtn = new Pattern_GridBagButton(" Liste neu laden  ", 2, 3, 1, taskPanelContr);
 		reloadBtn.getGbc_button().insets = new Insets(20, 10, 0, 0);
 		pathIconReload = "/reload.png";
 		iconReload = new ImageIcon(getClass().getResource(pathIconReload)).getImage();
@@ -107,8 +107,8 @@ public class Template_TaskList extends Template_BlockPanel{
 		this.add(anzTasks, gbc_anzTask);
 		
 		if(throwEx != null){
-			new Frame_ExceptionMessage(throwEx);
-			
+//			new Frame_ExceptionMessage(throwEx);
+			new Frame_ExceptionMsg();
 //			TaskDialogs.showException(throwEx);
 		}
 	}

@@ -1,16 +1,12 @@
 package de.gokv.client.taskviewer.view;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 
-import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.Icon;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -19,9 +15,6 @@ import javax.swing.JTextArea;
 import javax.swing.UIManager;
 
 import org.oxbow.swingbits.util.Strings;
-
-import de.gokv.client.taskviewer.utils.HexaToRGB;
-import net.sf.json.util.NewBeanInstanceStrategy;
 
 public class Frame_ExceptionMessage extends JFrame {
 
