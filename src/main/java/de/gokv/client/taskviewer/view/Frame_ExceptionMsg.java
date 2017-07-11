@@ -2,6 +2,7 @@ package de.gokv.client.taskviewer.view;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -107,6 +108,8 @@ public class Frame_ExceptionMsg extends JDialog {
 		fExMsg.setTitle("Fehlercode: " + fehlercode);
 		fExMsg.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		fExMsg.setAlwaysOnTop(true);
+		fExMsg.setResizable(true);
+		fExMsg.setMinimumSize(new Dimension(500, 160));
 		fExMsg.pack();
 		fExMsg.setLocationRelativeTo(null);
 		fExMsg.setVisible(true);
