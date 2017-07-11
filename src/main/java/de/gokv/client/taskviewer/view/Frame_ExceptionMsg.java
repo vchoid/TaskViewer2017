@@ -15,18 +15,19 @@ import javax.swing.UIManager;
 
 import org.oxbow.swingbits.util.Strings;
 
+import de.gokv.client.taskviewer.controller.FrameException_Controller;
 import net.miginfocom.swing.MigLayout;
 
 public class Frame_ExceptionMsg extends JDialog {
 
 	private JPanel contentPane;
-	private JPanel topPane;
+	public  JPanel topPane;
+	public static JPanel midPane;
 	private JPanel bottomPane;
 	
 	private String msg;
 
-	private Pattern_Button details;
-	private Pattern_Button close;
+	public static Pattern_Button details;
 
 	private JLabel msgLabel;
 	private JLabel descrLabel;
@@ -34,12 +35,20 @@ public class Frame_ExceptionMsg extends JDialog {
 	private Icon icon = UIManager.getIcon("OptionPane.errorIcon");
 	private final Font fontTitle = new Font("SansSerif", Font.PLAIN, 20);
 	
+	private FrameException_Controller btnCont = new FrameException_Controller();
+	
 	private int fehlercode;
+	
+	private static Throwable e;
 
-	public Frame_ExceptionMsg(Throwable ex) {
-
+	public Frame_ExceptionMsg() {
+	}
+	
+	public Frame_ExceptionMsg(Throwable e) {
+		this.e = e;
 		BorderLayout bLayoutCONTENT = new BorderLayout();
 		MigLayout mlayoutTOP = new MigLayout("","[][grow][]", "[]");
+		MigLayout mlayoutMIDDLE = new MigLayout("","[][grow][]", "[]");
 		MigLayout mlayoutBTTM = new MigLayout("","[][grow][]", "[]");
 
 		// Content Pane ++++++++++++++++++++++++++++++++++++++++
@@ -50,7 +59,7 @@ public class Frame_ExceptionMsg extends JDialog {
 		topPane = new JPanel();
 		topPane.setBackground(Color.WHITE);
 		topPane.setLayout(mlayoutTOP);
-		msg = ex.getMessage();
+		msg = e.getMessage();
 		msgLabel = new JLabel(msg);
 		msgLabel.setIcon(icon);
 		msgLabel.setFont(fontTitle);
@@ -58,18 +67,21 @@ public class Frame_ExceptionMsg extends JDialog {
 		//------------------------------------------------------
 		topPane.add(msgLabel, "wrap");
 		topPane.add(descrLabel, "wrap");
-//		topPane.add(getStackTraceAsScrollPane(ex), "growx, pushx");
+		// Middle Pane +++++++++++++++++++++++++++++++++++++++++
+		midPane = new JPanel();
+		midPane.setLayout(mlayoutMIDDLE);
+		//------------------------------------------------------
+//		midPane.add(getStackTraceAsScrollPane(), "growx, pushx");
 		// Bottom Pane +++++++++++++++++++++++++++++++++++++++++
 		bottomPane = new JPanel();
-		bottomPane.setBackground(Color.GRAY);
 		bottomPane.setLayout(mlayoutBTTM);
 		details = new Pattern_Button("Details anzeigen");
-		close = new Pattern_Button("Schlieﬂen");
+		details.addActionListener(btnCont);
 		// ------------------------------------------------------
 		bottomPane.add(details, "flowy");
-		bottomPane.add(close, "right");
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++
-		contentPane.add(topPane, BorderLayout.CENTER);
+		contentPane.add(topPane, BorderLayout.PAGE_START);
+		contentPane.add(midPane, BorderLayout.CENTER);
 		contentPane.add(bottomPane, BorderLayout.PAGE_END);
 		add(contentPane);
 		// ------------------------------------------------------
@@ -86,7 +98,7 @@ public class Frame_ExceptionMsg extends JDialog {
 	 * @param e
 	 * @return
 	 */
-	public JScrollPane getStackTraceAsScrollPane(Throwable e) {
+	public static JScrollPane getStackTraceAsScrollPane() {
 		JTextArea text = new JTextArea();
 		text.setEditable(false);
 		text.setText(Strings.stackStraceAsString(e));

@@ -21,6 +21,7 @@ public class Frame_ExceptionMessage extends JFrame {
 	private static final long serialVersionUID = 1L;
 	
 	private int fehlercode;
+	public Throwable e;
 	
 	private String msg;
 	
@@ -46,7 +47,7 @@ public class Frame_ExceptionMessage extends JFrame {
 	 * @param e
 	 * @return
 	 */
-	public JScrollPane getStackTraceAsScrollPane(Throwable e) {
+	public JScrollPane getStackTraceAsScrollPane() {
 		JTextArea text = new JTextArea();
 		text.setEditable(false);
 		text.setText(Strings.stackStraceAsString(e));
@@ -55,7 +56,8 @@ public class Frame_ExceptionMessage extends JFrame {
 		return scroller;
 	}
 
-	public Frame_ExceptionMessage(Throwable ex) {
+	public Frame_ExceptionMessage(Throwable e) {
+		this.e = e;
 		//TODO enum Fehlercode Tabelle
 		fehlercode = 101;
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -65,7 +67,7 @@ public class Frame_ExceptionMessage extends JFrame {
 		
 		msgPanel = new JPanel();
 		msgPanel.setLayout(getErrorMsgLayout());
-		msg = ex.getMessage();
+		msg = e.getMessage();
 		msgLabel = new JLabel(msg);
 		msgLabel.setIcon(icon);
 		msgLabel.setFont(fontTitle);
@@ -92,7 +94,7 @@ public class Frame_ExceptionMessage extends JFrame {
 
 		msgPanel.add(msgLabel, gbc_shortTitle);
 		msgPanel.add(descrLabel, gbc_description);
-		msgPanel.add(getStackTraceAsScrollPane(ex), gbc_scrollStackTrace);
+		msgPanel.add(getStackTraceAsScrollPane(), gbc_scrollStackTrace);
 		
 		contentPanel.add(msgPanel);
 		add(contentPanel);
