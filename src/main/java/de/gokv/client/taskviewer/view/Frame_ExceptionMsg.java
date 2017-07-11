@@ -4,10 +4,13 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
 
 import javax.sound.midi.spi.MidiDeviceProvider;
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -30,14 +33,20 @@ public class Frame_ExceptionMsg extends JDialog {
 
 	public static String msg;
 
-	public static Pattern_Button details;
+	public Pattern_Button details;
 
 	public static JLabel msgLabel;
 	public static JLabel descrLabel;
 
+	public String pathAppIcon;
+	public Image iconLoad = new ImageIcon(getClass().getResource("/arrow_down.png")).getImage();
+	public ImageIcon iconLoadScaled = new ImageIcon(iconLoad.getScaledInstance(12, 12, 0));
+	
+	
+	
 	public static Icon icon = UIManager.getIcon("OptionPane.errorIcon");
 	public static final Font FONT_TITLE = new Font("SansSerif", Font.PLAIN, 20);
-
+	
 	public static FrameException_Controller btnCont = new FrameException_Controller();
 
 	public static int fehlercode;
@@ -45,12 +54,13 @@ public class Frame_ExceptionMsg extends JDialog {
 
 	public static Frame_ExceptionMsg fExMsg;
 	public Frame_ExceptionMsg() {
+		pathAppIcon = "/taskViewerError.png";
+		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(pathAppIcon)));
 	}
 
 
 	public static void setMessageDialog(Throwable ex){
 		fExMsg = new Frame_ExceptionMsg();
-		
 		fExMsg.ex = ex;
 		BorderLayout bLayoutCONTENT = new BorderLayout();
 		MigLayout mlayoutTOP = new MigLayout("", "[][grow][]", "[]");
@@ -83,10 +93,11 @@ public class Frame_ExceptionMsg extends JDialog {
 		bottomPane = new JPanel();
 		bottomPane.setLayout(mlayoutBTTM);
 		bottomPane.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.GRAY));
-		details = new Pattern_Button("Weitere Details");
-		details.addActionListener(btnCont);
+		fExMsg.details = new Pattern_Button("Weitere Details");
+		fExMsg.details.addActionListener(btnCont);
+		fExMsg.details.setIcon(fExMsg.iconLoadScaled);
 		// ------------------------------------------------------
-		bottomPane.add(details, "flowy");
+		bottomPane.add(fExMsg.details, "flowy");
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++
 		contentPane.add(topPane, BorderLayout.PAGE_START);
 		contentPane.add(midPane, BorderLayout.CENTER);
@@ -97,7 +108,6 @@ public class Frame_ExceptionMsg extends JDialog {
 		fExMsg.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		fExMsg.setAlwaysOnTop(true);
 		fExMsg.pack();
-//		fExMsg.setSize(600, 300);
 		fExMsg.setLocationRelativeTo(null);
 		fExMsg.setVisible(true);
 		
