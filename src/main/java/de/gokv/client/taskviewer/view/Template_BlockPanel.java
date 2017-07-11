@@ -18,18 +18,13 @@ public abstract class Template_BlockPanel extends JPanel{
 	
 	protected final Color colorTitle = new HexaToRGB("color.panel.titeltext.foreground").parseHexToRGB();
 	protected final Color background = new HexaToRGB("color.panel.block.background").parseHexToRGB();
-	protected final Color colorBtnBG = new HexaToRGB("color.button.background").parseHexToRGB();
-	protected final Color colorBtnTxt = new HexaToRGB("color.button.text").parseHexToRGB();
 	protected final Color colorEntryTxt = new HexaToRGB("color.entries.text").parseHexToRGB();
-	protected final Color colorInfoTitleTxt = new HexaToRGB("color.info.titel.text").parseHexToRGB();
-	protected final Color colorInfoTxt = new HexaToRGB("color.info.text").parseHexToRGB();
 	
 	protected final Font fontTitle = new Font("SansSerif", Font.BOLD, 18);
 	protected final Font fontInfoTitle = new Font("Arial", Font.BOLD, 14);
 	protected final Font fontTxt = new Font("Arial", Font.PLAIN, 15);
 
 	protected final Border emptyBorder = BorderFactory.createEmptyBorder();
-	protected final Border btnBorder = BorderFactory.createEmptyBorder(8, 5, 8, 5);
 	
 	protected final FrameTaskViewer_Controller controller;
 	

@@ -109,7 +109,6 @@ public class Template_TaskList extends Template_BlockPanel{
 		if(throwEx != null){
 			new Frame_ExceptionMessage(throwEx);
 			
-			
 //			TaskDialogs.showException(throwEx);
 		}
 	}

@@ -7,6 +7,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -18,6 +20,7 @@ import javax.swing.UIManager;
 
 import org.oxbow.swingbits.util.Strings;
 
+import de.gokv.client.taskviewer.utils.HexaToRGB;
 import net.sf.json.util.NewBeanInstanceStrategy;
 
 public class Frame_ExceptionMessage extends JFrame {
@@ -38,15 +41,10 @@ public class Frame_ExceptionMessage extends JFrame {
 	private Icon icon = UIManager.getIcon("OptionPane.errorIcon");
 	private final Font fontTitle = new Font("SansSerif", Font.PLAIN, 20);
 	
-	public GridLayout getGridLayout(){
-		GridLayout layout = new GridLayout(2,0);
-		return layout;
-	}
-	
-	public GridBagLayout getGBLayout() {
+	public GridBagLayout getErrorMsgLayout() {
 		GridBagLayout layout = new GridBagLayout();
 		layout.columnWidths = new int[] { 10, 210, 30, 10 };
-		layout.rowHeights = new int[] { 10, 50, 50, 200 };
+		layout.rowHeights = new int[] { 10, 50, 50, 200, 10 };
 		return layout;
 	}
 
@@ -70,12 +68,11 @@ public class Frame_ExceptionMessage extends JFrame {
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++
 		setTitle("Fehlercode: " + fehlercode);
 		contentPanel = new JPanel();
-		contentPanel.setLayout(getGridLayout());
-		msg = ex.getMessage();
+		contentPanel.setLayout(new BoxLayout(contentPanel, BoxLayout.Y_AXIS));
+		
 		msgPanel = new JPanel();
-		msgPanel.setLayout(getGBLayout());
-
-		// ----------------------------------------
+		msgPanel.setLayout(getErrorMsgLayout());
+		msg = ex.getMessage();
 		msgLabel = new JLabel(msg);
 		msgLabel.setIcon(icon);
 		msgLabel.setFont(fontTitle);
@@ -104,11 +101,7 @@ public class Frame_ExceptionMessage extends JFrame {
 		msgPanel.add(descrLabel, gbc_description);
 		msgPanel.add(getStackTraceAsScrollPane(ex), gbc_scrollStackTrace);
 		
-		JButton but = new JButton("test");
-		but.setBackground(Color.GRAY);
-		
 		contentPanel.add(msgPanel);
-		contentPanel.add(but);
 		add(contentPanel);
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
