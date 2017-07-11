@@ -9,11 +9,14 @@ public class FrameException_Controller implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == Frame_ExceptionMsg.details){
+		if(e.getSource() == Frame_ExceptionMsg.details && !(Frame_ExceptionMsg.midPane.isVisible())){
 			Frame_ExceptionMsg.midPane.setVisible(true);
 			Frame_ExceptionMsg.fExMsg.pack();
 			
-		} 
+		} else if(e.getSource() == Frame_ExceptionMsg.details){
+			Frame_ExceptionMsg.midPane.setVisible(false);
+			Frame_ExceptionMsg.fExMsg.pack();
+		}
 		
 	}
 
