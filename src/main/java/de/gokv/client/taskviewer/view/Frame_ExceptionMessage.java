@@ -1,11 +1,14 @@
 package de.gokv.client.taskviewer.view;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 
 import javax.swing.Icon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -15,6 +18,8 @@ import javax.swing.UIManager;
 
 import org.oxbow.swingbits.util.Strings;
 
+import net.sf.json.util.NewBeanInstanceStrategy;
+
 public class Frame_ExceptionMessage extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -22,25 +27,31 @@ public class Frame_ExceptionMessage extends JFrame {
 	private int fehlercode;
 	
 	private String msg;
-	private JPanel panel;
+	
+	private JPanel contentPanel;
+	private JPanel msgPanel;
+	private JPanel btnPanel;
 	
 	private JLabel msgLabel;
 	private JLabel descrLabel;
 
 	private Icon icon = UIManager.getIcon("OptionPane.errorIcon");
 	private final Font fontTitle = new Font("SansSerif", Font.PLAIN, 20);
-	/**
-	 * 
-	 */
-	public GridBagLayout getLayout() {
+	
+	public GridLayout getGridLayout(){
+		GridLayout layout = new GridLayout(2,0);
+		return layout;
+	}
+	
+	public GridBagLayout getGBLayout() {
 		GridBagLayout layout = new GridBagLayout();
 		layout.columnWidths = new int[] { 10, 210, 30, 10 };
-		layout.rowHeights = new int[] { 10, 50, 50, 200, 50, 10 };
+		layout.rowHeights = new int[] { 10, 50, 50, 200 };
 		return layout;
 	}
 
 	/**
-	 * 
+	 * Holt den StackTrace und gibt ihn als ein JScrollPane zurück.
 	 * @param e
 	 * @return
 	 */
@@ -58,9 +69,11 @@ public class Frame_ExceptionMessage extends JFrame {
 		fehlercode = 101;
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++
 		setTitle("Fehlercode: " + fehlercode);
+		contentPanel = new JPanel();
+		contentPanel.setLayout(getGridLayout());
 		msg = ex.getMessage();
-		panel = new JPanel();
-		panel.setLayout(getLayout());
+		msgPanel = new JPanel();
+		msgPanel.setLayout(getGBLayout());
 
 		// ----------------------------------------
 		msgLabel = new JLabel(msg);
@@ -87,11 +100,16 @@ public class Frame_ExceptionMessage extends JFrame {
 		gbc_scrollStackTrace.gridx = 1;
 		gbc_scrollStackTrace.gridy = 3;
 
-		panel.add(msgLabel, gbc_shortTitle);
-		panel.add(descrLabel, gbc_description);
-		panel.add(getStackTraceAsScrollPane(ex), gbc_scrollStackTrace);
+		msgPanel.add(msgLabel, gbc_shortTitle);
+		msgPanel.add(descrLabel, gbc_description);
+		msgPanel.add(getStackTraceAsScrollPane(ex), gbc_scrollStackTrace);
 		
-		add(panel);
+		JButton but = new JButton("test");
+		but.setBackground(Color.GRAY);
+		
+		contentPanel.add(msgPanel);
+		contentPanel.add(but);
+		add(contentPanel);
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setAlwaysOnTop(true);
