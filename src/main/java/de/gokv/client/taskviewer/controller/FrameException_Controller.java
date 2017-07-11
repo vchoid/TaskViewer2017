@@ -1,6 +1,5 @@
 package de.gokv.client.taskviewer.controller;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
