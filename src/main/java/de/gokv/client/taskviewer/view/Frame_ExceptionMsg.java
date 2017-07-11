@@ -34,7 +34,7 @@ public class Frame_ExceptionMsg extends JDialog {
 	public Pattern_Button details;
 
 	public static JLabel msgLabel;
-	public static JLabel descrLabel;
+	public static JTextArea descrLabel;
 
 	public String pathAppIcon;
 	public Image iconLoad = new ImageIcon(getClass().getResource("/arrow_down.png")).getImage();
@@ -76,10 +76,13 @@ public class Frame_ExceptionMsg extends JDialog {
 		msgLabel = new JLabel(msg);
 		msgLabel.setIcon(icon);
 		msgLabel.setFont(FONT_TITLE);
-		descrLabel = new JLabel("Hier eine kleine Beschreibung zum Fehler in einfachen Worten");
+		descrLabel = new JTextArea("Hier eine kleine Beschreibung zum Fehler in einfachen Worten und noch mehr und mehr und mehr und noch mehr und mehr und mehr");
+		descrLabel.setEditable(false);
+		descrLabel.setLayout(mlayoutTOP);
+		descrLabel.setLineWrap(true);;
 		// ------------------------------------------------------
-		topPane.add(msgLabel, "wrap ");
-		topPane.add(descrLabel, "wrap ");
+		topPane.add(msgLabel, "wrap");
+		topPane.add(descrLabel, "grow");
 		// Middle Pane +++++++++++++++++++++++++++++++++++++++++
 		midPane = new JPanel(new BorderLayout());
 		midPane.setBackground(Color.WHITE);
@@ -106,7 +109,7 @@ public class Frame_ExceptionMsg extends JDialog {
 		fExMsg.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		fExMsg.setAlwaysOnTop(true);
 		fExMsg.setResizable(true);
-		fExMsg.setMinimumSize(new Dimension(500, 160));
+		fExMsg.setMinimumSize(new Dimension(500, 155));
 		fExMsg.pack();
 		fExMsg.setLocationRelativeTo(null);
 		fExMsg.setVisible(true);

@@ -27,6 +27,7 @@ public class ClientException extends RuntimeException {
 
 	private static final long serialVersionUID = 4381501137429755486L;
 
+	public final static int ERROR_CODE = 100;
 	private Throwable cause;
 	private String message;
 
@@ -38,7 +39,11 @@ public class ClientException extends RuntimeException {
 	 */
 	public ClientException(Throwable e, String message) {
 		this.cause = e;
-		this.message = message + "(ClientException)";
+		this.message = message + " (Fehlercode: " + ERROR_CODE + ")";
+	}
+	
+	public static int getErrorCode() {
+		return ERROR_CODE;
 	}
 	/**
 	 * Holt einen Grund des Fehlers und gibt ihn zurück.

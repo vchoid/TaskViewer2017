@@ -73,16 +73,20 @@ public class Template_TaskList extends Template_BlockPanel {
 		this.add(scrollTask, gbc_scrollTask);
 
 		// << Tasks laden - Button >>
-		taskLoadBtn = new Pattern_GridBagButton("Task laden", 1,3,1, taskListSelcContr);
+		taskLoadBtn = new Pattern_GridBagButton(" Task laden ", 1,3,1, taskListSelcContr);
 		taskLoadBtn.getGbc_button().insets = new Insets(20, 0, 0, 5);
+		pathIconReload = "/reload_white.png";
+		iconReload = new ImageIcon(getClass().getResource(pathIconReload)).getImage();
+		iconReloadScaled = new ImageIcon(iconReload);
+		taskLoadBtn.getButton().setIcon(iconReloadScaled);
 		this.add(taskLoadBtn.getButton(), taskLoadBtn.getGbc_button());
 		
 		// << Tasksliste Neu Laden - Button >>
 		reloadBtn = new Pattern_GridBagButton(" Liste neu laden  ", 2, 3, 1, taskPanelContr);
 		reloadBtn.getGbc_button().insets = new Insets(20, 10, 0, 0);
-		pathIconReload = "/reload.png";
+		pathIconReload = "/download_white.png";
 		iconReload = new ImageIcon(getClass().getResource(pathIconReload)).getImage();
-		iconReloadScaled = new ImageIcon(iconReload.getScaledInstance(18, 18, 0));
+		iconReloadScaled = new ImageIcon(iconReload);
 		reloadBtn.getButton().setIcon(iconReloadScaled);
 		this.add(reloadBtn.getButton(), reloadBtn.getGbc_button());
 
