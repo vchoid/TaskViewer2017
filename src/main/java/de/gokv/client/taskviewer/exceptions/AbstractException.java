@@ -7,18 +7,28 @@ public class AbstractException extends Throwable {
 	protected Throwable cause;
 	protected String title;
 	protected String message;
-	protected int code;
+	protected int errSuperCode;
+	protected static int errChildCode;
 
 	public AbstractException() {
 		
 	}
 
-	public AbstractException(Throwable cause, String title, String message, int code) {
+	public AbstractException(Throwable cause, String title, String message, int errSuperCode) {
 		this.cause = cause;
 		this.title = title;
 		this.message = message;
-		this.code = code;
+		this.errSuperCode = errSuperCode;
 		
+		
+	}
+	
+	public static void setErrChildCode(int errChildCode) {
+		AbstractException.errChildCode = errChildCode;
+	}
+
+	public int getErrChildCode() {
+		return errChildCode;
 	}
 	
 	public Throwable getCause() {
@@ -34,7 +44,9 @@ public class AbstractException extends Throwable {
 	}
 	
 	public int getCode() {
-		return code;
+		return errSuperCode;
 	}
+
+	
 
 }

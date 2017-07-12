@@ -132,10 +132,10 @@ public class CSVReader {
 			}
 
 		} catch (FileNotFoundException e) {
-			throw new ClientException(e, "Datei " + filePath + " wurde nicht gefunden");
+			throw new ClientException(e, "Fehler beim Laden der Datei", "Datei " + filePath + " wurde nicht gefunden", 1);
 
 		} catch (IOException e) {
-			throw new ClientException(e, "Es ist ein Fehler beim Lesen der Datei aufgetreten");
+			throw new ClientException(e, "Ein/Ausgabe Fehler", "Es ist ein Fehler beim Lesen der Datei aufgetreten", 2);
 
 		} finally {
 			try {

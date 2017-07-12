@@ -20,12 +20,18 @@ package de.gokv.client.taskviewer.exceptions;
  * @version 1.0.0
  */
 
-public class InvalidCSVRecordException extends Throwable {
+public class InvalidCSVRecordException extends AbstractException {
 
 	private static final long serialVersionUID = -887930394449075849L;
 
 	private static String message;
 
+	public InvalidCSVRecordException(Throwable cause, String title, String message, int code) {
+		super(cause, title, message, code);
+		setErrChildCode(300);
+	}
+	
+	
 	/**
 	 * Gibt den ein Fehler, an der genauen Stelle (Zeile und Spalte) der CSV zurück.
 	 * 

@@ -44,17 +44,17 @@ public class Abstract_TaskListPanel_Controller extends Abstract_MyFrame_Controll
 				ProxyAuthentication.initialize(properties);
 //				throw new MissingProxyPropertyException("MissingProxyPropertyException", null);
 			} catch (IOException | MissingProxyPropertyException e) {
-				throw new ClientConfigurationExeception(e, "Fehler beim Laden der Proxy-Datei", "Die proxyconfig.properties enthält fehlerhafte Einträge.", 100);
+				throw new ClientConfigurationExeception(e, "Fehler beim Laden der Proxy-Datei", "Die proxyconfig.properties enthält fehlerhafte Einträge.", 3);
 			}
 		}
 			
 		if (client == null){
 			try {
 				client = new HTTPSClient(new URL(valProps));
-				throw new ServerException("ServerException");
+//				throw new ServerException("ServerException");
 			} catch (ServerException | GeneralSecurityException | IOException | ClientCertificateException
 					| URISyntaxException e) {
-				throw new ClientConfigurationExeception(e, "Verbindungsfehler zum Server", "Die http.properties enthält fehlerhafte Einträge.", 101);
+				throw new ClientConfigurationExeception(e, "Verbindungsfehler zum Server", "Die http.properties enthält fehlerhafte Einträge.", 4);
 			}
 		}
 		taskMask = frame.taskMask;

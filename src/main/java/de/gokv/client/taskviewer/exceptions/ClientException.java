@@ -31,6 +31,9 @@ public class ClientException extends RuntimeException {
 	private String title;
 	private String message;
 	private int code;
+	private static int ERROR_CODE;
+
+
 
 	/**
 	 * Kontruktor zum aufangen eines Fehlers, der Klasse {@link Trowable} und einer Nachricht.
@@ -43,7 +46,10 @@ public class ClientException extends RuntimeException {
 		this.title = title;
 		this.message = message;
 		this.code = code;
+		ERROR_CODE = 200;
 	}
+	
+	
 	/**
 	 * Gibt den Titel des Fehlers zurück
 	 * @return
@@ -52,12 +58,18 @@ public class ClientException extends RuntimeException {
 		return title;
 	}
 	/**
-	 * Gibt den Code des Fehlers zurück.
-	 *TODO verweis auf FehlercodeTabelle machen
+	 * Gibt den ErrorCode der Superklasse der Exception zurück.
 	 * @return
 	 */
 	public int getCode() {
 		return code;
+	}
+	/**
+	 * Gibt den ErrorCode der ChildException zurück.
+	 * @return
+	 */
+	public static int getERROR_CODE() {
+		return ERROR_CODE;
 	}
 
 	/**

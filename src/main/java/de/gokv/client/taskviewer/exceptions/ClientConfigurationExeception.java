@@ -9,6 +9,8 @@ public class ClientConfigurationExeception extends AbstractException {
 	
 	public ClientConfigurationExeception(Throwable cause, String title, String message, int code) {
 		super(cause, title, message, code);
+		setErrChildCode(100);
 	}
+	
 	
 }

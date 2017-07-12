@@ -55,8 +55,7 @@ public class Template_TaskList extends Template_BlockPanel {
 			taskListSelcContr = new TaskListPanel_ActionContr_ListSelectContr();
 			taskListKeyContr = new TaskListPanel_KeyContr();
 		} catch (ClientConfigurationExeception e) {
-			new Frame_ExceptionMsg();
-			Frame_ExceptionMsg.setMessageDialog(e);
+//			Frame_ExceptionMsg.setMessageDialog(e);
 //			throwEx = e;
 		}
 

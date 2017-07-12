@@ -25,7 +25,7 @@ import net.miginfocom.swing.MigLayout;
 public class Frame_ExceptionMsg extends JDialog {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	public static JPanel contentPane;
 	public static JPanel topPane;
 	public static JPanel midPane;
@@ -37,27 +37,29 @@ public class Frame_ExceptionMsg extends JDialog {
 	public static JLabel errorIconLabel;
 	public static JLabel errTitle;
 	public static JTextArea errShortMsg;
+	private static int errorCode;
 
 	public String pathAppIcon;
 	public Image iconLoad = new ImageIcon(getClass().getResource("/expandIcon/expandMoreIcon_grey.png")).getImage();
 	public ImageIcon iconLoadScaled = new ImageIcon(iconLoad.getScaledInstance(12, 12, 0));
-	
+
 	public Image imageError = new ImageIcon(getClass().getResource("/errorIcon/errIcon_red.png")).getImage();
 	public ImageIcon imageIconErrorScaled = new ImageIcon(imageError.getScaledInstance(25, 25, 0));
 	public Icon iconError = imageIconErrorScaled;
-	
+
 	public static final Font FONT_TITLE = new Font("SansSerif", Font.PLAIN, 20);
 
 	public static AbstractException ex;
 
 	public static Frame_ExceptionMsg fExMsg;
+
 	public Frame_ExceptionMsg() {
 		pathAppIcon = "/appIcon/taskViewerError.png";
 		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(pathAppIcon)));
 	}
 
-
-	public static void setMessageDialog(AbstractException ex){
+	public static void setMessageDialog(AbstractException ex) {
+		errorCode = ex.getErrChildCode() + ex.getCode();
 		fExMsg = new Frame_ExceptionMsg();
 		Frame_ExceptionMsg.ex = ex;
 		BorderLayout bLayoutCONTENT = new BorderLayout();
@@ -79,7 +81,8 @@ public class Frame_ExceptionMsg extends JDialog {
 		errShortMsg = new JTextArea(ex.getMessage());
 		errShortMsg.setEditable(false);
 		errShortMsg.setLayout(mlayoutTOP);
-		errShortMsg.setLineWrap(true);;
+		errShortMsg.setLineWrap(true);
+		;
 		// ------------------------------------------------------
 		topPane.add(errorIconLabel, "");
 		topPane.add(errTitle, "wrap,span");
@@ -106,7 +109,7 @@ public class Frame_ExceptionMsg extends JDialog {
 		contentPane.add(bottomPane, BorderLayout.PAGE_END);
 		fExMsg.add(contentPane);
 		// ------------------------------------------------------
-		fExMsg.setTitle("Fehlercode: " + ex.getCode());
+		fExMsg.setTitle("Fehlercode: " + errorCode);
 		fExMsg.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		fExMsg.setAlwaysOnTop(true);
 		fExMsg.setResizable(true);
@@ -114,9 +117,9 @@ public class Frame_ExceptionMsg extends JDialog {
 		fExMsg.pack();
 		fExMsg.setLocationRelativeTo(null);
 		fExMsg.setVisible(true);
-		
+
 	}
-	
+
 	public static JScrollPane getStackTraceAsScrollPane() {
 		JTextArea text = new JTextArea();
 		text.setEditable(false);
