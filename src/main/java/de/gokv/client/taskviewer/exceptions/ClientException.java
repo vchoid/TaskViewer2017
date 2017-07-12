@@ -27,9 +27,10 @@ public class ClientException extends RuntimeException {
 
 	private static final long serialVersionUID = 4381501137429755486L;
 
-	public final static int ERROR_CODE = 100;
 	private Throwable cause;
+	private String title;
 	private String message;
+	private int code;
 
 	/**
 	 * Kontruktor zum aufangen eines Fehlers, der Klasse {@link Trowable} und einer Nachricht.
@@ -37,22 +38,38 @@ public class ClientException extends RuntimeException {
 	 * @param e
 	 * @param message
 	 */
-	public ClientException(Throwable e, String message) {
+	public ClientException(Throwable e, String title, String message, int code) {
 		this.cause = e;
-		this.message = message + " (Fehlercode: " + ERROR_CODE + ")";
-	}
-	
-	public static int getErrorCode() {
-		return ERROR_CODE;
+		this.title = title;
+		this.message = message;
+		this.code = code;
 	}
 	/**
-	 * Holt einen Grund des Fehlers und gibt ihn zurück.
+	 * Gibt den Titel des Fehlers zurück
+	 * @return
+	 */
+	public String getTitle() {
+		return title;
+	}
+	/**
+	 * Gibt den Code des Fehlers zurück.
+	 *TODO verweis auf FehlercodeTabelle machen
+	 * @return
+	 */
+	public int getCode() {
+		return code;
+	}
+
+	/**
+	 * Gibt die genaue Fehlermeldung zurück.
+	 * @return
 	 */
 	public Throwable getCause() {
 		return cause;
 	}
 	/**
-	 * Holt eine Nachricht und gibt sie zurück.
+	 * Gibt eine kurze Beschreibung des Fehlers zurück.
+	 * @return
 	 */
 	public String getMessage() {
 		return message;

@@ -13,8 +13,6 @@ package de.gokv.client.taskviewer.exceptions;
 public class InvalidDateException extends Throwable {
 
 	private static final long serialVersionUID = -7779029938817835658L;
-
-	public final static int ERROR_CODE = 103;
 	
 	private String message;
 	/**
@@ -25,7 +23,7 @@ public class InvalidDateException extends Throwable {
 	 */
 	public InvalidDateException(String message, String date) {
 		super();
-		this.message = (String.format(message, date) + "(Fehlercode:" + ERROR_CODE + ")");
+		this.message = (String.format(message, date));
 	}
 
 	@Override

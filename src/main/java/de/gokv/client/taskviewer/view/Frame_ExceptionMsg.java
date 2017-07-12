@@ -19,22 +19,24 @@ import javax.swing.JTextArea;
 import org.oxbow.swingbits.util.Strings;
 
 import de.gokv.client.taskviewer.controller.FrameException_Controller;
+import de.gokv.client.taskviewer.exceptions.AbstractException;
 import net.miginfocom.swing.MigLayout;
 
 public class Frame_ExceptionMsg extends JDialog {
 
+	private static final long serialVersionUID = 1L;
+	
 	public static JPanel contentPane;
 	public static JPanel topPane;
 	public static JPanel midPane;
 	public static JPanel bottomPane;
 
-	public static String msg;
+	public Pattern_Button expandBtn;
+	public static FrameException_Controller btnCont = new FrameException_Controller();
 
-	public Pattern_Button details;
-
-	public static JLabel iconErrorLabel;
-	public static JLabel msgLabel;
-	public static JTextArea descrLabel;
+	public static JLabel errorIconLabel;
+	public static JLabel errTitle;
+	public static JTextArea errShortMsg;
 
 	public String pathAppIcon;
 	public Image iconLoad = new ImageIcon(getClass().getResource("/expandIcon/expandMoreIcon_grey.png")).getImage();
@@ -42,18 +44,11 @@ public class Frame_ExceptionMsg extends JDialog {
 	
 	public Image imageError = new ImageIcon(getClass().getResource("/errorIcon/errIcon_red.png")).getImage();
 	public ImageIcon imageIconErrorScaled = new ImageIcon(imageError.getScaledInstance(25, 25, 0));
-	
-	
-	
-	
-//	public static Icon icon = UIManager.getIcon("OptionPane.errorIcon");
 	public Icon iconError = imageIconErrorScaled;
-	public static final Font FONT_TITLE = new Font("SansSerif", Font.PLAIN, 20);
 	
-	public static FrameException_Controller btnCont = new FrameException_Controller();
+	public static final Font FONT_TITLE = new Font("SansSerif", Font.PLAIN, 20);
 
-	public static int fehlercode;
-	public static Throwable ex;
+	public static AbstractException ex;
 
 	public static Frame_ExceptionMsg fExMsg;
 	public Frame_ExceptionMsg() {
@@ -62,9 +57,9 @@ public class Frame_ExceptionMsg extends JDialog {
 	}
 
 
-	public static void setMessageDialog(Throwable ex){
+	public static void setMessageDialog(AbstractException ex){
 		fExMsg = new Frame_ExceptionMsg();
-		fExMsg.ex = ex;
+		Frame_ExceptionMsg.ex = ex;
 		BorderLayout bLayoutCONTENT = new BorderLayout();
 		MigLayout mlayoutTOP = new MigLayout("", "[][grow][]", "[]");
 		MigLayout mlayoutMIDDLE = new MigLayout("", "[][grow][]", "[]");
@@ -77,19 +72,18 @@ public class Frame_ExceptionMsg extends JDialog {
 		topPane = new JPanel();
 		topPane.setBackground(Color.WHITE);
 		topPane.setLayout(mlayoutTOP);
-		msg = ex.getMessage();
-		iconErrorLabel = new JLabel();
-		iconErrorLabel.setIcon(fExMsg.iconError);
-		msgLabel = new JLabel(msg);
-		msgLabel.setFont(FONT_TITLE);
-		descrLabel = new JTextArea("Hier eine kleine Beschreibung zum Fehler in einfachen Worten und noch mehr und mehr und mehr und noch mehr und mehr und mehr");
-		descrLabel.setEditable(false);
-		descrLabel.setLayout(mlayoutTOP);
-		descrLabel.setLineWrap(true);;
+		errorIconLabel = new JLabel();
+		errorIconLabel.setIcon(fExMsg.iconError);
+		errTitle = new JLabel(ex.getTitle());
+		errTitle.setFont(FONT_TITLE);
+		errShortMsg = new JTextArea(ex.getMessage());
+		errShortMsg.setEditable(false);
+		errShortMsg.setLayout(mlayoutTOP);
+		errShortMsg.setLineWrap(true);;
 		// ------------------------------------------------------
-		topPane.add(iconErrorLabel, "");
-		topPane.add(msgLabel, "wrap,span");
-		topPane.add(descrLabel, "grow, skip, span");
+		topPane.add(errorIconLabel, "");
+		topPane.add(errTitle, "wrap,span");
+		topPane.add(errShortMsg, "grow, skip, span");
 		// Middle Pane +++++++++++++++++++++++++++++++++++++++++
 		midPane = new JPanel(new BorderLayout());
 		midPane.setBackground(Color.WHITE);
@@ -101,33 +95,28 @@ public class Frame_ExceptionMsg extends JDialog {
 		bottomPane = new JPanel();
 		bottomPane.setLayout(mlayoutBTTM);
 		bottomPane.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.GRAY));
-		fExMsg.details = new Pattern_Button("Weitere Details");
-		fExMsg.details.addActionListener(btnCont);
-		fExMsg.details.setIcon(fExMsg.iconLoadScaled);
+		fExMsg.expandBtn = new Pattern_Button("Weitere Details");
+		fExMsg.expandBtn.addActionListener(btnCont);
+		fExMsg.expandBtn.setIcon(fExMsg.iconLoadScaled);
 		// ------------------------------------------------------
-		bottomPane.add(fExMsg.details, "flowy");
+		bottomPane.add(fExMsg.expandBtn, "flowy");
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++
 		contentPane.add(topPane, BorderLayout.PAGE_START);
 		contentPane.add(midPane, BorderLayout.CENTER);
 		contentPane.add(bottomPane, BorderLayout.PAGE_END);
 		fExMsg.add(contentPane);
 		// ------------------------------------------------------
-		fExMsg.setTitle("Fehlercode: " + fehlercode);
+		fExMsg.setTitle("Fehlercode: " + ex.getCode());
 		fExMsg.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		fExMsg.setAlwaysOnTop(true);
 		fExMsg.setResizable(true);
-		fExMsg.setMinimumSize(new Dimension(600, 155));
+		fExMsg.setMinimumSize(new Dimension(600, 149));
 		fExMsg.pack();
 		fExMsg.setLocationRelativeTo(null);
 		fExMsg.setVisible(true);
 		
 	}
-	/**
-	 * Holt den StackTrace und gibt ihn als ein JScrollPane zurück.
-	 * 
-	 * @param e
-	 * @return
-	 */
+	
 	public static JScrollPane getStackTraceAsScrollPane() {
 		JTextArea text = new JTextArea();
 		text.setEditable(false);
