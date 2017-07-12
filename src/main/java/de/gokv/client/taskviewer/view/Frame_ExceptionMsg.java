@@ -38,7 +38,7 @@ public class Frame_ExceptionMsg extends JDialog {
 	public static JTextArea descrLabel;
 
 	public String pathAppIcon;
-	public Image iconLoad = new ImageIcon(getClass().getResource("/detailIcon/down_darkGrey.png")).getImage();
+	public Image iconLoad = new ImageIcon(getClass().getResource("/expandIcon/expandMoreIcon_grey.png")).getImage();
 	public ImageIcon iconLoadScaled = new ImageIcon(iconLoad.getScaledInstance(12, 12, 0));
 	
 	public Image imageError = new ImageIcon(getClass().getResource("/errorIcon/errIcon_red.png")).getImage();
