@@ -41,7 +41,7 @@ public class Frame_ExceptionMsg extends JDialog {
 	public Image iconLoad = new ImageIcon(getClass().getResource("/detailIcon/down_darkGrey.png")).getImage();
 	public ImageIcon iconLoadScaled = new ImageIcon(iconLoad.getScaledInstance(12, 12, 0));
 	
-	public Image imageError = new ImageIcon(getClass().getResource("/errorIcon/errorWin10.png")).getImage();
+	public Image imageError = new ImageIcon(getClass().getResource("/errorIcon/errIcon_red.png")).getImage();
 	public ImageIcon imageIconErrorScaled = new ImageIcon(imageError.getScaledInstance(25, 25, 0));
 	
 	
