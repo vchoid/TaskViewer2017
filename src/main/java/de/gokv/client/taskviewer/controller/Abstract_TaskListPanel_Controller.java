@@ -42,7 +42,7 @@ public class Abstract_TaskListPanel_Controller extends Abstract_MyFrame_Controll
 				Properties properties = new Properties();
 				properties.load(stream);
 				ProxyAuthentication.initialize(properties);
-//				throw new MissingProxyPropertyException("MissingProxyPropertyException", null);
+				throw new MissingProxyPropertyException("MissingProxyPropertyException", null);
 			} catch (IOException | MissingProxyPropertyException e) {
 				throw new ClientConfigurationExeception(e, "Fehler beim Laden der Proxy-Datei");
 			}

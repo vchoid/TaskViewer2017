@@ -33,6 +33,7 @@ public class Frame_ExceptionMsg extends JDialog {
 
 	public Pattern_Button details;
 
+	public static JLabel iconErrorLabel;
 	public static JLabel msgLabel;
 	public static JTextArea descrLabel;
 
@@ -40,9 +41,14 @@ public class Frame_ExceptionMsg extends JDialog {
 	public Image iconLoad = new ImageIcon(getClass().getResource("/detailIcon/down_darkGrey.png")).getImage();
 	public ImageIcon iconLoadScaled = new ImageIcon(iconLoad.getScaledInstance(12, 12, 0));
 	
+	public Image imageError = new ImageIcon(getClass().getResource("/errorIcon/errorWin10.png")).getImage();
+	public ImageIcon imageIconErrorScaled = new ImageIcon(imageError.getScaledInstance(25, 25, 0));
 	
 	
-	public static Icon icon = UIManager.getIcon("OptionPane.errorIcon");
+	
+	
+//	public static Icon icon = UIManager.getIcon("OptionPane.errorIcon");
+	public Icon iconError = imageIconErrorScaled;
 	public static final Font FONT_TITLE = new Font("SansSerif", Font.PLAIN, 20);
 	
 	public static FrameException_Controller btnCont = new FrameException_Controller();
@@ -73,23 +79,25 @@ public class Frame_ExceptionMsg extends JDialog {
 		topPane.setBackground(Color.WHITE);
 		topPane.setLayout(mlayoutTOP);
 		msg = ex.getMessage();
+		iconErrorLabel = new JLabel();
+		iconErrorLabel.setIcon(fExMsg.iconError);
 		msgLabel = new JLabel(msg);
-		msgLabel.setIcon(icon);
 		msgLabel.setFont(FONT_TITLE);
 		descrLabel = new JTextArea("Hier eine kleine Beschreibung zum Fehler in einfachen Worten und noch mehr und mehr und mehr und noch mehr und mehr und mehr");
 		descrLabel.setEditable(false);
 		descrLabel.setLayout(mlayoutTOP);
 		descrLabel.setLineWrap(true);;
 		// ------------------------------------------------------
-		topPane.add(msgLabel, "wrap");
-		topPane.add(descrLabel, "grow");
+		topPane.add(iconErrorLabel, "");
+		topPane.add(msgLabel, "wrap,span");
+		topPane.add(descrLabel, "grow, skip, span");
 		// Middle Pane +++++++++++++++++++++++++++++++++++++++++
 		midPane = new JPanel(new BorderLayout());
 		midPane.setBackground(Color.WHITE);
 		midPane.setLayout(mlayoutMIDDLE);
 		midPane.setVisible(false);
 		// ------------------------------------------------------
-		midPane.add(getStackTraceAsScrollPane(), "growx, pushx");
+		midPane.add(getStackTraceAsScrollPane(), "span, grow, push");
 		// Bottom Pane +++++++++++++++++++++++++++++++++++++++++
 		bottomPane = new JPanel();
 		bottomPane.setLayout(mlayoutBTTM);
