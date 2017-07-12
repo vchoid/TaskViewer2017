@@ -59,7 +59,7 @@ public class Frame_ExceptionMsg extends JDialog {
 	}
 
 	public static void setMessageDialog(AbstractException ex) {
-		errorCode = ex.getErrChildCode() + ex.getCode();
+		errorCode = ex.getErrChildCode() + ex.getErrSuperCode();
 		fExMsg = new Frame_ExceptionMsg();
 		Frame_ExceptionMsg.ex = ex;
 		BorderLayout bLayoutCONTENT = new BorderLayout();

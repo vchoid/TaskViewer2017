@@ -43,7 +43,7 @@ public class AbstractException extends Throwable {
 		return message;
 	}
 	
-	public int getCode() {
+	public int getErrSuperCode() {
 		return errSuperCode;
 	}
 
