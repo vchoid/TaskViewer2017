@@ -117,7 +117,7 @@ public class Frame_ExceptionMsg extends JDialog {
 		fExMsg.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		fExMsg.setAlwaysOnTop(true);
 		fExMsg.setResizable(true);
-		fExMsg.setMinimumSize(new Dimension(500, 155));
+		fExMsg.setMinimumSize(new Dimension(600, 155));
 		fExMsg.pack();
 		fExMsg.setLocationRelativeTo(null);
 		fExMsg.setVisible(true);
