@@ -37,6 +37,7 @@ public abstract class Template_BlockPanel extends JPanel{
 		this.setBorder(titleBorder);
 		this.setBackground(background);
 		this.setLayout(getLayout());	
+		this.repaint();
 		this.controller = controller;
 	}
 	
