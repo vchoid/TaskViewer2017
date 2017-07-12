@@ -11,6 +11,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
+import org.oxbow.swingbits.dialog.task.TaskDialogs;
+
 import de.gokv.client.taskviewer.controller.FrameTaskViewer_Controller;
 import de.gokv.client.taskviewer.controller.TaskListPanel_ActionContr;
 import de.gokv.client.taskviewer.controller.TaskListPanel_ActionContr_ListSelectContr;
@@ -53,7 +55,9 @@ public class Template_TaskList extends Template_BlockPanel {
 			taskListSelcContr = new TaskListPanel_ActionContr_ListSelectContr();
 			taskListKeyContr = new TaskListPanel_KeyContr();
 		} catch (ClientConfigurationExeception e) {
-			throwEx = e;
+			new Frame_ExceptionMsg();
+			Frame_ExceptionMsg.setMessageDialog(e);
+//			throwEx = e;
 		}
 
 		// << Task-Liste >>
@@ -75,7 +79,7 @@ public class Template_TaskList extends Template_BlockPanel {
 		// << Tasks laden - Button >>
 		taskLoadBtn = new Pattern_GridBagButton(" Task laden ", 1,3,1, taskListSelcContr);
 		taskLoadBtn.getGbc_button().insets = new Insets(20, 0, 0, 5);
-		pathIconReload = "/reload_white.png";
+		pathIconReload = "/reloadIcon/reload_white.png";
 		iconReload = new ImageIcon(getClass().getResource(pathIconReload)).getImage();
 		iconReloadScaled = new ImageIcon(iconReload);
 		taskLoadBtn.getButton().setIcon(iconReloadScaled);
@@ -84,7 +88,7 @@ public class Template_TaskList extends Template_BlockPanel {
 		// << Tasksliste Neu Laden - Button >>
 		reloadBtn = new Pattern_GridBagButton(" Liste neu laden  ", 2, 3, 1, taskPanelContr);
 		reloadBtn.getGbc_button().insets = new Insets(20, 10, 0, 0);
-		pathIconReload = "/download_white.png";
+		pathIconReload = "/downloadIcon/download_white.png";
 		iconReload = new ImageIcon(getClass().getResource(pathIconReload)).getImage();
 		iconReloadScaled = new ImageIcon(iconReload);
 		reloadBtn.getButton().setIcon(iconReloadScaled);
@@ -108,9 +112,10 @@ public class Template_TaskList extends Template_BlockPanel {
 		
 		
 		
-		if(throwEx != null){
-			new Frame_ExceptionMsg().setMessageDialog(throwEx);;
-		}
+//		if(throwEx != null){
+//			TaskDialogs.showException(throwEx);
+//			new Frame_ExceptionMsg().setMessageDialog(throwEx);
+//		}
 	}
 
 }

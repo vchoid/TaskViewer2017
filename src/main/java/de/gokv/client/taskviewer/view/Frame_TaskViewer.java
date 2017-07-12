@@ -39,7 +39,7 @@ public class Frame_TaskViewer extends JFrame {
 
 	public Frame_TaskViewer() {
 		controller = new FrameTaskViewer_Controller(this);
-		pathAppIcon = "/taskViewer.png";
+		pathAppIcon = "/appIcon/taskViewer.png";
 		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(pathAppIcon)));
 		setTitle("bitGo_KV-TaskViewer");
 //		setAlwaysOnTop(true);

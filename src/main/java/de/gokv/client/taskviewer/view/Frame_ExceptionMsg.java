@@ -37,7 +37,7 @@ public class Frame_ExceptionMsg extends JDialog {
 	public static JTextArea descrLabel;
 
 	public String pathAppIcon;
-	public Image iconLoad = new ImageIcon(getClass().getResource("/arrow_down.png")).getImage();
+	public Image iconLoad = new ImageIcon(getClass().getResource("/detailIcon/down_darkGrey.png")).getImage();
 	public ImageIcon iconLoadScaled = new ImageIcon(iconLoad.getScaledInstance(12, 12, 0));
 	
 	
@@ -52,7 +52,7 @@ public class Frame_ExceptionMsg extends JDialog {
 
 	public static Frame_ExceptionMsg fExMsg;
 	public Frame_ExceptionMsg() {
-		pathAppIcon = "/taskViewerError.png";
+		pathAppIcon = "/appIcon/taskViewerError.png";
 		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(pathAppIcon)));
 	}
 

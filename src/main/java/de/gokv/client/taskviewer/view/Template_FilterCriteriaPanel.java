@@ -2,8 +2,10 @@ package de.gokv.client.taskviewer.view;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.Insets;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
@@ -27,6 +29,10 @@ public class Template_FilterCriteriaPanel extends Template_BlockPanel {
 	public Pattern_GridBagButton filterBtn;
 	public JTextField anzFiltEntriesTf;
 	public String valFiltMsg = "";
+	
+	private Image iconReload;
+	private String pathIconReload;
+	private ImageIcon iconReloadScaled;
 	
 	public Template_FilterCriteriaPanel(FrameTaskViewer_Controller controller) {
 		super("Filter Maske", controller);
@@ -73,8 +79,12 @@ public class Template_FilterCriteriaPanel extends Template_BlockPanel {
 		this.add(orderDatePickerField.getDatePickerImpl(), orderDatePickerField.getGbc_date());
 
 		// << Button "Felder leeren" >>
-		clearAllBtn = new Pattern_GridBagButton("Felder zurücksetzen", 1, 6, 2, filtCPActContr);
+		clearAllBtn = new Pattern_GridBagButton(" Felder zurücksetzen ", 1, 6, 2, filtCPActContr);
 		clearAllBtn.getGbc_button().insets = new Insets(20, 0, 0, 0);
+		pathIconReload = "/deleteIcon/del_white.png";
+		iconReload = new ImageIcon(getClass().getResource(pathIconReload)).getImage();
+		iconReloadScaled = new ImageIcon(iconReload);
+		clearAllBtn.getButton().setIcon(iconReloadScaled);
 		this.add(clearAllBtn.getButton(), clearAllBtn.getGbc_button());
 		
 		// TODO Löschen
