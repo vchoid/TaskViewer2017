@@ -32,8 +32,6 @@ public class Template_TaskList extends Template_BlockPanel {
 	private String pathIconReload;
 	private ImageIcon iconReloadScaled;
 
-	private Throwable throwEx;
-
 	protected Template_TaskList(FrameTaskViewer_Controller controller) {
 		super("Tasks", controller);
 	}
@@ -55,8 +53,7 @@ public class Template_TaskList extends Template_BlockPanel {
 			taskListSelcContr = new TaskListPanel_ActionContr_ListSelectContr();
 			taskListKeyContr = new TaskListPanel_KeyContr();
 		} catch (ClientConfigurationExeception e) {
-//			Frame_ExceptionMsg.setMessageDialog(e);
-//			throwEx = e;
+			Frame_ExceptionMsg.setMessageDialog(e);
 		}
 
 		// << Task-Liste >>
@@ -108,13 +105,6 @@ public class Template_TaskList extends Template_BlockPanel {
 		gbc_anzTask.gridx = 2;
 		gbc_anzTask.gridy = 4;
 		this.add(anzTasks, gbc_anzTask);
-		
-		
-		
-//		if(throwEx != null){
-//			TaskDialogs.showException(throwEx);
-//			new Frame_ExceptionMsg().setMessageDialog(throwEx);
-//		}
 	}
 
 }
