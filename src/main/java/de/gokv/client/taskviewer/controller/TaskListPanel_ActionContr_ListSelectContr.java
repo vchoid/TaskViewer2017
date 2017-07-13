@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import org.oxbow.swingbits.dialog.task.TaskDialogs;
+
 import de.gokv.client.taskviewer.exceptions.ClientConfigurationExeception;
 import de.gokv.client.taskviewer.view.Frame_ExceptionMsg;
 
@@ -31,7 +33,7 @@ public class TaskListPanel_ActionContr_ListSelectContr extends Abstract_TaskList
 			try {
 				loadTaskDetails();
 			} catch (ClientConfigurationExeception e1) {
-				Frame_ExceptionMsg.setMessageDialog(e1);
+				Frame_ExceptionMsg.showException(e1);
 			}
 		}
 	}

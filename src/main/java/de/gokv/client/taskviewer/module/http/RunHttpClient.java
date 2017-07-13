@@ -5,6 +5,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.security.GeneralSecurityException;
 
+import de.gokv.client.taskviewer.exceptions.ClientConfigurationExeception;
 import de.gokv.client.taskviewer.module.http.ssl.ClientCertificateException;
 import de.gokv.client.taskviewer.module.http.ssl.ServerException;
 
@@ -14,7 +15,7 @@ public class RunHttpClient {
 			HTTPSClient httpsClient = new HTTPSClient(new URL("http://localhost:9080/gokv-tenant/api"));
 			httpsClient.loadTaskDetails("");
 		} catch (ServerException | GeneralSecurityException | IOException | ClientCertificateException
-				| URISyntaxException e) {
+				| URISyntaxException | ClientConfigurationExeception e) {
 			e.printStackTrace();
 		}
 	}

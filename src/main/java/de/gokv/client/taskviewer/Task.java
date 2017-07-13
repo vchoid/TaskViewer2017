@@ -138,7 +138,6 @@ public class Task {
 			t.kvnr = CSVReader.getValue(record, CSVReader.COL_MITGLIED_KVNR, true, PATTERN_KVNR);
 			t.name = CSVReader.getValue(record, CSVReader.COL_MITGLIED_NAME, true, PATTERN_NONUMB);
 			t.vName = CSVReader.getValue(record, CSVReader.COL_MITGLIED_VORNAME, true, PATTERN_NONUMB);
-
 			t.titel = CSVReader.getValue(record, CSVReader.COL_MITGLIED_TITEL, false, PATTERN_NONUMB);
 			t.zsWort = CSVReader.getValue(record, CSVReader.COL_MITGLIED_ZSWORT, false, PATTERN_NONUMB);
 			t.vsWort = CSVReader.getValue(record, CSVReader.COL_MITGLIED_VSWORT, false, PATTERN_NONUMB);
@@ -150,7 +149,6 @@ public class Task {
 		return t;
 	}
 
-	// Konstruktor ++++++++++++++++++++++++++++++++++++++
 	public Task() {
 		super();
 	}

@@ -18,7 +18,7 @@ public class TaskListPanel_KeyContr extends Abstract_TaskListPanel_Controller im
 			try {
 				loadTaskDetails();
 			} catch (ClientConfigurationExeception e1) {
-				Frame_ExceptionMsg.setMessageDialog(e1);
+				Frame_ExceptionMsg.showException(e1);
 			}
 		}
 	}

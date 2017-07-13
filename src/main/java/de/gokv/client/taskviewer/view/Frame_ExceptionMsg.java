@@ -58,7 +58,7 @@ public class Frame_ExceptionMsg extends JDialog {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(pathAppIcon)));
 	}
 
-	public static void setMessageDialog(AbstractException ex) {
+	public static void showException(AbstractException ex) {
 		errorCode = ex.getErrChildCode() + ex.getErrSuperCode();
 		fExMsg = new Frame_ExceptionMsg();
 		Frame_ExceptionMsg.ex = ex;
@@ -114,9 +114,9 @@ public class Frame_ExceptionMsg extends JDialog {
 		fExMsg.setAlwaysOnTop(true);
 		fExMsg.setResizable(true);
 		fExMsg.setMinimumSize(new Dimension(600, 149));
-		fExMsg.pack();
 		fExMsg.setLocationRelativeTo(null);
 		fExMsg.setVisible(true);
+		fExMsg.pack();
 
 	}
 
