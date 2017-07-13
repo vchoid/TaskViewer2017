@@ -35,10 +35,12 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 
+import de.gokv.client.taskviewer.exceptions.ClientConfigurationExeception;
 import de.gokv.client.taskviewer.module.http.proxy.ProxyAuthentication;
 import de.gokv.client.taskviewer.module.http.ssl.ClientCertificate;
 import de.gokv.client.taskviewer.module.http.ssl.ClientCertificateException;
 import de.gokv.client.taskviewer.module.http.ssl.ServerException;
+import de.gokv.client.taskviewer.view.Frame_ExceptionMsg;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -144,14 +146,13 @@ public class HTTPSClient {
 		trustedCertficates = ClientCertificate.readCertificateFromPKCS7(filename);
 	}
 
-	public void loadTaskDetails(String taskID) {
+	public void loadTaskDetails(String taskID) throws ClientConfigurationExeception {
 		try {
 			JSONObject taskDetails = getTaskDetails(taskID);
 			JSONArray results = taskDetails.getJSONArray("results");
 			task = results.getJSONObject(0);
 		} catch (ServerException | IndexOutOfBoundsException e) {
-			e.printStackTrace();
-			//TODO errMsg zum View schicken, wenn keine task vorhanden bzw IndexOutOfBound
+			throw new ClientConfigurationExeception(e, "Eintrag wurde nicht gefunden", "Der gewählte Eintrag konnte nicht geladen werden.", 5);
 		}
 	}
 

@@ -4,6 +4,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import de.gokv.client.taskviewer.exceptions.ClientConfigurationExeception;
+import de.gokv.client.taskviewer.view.Frame_ExceptionMsg;
 
 public class TaskListPanel_KeyContr extends Abstract_TaskListPanel_Controller implements KeyListener{
 
@@ -14,7 +15,11 @@ public class TaskListPanel_KeyContr extends Abstract_TaskListPanel_Controller im
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_ENTER && taskMask.taskList.isSelectedIndex(taskMask.taskList.getSelectedIndex())) {
-			loadTaskDetails();
+			try {
+				loadTaskDetails();
+			} catch (ClientConfigurationExeception e1) {
+				Frame_ExceptionMsg.setMessageDialog(e1);
+			}
 		}
 	}
 

@@ -20,7 +20,6 @@ public class AbstractException extends Throwable {
 		this.message = message;
 		this.errSuperCode = errSuperCode;
 		
-		
 	}
 	
 	public static void setErrChildCode(int errChildCode) {

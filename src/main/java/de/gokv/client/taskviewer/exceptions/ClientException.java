@@ -30,8 +30,8 @@ public class ClientException extends RuntimeException {
 	private Throwable cause;
 	private String title;
 	private String message;
-	private int code;
-	private static int ERROR_CODE;
+	private int errCodeSuper;
+	private static int errorCode;
 
 
 
@@ -41,12 +41,12 @@ public class ClientException extends RuntimeException {
 	 * @param e
 	 * @param message
 	 */
-	public ClientException(Throwable e, String title, String message, int code) {
+	public ClientException(Throwable e, String title, String message, int errCodeSuper) {
 		this.cause = e;
 		this.title = title;
 		this.message = message;
-		this.code = code;
-		ERROR_CODE = 200;
+		this.errCodeSuper = errCodeSuper;
+		errorCode = 200;
 	}
 	
 	
@@ -62,14 +62,14 @@ public class ClientException extends RuntimeException {
 	 * @return
 	 */
 	public int getCode() {
-		return code;
+		return errCodeSuper;
 	}
 	/**
 	 * Gibt den ErrorCode der ChildException zurück.
 	 * @return
 	 */
-	public static int getERROR_CODE() {
-		return ERROR_CODE;
+	public static int getErrCode() {
+		return errorCode;
 	}
 
 	/**

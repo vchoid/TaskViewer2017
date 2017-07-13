@@ -42,15 +42,17 @@ public class Abstract_TaskListPanel_Controller extends Abstract_MyFrame_Controll
 				Properties properties = new Properties();
 				properties.load(stream);
 				ProxyAuthentication.initialize(properties);
+				//TODO löschen
 //				throw new MissingProxyPropertyException("MissingProxyPropertyException", null);
 			} catch (IOException | MissingProxyPropertyException e) {
-				throw new ClientConfigurationExeception(e, "Fehler beim Laden der Proxy-Datei", "Die proxyconfig.properties enthält fehlerhafte Einträge.", 3);
+				throw new ClientConfigurationExeception(e, "Fehlerhafter Proxy", "Die proxyconfig.properties enthält fehlerhafte Einträge.", 3);
 			}
 		}
 			
 		if (client == null){
 			try {
 				client = new HTTPSClient(new URL(valProps));
+				//TODO löschen
 //				throw new ServerException("ServerException");
 			} catch (ServerException | GeneralSecurityException | IOException | ClientCertificateException
 					| URISyntaxException e) {
@@ -62,7 +64,7 @@ public class Abstract_TaskListPanel_Controller extends Abstract_MyFrame_Controll
 		infoTask = frame.infoTask;
 	}
 
-	protected void loadTaskDetails() {
+	protected void loadTaskDetails() throws ClientConfigurationExeception {
 		taskID = taskMask.taskList.getSelectedValue();
 		client.loadTaskDetails(taskID);
 		infoTask.state.setlField(HTTPSClient.task.get("state").toString());
@@ -74,7 +76,7 @@ public class Abstract_TaskListPanel_Controller extends Abstract_MyFrame_Controll
 		infoTask.evReceived.setlField(DateUtil.dateWithTimeFromHttpsClientToString("eventReceived"));
 		infoTask.evResult.setlField(DateUtil.dateWithTimeFromHttpsClientToString("eventResult"));
 		
-		//TODO evtl löschen.
+		//TODO löschen.
 		// unkonvertierter String in Bezug auf der Ausgabe -----------------------------
 //		infoTask.evInProgs.setlField(HTTPSClient.task.get("eventInProgress").toString());
 //		infoTask.evCompl.setlField(HTTPSClient.task.get("eventCompleted").toString());
