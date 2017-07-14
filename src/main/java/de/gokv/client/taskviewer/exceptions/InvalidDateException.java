@@ -26,7 +26,6 @@ public class InvalidDateException extends AbstractException {
 		setErrChildCode(400);
 	}
 	
-	
 	public InvalidDateException(String title, String message, int code, String date) {
 		setTitle(title);
 		this.message = (String.format(message, date));

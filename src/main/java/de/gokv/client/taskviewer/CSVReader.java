@@ -218,7 +218,7 @@ public class CSVReader {
 		String value = getValue(rec, colName, requireField);
 		if (!pattern.matcher(value).matches())
 			throw new InvalidCSVRecordException(colName, rec.getRecordNumber(),
-					"Der Wert %s ist für das Format %s nicht gültig.", value, pattern.toString());
+					"-ungültiger Wert-%s Der Wert %s ist für das Format %s nicht gültig.%s",System.lineSeparator(), value, pattern.toString(), System.lineSeparator());
 		return value;
 	}
 	/**
@@ -232,7 +232,7 @@ public class CSVReader {
 		String value= getValue(rec, colName, requireField);
 		if(!(taskTypeList.contains(value))){
 			throw new InvalidCSVRecordException(colName, rec.getRecordNumber(),
-					"\'%s\' ist kein gültiger TaskType %s", value, System.lineSeparator());
+					"-Tasktype-Fehler-%s \'%s\' ist kein gültiger TaskType %s.",System.lineSeparator(), value, System.lineSeparator());
 		}
 		 return value;
 		

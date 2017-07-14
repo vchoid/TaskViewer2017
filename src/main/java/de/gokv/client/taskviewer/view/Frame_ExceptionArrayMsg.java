@@ -79,7 +79,7 @@ public class Frame_ExceptionArrayMsg extends JDialog{
 		titlePane.setLayout(mlayoutTOP);
 		errorIconLabel = new JLabel();
 		errorIconLabel.setIcon(fExMsg.iconError);
-		errTitle = new JLabel("Fehlerhafte Werte in der CSV");
+		errTitle = new JLabel("Fehlerhafte Werte in CSV-Datein");
 		errTitle.setFont(FONT_TITLE);
 		errSize = new JLabel(""+invalidEntries.size()+" fehlerhafte Einträge");
 		// ------------------------------------------------------
@@ -122,7 +122,7 @@ public class Frame_ExceptionArrayMsg extends JDialog{
 	public static JScrollPane getStackTraceAsScrollPane() {
 		JTextArea text = new JTextArea();
 		text.setEditable(false);
-		text.setText("Folgende Fehler traten auf: \n" + abstrExc.toString().replace("[", "").replace("]", "").replace(",", ""));
+		text.setText("Folgende Fehler traten auf: \n\n" + abstrExc.toString().replace("[", "").replace("]", "").replace(",", ""));
 		JScrollPane scroller = new JScrollPane(text);
 		return scroller;
 	}
