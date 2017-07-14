@@ -7,12 +7,13 @@ package de.gokv.client.taskviewer.exceptions;
  * <p>
  * <b>Kontruktor:</b>
  * <ul>
- * <li><b>{@link #InvalidCSVRecordException(String, long)}</b>: Gibt den ein Fehler,
- * an der genauen Stelle (Zeile und Spalte) der CSV zurück.</li>
- * <li><b>{@link #InvalidCSVRecordException(Throwable, long)}</b>: Gibt den genauen Fehler,
- * in der Zeile der CSV zurück.</li>
- * <li><b>{@link #InvalidCSVRecordException(String, long, String, Object)}</b>: Gibt den genauen Fehler,
- * an der genauen Stelle (Zeile und Spalte) der CSV zurück.</li>
+ * <li><b>{@link #InvalidCSVRecordException(String, long)}</b>: Gibt den ein
+ * Fehler, an der genauen Stelle (Zeile und Spalte) der CSV zurück.</li>
+ * <li><b>{@link #InvalidCSVRecordException(Throwable, long)}</b>: Gibt den
+ * genauen Fehler, in der Zeile der CSV zurück.</li>
+ * <li><b>{@link #InvalidCSVRecordException(String, long, String, Object)}</b>:
+ * Gibt den genauen Fehler, an der genauen Stelle (Zeile und Spalte) der CSV
+ * zurück.</li>
  * </ul>
  * </p>
  * 
@@ -30,44 +31,57 @@ public class InvalidCSVRecordException extends AbstractException {
 		super(cause, title, message, code);
 		setErrChildCode(300);
 	}
-	
-	
+
 	/**
-	 * Gibt den ein Fehler, an der genauen Stelle (Zeile und Spalte) der CSV zurück.
+	 * Gibt den ein Fehler, an der genauen Stelle (Zeile und Spalte) der CSV
+	 * zurück.
 	 * 
-	 * @param colName	Spaltename
-	 * @param line		Zeilenangabe
+	 * @param colName
+	 *            Spaltename
+	 * @param line
+	 *            Zeilenangabe
 	 */
 	public InvalidCSVRecordException(String colName, long line) {
-		this(colName, line, "Ungültiger Spalteninhalt");
+		this(colName, line, "-Ungültiger oder leerer Spalteninhalt-%s", System.lineSeparator());
 	}
+
 	/**
 	 * Gibt den genauen Fehler, in der Zeile der CSV zurück.
 	 * 
-	 * @param e		geworfene Exception
-	 * @param line	Zeilenangabe
+	 * @param e
+	 *            geworfene Exception
+	 * @param line
+	 *            Zeilenangabe
 	 */
 	public InvalidCSVRecordException(Throwable e, long line) {
 		super();
-		InvalidCSVRecordException.message = String.format("In der Zeile %s, %s \'%s\'", line, System.lineSeparator() , e.getMessage());
+		InvalidCSVRecordException.message = String.format("In der Zeile %s, %s \'%s\'", line, System.lineSeparator(),
+				e.getMessage());
 	}
+
 	/**
-	 * Gibt den genauen Fehler, an der genauen Stelle (Zeile und Spalte) der CSV zurück.
+	 * Gibt den genauen Fehler, an der genauen Stelle (Zeile und Spalte) der CSV
+	 * zurück.
 	 * 
-	 * @param colName	Spaltenname
-	 * @param line		Zeilenangabe
-	 * @param reason	Grund
-	 * @param objects	fehlerhaftes Objekt
+	 * @param colName
+	 *            Spaltenname
+	 * @param line
+	 *            Zeilenangabe
+	 * @param reason
+	 *            Grund
+	 * @param objects
+	 *            fehlerhaftes Objekt
 	 */
-	public InvalidCSVRecordException(String colName, long line, String reason,Object...objects) {
+	public InvalidCSVRecordException(String colName, long line, String reason, Object... objects) {
 		super();
 		reason = String.format(reason, objects);
-		InvalidCSVRecordException.message = String.format("In der Zeile %s,  %s in der Spalte \"%s\" %s Grund: %s", line, System.lineSeparator(), colName, System.lineSeparator(), reason );
+		InvalidCSVRecordException.message = String.format("In der Zeile %s,  %s in der Spalte \"%s\" %s Grund: %s",
+				line, System.lineSeparator(), colName, System.lineSeparator(), reason);
 	}
 
 	@Override
 	public String getMessage() {
-		return message +  System.lineSeparator();
+		return message + System.lineSeparator();
 	}
 
 }

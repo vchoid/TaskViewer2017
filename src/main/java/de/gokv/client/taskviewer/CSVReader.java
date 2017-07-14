@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 //import java.util.Map;
 import java.util.regex.Pattern;
+import java.util.zip.Inflater;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -18,7 +19,6 @@ import de.gokv.client.taskviewer.exceptions.ClientException;
 import de.gokv.client.taskviewer.exceptions.InvalidCSVRecordException;
 import de.gokv.client.taskviewer.exceptions.InvalidDateException;
 import de.gokv.client.taskviewer.utils.DateUtil;
-import de.gokv.client.taskviewer.view.Frame_ExceptionArrayMsg;
 
 /**
  * Eine CSV auslesen und Daten zurückgeben.
@@ -64,14 +64,17 @@ public class CSVReader {
 	// ungültige Einträge aus der CSV ++++++++++++++++++++++++++++++++++
 	private static List<CSVRecord> invalidEntries = new ArrayList<CSVRecord>();
 	private static List<String> abstrExc = new ArrayList<String>();
+	private static List<String> invFilePath = new ArrayList<String>();
 
-	public static int invEntSize;
+	public int invEntSize;
 
 	// gültige Einträge aus der CSV
 	private List<Task> validEntries = new ArrayList<Task>();
 
 	// Datei-Abfrage - Dateipfad +++++++++++++++++++++++++++++++++++++++
-	private static String filePath;
+	private String filePath;
+//	private static String invFilePath;
+
 
 	public CSVReader(String path) {
 		filePath = path;
@@ -124,14 +127,12 @@ public class CSVReader {
 				} catch (InvalidCSVRecordException e) {
 					invalidEntries.add(csvRecord);
 					invEntSize = invalidEntries.size();
-					
 					abstrExc.add(e.getMessage());
+					if(!invFilePath.contains(filePath)){
+						invFilePath.add(filePath);
+					}
 					
 				}
-			}
-			//TODO neue Exception frame mit Array für mehrere Fehler in der CSV
-			if(invalidEntries.size() > 0){
-//			Frame_ExceptionArrayMsg.showException(abstrExc, invalidEntries, filePath);
 			}
 		} catch (FileNotFoundException e) {
 			throw new ClientException(e, "Fehler beim Laden der Datei", "Datei " + filePath + " wurde nicht gefunden", 1);
@@ -150,8 +151,6 @@ public class CSVReader {
 			}
 		}
 	}
-
-	// TODO Methode column isSet()
 
 	/**
 	 * Holt den Wert aus der CSV-Datei und gibt ihn wieder als String zurück.
@@ -260,7 +259,7 @@ public class CSVReader {
 		return localDate;
 	}
 	
-	public static String getFilePath() {
+	public String getFilePath() {
 		return filePath;
 	}
 	
@@ -272,12 +271,17 @@ public class CSVReader {
 		return invalidEntries;
 	}
 
-	public static int getInvEntSize() {
+	public int getInvEntSize() {
 		return invEntSize;
 	}
 	
 	public static List<String> getAbstrExc() {
 		return abstrExc;
 	}
+	public static List<String> getInvFilePath() {
+		return invFilePath;
+	}
+	
+	
 	
 }

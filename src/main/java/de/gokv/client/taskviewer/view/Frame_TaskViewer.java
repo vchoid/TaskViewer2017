@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 
 import de.gokv.client.taskviewer.CSVReader;
 import de.gokv.client.taskviewer.controller.FrameTaskViewer_Controller;
+import de.gokv.client.taskviewer.controller.TaskListPanel_ActionContr;
 import de.gokv.client.taskviewer.exceptions.ClientConfigurationExeception;
 import de.gokv.client.taskviewer.utils.HexaToRGB;
 
@@ -83,8 +84,8 @@ public class Frame_TaskViewer extends JFrame {
 		// Error Message
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		// color.properties
-		if(CSVReader.invEntSize > 0){
-			Frame_ExceptionArrayMsg.showException(CSVReader.getAbstrExc(), CSVReader.getInvalidEntries(), CSVReader.getFilePath());
+		if(CSVReader.getInvalidEntries().size() > 0){
+			Frame_ExceptionArrayMsg.showErrorMessageDialog(CSVReader.getAbstrExc(), CSVReader.getInvalidEntries());
 		}
 		if (HexaToRGB.errMsg != null) {
 			JOptionPane.showMessageDialog(null, HexaToRGB.errMsg, "Fehler in der color.properties Datei",

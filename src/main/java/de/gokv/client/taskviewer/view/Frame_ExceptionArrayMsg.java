@@ -19,13 +19,13 @@ import javax.swing.JTextArea;
 
 import org.apache.commons.csv.CSVRecord;
 
+import de.gokv.client.taskviewer.CSVReader;
 import de.gokv.client.taskviewer.controller.FrameExceptionArray_Controller;
 import de.gokv.client.taskviewer.exceptions.AbstractException;
 import net.miginfocom.swing.MigLayout;
 
-public class Frame_ExceptionArrayMsg extends JDialog{
-	
-	
+public class Frame_ExceptionArrayMsg extends JDialog {
+
 	public static JPanel contentPane;
 	public static JPanel titlePane;
 	public static JPanel descriptionPane;
@@ -53,6 +53,7 @@ public class Frame_ExceptionArrayMsg extends JDialog{
 
 	public static List<String> abstrExc;
 	public static List<CSVRecord> invalidEntries;
+	private static String filePath;
 	public static Frame_ExceptionArrayMsg fExMsg;
 
 	public Frame_ExceptionArrayMsg() {
@@ -60,7 +61,7 @@ public class Frame_ExceptionArrayMsg extends JDialog{
 		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(pathAppIcon)));
 	}
 
-	public static void showException(List<String> abstrExc, List<CSVRecord> invalidEntries, String filePath) {
+	public static void showErrorMessageDialog(List<String> abstrExc, List<CSVRecord> invalidEntries) {
 		errorCode = 300;
 		fExMsg = new Frame_ExceptionArrayMsg();
 		Frame_ExceptionArrayMsg.invalidEntries = invalidEntries;
@@ -81,7 +82,7 @@ public class Frame_ExceptionArrayMsg extends JDialog{
 		errorIconLabel.setIcon(fExMsg.iconError);
 		errTitle = new JLabel("Fehlerhafte Werte in CSV-Datein");
 		errTitle.setFont(FONT_TITLE);
-		errSize = new JLabel(""+invalidEntries.size()+" fehlerhafte Einträge");
+		errSize = new JLabel("" + invalidEntries.size() + " fehlerhafte Einträge");
 		// ------------------------------------------------------
 		titlePane.add(errorIconLabel, "");
 		titlePane.add(errTitle, "wrap,span");
@@ -122,9 +123,14 @@ public class Frame_ExceptionArrayMsg extends JDialog{
 	public static JScrollPane getStackTraceAsScrollPane() {
 		JTextArea text = new JTextArea();
 		text.setEditable(false);
-		text.setText("Folgende Fehler traten auf: \n\n" + abstrExc.toString().replace("[", "").replace("]", "").replace(",", ""));
+		if (CSVReader.getInvFilePath().size() == 1) {
+			filePath = "In der Datei: " + CSVReader.getInvFilePath() + "\ntraten folgende Fehler auf: \n\n";
+		} else {
+			filePath = "In den Dateien: " + CSVReader.getInvFilePath() + "\ntraten folgende Fehler auf: \n\n";
+		}
+		text.setText(filePath + abstrExc.toString().replace("[", "").replace("]", "").replace(",", ""));
 		JScrollPane scroller = new JScrollPane(text);
 		return scroller;
 	}
-	
+
 }

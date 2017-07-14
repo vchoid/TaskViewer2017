@@ -106,7 +106,7 @@ public class DateUtil {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		throw new InvalidDateException("Formatfehler vom Datum", "Fehler beim Konvertieren vom String \'%s\' in ein LocalDate-Format",0, date);
+		throw new InvalidDateException("Fehler beim Konvertieren vom String \'%s\' in ein LocalDate-Format", date);
 	}
 	
 	/**
@@ -143,9 +143,9 @@ public class DateUtil {
 		try {
 			return parseDate(date);
 		} catch (InvalidDateException e) {
-			String msg = String.format("%s %s in der Spalte \'%s\'", e.getMessage(), System.lineSeparator(),
-					columnName);
-			throw new InvalidDateException("Formatfehler vom Datum",msg, 0,date);
+			String msg = String.format("%s %s in der Spalte \'%s\'%s", e.getMessage(), System.lineSeparator(),
+					columnName, System.lineSeparator());
+			throw new InvalidDateException(msg,date);
 		}
 	}
 
