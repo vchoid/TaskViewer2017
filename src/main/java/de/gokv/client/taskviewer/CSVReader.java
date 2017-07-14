@@ -18,7 +18,7 @@ import de.gokv.client.taskviewer.exceptions.ClientException;
 import de.gokv.client.taskviewer.exceptions.InvalidCSVRecordException;
 import de.gokv.client.taskviewer.exceptions.InvalidDateException;
 import de.gokv.client.taskviewer.utils.DateUtil;
-import de.gokv.client.taskviewer.view.Frame_ExceptionMsg;
+import de.gokv.client.taskviewer.view.Frame_ExceptionArrayMsg;
 
 /**
  * Eine CSV auslesen und Daten zurückgeben.
@@ -62,9 +62,10 @@ public class CSVReader {
 	public static final String COL_MITGLIED_GEB_DAT = "mitglied_gebdat";
 
 	// ungültige Einträge aus der CSV ++++++++++++++++++++++++++++++++++
-	private List<CSVRecord> invalidEntries = new ArrayList<CSVRecord>();
-	public int invEntSize;
-	private String errMsg;
+	private static List<CSVRecord> invalidEntries = new ArrayList<CSVRecord>();
+	private static List<String> abstrExc = new ArrayList<String>();
+
+	public static int invEntSize;
 
 	// gültige Einträge aus der CSV
 	private List<Task> validEntries = new ArrayList<Task>();
@@ -121,19 +122,17 @@ public class CSVReader {
 						validEntries.add(oneTask_oneRow);
 
 				} catch (InvalidCSVRecordException e) {
-
 					invalidEntries.add(csvRecord);
 					invEntSize = invalidEntries.size();
-					errMsg = "\n\n-------------------------------------------------------- Meldung "
-							+ invEntSize + " --------------------------------------------------------\n "
-							+ "\nDatei: " + filePath + "\n"
-							+ e.getMessage();
-//					System.err.println(errMsg);
-					//TODO neue Exception frame mit Array für mehrere Fehler in der CSV
-//					Frame_ExceptionMsg.showException(e);
+					
+					abstrExc.add(e.getMessage());
+					
 				}
 			}
-
+			//TODO neue Exception frame mit Array für mehrere Fehler in der CSV
+			if(invalidEntries.size() > 0){
+//			Frame_ExceptionArrayMsg.showException(abstrExc, invalidEntries, filePath);
+			}
 		} catch (FileNotFoundException e) {
 			throw new ClientException(e, "Fehler beim Laden der Datei", "Datei " + filePath + " wurde nicht gefunden", 1);
 
@@ -147,7 +146,7 @@ public class CSVReader {
 				if (csvFileParser != null)
 					csvFileParser.close();
 			} catch (IOException e) {
-				// Swallow Exception
+				throw new ClientException(e, "Ein/Ausgabe Fehler", "Es ist ein Fehler beim Lesen der Datei aufgetreten", 2);
 			}
 		}
 	}
@@ -269,8 +268,16 @@ public class CSVReader {
 		return validEntries;
 	}
 
-	public List<CSVRecord> getInvalidEntries() {
+	public static List<CSVRecord> getInvalidEntries() {
 		return invalidEntries;
 	}
 
+	public static int getInvEntSize() {
+		return invEntSize;
+	}
+	
+	public static List<String> getAbstrExc() {
+		return abstrExc;
+	}
+	
 }

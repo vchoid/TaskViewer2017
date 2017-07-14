@@ -145,7 +145,6 @@ public class DateUtil {
 		} catch (InvalidDateException e) {
 			String msg = String.format("%s %s in der Spalte \'%s\'", e.getMessage(), System.lineSeparator(),
 					columnName);
-			Frame_ExceptionMsg.showException(e);
 			throw new InvalidDateException("Formatfehler vom Datum",msg, 0,date);
 		}
 	}

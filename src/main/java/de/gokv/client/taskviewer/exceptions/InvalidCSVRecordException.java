@@ -62,12 +62,12 @@ public class InvalidCSVRecordException extends AbstractException {
 	public InvalidCSVRecordException(String colName, long line, String reason,Object...objects) {
 		super();
 		reason = String.format(reason, objects);
-		InvalidCSVRecordException.message = String.format("In Zeile %s,  %s in der Spalte \"%s\" %s Grund: %s", line, System.lineSeparator(), colName, System.lineSeparator(), reason);
+		InvalidCSVRecordException.message = String.format("In Zeile %s,  %s in der Spalte \"%s\" %s Grund: %s", line, System.lineSeparator(), colName, System.lineSeparator(), reason );
 	}
 
 	@Override
 	public String getMessage() {
-		return message;
+		return message +  System.lineSeparator();
 	}
 
 }
