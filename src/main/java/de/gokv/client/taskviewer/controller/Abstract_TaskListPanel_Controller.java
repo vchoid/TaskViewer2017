@@ -27,8 +27,8 @@ public class Abstract_TaskListPanel_Controller extends Abstract_MyFrame_Controll
 	
 	private LoadProperties loadProps;
 	protected static final String FILE_PROPS = "http.properties";
-//	protected static final String TITLE_OF_VAL_PROPS = "http.local.url";
-	protected static final String TITLE_OF_VAL_PROPS = "http.url";
+	protected static final String TITLE_OF_VAL_PROPS = "http.local.url";
+//	protected static final String TITLE_OF_VAL_PROPS = "http.url";
 	protected final String valProps;
 	public String errMsg;
 
@@ -43,7 +43,7 @@ public class Abstract_TaskListPanel_Controller extends Abstract_MyFrame_Controll
 				properties.load(stream);
 				ProxyAuthentication.initialize(properties);
 				//TODO löschen
-				throw new MissingProxyPropertyException("MissingProxyPropertyException", null);
+//				throw new MissingProxyPropertyException("MissingProxyPropertyException", null);
 			} catch (IOException | MissingProxyPropertyException e) {
 				throw new ClientConfigurationExeception(e, "Fehlerhafter Proxy", "Die proxyconfig.properties enthält fehlerhafte Einträge.", 3);
 			}

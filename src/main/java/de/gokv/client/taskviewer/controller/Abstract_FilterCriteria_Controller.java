@@ -3,6 +3,7 @@ package de.gokv.client.taskviewer.controller;
 import de.gokv.client.taskviewer.Criteria;
 import de.gokv.client.taskviewer.exceptions.InvalidDateException;
 import de.gokv.client.taskviewer.utils.DateUtil;
+import de.gokv.client.taskviewer.view.Frame_ExceptionMsg;
 import de.gokv.client.taskviewer.view.Template_FilterCriteriaPanel;
 import de.gokv.client.taskviewer.view.Template_InfoCSVPanel;
 import de.gokv.client.taskviewer.view.Template_InfoTaskPanel;
@@ -45,7 +46,8 @@ public class Abstract_FilterCriteria_Controller extends Abstract_MyFrame_Control
 
 		} catch (InvalidDateException e1) {
 			// DO NOTHING
-			e1.printStackTrace();
+			Frame_ExceptionMsg.showException(e1);
+//			e1.printStackTrace();
 		}
 	}
 

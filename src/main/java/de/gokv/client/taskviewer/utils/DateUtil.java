@@ -10,8 +10,10 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import de.gokv.client.taskviewer.exceptions.AbstractException;
 import de.gokv.client.taskviewer.exceptions.InvalidDateException;
 import de.gokv.client.taskviewer.module.http.HTTPSClient;
+import de.gokv.client.taskviewer.view.Frame_ExceptionMsg;
 
 /**
  * Beinhaltet eine Methode zum Überprüfen des richtigen Formates (DD.MM.YYYY)
@@ -94,12 +96,17 @@ public class DateUtil {
 	 *             ohne Spaltenname
 	 */
 	public static LocalDate parseDate(String date) throws InvalidDateException {
-		if (isDateValid(date)) {
-			LocalDate d2;
-			d2 = LocalDate.parse(date, dateTimeFormat);
-			return d2;
+		try {
+			if (isDateValid(date)) {
+				LocalDate d2;
+				d2 = LocalDate.parse(date, dateTimeFormat);
+				return d2;
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		throw new InvalidDateException("Fehler beim Konvertieren vom String \'%s\' in ein LocalDate-Format", date);
+		throw new InvalidDateException("Formatfehler vom Datum", "Fehler beim Konvertieren vom String \'%s\' in ein LocalDate-Format",0, date);
 	}
 	
 	/**
@@ -138,7 +145,8 @@ public class DateUtil {
 		} catch (InvalidDateException e) {
 			String msg = String.format("%s %s in der Spalte \'%s\'", e.getMessage(), System.lineSeparator(),
 					columnName);
-			throw new InvalidDateException(msg, date);
+			Frame_ExceptionMsg.showException(e);
+			throw new InvalidDateException("Formatfehler vom Datum",msg, 0,date);
 		}
 	}
 

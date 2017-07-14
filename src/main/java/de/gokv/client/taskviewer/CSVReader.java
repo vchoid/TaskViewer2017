@@ -18,6 +18,7 @@ import de.gokv.client.taskviewer.exceptions.ClientException;
 import de.gokv.client.taskviewer.exceptions.InvalidCSVRecordException;
 import de.gokv.client.taskviewer.exceptions.InvalidDateException;
 import de.gokv.client.taskviewer.utils.DateUtil;
+import de.gokv.client.taskviewer.view.Frame_ExceptionMsg;
 
 /**
  * Eine CSV auslesen und Daten zurückgeben.
@@ -109,7 +110,7 @@ public class CSVReader {
 			csvFileParser = new CSVParser(csvFile, csvHeaderFormat);
 
 			// TODO: Überprüfung der Header in der CSV
-			// System.out.println(csvFileParser.getHeaderMap());
+//			 System.out.println(csvFileParser.getHeaderMap());
 
 			// Eine Zeile aus der CSV +++++++++++++++++++++++++++++++++++
 			for (CSVRecord csvRecord : csvFileParser.getRecords()) {
@@ -128,6 +129,8 @@ public class CSVReader {
 							+ "\nDatei: " + filePath + "\n"
 							+ e.getMessage();
 //					System.err.println(errMsg);
+					//TODO neue Exception frame mit Array für mehrere Fehler in der CSV
+//					Frame_ExceptionMsg.showException(e);
 				}
 			}
 

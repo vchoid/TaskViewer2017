@@ -2,6 +2,7 @@ package de.gokv.client.taskviewer.exceptions;
 
 public class AbstractException extends Throwable {
 
+
 	private static final long serialVersionUID = 1L;
 
 	protected Throwable cause;
@@ -47,5 +48,20 @@ public class AbstractException extends Throwable {
 	}
 
 	
+	public void setCause(Throwable cause) {
+		this.cause = cause;
+	}
+	
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	
+	public void setErrSuperCode(int errSuperCode) {
+		this.errSuperCode = errSuperCode;
+	}
 
 }
