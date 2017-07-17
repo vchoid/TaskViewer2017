@@ -21,11 +21,11 @@ import org.apache.commons.csv.CSVRecord;
 
 import de.gokv.client.taskviewer.CSVReader;
 import de.gokv.client.taskviewer.controller.FrameExceptionArray_Controller;
-import de.gokv.client.taskviewer.exceptions.AbstractException;
 import net.miginfocom.swing.MigLayout;
 
 public class Frame_ExceptionArrayMsg extends JDialog {
 
+	private static final long serialVersionUID = 1L;
 	public static JPanel contentPane;
 	public static JPanel titlePane;
 	public static JPanel descriptionPane;
@@ -123,10 +123,10 @@ public class Frame_ExceptionArrayMsg extends JDialog {
 	public static JScrollPane getStackTraceAsScrollPane() {
 		JTextArea text = new JTextArea();
 		text.setEditable(false);
-		if (CSVReader.getInvFilePath().size() == 1) {
-			filePath = "In der Datei: " + CSVReader.getInvFilePath() + "\ntraten folgende Fehler auf: \n\n";
+		if (CSVReader.getInvFilePaths().size() == 1) {
+			filePath = "In der Datei: " + CSVReader.getInvFilePaths() + "\ntraten folgende Fehler auf: \n\n";
 		} else {
-			filePath = "In den Dateien: " + CSVReader.getInvFilePath() + "\ntraten folgende Fehler auf: \n\n";
+			filePath = "In den Dateien: " + CSVReader.getInvFilePaths() + "\ntraten folgende Fehler auf: \n\n";
 		}
 		text.setText(filePath + abstrExc.toString().replace("[", "").replace("]", "").replace(",", ""));
 		JScrollPane scroller = new JScrollPane(text);

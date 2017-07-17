@@ -10,7 +10,6 @@ import javax.swing.JLabel;
 import javax.swing.border.Border;
 
 import de.gokv.client.taskviewer.controller.FilterCriteriaPanel_DateContr;
-import de.gokv.client.taskviewer.controller.FilterCriteriaPanel_MouseContr;
 import de.gokv.client.taskviewer.utils.HexaToRGB;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;

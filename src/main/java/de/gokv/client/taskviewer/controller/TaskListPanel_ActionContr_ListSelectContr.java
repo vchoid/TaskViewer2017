@@ -6,8 +6,6 @@ import java.awt.event.ActionListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import org.oxbow.swingbits.dialog.task.TaskDialogs;
-
 import de.gokv.client.taskviewer.exceptions.ClientConfigurationExeception;
 import de.gokv.client.taskviewer.view.Frame_ExceptionMsg;
 

@@ -11,8 +11,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
-import org.oxbow.swingbits.dialog.task.TaskDialogs;
-
 import de.gokv.client.taskviewer.controller.FrameTaskViewer_Controller;
 import de.gokv.client.taskviewer.controller.TaskListPanel_ActionContr;
 import de.gokv.client.taskviewer.controller.TaskListPanel_ActionContr_ListSelectContr;

@@ -6,7 +6,6 @@ import java.awt.Image;
 import java.awt.Insets;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JTextField;
 
 import de.gokv.client.taskviewer.controller.FilterCriteriaPanel_ActionContr;

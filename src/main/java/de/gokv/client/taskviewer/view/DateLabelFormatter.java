@@ -7,6 +7,9 @@ import java.util.Date;
 import javax.swing.JFormattedTextField.AbstractFormatter;
 
 class DateLabelFormatter extends AbstractFormatter {
+	
+	private static final long serialVersionUID = 1L;
+	
 		private String datePattern = "dd.MM.yyyy";
 	    private SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);
 

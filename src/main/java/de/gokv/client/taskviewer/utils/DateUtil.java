@@ -10,10 +10,8 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import de.gokv.client.taskviewer.exceptions.AbstractException;
 import de.gokv.client.taskviewer.exceptions.InvalidDateException;
 import de.gokv.client.taskviewer.module.http.HTTPSClient;
-import de.gokv.client.taskviewer.view.Frame_ExceptionMsg;
 
 /**
  * Beinhaltet eine Methode zum Überprüfen des richtigen Formates (DD.MM.YYYY)

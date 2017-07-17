@@ -40,7 +40,6 @@ import de.gokv.client.taskviewer.module.http.proxy.ProxyAuthentication;
 import de.gokv.client.taskviewer.module.http.ssl.ClientCertificate;
 import de.gokv.client.taskviewer.module.http.ssl.ClientCertificateException;
 import de.gokv.client.taskviewer.module.http.ssl.ServerException;
-import de.gokv.client.taskviewer.view.Frame_ExceptionMsg;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -51,6 +50,7 @@ public class HTTPSClient {
 	private URI apiEntryPoint;
 	private URI apiAdminEntryPoint;
 	private URI apiTaskEntryPoint;
+	@SuppressWarnings("unused")
 	private ExecutorService downloadPool;
 	private CloseableHttpClient client;
 	private X509Certificate[] trustedCertficates;

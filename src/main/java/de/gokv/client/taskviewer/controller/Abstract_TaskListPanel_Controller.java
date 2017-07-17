@@ -42,8 +42,6 @@ public class Abstract_TaskListPanel_Controller extends Abstract_MyFrame_Controll
 				Properties properties = new Properties();
 				properties.load(stream);
 				ProxyAuthentication.initialize(properties);
-				//TODO löschen
-//				throw new MissingProxyPropertyException("MissingProxyPropertyException", null);
 			} catch (IOException | MissingProxyPropertyException e) {
 				throw new ClientConfigurationExeception(e, "Fehlerhafter Proxy", "Die proxyconfig.properties enthält fehlerhafte Einträge.", 3);
 			}
@@ -52,8 +50,6 @@ public class Abstract_TaskListPanel_Controller extends Abstract_MyFrame_Controll
 		if (client == null){
 			try {
 				client = new HTTPSClient(new URL(valProps));
-				//TODO löschen
-//				throw new ServerException("ServerException");
 			} catch (ServerException | GeneralSecurityException | IOException | ClientCertificateException
 					| URISyntaxException e) {
 				throw new ClientConfigurationExeception(e, "Verbindungsfehler zum Server", "Die http.properties enthält fehlerhafte Einträge.", 4);

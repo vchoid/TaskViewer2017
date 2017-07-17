@@ -49,7 +49,7 @@ public class MyModel {
 			reader.readCSVFile();
 			tasks.addAll(reader.getValidEntries());
 			countValidTasks += reader.getValidEntries().size();
-			countInvalidTasks = reader.getInvalidEntries().size();
+			countInvalidTasks = CSVReader.getInvalidEntries().size();
 			
 		}
 	}

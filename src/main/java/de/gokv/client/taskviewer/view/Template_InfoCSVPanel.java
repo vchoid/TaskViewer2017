@@ -1,10 +1,6 @@
 package de.gokv.client.taskviewer.view;
 
-import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.Insets;
-
-import javax.swing.JLabel;
 
 import de.gokv.client.taskviewer.controller.FrameTaskViewer_Controller;
 

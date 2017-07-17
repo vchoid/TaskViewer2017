@@ -77,23 +77,22 @@ public class Frame_TaskViewer extends JFrame {
 		contPanel.add(infoCSV);
 		contPanel.add(infoTask);
 
-		// TODO Error Message in Extra Frame anzeigen!
 		// Error Message
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-		// Fehler in CSV Dateien
-		if(CSVReader.getInvalidEntries().size() > 0){
-			Frame_ExceptionArrayMsg.showErrorMessageDialog(CSVReader.getAbstrExc(), CSVReader.getInvalidEntries());
-		}
 		// Fehler in der color.properties-Datei
 		if (HexaToRGB.errMsg != null) {
 			JOptionPane.showMessageDialog(null, HexaToRGB.errMsg, "Fehler in der color.properties Datei",
 					JOptionPane.WARNING_MESSAGE);
 		}
+		// Fehler in CSV Dateien
+		if(CSVReader.getInvalidEntries().size() > 0){
+			Frame_ExceptionArrayMsg.showErrorMessageDialog(CSVReader.getAbstrExc(), CSVReader.getInvalidEntries());
+		}
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		setVisible(true);
 		setLocationRelativeTo(null);
 		setResizable(false);
+		setVisible(true);
 	}
 
 	public FrameTaskViewer_Controller getController() {

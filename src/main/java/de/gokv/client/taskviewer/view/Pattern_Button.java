@@ -9,6 +9,7 @@ import javax.swing.border.Border;
 
 public class Pattern_Button extends JButton{
 	
+	private static final long serialVersionUID = 1L;
 	private final Font fontTxt = new Font("Arial", Font.BOLD, 12);
 	private final Border btnBorder = BorderFactory.createEmptyBorder(8, 5, 8, 5);
 	

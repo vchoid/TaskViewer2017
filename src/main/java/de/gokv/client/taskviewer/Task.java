@@ -3,8 +3,6 @@ package de.gokv.client.taskviewer;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
 import java.util.regex.Pattern;
 
 import org.apache.commons.csv.CSVRecord;

@@ -13,6 +13,7 @@ import de.gokv.client.taskviewer.utils.HexaToRGB;
 
 public class Pattern_GridBagButton extends JButton{
 
+	private static final long serialVersionUID = 1L;
 	private final Font fontTxt = new Font("Arial", Font.PLAIN, 15);
 	private final Border btnBorder = BorderFactory.createEmptyBorder(8, 5, 8, 5);
 	

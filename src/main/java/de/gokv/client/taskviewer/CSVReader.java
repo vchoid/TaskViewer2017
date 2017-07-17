@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 //import java.util.Map;
 import java.util.regex.Pattern;
-import java.util.zip.Inflater;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -73,8 +72,7 @@ public class CSVReader {
 
 	// Datei-Abfrage - Dateipfad +++++++++++++++++++++++++++++++++++++++
 	private static String filePath;
-//	private static String invFilePath;
-
+	// private static String invFilePath;
 
 	public CSVReader(String path) {
 		filePath = path;
@@ -102,7 +100,6 @@ public class CSVReader {
 		FileReader csvFile = null;
 		CSVParser csvFileParser = null;
 
-		// TODO header Mapping ==> eigene Exception werfen.
 		// erste Zeile als Titelzeile festlegen durch automatisches Parsing
 		CSVFormat csvHeaderFormat = CSVFormat.newFormat(';').withHeader();
 
@@ -112,9 +109,6 @@ public class CSVReader {
 
 			// csv zergliedern - starten ++++++++++++++++++++++++++++++++
 			csvFileParser = new CSVParser(csvFile, csvHeaderFormat);
-
-			// TODO: Überprüfung der Header in der CSV
-//			 System.out.println(csvFileParser.getHeaderMap());
 
 			// Eine Zeile aus der CSV +++++++++++++++++++++++++++++++++++
 			for (CSVRecord csvRecord : csvFileParser.getRecords()) {
@@ -127,16 +121,16 @@ public class CSVReader {
 				} catch (InvalidCSVRecordException e) {
 					invalidEntries.add(csvRecord);
 					setInvalidEntries(invalidEntries);
-//					invEntSize = invalidEntries.size();
 					abstrExc.add(e.getMessage());
-					if(!invFilePath.contains(filePath)){
+					if (!invFilePath.contains(filePath)) {
 						invFilePath.add(filePath);
 					}
-					
+
 				}
 			}
 		} catch (FileNotFoundException e) {
-			throw new ClientException(e, "Fehler beim Laden der Datei", "Datei " + filePath + " wurde nicht gefunden", 1);
+			throw new ClientException(e, "Fehler beim Laden der Datei", "Datei " + filePath + " wurde nicht gefunden",
+					1);
 
 		} catch (IOException e) {
 			throw new ClientException(e, "Ein/Ausgabe Fehler", "Es ist ein Fehler beim Lesen der Datei aufgetreten", 2);
@@ -148,7 +142,8 @@ public class CSVReader {
 				if (csvFileParser != null)
 					csvFileParser.close();
 			} catch (IOException e) {
-				throw new ClientException(e, "Ein/Ausgabe Fehler", "Es ist ein Fehler beim Lesen der Datei aufgetreten", 2);
+				throw new ClientException(e, "Ein/Ausgabe Fehler", "Es ist ein Fehler beim Lesen der Datei aufgetreten",
+						2);
 			}
 		}
 	}
@@ -173,8 +168,8 @@ public class CSVReader {
 	/**
 	 * 
 	 * Holt den Wert aus der CSV-Datei und gibt ihn wieder als String zurück.
-	 * Überprüft ob es sich um ein Pflichfeld handelt 
-	 * und wirft eine {@link InvalidCSVRecordException}, wenn dies nicht der Fall ist.
+	 * Überprüft ob es sich um ein Pflichfeld handelt und wirft eine
+	 * {@link InvalidCSVRecordException}, wenn dies nicht der Fall ist.
 	 * 
 	 * @param rec
 	 *            CSV-Datei einlesen.
@@ -185,7 +180,8 @@ public class CSVReader {
 	 * @return Gibt den Wert von der CSV-Datei-Spalte zurück.
 	 * @throws InvalidCSVRecordException
 	 */
-	public static String getValue(CSVRecord rec, String colName, boolean requireField) throws InvalidCSVRecordException {
+	public static String getValue(CSVRecord rec, String colName, boolean requireField)
+			throws InvalidCSVRecordException {
 		String s = getValue(rec, colName);
 
 		if (requireField && StringUtils.isBlank(s)) {
@@ -196,8 +192,8 @@ public class CSVReader {
 
 	/**
 	 * Holt den Wert aus der CSV-Datei und gibt ihn wieder als String zurück.
-	 * Überprüft ob es sich um ein Pflichfeld handelt
-	 * und wirft eine {@link InvalidCSVRecordException}, wenn dies nicht der Fall ist.
+	 * Überprüft ob es sich um ein Pflichfeld handelt und wirft eine
+	 * {@link InvalidCSVRecordException}, wenn dies nicht der Fall ist.
 	 * Überprüft, ob der Wert ein bestimmtes Pattern aufweist, wirft eine
 	 * {@link InvalidCSVRecordException}, wenn dies nicht der Fall ist.
 	 * 
@@ -218,30 +214,36 @@ public class CSVReader {
 		String value = getValue(rec, colName, requireField);
 		if (!pattern.matcher(value).matches())
 			throw new InvalidCSVRecordException(colName, rec.getRecordNumber(),
-					"-ungültiger Wert-%s Der Wert %s ist für das Format %s nicht gültig.%s",System.lineSeparator(), value, pattern.toString(), System.lineSeparator());
+					"-ungültiger Wert-%s Der Wert %s ist für das Format %s nicht gültig.%s", System.lineSeparator(),
+					value, pattern.toString(), System.lineSeparator());
 		return value;
 	}
+
 	/**
 	 * Holt den Wert aus der CSV-Datei und gibt ihn wieder als String zurück.
-	 * Überprüft ob es sich um ein Pflichfeld handelt
-	 * und wirft eine {@link InvalidCSVRecordException}, wenn dies nicht der Fall ist.
-	 * Überprüft ob es sich um ein TaskTyp aus der ArrayList {@link Task#TASK_TYPES TASK_TYPES} handelt.
+	 * Überprüft ob es sich um ein Pflichfeld handelt und wirft eine
+	 * {@link InvalidCSVRecordException}, wenn dies nicht der Fall ist.
+	 * Überprüft ob es sich um ein TaskTyp aus der ArrayList
+	 * {@link Task#TASK_TYPES TASK_TYPES} handelt.
 	 */
-	public static String getMappedValue(CSVRecord rec, String colName, boolean requireField, ArrayList<String> taskTypeList) throws InvalidCSVRecordException{
-		
-		String value= getValue(rec, colName, requireField);
-		if(!(taskTypeList.contains(value))){
+	public static String getMappedValue(CSVRecord rec, String colName, boolean requireField,
+			ArrayList<String> taskTypeList) throws InvalidCSVRecordException {
+
+		String value = getValue(rec, colName, requireField);
+		if (!(taskTypeList.contains(value))) {
 			throw new InvalidCSVRecordException(colName, rec.getRecordNumber(),
-					"-Tasktype-Fehler-%s \'%s\' ist kein gültiger TaskType %s.",System.lineSeparator(), value, System.lineSeparator());
+					"-Tasktype-Fehler-%s \'%s\' ist kein gültiger TaskType %s.", System.lineSeparator(), value,
+					System.lineSeparator());
 		}
-		 return value;
-		
+		return value;
+
 	}
+
 	/**
 	 * 
 	 * Holt den Wert aus der CSV-Datei und gibt ihn wieder als LocalDate zurück.
-	 * Überprüft ob es sich um ein Pflichfeld handelt
-	 * und wirft eine {@link InvalidCSVRecordException}, wenn dies nicht der Fall ist.
+	 * Überprüft ob es sich um ein Pflichfeld handelt und wirft eine
+	 * {@link InvalidCSVRecordException}, wenn dies nicht der Fall ist.
 	 * 
 	 * @param rec
 	 *            CSV-Datei einlesen.
@@ -259,11 +261,11 @@ public class CSVReader {
 		LocalDate localDate = DateUtil.parseDate(s, colName);
 		return localDate;
 	}
-	
+
 	public static String getFilePath() {
 		return filePath;
 	}
-	
+
 	public List<Task> getValidEntries() {
 		return validEntries;
 	}
@@ -273,7 +275,7 @@ public class CSVReader {
 	}
 
 	public void setInvalidEntries(List<CSVRecord> invalidEntries) {
-		this.invalidEntries = invalidEntries;
+		CSVReader.invalidEntries = invalidEntries;
 	}
 
 	public void setInvEntSize(int invEntSize) {
@@ -283,14 +285,13 @@ public class CSVReader {
 	public int getInvEntSize() {
 		return invEntSize;
 	}
-	
+
 	public static List<String> getAbstrExc() {
 		return abstrExc;
 	}
-	public static List<String> getInvFilePath() {
+
+	public static List<String> getInvFilePaths() {
 		return invFilePath;
 	}
-	
-	
-	
+
 }

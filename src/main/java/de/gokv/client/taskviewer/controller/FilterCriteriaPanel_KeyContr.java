@@ -5,8 +5,6 @@ import java.awt.event.KeyListener;
 
 import org.apache.commons.lang.ArrayUtils;
 
-import de.gokv.client.taskviewer.view.Template_FilterCriteriaPanel;
-
 public class FilterCriteriaPanel_KeyContr extends Abstract_FilterCriteria_Controller implements KeyListener {
 
 	private final int[] ignoredKeys = {KeyEvent.VK_CAPS_LOCK, KeyEvent.VK_SHIFT};

@@ -61,8 +61,8 @@ public class Criteria {
 		return criteria;
 	}
 	
+	@SuppressWarnings("unused")
 	private LocalDate formatCriteria(LocalDate dateCriteria) {
-		//TODO überprüfe Tag, Monat , Jahr
 		return dateCriteria;
 	}
 	

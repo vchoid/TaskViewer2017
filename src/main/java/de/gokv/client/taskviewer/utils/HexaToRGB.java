@@ -1,7 +1,6 @@
 package de.gokv.client.taskviewer.utils;
 
 import java.awt.Color;
-import java.time.LocalDate;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
