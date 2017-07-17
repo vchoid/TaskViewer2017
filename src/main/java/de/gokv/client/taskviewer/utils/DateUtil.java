@@ -26,9 +26,8 @@ import de.gokv.client.taskviewer.module.http.HTTPSClient;
  * {@link LocalDate} um</li>
  * <li><b>{@link #parseDate(String, String)}</b>: wandelt einen {@link String}
  * in ein {@link LocalDate} um und gibt den Spaltennamen in der Fehlermeldung
- * zurück</li>
- * TODO JAVADOC fertig schreiben.
- * <li><b>{@link #datetoString(String)}</b>: ...</li>
+ * zurück</li> TODO JAVADOC fertig schreiben.
+ * <li><b>{@link #stringDateToString(String)}</b>: ...</li>
  * <li><b>{@link #localDateToString(LocalDate)}</b>: ...</li>
  * <li><b>{@link #dateFromHttpsClientToString(String)}</b>: ...</li>
  * <li><b>{@link #dateWithTimeFromHttpsClientToString(String)}</b>: ...</li>
@@ -46,16 +45,20 @@ public class DateUtil {
 	private final static DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("dd.MM.uuuu")
 			.withResolverStyle(ResolverStyle.STRICT);
 	private final static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
-	public final static DateTimeFormatter dTf_request = DateTimeFormatter.ofPattern("uuuu'-'MM'-'dd'T'HH':'mm':'ss'.'SSS'Z'");
+	public final static DateTimeFormatter dTf_request = DateTimeFormatter
+			.ofPattern("uuuu'-'MM'-'dd'T'HH':'mm':'ss'.'SSS'Z'");
 
+	private static String dateValueAsString;
+	private static String timeSecondsValueAsString;
 
 	/**
 	 * Legt ein {@link Pattern} im Format "ZZ.ZZ.ZZZZ" (Z = Ziffer) an.
-	 * Vergleicht mit der {@link Pattern#matcher(CharSequence) matcher()}-Methode,
-	 * ob der Parameter im erwartetem Format vorliegt und gibt ein boolischen Wert zurück.
-	 * Anschließend wird versucht den String in ein LocalDate-Format zu konvertieren und
-	 * gibt ein wieder ein boolischen Wert zurück.
-	 * Bei einem Fehler wird die {@link DateTimeParseException} geworfen.
+	 * Vergleicht mit der {@link Pattern#matcher(CharSequence) matcher()}
+	 * -Methode, ob der Parameter im erwartetem Format vorliegt und gibt ein
+	 * boolischen Wert zurück. Anschließend wird versucht den String in ein
+	 * LocalDate-Format zu konvertieren und gibt ein wieder ein boolischen Wert
+	 * zurück. Bei einem Fehler wird die {@link DateTimeParseException}
+	 * geworfen.
 	 * 
 	 * @param date
 	 *            {@link String}: Zu konvertierendes Datum im Format TT.MM.JJJJ
@@ -68,7 +71,7 @@ public class DateUtil {
 	 *         </ul>
 	 */
 	public static boolean isDateValid(String date) {
-		// String überprüfen, ob 
+		// String überprüfen, ob
 		Pattern p = Pattern.compile("\\d{2}\\.\\d{2}\\.\\d{4}");
 		Matcher m = p.matcher(date);
 		if (!m.matches()) {
@@ -81,11 +84,12 @@ public class DateUtil {
 			return false;
 		}
 	}
+
 	/**
-	 * Überprüft zuerst mit der {@link #isDateValid(String) is DateValid()}-Methode
-	 * ein String auf syntaktische Korrektheit und
-	 * konvertiert ihn zu einem Datums-Objekt um.
-	 * Bei einem Fehler wird {@link InvalidDateException} geworfen.
+	 * Überprüft zuerst mit der {@link #isDateValid(String) is DateValid()}
+	 * -Methode ein String auf syntaktische Korrektheit und konvertiert ihn zu
+	 * einem Datums-Objekt um. Bei einem Fehler wird
+	 * {@link InvalidDateException} geworfen.
 	 * 
 	 * @param date
 	 *            {@link String}: Zu konvertierendes Datum im Format TT.MM.JJJJ
@@ -106,7 +110,7 @@ public class DateUtil {
 		}
 		throw new InvalidDateException("Fehler beim Konvertieren vom String \'%s\' in ein LocalDate-Format", date);
 	}
-	
+
 	/**
 	 * Konvertiert ein {@link Date}-Objekt in ein {@link LocalDate}.
 	 * 
@@ -114,20 +118,20 @@ public class DateUtil {
 	 * @return
 	 * @throws InvalidDateException
 	 */
-	public static LocalDate parseDate(Date date) throws InvalidDateException{
+	public static LocalDate parseDate(Date date) throws InvalidDateException {
 		return parseDate(simpleDateFormat.format(date));
 	}
-	
-	
-//	public static LocalDate parseDate(Object date) throws InvalidDateException{
-//		return parseDate(sDf_request.format(date));
-//	}
-	
+
+	// public static LocalDate parseDate(Object date) throws
+	// InvalidDateException{
+	// return parseDate(sDf_request.format(date));
+	// }
+
 	/**
-	 * Versucht mit der {@link #parseDate(String) parseDate()}-Methode ein Strind
-	 * in ein LocaDate-Format zu konverieren und wirf bei einem Fehler die
-	 * {@link InvalidDateException}, mit der genauen Zeilen- und Spaltenangabe
-	 * in der der Fehler auftrat.
+	 * Versucht mit der {@link #parseDate(String) parseDate()}-Methode ein
+	 * Strind in ein LocaDate-Format zu konverieren und wirf bei einem Fehler
+	 * die {@link InvalidDateException}, mit der genauen Zeilen- und
+	 * Spaltenangabe in der der Fehler auftrat.
 	 * 
 	 * @param date
 	 *            {@link String}: Zu konvertierendes Datum im Format TT.MM.JJJJ
@@ -143,7 +147,7 @@ public class DateUtil {
 		} catch (InvalidDateException e) {
 			String msg = String.format("%s %s in der Spalte \'%s\'%s", e.getMessage(), System.lineSeparator(),
 					columnName, System.lineSeparator());
-			throw new InvalidDateException(msg,date);
+			throw new InvalidDateException(msg, date);
 		}
 	}
 
@@ -153,9 +157,11 @@ public class DateUtil {
 	 * @param strDate
 	 * @return
 	 */
-	public static String datetoString(String strDate) {
+	public static String stringDateToString(String strDate) {
 		LocalDate lDate = LocalDate.parse(strDate, DateUtil.dTf_request);
-		strDate = lDate.getDayOfMonth() + "." + lDate.getMonthValue() + "." + lDate.getYear();
+
+		strDate = add_0_BeforeValue(lDate.getDayOfMonth()) + "." + add_0_BeforeValue(lDate.getMonthValue()) + "."
+				+ lDate.getYear();
 		return strDate;
 	}
 
@@ -166,7 +172,8 @@ public class DateUtil {
 	 * @return
 	 */
 	public static String localDateToString(LocalDate lDate) {
-		return lDate.getDayOfMonth() + "." + lDate.getMonthValue() + "." + lDate.getYear();
+		return add_0_BeforeValue(lDate.getDayOfMonth()) + "." + add_0_BeforeValue(lDate.getMonthValue()) + "."
+				+ lDate.getYear();
 	}
 
 	/**
@@ -182,15 +189,17 @@ public class DateUtil {
 		String httpClient = HTTPSClient.task.get(httpClientTitle).toString();
 		if (!(httpClient.equals("empty"))) {
 			LocalDateTime lDate = LocalDateTime.parse(httpClient, DateUtil.dTf_request);
-			httpClient = lDate.getDayOfMonth() + "." + lDate.getMonthValue() + "." + lDate.getYear();
+			httpClient = add_0_BeforeValue(lDate.getDayOfMonth()) + "." + add_0_BeforeValue(lDate.getMonthValue()) + "."
+					+ lDate.getYear();
 		}
 		return httpClient;
 	}
+
 	/**
 	 * Holt ein Datum über den HTTPSClient im Format String und speichert es in
 	 * einer Variable. Wandelt das Datum in eine LocalDateTime-Format um.
-	 * Überschreibt die String Variable im Format "mm.dd.yyyy hh:mm:ss" und gibt sie
-	 * zurück.
+	 * Überschreibt die String Variable im Format "mm.dd.yyyy hh:mm:ss" und gibt
+	 * sie zurück.
 	 * 
 	 * @param httpClientTitle
 	 * @return
@@ -199,9 +208,28 @@ public class DateUtil {
 		String httpClient = HTTPSClient.task.get(httpClientTitle).toString();
 		if (!(httpClient.equals("empty"))) {
 			LocalDateTime lDate = LocalDateTime.parse(httpClient, DateUtil.dTf_request);
-			httpClient = lDate.getDayOfMonth() + "." + lDate.getMonthValue() + "." + lDate.getYear() + " (Uhrzeit: "
-					+ lDate.getHour() + ":" + lDate.getMinute() + ":" + lDate.getSecond() + ")";
+			httpClient = add_0_BeforeValue(lDate.getDayOfMonth()) + "." + add_0_BeforeValue(lDate.getMonthValue()) + "."
+					+ lDate.getYear() + " (Uhrzeit: " + add_0_BeforeValue(lDate.getHour()) + ":" + add_0_BeforeValue(lDate.getMinute()) + ":"
+					+ add_0_AfterValue(lDate.getSecond()) + ")";
 		}
 		return httpClient;
+	}
+
+	public static String add_0_BeforeValue(int dateValueAsInt) {
+		if (dateValueAsInt < 10) {
+			dateValueAsString = "0" + dateValueAsInt;
+		} else {
+			dateValueAsString = "" + dateValueAsInt;
+		}
+		return dateValueAsString;
+	}
+
+	public static String add_0_AfterValue(int timeValueAsInt) {
+		if (timeValueAsInt < 10) {
+			timeSecondsValueAsString = timeValueAsInt + "0";
+		} else {
+			timeSecondsValueAsString = "" + timeValueAsInt;
+		}
+		return timeSecondsValueAsString;
 	}
 }

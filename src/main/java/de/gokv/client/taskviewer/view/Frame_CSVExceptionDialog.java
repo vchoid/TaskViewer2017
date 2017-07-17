@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
@@ -16,26 +17,41 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-import org.oxbow.swingbits.util.Strings;
+import org.apache.commons.csv.CSVRecord;
 
-import de.gokv.client.taskviewer.controller.FrameException_Controller;
-import de.gokv.client.taskviewer.exceptions.AbstractException;
+import de.gokv.client.taskviewer.CSVReader;
+import de.gokv.client.taskviewer.controller.FrameExceptionArray_Controller;
 import net.miginfocom.swing.MigLayout;
 
-public class Frame_ExceptionMsg extends JDialog {
+
+/**
+ * Anzeige von Fehlern in CSV Datein.
+ * 
+ * <p>
+ * <b>Methoden:</b>
+ * <ul>
+ * <li><b>{@link #showErrorMessageDialog(List, List)}</b>: Ermöglicht die Anzeige von Fehler in einem Extra Fenster.</li>
+ * 
+ * 
+ * @author Christoph Kiank
+ *
+ */
+public class Frame_CSVExceptionDialog extends JDialog {
 
 	private static final long serialVersionUID = 1L;
-
 	public static JPanel contentPane;
-	public static JPanel topPane;
-	public static JPanel midPane;
+	public static JPanel titlePane;
+	public static JPanel descriptionPane;
+	public static JPanel stackTracePane;
 	public static JPanel bottomPane;
 
 	public Pattern_Button expandBtn;
-	public static FrameException_Controller btnCont = new FrameException_Controller();
+	public static FrameExceptionArray_Controller btnCont = new FrameExceptionArray_Controller();
 
 	public static JLabel errorIconLabel;
 	public static JLabel errTitle;
+	public static JLabel errSize;
+	private String errSizeString;
 	public static JTextArea errShortMsg;
 	private static int errorCode;
 
@@ -49,19 +65,29 @@ public class Frame_ExceptionMsg extends JDialog {
 
 	public static final Font FONT_TITLE = new Font("SansSerif", Font.PLAIN, 20);
 
-	public static AbstractException ex;
+	public static List<String> abstrExc;
+	public static List<CSVRecord> invalidEntries;
+	private static String filePath;
+	public static Frame_CSVExceptionDialog fExMsg;
 
-	public static Frame_ExceptionMsg fExMsg;
-
-	public Frame_ExceptionMsg() {
+	/**
+	 * Das Absturzprogramm Icon wird hier geladen.
+	 */
+	public Frame_CSVExceptionDialog() {
 		pathAppIcon = "/appIcon/taskViewerError.png";
 		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(pathAppIcon)));
 	}
-
-	public static void showException(AbstractException ex) {
-		errorCode = ex.getErrChildCode() + ex.getErrSuperCode();
-		fExMsg = new Frame_ExceptionMsg();
-		Frame_ExceptionMsg.ex = ex;
+	/**
+	 * Ermöglicht die Anzeige von Fehler in einem Extra Fenster.
+	 * 
+	 * @param abstrExc
+	 * @param invalidEntries
+	 */
+	public static void showErrorMessageDialog(List<String> abstrExc, List<CSVRecord> invalidEntries) {
+		errorCode = 300;
+		fExMsg = new Frame_CSVExceptionDialog();
+		Frame_CSVExceptionDialog.invalidEntries = invalidEntries;
+		Frame_CSVExceptionDialog.abstrExc = abstrExc;
 		BorderLayout bLayoutCONTENT = new BorderLayout();
 		MigLayout mlayoutTOP = new MigLayout("", "[][grow][]", "[]");
 		MigLayout mlayoutMIDDLE = new MigLayout("", "[][grow][]", "[]");
@@ -71,28 +97,30 @@ public class Frame_ExceptionMsg extends JDialog {
 		contentPane = new JPanel();
 		contentPane.setLayout(bLayoutCONTENT);
 		// Top Pane ++++++++++++++++++++++++++++++++++++++++++++
-		topPane = new JPanel();
-		topPane.setBackground(Color.WHITE);
-		topPane.setLayout(mlayoutTOP);
+		titlePane = new JPanel();
+		titlePane.setBackground(Color.WHITE);
+		titlePane.setLayout(mlayoutTOP);
 		errorIconLabel = new JLabel();
 		errorIconLabel.setIcon(fExMsg.iconError);
-		errTitle = new JLabel(ex.getTitle());
+		errTitle = new JLabel("Fehlerhafte Werte in CSV-Datein");
 		errTitle.setFont(FONT_TITLE);
-		errShortMsg = new JTextArea(ex.getMessage());
-		errShortMsg.setEditable(false);
-		errShortMsg.setLayout(mlayoutTOP);
-		errShortMsg.setLineWrap(true);
+		if(invalidEntries.size() == 1){
+			fExMsg.errSizeString = ""+ invalidEntries.size() + " fehlerhafter Eintrag";
+		} else {
+			fExMsg.errSizeString = ""+ invalidEntries.size() + " fehlerhafte Einträge";
+		}
+		errSize = new JLabel(fExMsg.errSizeString);
 		// ------------------------------------------------------
-		topPane.add(errorIconLabel, "");
-		topPane.add(errTitle, "wrap,span");
-		topPane.add(errShortMsg, "grow, skip, span");
+		titlePane.add(errorIconLabel, "");
+		titlePane.add(errTitle, "wrap,span");
+		titlePane.add(errSize, "grow, skip, span");
 		// Middle Pane +++++++++++++++++++++++++++++++++++++++++
-		midPane = new JPanel(new BorderLayout());
-		midPane.setBackground(Color.WHITE);
-		midPane.setLayout(mlayoutMIDDLE);
-		midPane.setVisible(false);
+		stackTracePane = new JPanel(new BorderLayout());
+		stackTracePane.setBackground(Color.WHITE);
+		stackTracePane.setLayout(mlayoutMIDDLE);
+		stackTracePane.setVisible(false);
 		// ------------------------------------------------------
-		midPane.add(getStackTraceAsScrollPane(), "span, grow, push");
+		stackTracePane.add(getStackTraceAsScrollPane(), "span, grow, push, wrap");
 		// Bottom Pane +++++++++++++++++++++++++++++++++++++++++
 		bottomPane = new JPanel();
 		bottomPane.setLayout(mlayoutBTTM);
@@ -103,8 +131,8 @@ public class Frame_ExceptionMsg extends JDialog {
 		// ------------------------------------------------------
 		bottomPane.add(fExMsg.expandBtn, "flowy");
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++
-		contentPane.add(topPane, BorderLayout.PAGE_START);
-		contentPane.add(midPane, BorderLayout.CENTER);
+		contentPane.add(titlePane, BorderLayout.PAGE_START);
+		contentPane.add(stackTracePane, BorderLayout.CENTER);
 		contentPane.add(bottomPane, BorderLayout.PAGE_END);
 		fExMsg.add(contentPane);
 		// ------------------------------------------------------
@@ -122,7 +150,12 @@ public class Frame_ExceptionMsg extends JDialog {
 	public static JScrollPane getStackTraceAsScrollPane() {
 		JTextArea text = new JTextArea();
 		text.setEditable(false);
-		text.setText(Strings.stackStraceAsString(ex));
+		if (CSVReader.getInvFilePaths().size() == 2) {
+			filePath = "In der Datei: " + CSVReader.getInvFilePaths() + "\ntraten folgende Fehler auf: \n\n";
+		} else {
+			filePath = "In den Dateien: " + CSVReader.getInvFilePaths() + "\ntraten folgende Fehler auf: \n\n";
+		}
+		text.setText(filePath + abstrExc.toString().replace("[", "").replace("]", "").replace(",", ""));
 		JScrollPane scroller = new JScrollPane(text);
 		return scroller;
 	}

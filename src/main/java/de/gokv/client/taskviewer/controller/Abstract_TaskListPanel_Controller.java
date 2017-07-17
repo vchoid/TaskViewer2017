@@ -66,7 +66,8 @@ public class Abstract_TaskListPanel_Controller extends Abstract_MyFrame_Controll
 		infoTask.state.setlField(HTTPSClient.task.get("state").toString());
 		infoTask.taskType.setlField(HTTPSClient.task.get("type").toString());
 		
-		infoTask.orderDate.setlField(DateUtil.dateWithTimeFromHttpsClientToString("orderedDate"));
+		infoTask.orderDate.setlField(DateUtil.dateFromHttpsClientToString("orderedDate"));
+//		infoTask.orderDate.setlField(DateUtil.dateWithTimeFromHttpsClientToString("orderedDate"));
 		infoTask.evInProgs.setlField(DateUtil.dateWithTimeFromHttpsClientToString("eventInProgress"));
 		infoTask.evCompl.setlField(DateUtil.dateWithTimeFromHttpsClientToString("eventCompleted"));
 		infoTask.evReceived.setlField(DateUtil.dateWithTimeFromHttpsClientToString("eventReceived"));

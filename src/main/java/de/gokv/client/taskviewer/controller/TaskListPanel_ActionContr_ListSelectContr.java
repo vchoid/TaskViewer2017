@@ -7,7 +7,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import de.gokv.client.taskviewer.exceptions.ClientConfigurationExeception;
-import de.gokv.client.taskviewer.view.Frame_ExceptionMsg;
+import de.gokv.client.taskviewer.view.Frame_ExceptionDialog;
 
 /**
  * 
@@ -31,7 +31,7 @@ public class TaskListPanel_ActionContr_ListSelectContr extends Abstract_TaskList
 			try {
 				loadTaskDetails();
 			} catch (ClientConfigurationExeception e1) {
-				Frame_ExceptionMsg.showException(e1);
+				Frame_ExceptionDialog.showException(e1);
 			}
 		}
 	}

@@ -6,7 +6,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
@@ -17,28 +16,26 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-import org.apache.commons.csv.CSVRecord;
+import org.oxbow.swingbits.util.Strings;
 
-import de.gokv.client.taskviewer.CSVReader;
-import de.gokv.client.taskviewer.controller.FrameExceptionArray_Controller;
+import de.gokv.client.taskviewer.controller.FrameException_Controller;
+import de.gokv.client.taskviewer.exceptions.AbstractException;
 import net.miginfocom.swing.MigLayout;
 
-public class Frame_ExceptionArrayMsg extends JDialog {
+public class Frame_ExceptionDialog extends JDialog {
 
 	private static final long serialVersionUID = 1L;
+
 	public static JPanel contentPane;
-	public static JPanel titlePane;
-	public static JPanel descriptionPane;
-	public static JPanel stackTracePane;
+	public static JPanel topPane;
+	public static JPanel midPane;
 	public static JPanel bottomPane;
 
 	public Pattern_Button expandBtn;
-	public static FrameExceptionArray_Controller btnCont = new FrameExceptionArray_Controller();
+	public static FrameException_Controller btnCont = new FrameException_Controller();
 
 	public static JLabel errorIconLabel;
 	public static JLabel errTitle;
-	public static JLabel errSize;
-	private String errSizeString;
 	public static JTextArea errShortMsg;
 	private static int errorCode;
 
@@ -52,21 +49,19 @@ public class Frame_ExceptionArrayMsg extends JDialog {
 
 	public static final Font FONT_TITLE = new Font("SansSerif", Font.PLAIN, 20);
 
-	public static List<String> abstrExc;
-	public static List<CSVRecord> invalidEntries;
-	private static String filePath;
-	public static Frame_ExceptionArrayMsg fExMsg;
+	public static AbstractException ex;
 
-	public Frame_ExceptionArrayMsg() {
+	public static Frame_ExceptionDialog fExMsg;
+
+	public Frame_ExceptionDialog() {
 		pathAppIcon = "/appIcon/taskViewerError.png";
 		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(pathAppIcon)));
 	}
 
-	public static void showErrorMessageDialog(List<String> abstrExc, List<CSVRecord> invalidEntries) {
-		errorCode = 300;
-		fExMsg = new Frame_ExceptionArrayMsg();
-		Frame_ExceptionArrayMsg.invalidEntries = invalidEntries;
-		Frame_ExceptionArrayMsg.abstrExc = abstrExc;
+	public static void showException(AbstractException ex) {
+		errorCode = ex.getErrChildCode() + ex.getErrSuperCode();
+		fExMsg = new Frame_ExceptionDialog();
+		Frame_ExceptionDialog.ex = ex;
 		BorderLayout bLayoutCONTENT = new BorderLayout();
 		MigLayout mlayoutTOP = new MigLayout("", "[][grow][]", "[]");
 		MigLayout mlayoutMIDDLE = new MigLayout("", "[][grow][]", "[]");
@@ -76,30 +71,28 @@ public class Frame_ExceptionArrayMsg extends JDialog {
 		contentPane = new JPanel();
 		contentPane.setLayout(bLayoutCONTENT);
 		// Top Pane ++++++++++++++++++++++++++++++++++++++++++++
-		titlePane = new JPanel();
-		titlePane.setBackground(Color.WHITE);
-		titlePane.setLayout(mlayoutTOP);
+		topPane = new JPanel();
+		topPane.setBackground(Color.WHITE);
+		topPane.setLayout(mlayoutTOP);
 		errorIconLabel = new JLabel();
 		errorIconLabel.setIcon(fExMsg.iconError);
-		errTitle = new JLabel("Fehlerhafte Werte in CSV-Datein");
+		errTitle = new JLabel(ex.getTitle());
 		errTitle.setFont(FONT_TITLE);
-		if(invalidEntries.size() == 1){
-			fExMsg.errSizeString = ""+ invalidEntries.size() + " fehlerhafter Eintrag";
-		} else {
-			fExMsg.errSizeString = ""+ invalidEntries.size() + " fehlerhafte Einträge";
-		}
-		errSize = new JLabel(fExMsg.errSizeString);
+		errShortMsg = new JTextArea(ex.getMessage());
+		errShortMsg.setEditable(false);
+		errShortMsg.setLayout(mlayoutTOP);
+		errShortMsg.setLineWrap(true);
 		// ------------------------------------------------------
-		titlePane.add(errorIconLabel, "");
-		titlePane.add(errTitle, "wrap,span");
-		titlePane.add(errSize, "grow, skip, span");
+		topPane.add(errorIconLabel, "");
+		topPane.add(errTitle, "wrap,span");
+		topPane.add(errShortMsg, "grow, skip, span");
 		// Middle Pane +++++++++++++++++++++++++++++++++++++++++
-		stackTracePane = new JPanel(new BorderLayout());
-		stackTracePane.setBackground(Color.WHITE);
-		stackTracePane.setLayout(mlayoutMIDDLE);
-		stackTracePane.setVisible(false);
+		midPane = new JPanel(new BorderLayout());
+		midPane.setBackground(Color.WHITE);
+		midPane.setLayout(mlayoutMIDDLE);
+		midPane.setVisible(false);
 		// ------------------------------------------------------
-		stackTracePane.add(getStackTraceAsScrollPane(), "span, grow, push, wrap");
+		midPane.add(getStackTraceAsScrollPane(), "span, grow, push");
 		// Bottom Pane +++++++++++++++++++++++++++++++++++++++++
 		bottomPane = new JPanel();
 		bottomPane.setLayout(mlayoutBTTM);
@@ -110,8 +103,8 @@ public class Frame_ExceptionArrayMsg extends JDialog {
 		// ------------------------------------------------------
 		bottomPane.add(fExMsg.expandBtn, "flowy");
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++
-		contentPane.add(titlePane, BorderLayout.PAGE_START);
-		contentPane.add(stackTracePane, BorderLayout.CENTER);
+		contentPane.add(topPane, BorderLayout.PAGE_START);
+		contentPane.add(midPane, BorderLayout.CENTER);
 		contentPane.add(bottomPane, BorderLayout.PAGE_END);
 		fExMsg.add(contentPane);
 		// ------------------------------------------------------
@@ -129,12 +122,7 @@ public class Frame_ExceptionArrayMsg extends JDialog {
 	public static JScrollPane getStackTraceAsScrollPane() {
 		JTextArea text = new JTextArea();
 		text.setEditable(false);
-		if (CSVReader.getInvFilePaths().size() == 2) {
-			filePath = "In der Datei: " + CSVReader.getInvFilePaths() + "\ntraten folgende Fehler auf: \n\n";
-		} else {
-			filePath = "In den Dateien: " + CSVReader.getInvFilePaths() + "\ntraten folgende Fehler auf: \n\n";
-		}
-		text.setText(filePath + abstrExc.toString().replace("[", "").replace("]", "").replace(",", ""));
+		text.setText(Strings.stackStraceAsString(ex));
 		JScrollPane scroller = new JScrollPane(text);
 		return scroller;
 	}
