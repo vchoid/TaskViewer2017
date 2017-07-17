@@ -8,6 +8,7 @@ public class FilterCriteriaPanel_DateContr extends Abstract_FilterCriteria_Contr
 	@Override
 	public void stateChanged(ChangeEvent e) {
 		setFilteredTask();
+		frame.repaint();
 	}
 
 }

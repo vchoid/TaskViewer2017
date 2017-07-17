@@ -17,12 +17,14 @@ public class FilterCriteriaPanel_ActionContr extends Abstract_FilterCriteria_Con
 	public void actionPerformed(ActionEvent e) {
 		Template_FilterCriteriaPanel criteria = frame.filterMask;
 		 if (e.getSource() == criteria.clearAllBtn.getButton()) {
+			frame.repaint();
 			resetForm();
 			setFilteredTask();
 
 		}
 		setFilteredTask();
 		frame.filterMask.anzFiltEntriesTf.setText(null);
+		frame.repaint();
 
 	}
 }

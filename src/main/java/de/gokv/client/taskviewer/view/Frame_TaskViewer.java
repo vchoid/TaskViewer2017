@@ -92,6 +92,7 @@ public class Frame_TaskViewer extends JFrame {
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
 		setResizable(false);
+		repaint();
 		setVisible(true);
 	}
 

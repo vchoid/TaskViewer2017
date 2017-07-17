@@ -37,6 +37,7 @@ public class Abstract_FilterCriteria_Controller extends Abstract_MyFrame_Control
 			}
 
 			model.setFilterCriteria(criteria);
+			
 			frame.taskMask.taskList.setListData(model.getFilteredTaskID());
 			if(model.getFilteredTaskID().length == 1){
 				criteriaTemplate.anzFiltEntriesTf.setText("Einen Eintrag gefunden");

@@ -28,6 +28,7 @@ public class FilterCriteriaPanel_KeyContr extends Abstract_FilterCriteria_Contro
 			resetForm();
 		}
 		setFilteredTask();
+		frame.repaint();
 		
 	}
 
