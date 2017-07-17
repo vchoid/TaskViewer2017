@@ -72,7 +72,7 @@ public class CSVReader {
 	private List<Task> validEntries = new ArrayList<Task>();
 
 	// Datei-Abfrage - Dateipfad +++++++++++++++++++++++++++++++++++++++
-	private String filePath;
+	private static String filePath;
 //	private static String invFilePath;
 
 
@@ -259,7 +259,7 @@ public class CSVReader {
 		return localDate;
 	}
 	
-	public String getFilePath() {
+	public static String getFilePath() {
 		return filePath;
 	}
 	
