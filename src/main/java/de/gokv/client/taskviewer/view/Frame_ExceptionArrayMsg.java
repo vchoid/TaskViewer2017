@@ -123,7 +123,7 @@ public class Frame_ExceptionArrayMsg extends JDialog {
 	public static JScrollPane getStackTraceAsScrollPane() {
 		JTextArea text = new JTextArea();
 		text.setEditable(false);
-		if (CSVReader.getInvFilePaths().size() == 1) {
+		if (CSVReader.getInvFilePaths().size() == 2) {
 			filePath = "In der Datei: " + CSVReader.getInvFilePaths() + "\ntraten folgende Fehler auf: \n\n";
 		} else {
 			filePath = "In den Dateien: " + CSVReader.getInvFilePaths() + "\ntraten folgende Fehler auf: \n\n";

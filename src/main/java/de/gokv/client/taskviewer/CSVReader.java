@@ -13,6 +13,7 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 import org.apache.commons.lang3.StringUtils;
+import org.oxbow.swingbits.dialog.task.TaskDialogs;
 
 import de.gokv.client.taskviewer.exceptions.ClientException;
 import de.gokv.client.taskviewer.exceptions.InvalidCSVRecordException;
@@ -123,17 +124,21 @@ public class CSVReader {
 					setInvalidEntries(invalidEntries);
 					abstrExc.add(e.getMessage());
 					if (!invFilePath.contains(filePath)) {
+						invFilePath.add("\n");
 						invFilePath.add(filePath);
 					}
 
 				}
 			}
 		} catch (FileNotFoundException e) {
-			throw new ClientException(e, "Fehler beim Laden der Datei", "Datei " + filePath + " wurde nicht gefunden",
-					1);
+			//TODO Exception als ErrorFenster
+			TaskDialogs.showException(e);
+//			throw new ClientException(e, "Fehler beim Laden der Datei", "Datei " + filePath + " wurde nicht gefunden",
+//					1);
 
 		} catch (IOException e) {
-			throw new ClientException(e, "Ein/Ausgabe Fehler", "Es ist ein Fehler beim Lesen der Datei aufgetreten", 2);
+			TaskDialogs.showException(e);
+//			throw new ClientException(e, "Ein/Ausgabe Fehler", "Es ist ein Fehler beim Lesen der Datei aufgetreten", 2);
 
 		} finally {
 			try {
