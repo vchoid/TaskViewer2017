@@ -38,6 +38,7 @@ public class Frame_ExceptionArrayMsg extends JDialog {
 	public static JLabel errorIconLabel;
 	public static JLabel errTitle;
 	public static JLabel errSize;
+	private String errSizeString;
 	public static JTextArea errShortMsg;
 	private static int errorCode;
 
@@ -82,7 +83,12 @@ public class Frame_ExceptionArrayMsg extends JDialog {
 		errorIconLabel.setIcon(fExMsg.iconError);
 		errTitle = new JLabel("Fehlerhafte Werte in CSV-Datein");
 		errTitle.setFont(FONT_TITLE);
-		errSize = new JLabel("" + invalidEntries.size() + " fehlerhafte Einträge");
+		if(invalidEntries.size() == 1){
+			fExMsg.errSizeString = ""+ invalidEntries.size() + " fehlerhafter Eintrag";
+		} else {
+			fExMsg.errSizeString = ""+ invalidEntries.size() + " fehlerhafte Einträge";
+		}
+		errSize = new JLabel(fExMsg.errSizeString);
 		// ------------------------------------------------------
 		titlePane.add(errorIconLabel, "");
 		titlePane.add(errTitle, "wrap,span");

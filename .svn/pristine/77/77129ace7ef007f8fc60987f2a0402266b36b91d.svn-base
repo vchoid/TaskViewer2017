@@ -1,0 +1,2 @@
+http.local.url=http://localhost:9080/gokv-tenant/api
+http.url=https://gokv.bitmarck.de:444/gokv-tenant/api
