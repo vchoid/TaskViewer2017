@@ -20,22 +20,22 @@ import de.gokv.client.taskviewer.module.http.HTTPSClient;
  * <p>
  * <b>Methoden:</b>
  * <ul>
- * <li><b>{@link #isDateValid(String)}</b>: prüft ein Datum auf syntaktische
+ * <li><b>{@link #isDateValid(String)}</b>: Prüft ein Datum auf syntaktische
  * Korrektheit</li>
- * <li><b>{@link #parseDate(String)}</b>: wandelt einen {@link String} in ein
+ * <li><b>{@link #parseDate(String)}</b>: Wandelt einen {@link String} in ein
  * {@link LocalDate} um</li>
- * <li><b>{@link #parseDate(String, String)}</b>: wandelt einen {@link String}
+ * <li><b>{@link #parseDate(String, String)}</b>: Wandelt einen {@link String}
  * in ein {@link LocalDate} um und gibt den Spaltennamen in der Fehlermeldung
- * zurück</li> TODO JAVADOC fertig schreiben.
- * <li><b>{@link #stringDateToString(String)}</b>: ...</li>
- * <li><b>{@link #localDateToString(LocalDate)}</b>: ...</li>
- * <li><b>{@link #dateFromHttpsClientToString(String)}</b>: ...</li>
- * <li><b>{@link #dateWithTimeFromHttpsClientToString(String)}</b>: ...</li>
+ * <li><b>{@link #stringDateToString(String)}</b>: Konvertiert ein Datum(String) zu einem String im Format "mm.dd.yyyy".</li>
+ * <li><b>{@link #localDateToString(LocalDate)}</b>: Konvertiert ein Datum(LocalDate) zu einem String im Format "mm.dd.yyyy".</li>
+ * <li><b>{@link #dateFromHttpsClientToString(String)}</b>: Konvertiert ein Datum(String; geholt über HTTPS Client) zu einem String im Format "mm.dd.yyyy".</li>
+ * <li><b>{@link #dateWithTimeFromHttpsClientToString(String)}</b>:  Konvertiert ein Datum(String; geholt über HTTPS Client) zu einem String im Format "mm.dd.yyyy HH:MM:SS".</li>
+ * <li><b>{@link #add_0_BeforeValue(int)}</b>: Fügt bei Werten kleiner als Zahn eine 0 vorne an.</li>
  * </ul>
  * </p>
  * 
  * @author Christoph Kiank
- * @version 1.0.1
+ * @version 1.0.2
  * @see java.time.LocalDate
  *
  */
@@ -104,7 +104,6 @@ public class DateUtil {
 				return d2;
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		throw new InvalidDateException("Fehler beim Konvertieren vom String \'%s\' in ein LocalDate-Format", date);
@@ -213,7 +212,12 @@ public class DateUtil {
 		}
 		return httpClient;
 	}
-
+	/**
+	 * Fügt bei Werten kleiner als Zehn eine 0 vorne an.
+	 * 
+	 * @param dateValueAsInt
+	 * @return
+	 */
 	public static String add_0_BeforeValue(int dateValueAsInt) {
 		if (dateValueAsInt < 10) {
 			dateValueAsString = "0" + dateValueAsInt;
