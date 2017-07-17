@@ -1,0 +1,130 @@
+package de.gokv.client.taskviewer.view;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Image;
+import java.awt.Toolkit;
+
+import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+
+import org.oxbow.swingbits.util.Strings;
+
+import de.gokv.client.taskviewer.controller.FrameException_Controller;
+import de.gokv.client.taskviewer.exceptions.AbstractException;
+import net.miginfocom.swing.MigLayout;
+
+public class Frame_ExceptionDialog extends JDialog {
+
+	private static final long serialVersionUID = 1L;
+
+	public static JPanel contentPane;
+	public static JPanel topPane;
+	public static JPanel midPane;
+	public static JPanel bottomPane;
+
+	public Pattern_Button expandBtn;
+	public static FrameException_Controller btnCont = new FrameException_Controller();
+
+	public static JLabel errorIconLabel;
+	public static JLabel errTitle;
+	public static JTextArea errShortMsg;
+	private static int errorCode;
+
+	public String pathAppIcon;
+	public Image iconLoad = new ImageIcon(getClass().getResource("/expandIcon/expandMoreIcon_grey.png")).getImage();
+	public ImageIcon iconLoadScaled = new ImageIcon(iconLoad.getScaledInstance(12, 12, 0));
+
+	public Image imageError = new ImageIcon(getClass().getResource("/errorIcon/errIcon_red.png")).getImage();
+	public ImageIcon imageIconErrorScaled = new ImageIcon(imageError.getScaledInstance(25, 25, 0));
+	public Icon iconError = imageIconErrorScaled;
+
+	public static final Font FONT_TITLE = new Font("SansSerif", Font.PLAIN, 20);
+
+	public static AbstractException ex;
+
+	public static Frame_ExceptionDialog fExMsg;
+
+	public Frame_ExceptionDialog() {
+		pathAppIcon = "/appIcon/taskViewerError.png";
+		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(pathAppIcon)));
+	}
+
+	public static void showException(AbstractException ex) {
+		errorCode = ex.getErrChildCode() + ex.getErrSuperCode();
+		fExMsg = new Frame_ExceptionDialog();
+		Frame_ExceptionDialog.ex = ex;
+		BorderLayout bLayoutCONTENT = new BorderLayout();
+		MigLayout mlayoutTOP = new MigLayout("", "[][grow][]", "[]");
+		MigLayout mlayoutMIDDLE = new MigLayout("", "[][grow][]", "[]");
+		MigLayout mlayoutBTTM = new MigLayout("", "[][grow][]", "[]");
+
+		// Content Pane ++++++++++++++++++++++++++++++++++++++++
+		contentPane = new JPanel();
+		contentPane.setLayout(bLayoutCONTENT);
+		// Top Pane ++++++++++++++++++++++++++++++++++++++++++++
+		topPane = new JPanel();
+		topPane.setBackground(Color.WHITE);
+		topPane.setLayout(mlayoutTOP);
+		errorIconLabel = new JLabel();
+		errorIconLabel.setIcon(fExMsg.iconError);
+		errTitle = new JLabel(ex.getTitle());
+		errTitle.setFont(FONT_TITLE);
+		errShortMsg = new JTextArea(ex.getMessage());
+		errShortMsg.setEditable(false);
+		errShortMsg.setLayout(mlayoutTOP);
+		errShortMsg.setLineWrap(true);
+		// ------------------------------------------------------
+		topPane.add(errorIconLabel, "");
+		topPane.add(errTitle, "wrap,span");
+		topPane.add(errShortMsg, "grow, skip, span");
+		// Middle Pane +++++++++++++++++++++++++++++++++++++++++
+		midPane = new JPanel(new BorderLayout());
+		midPane.setBackground(Color.WHITE);
+		midPane.setLayout(mlayoutMIDDLE);
+		midPane.setVisible(false);
+		// ------------------------------------------------------
+		midPane.add(getStackTraceAsScrollPane(), "span, grow, push");
+		// Bottom Pane +++++++++++++++++++++++++++++++++++++++++
+		bottomPane = new JPanel();
+		bottomPane.setLayout(mlayoutBTTM);
+		bottomPane.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.GRAY));
+		fExMsg.expandBtn = new Pattern_Button("Weitere Details");
+		fExMsg.expandBtn.addActionListener(btnCont);
+		fExMsg.expandBtn.setIcon(fExMsg.iconLoadScaled);
+		// ------------------------------------------------------
+		bottomPane.add(fExMsg.expandBtn, "flowy");
+		// +++++++++++++++++++++++++++++++++++++++++++++++++++++
+		contentPane.add(topPane, BorderLayout.PAGE_START);
+		contentPane.add(midPane, BorderLayout.CENTER);
+		contentPane.add(bottomPane, BorderLayout.PAGE_END);
+		fExMsg.add(contentPane);
+		// ------------------------------------------------------
+		fExMsg.setTitle("Fehlercode: " + errorCode);
+		fExMsg.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		fExMsg.setAlwaysOnTop(true);
+		fExMsg.setResizable(true);
+		fExMsg.setMinimumSize(new Dimension(600, 149));
+		fExMsg.setLocationRelativeTo(null);
+		fExMsg.setVisible(true);
+		fExMsg.pack();
+
+	}
+
+	public static JScrollPane getStackTraceAsScrollPane() {
+		JTextArea text = new JTextArea();
+		text.setEditable(false);
+		text.setText(Strings.stackStraceAsString(ex));
+		JScrollPane scroller = new JScrollPane(text);
+		return scroller;
+	}
+
+}
