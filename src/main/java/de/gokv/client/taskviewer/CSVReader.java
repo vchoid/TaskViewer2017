@@ -126,7 +126,8 @@ public class CSVReader {
 
 				} catch (InvalidCSVRecordException e) {
 					invalidEntries.add(csvRecord);
-					invEntSize = invalidEntries.size();
+					setInvalidEntries(invalidEntries);
+//					invEntSize = invalidEntries.size();
 					abstrExc.add(e.getMessage());
 					if(!invFilePath.contains(filePath)){
 						invFilePath.add(filePath);
@@ -269,6 +270,14 @@ public class CSVReader {
 
 	public static List<CSVRecord> getInvalidEntries() {
 		return invalidEntries;
+	}
+
+	public void setInvalidEntries(List<CSVRecord> invalidEntries) {
+		this.invalidEntries = invalidEntries;
+	}
+
+	public void setInvEntSize(int invEntSize) {
+		this.invEntSize = invEntSize;
 	}
 
 	public int getInvEntSize() {

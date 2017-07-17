@@ -11,8 +11,6 @@ import javax.swing.JPanel;
 
 import de.gokv.client.taskviewer.CSVReader;
 import de.gokv.client.taskviewer.controller.FrameTaskViewer_Controller;
-import de.gokv.client.taskviewer.controller.TaskListPanel_ActionContr;
-import de.gokv.client.taskviewer.exceptions.ClientConfigurationExeception;
 import de.gokv.client.taskviewer.utils.HexaToRGB;
 
 /**
@@ -22,7 +20,6 @@ import de.gokv.client.taskviewer.utils.HexaToRGB;
 public class Frame_TaskViewer extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-
 	// Content Panel ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	private JPanel contPanel;
 	private FrameTaskViewer_Controller controller;
