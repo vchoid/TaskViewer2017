@@ -49,7 +49,6 @@ public class DateUtil {
 			.ofPattern("uuuu'-'MM'-'dd'T'HH':'mm':'ss'.'SSS'Z'");
 
 	private static String dateValueAsString;
-	private static String timeSecondsValueAsString;
 
 	/**
 	 * Legt ein {@link Pattern} im Format "ZZ.ZZ.ZZZZ" (Z = Ziffer) an.
@@ -210,7 +209,7 @@ public class DateUtil {
 			LocalDateTime lDate = LocalDateTime.parse(httpClient, DateUtil.dTf_request);
 			httpClient = add_0_BeforeValue(lDate.getDayOfMonth()) + "." + add_0_BeforeValue(lDate.getMonthValue()) + "."
 					+ lDate.getYear() + " (Uhrzeit: " + add_0_BeforeValue(lDate.getHour()) + ":" + add_0_BeforeValue(lDate.getMinute()) + ":"
-					+ add_0_AfterValue(lDate.getSecond()) + ")";
+					+ add_0_BeforeValue(lDate.getSecond()) + ")";
 		}
 		return httpClient;
 	}
@@ -224,12 +223,4 @@ public class DateUtil {
 		return dateValueAsString;
 	}
 
-	public static String add_0_AfterValue(int timeValueAsInt) {
-		if (timeValueAsInt < 10) {
-			timeSecondsValueAsString = timeValueAsInt + "0";
-		} else {
-			timeSecondsValueAsString = "" + timeValueAsInt;
-		}
-		return timeSecondsValueAsString;
-	}
 }
