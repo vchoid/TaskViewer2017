@@ -214,7 +214,7 @@ public class HTTPSClient {
 		try {
 			return get(new URI(getApiTaskEntryPoint().toString() + "/" + taskID), ResponseFormat.JSON);
 		} catch (URISyntaxException e) {
-			throw new ServerException("", e);
+			throw new ServerException("Der Server antwortet nicht", e);
 		}
 	}
 

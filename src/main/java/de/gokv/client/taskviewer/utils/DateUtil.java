@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 import java.util.Date;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -26,11 +27,18 @@ import de.gokv.client.taskviewer.module.http.HTTPSClient;
  * {@link LocalDate} um</li>
  * <li><b>{@link #parseDate(String, String)}</b>: Wandelt einen {@link String}
  * in ein {@link LocalDate} um und gibt den Spaltennamen in der Fehlermeldung
- * <li><b>{@link #stringDateToString(String)}</b>: Konvertiert ein Datum(String) zu einem String im Format "mm.dd.yyyy".</li>
- * <li><b>{@link #localDateToString(LocalDate)}</b>: Konvertiert ein Datum(LocalDate) zu einem String im Format "mm.dd.yyyy".</li>
- * <li><b>{@link #dateFromHttpsClientToString(String)}</b>: Konvertiert ein Datum(String; geholt über HTTPS Client) zu einem String im Format "mm.dd.yyyy".</li>
- * <li><b>{@link #dateWithTimeFromHttpsClientToString(String)}</b>:  Konvertiert ein Datum(String; geholt über HTTPS Client) zu einem String im Format "mm.dd.yyyy HH:MM:SS".</li>
- * <li><b>{@link #add_0_BeforeValue(int)}</b>: Fügt bei Werten kleiner als Zahn eine 0 vorne an.</li>
+ * <li><b>{@link #stringDateToString(String)}</b>: Konvertiert ein Datum(String)
+ * zu einem String im Format "mm.dd.yyyy".</li>
+ * <li><b>{@link #localDateToString(LocalDate)}</b>: Konvertiert ein
+ * Datum(LocalDate) zu einem String im Format "mm.dd.yyyy".</li>
+ * <li><b>{@link #dateFromHttpsClientToString(String)}</b>: Konvertiert ein
+ * Datum(String; geholt über HTTPS Client) zu einem String im Format
+ * "mm.dd.yyyy".</li>
+ * <li><b>{@link #dateWithTimeFromHttpsClientToString(String)}</b>: Konvertiert
+ * ein Datum(String; geholt über HTTPS Client) zu einem String im Format
+ * "mm.dd.yyyy HH:MM:SS".</li>
+ * <li><b>{@link #add_0_BeforeValue(int)}</b>: Fügt bei Werten kleiner als Zahn
+ * eine 0 vorne an.</li>
  * </ul>
  * </p>
  * 
@@ -42,11 +50,11 @@ import de.gokv.client.taskviewer.module.http.HTTPSClient;
 public class DateUtil {
 
 	// ResolveStyle.STRICT ==> verhindert: z.B. 29.02.2017 => 01.03.2017
-	private final static DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("dd.MM.uuuu")
+	private final static DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("dd.MM.uuuu", Locale.GERMAN)
 			.withResolverStyle(ResolverStyle.STRICT);
-	private final static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
+	private final static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.GERMAN);
 	public final static DateTimeFormatter dTf_request = DateTimeFormatter
-			.ofPattern("uuuu'-'MM'-'dd'T'HH':'mm':'ss'.'SSS'Z'");
+			.ofPattern("uuuu'-'MM'-'dd'T'HH':'mm':'ss'.'SSS'Z'",Locale.GERMAN);
 
 	private static String dateValueAsString;
 
@@ -204,14 +212,17 @@ public class DateUtil {
 	 */
 	public static String dateWithTimeFromHttpsClientToString(String httpClientTitle) {
 		String httpClient = HTTPSClient.task.get(httpClientTitle).toString();
+		//TODO Stunden überprüfen wegen +2 --> In Datenbank anders
 		if (!(httpClient.equals("empty"))) {
 			LocalDateTime lDate = LocalDateTime.parse(httpClient, DateUtil.dTf_request);
 			httpClient = add_0_BeforeValue(lDate.getDayOfMonth()) + "." + add_0_BeforeValue(lDate.getMonthValue()) + "."
-					+ lDate.getYear() + " (Uhrzeit: " + add_0_BeforeValue(lDate.getHour()) + ":" + add_0_BeforeValue(lDate.getMinute()) + ":"
-					+ add_0_BeforeValue(lDate.getSecond()) + ")";
+					+ lDate.getYear() + " (Uhrzeit: " + add_0_BeforeValue(lDate.getHour()+2) + ":"
+					+ add_0_BeforeValue(lDate.getMinute()) + ":" + add_0_BeforeValue(lDate.getSecond()) + ")";
+
 		}
 		return httpClient;
 	}
+
 	/**
 	 * Fügt bei Werten kleiner als Zehn eine 0 vorne an.
 	 * 
