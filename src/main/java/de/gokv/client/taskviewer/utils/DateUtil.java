@@ -216,7 +216,7 @@ public class DateUtil {
 		if (!(httpClient.equals("empty"))) {
 			LocalDateTime lDate = LocalDateTime.parse(httpClient, DateUtil.dTf_request);
 			httpClient = add_0_BeforeValue(lDate.getDayOfMonth()) + "." + add_0_BeforeValue(lDate.getMonthValue()) + "."
-					+ lDate.getYear() + " (Uhrzeit: " + add_0_BeforeValue(lDate.getHour()+2) + ":"
+					+ lDate.getYear() + " (Uhrzeit: " + add_0_BeforeValue(lDate.getHour()) + ":"
 					+ add_0_BeforeValue(lDate.getMinute()) + ":" + add_0_BeforeValue(lDate.getSecond()) + ")";
 
 		}

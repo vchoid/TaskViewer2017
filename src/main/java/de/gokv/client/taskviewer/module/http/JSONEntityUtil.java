@@ -40,8 +40,7 @@ public class JSONEntityUtil {
 				}
 
 				@Override
-				public StringBuffer format(Date date, StringBuffer toAppendTo,
-						FieldPosition pos) {
+				public StringBuffer format(Date date, StringBuffer toAppendTo, FieldPosition pos) {
 					Calendar cal = new GregorianCalendar();
 					cal.setTime(date);
 					cal.setTimeZone(GMT);
@@ -59,13 +58,10 @@ public class JSONEntityUtil {
 
 	public static URI getLink(URI apiEntryPoint, JSONObject obj, String rel) {
 		try {
-			return apiEntryPoint.resolve(new URI(obj.getJSONObject("_links")
-					.getJSONObject(rel).getString("href")));
+			return apiEntryPoint.resolve(new URI(obj.getJSONObject("_links").getJSONObject(rel).getString("href")));
 		} catch (URISyntaxException e) {
 			throw new IllegalArgumentException(
-					String.format(
-							"href for link relation %s is not a proper URI in entity %s",
-							rel, obj), e);
+					String.format("href for link relation %s is not a proper URI in entity %s", rel, obj), e);
 		}
 	}
 }
