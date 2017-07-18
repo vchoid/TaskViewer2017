@@ -47,8 +47,8 @@ public class Abstract_FilterCriteria_Controller extends Abstract_MyFrame_Control
 
 		} catch (InvalidDateException e1) {
 			// DO NOTHING
-			Frame_ExceptionDialog.showException(e1);
-//			e1.printStackTrace();
+//			Frame_ExceptionDialog.showException(e1);
+			e1.printStackTrace();
 		}
 	}
 
