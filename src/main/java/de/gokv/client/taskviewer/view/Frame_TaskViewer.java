@@ -85,9 +85,9 @@ public class Frame_TaskViewer extends JFrame {
 					JOptionPane.WARNING_MESSAGE);
 		}
 		// Fehler in CSV Dateien
-		if(CSVReader.getInvalidEntries().size() > 0){
-			Frame_CSVExceptionDialog.showErrorMessageDialog(CSVReader.getAbstrExc(), CSVReader.getInvalidEntries());
-		}
+//		if(CSVReader.getInvalidEntries().size() > 0){
+//			Frame_CSVExceptionDialog.showErrorMessageDialog(CSVReader.getAbstrExc(), CSVReader.getInvalidEntries());
+//		}
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);

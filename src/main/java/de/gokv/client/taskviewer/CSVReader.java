@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-//import java.util.Map;
 import java.util.regex.Pattern;
 
 import org.apache.commons.csv.CSVFormat;
@@ -62,7 +61,7 @@ public class CSVReader {
 	public static final String COL_MITGLIED_GEB_DAT = "mitglied_gebdat";
 
 	// ungültige Einträge aus der CSV ++++++++++++++++++++++++++++++++++
-	private static List<CSVRecord> invalidEntries = new ArrayList<CSVRecord>();
+	private List<CSVRecord> invalidEntries = new ArrayList<CSVRecord>();
 	private static List<String> abstrExc = new ArrayList<String>();
 	private static List<String> invFilePath = new ArrayList<String>();
 
@@ -121,7 +120,8 @@ public class CSVReader {
 
 				} catch (InvalidCSVRecordException e) {
 					invalidEntries.add(csvRecord);
-					setInvalidEntries(invalidEntries);
+					invEntSize = invalidEntries.size();
+//					setInvalidEntries(invalidEntries);
 					abstrExc.add(e.getMessage());
 					if (!invFilePath.contains(filePath)) {
 						invFilePath.add("\n");
@@ -275,12 +275,12 @@ public class CSVReader {
 		return validEntries;
 	}
 
-	public static List<CSVRecord> getInvalidEntries() {
+	public List<CSVRecord> getInvalidEntries() {
 		return invalidEntries;
 	}
 
 	public void setInvalidEntries(List<CSVRecord> invalidEntries) {
-		CSVReader.invalidEntries = invalidEntries;
+		this.invalidEntries = invalidEntries;
 	}
 
 	public void setInvEntSize(int invEntSize) {
