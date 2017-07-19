@@ -8,9 +8,9 @@ import de.gokv.client.taskviewer.view.Template_TaskList;
 public class TaskListPanel_ActionContr extends Abstract_MyFrame_Controller implements ActionListener {
 
 	public int valEnt;
-	public static String valEntMsg = "";
+	public String valEntMsg = "";
 	public int invalEnt;
-	public static String invalEntMsg = "";
+	public String invalEntMsg = "";
 	private Template_TaskList taskMask;
 	
 	public TaskListPanel_ActionContr() {
@@ -24,6 +24,7 @@ public class TaskListPanel_ActionContr extends Abstract_MyFrame_Controller imple
 		} else {
 			invalEntMsg = "";
 		}
+		
 		if (model.countValidTasks > 0) {
 			getValidEntries();
 		} else {
@@ -35,11 +36,11 @@ public class TaskListPanel_ActionContr extends Abstract_MyFrame_Controller imple
 		taskMask.anzTasks.setText(valEntMsg + invalEntMsg);
 	}
 	
-	public static String getInvalidEntries(){
+	public String getInvalidEntries(){
 		return invalEntMsg = "(+ " + model.countInvalidTasks + " fehlerhaft)";
 	}
 	
-	public static String getValidEntries(){
+	public String getValidEntries(){
 		if(model.countValidTasks == 1){
 			return valEntMsg = model.countValidTasks + " Eintrag ";
 		} else {
@@ -51,8 +52,8 @@ public class TaskListPanel_ActionContr extends Abstract_MyFrame_Controller imple
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == taskMask.reloadBtn.getButton()) {
 			model.reload();
-			getAllEntries();
 			taskMask.taskList.setListData(model.getFilteredTaskID());
+			getAllEntries();
 			
 		}
 	}

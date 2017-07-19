@@ -89,7 +89,7 @@ public class Template_TaskList extends Template_BlockPanel {
 		this.add(reloadBtn.getButton(), reloadBtn.getGbc_button());
 
 		// << Anzahl der TaskID´s in der Liste und der Fehlerhaften >>
-		anzTasks = new JTextField(TaskListPanel_ActionContr.getValidEntries() + TaskListPanel_ActionContr.getInvalidEntries());
+		anzTasks = new JTextField(taskPanelContr.getValidEntries() + taskPanelContr.getInvalidEntries());
 		anzTasks.setForeground(colorEntryTxt);
 		anzTasks.setBorder(emptyBorder);
 		anzTasks.setOpaque(false);
