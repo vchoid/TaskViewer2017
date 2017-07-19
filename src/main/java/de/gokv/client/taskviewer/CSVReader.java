@@ -120,8 +120,7 @@ public class CSVReader {
 
 				} catch (InvalidCSVRecordException e) {
 					invalidEntries.add(csvRecord);
-					invEntSize = invalidEntries.size();
-//					setInvalidEntries(invalidEntries);
+					setInvalidEntries(invalidEntries);
 					abstrExc.add(e.getMessage());
 					if (!invFilePath.contains(filePath)) {
 						invFilePath.add("\n");
@@ -131,7 +130,6 @@ public class CSVReader {
 				}
 			}
 		} catch (FileNotFoundException e) {
-			//TODO Exception als ErrorFenster
 			TaskDialogs.showException(e);
 //			throw new ClientException(e, "Fehler beim Laden der Datei", "Datei " + filePath + " wurde nicht gefunden",
 //					1);

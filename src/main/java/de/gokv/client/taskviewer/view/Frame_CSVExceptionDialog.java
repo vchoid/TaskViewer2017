@@ -66,7 +66,7 @@ public class Frame_CSVExceptionDialog extends JDialog {
 	public static final Font FONT_TITLE = new Font("SansSerif", Font.PLAIN, 20);
 
 	public static List<String> abstrExc;
-	public static List<CSVRecord> invalidEntries;
+	public static int invalidEntries;
 	private static String filePath;
 	public static Frame_CSVExceptionDialog fExMsg;
 
@@ -83,7 +83,7 @@ public class Frame_CSVExceptionDialog extends JDialog {
 	 * @param abstrExc
 	 * @param invalidEntries
 	 */
-	public static void showErrorMessageDialog(List<String> abstrExc, List<CSVRecord> invalidEntries) {
+	public static void showErrorMessageDialog(List<String> abstrExc, int invalidEntries) {
 		errorCode = 300;
 		fExMsg = new Frame_CSVExceptionDialog();
 		Frame_CSVExceptionDialog.invalidEntries = invalidEntries;
@@ -104,10 +104,10 @@ public class Frame_CSVExceptionDialog extends JDialog {
 		errorIconLabel.setIcon(fExMsg.iconError);
 		errTitle = new JLabel("Fehlerhafte Werte in CSV-Datein");
 		errTitle.setFont(FONT_TITLE);
-		if(invalidEntries.size() == 1){
-			fExMsg.errSizeString = ""+ invalidEntries.size() + " fehlerhafter Eintrag";
+		if(invalidEntries == 1){
+			fExMsg.errSizeString = ""+ invalidEntries + " fehlerhafter Eintrag";
 		} else {
-			fExMsg.errSizeString = ""+ invalidEntries.size() + " fehlerhafte Einträge";
+			fExMsg.errSizeString = ""+ invalidEntries + " fehlerhafte Einträge";
 		}
 		errSize = new JLabel(fExMsg.errSizeString);
 		// ------------------------------------------------------

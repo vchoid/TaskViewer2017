@@ -84,10 +84,10 @@ public class Frame_TaskViewer extends JFrame {
 			JOptionPane.showMessageDialog(null, HexaToRGB.errMsg, "Fehler in der color.properties Datei",
 					JOptionPane.WARNING_MESSAGE);
 		}
-		// Fehler in CSV Dateien
-//		if(CSVReader.getInvalidEntries().size() > 0){
-//			Frame_CSVExceptionDialog.showErrorMessageDialog(CSVReader.getAbstrExc(), CSVReader.getInvalidEntries());
-//		}
+//		 Fehler in CSV Dateien
+		if(controller.getModel().countInvalidTasks > 0){
+			Frame_CSVExceptionDialog.showErrorMessageDialog(CSVReader.getAbstrExc(), controller.getModel().countInvalidTasks);
+		}
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
