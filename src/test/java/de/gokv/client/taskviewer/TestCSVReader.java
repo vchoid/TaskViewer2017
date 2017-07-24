@@ -98,7 +98,7 @@ public class TestCSVReader {
 	 * die mit validen Werten gefüllt ist.
 	 */
 	private void getValidFile() {
-		filePath = "/orders/dum_famv_direct_input_monitoring_20170515131131.csv";
+		filePath = "/src/test/resources/dum_famv_direct_input_monitoring_20170515131131.csv";
 		getFile(filePath);
 	}
 	/**
@@ -138,7 +138,7 @@ public class TestCSVReader {
 	 * die valide Werte in der Spalte TaskType hat.
 	 */
 	private void getTaskTypeFile() {
-		filePath = "/src/test/resources/taskTypes_direct_input_monitoring_20170515131131.csv";
+		filePath = "/src/test/resources/invalid_taskTypes_direct_input_monitoring_20170515131131.csv";
 		getFile(filePath);
 	}
 	/**
@@ -156,7 +156,7 @@ public class TestCSVReader {
 	 *  Versucht in einem try/catch-Block die CSV-Datei oder den angebenen Pfad zu lesen.
 	 *  Überprüft, ob die geworfene {@link ClientException} eine vom Typ {@link FileNotFoundException} ist.
 	 */
-	@Test(expected = ClientException.class)
+	@Test()
 	public void testCSVReaderWrongFileException() {
 		String wrongfile_wrongPath = System.getProperty("user.dir")
 				+ "/falscher/test/Pfad/falsche_famv_direct_input_monitoring_20170515131131.csv";
@@ -164,6 +164,7 @@ public class TestCSVReader {
 		try {
 			reader.readCSVFile();
 		} catch (ClientException e) {
+			System.out.println(e);
 			Assert.assertEquals("Datei " + wrongfile_wrongPath + " wurde nicht gefunden" + "(ClientException)", e.getMessage());
 			Assert.assertTrue(e.getCause() instanceof FileNotFoundException);
 			throw e;
