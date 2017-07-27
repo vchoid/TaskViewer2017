@@ -86,12 +86,6 @@ public class Template_FilterCriteriaPanel extends Template_BlockPanel {
 		clearAllBtn.getButton().setIcon(iconReloadScaled);
 		this.add(clearAllBtn.getButton(), clearAllBtn.getGbc_button());
 		
-		// TODO Löschen
-		// << Button "Filter anwenden" >>
-//		filterBtn = new Pattern_Button("Filter anwenden", 2, 6, 1, filtCPActContr);
-//		filterBtn.getGbc_button().insets = new Insets(20, 10, 0, 0);
-//		this.add(filterBtn.getButton(), filterBtn.getGbc_button());
-
 		// Anzahl der gefilterten Tasks
 		anzFiltEntriesTf = new JTextField();
 		anzFiltEntriesTf.setForeground(colorEntryTxt);
