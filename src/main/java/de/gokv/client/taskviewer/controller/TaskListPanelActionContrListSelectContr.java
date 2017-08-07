@@ -7,7 +7,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import de.gokv.client.taskviewer.exceptions.ClientConfigurationExeception;
-import de.gokv.client.taskviewer.view.Frame_ExceptionDialog;
+import de.gokv.client.taskviewer.view.FExceptionDialogFrame;
 
 /**
  * 
@@ -15,9 +15,9 @@ import de.gokv.client.taskviewer.view.Frame_ExceptionDialog;
  * @author Christoph Kiank
  *
  */
-public class TaskListPanel_ActionContr_ListSelectContr extends Abstract_TaskListPanel_Controller implements ActionListener, ListSelectionListener {
+public class TaskListPanelActionContrListSelectContr extends AbstractTaskListPanelController implements ActionListener, ListSelectionListener {
 
-	public TaskListPanel_ActionContr_ListSelectContr() throws ClientConfigurationExeception {
+	public TaskListPanelActionContrListSelectContr() throws ClientConfigurationExeception {
 		super();
 	}
 
@@ -31,7 +31,7 @@ public class TaskListPanel_ActionContr_ListSelectContr extends Abstract_TaskList
 			try {
 				loadTaskDetails();
 			} catch (ClientConfigurationExeception e1) {
-				Frame_ExceptionDialog.showException(e1);
+				FExceptionDialogFrame.showException(e1);
 			}
 		}
 	}

@@ -3,7 +3,7 @@ package de.gokv.client.taskviewer.controller;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class FilterCriteriaPanel_MouseContr extends Abstract_FilterCriteria_Controller implements MouseListener {
+public class FilterCriteriaPanelMouseContr extends AbstractFilterCriteriaController implements MouseListener {
 
 	@Override
 	public void mouseClicked(MouseEvent arg0) {

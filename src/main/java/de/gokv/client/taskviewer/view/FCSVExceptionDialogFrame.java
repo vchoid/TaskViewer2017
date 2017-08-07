@@ -20,7 +20,7 @@ import javax.swing.JTextArea;
 import org.apache.commons.csv.CSVRecord;
 
 import de.gokv.client.taskviewer.CSVReader;
-import de.gokv.client.taskviewer.controller.FrameExceptionArray_Controller;
+import de.gokv.client.taskviewer.controller.FrameExceptionArrayController;
 import net.miginfocom.swing.MigLayout;
 
 
@@ -36,7 +36,7 @@ import net.miginfocom.swing.MigLayout;
  * @author Christoph Kiank
  *
  */
-public class Frame_CSVExceptionDialog extends JDialog {
+public class FCSVExceptionDialogFrame extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	public static JPanel contentPane;
@@ -45,8 +45,8 @@ public class Frame_CSVExceptionDialog extends JDialog {
 	public static JPanel stackTracePane;
 	public static JPanel bottomPane;
 
-	public Pattern_Button expandBtn;
-	public static FrameExceptionArray_Controller btnCont = new FrameExceptionArray_Controller();
+	public PButtonPattern expandBtn;
+	public static FrameExceptionArrayController btnCont = new FrameExceptionArrayController();
 
 	public static JLabel errorIconLabel;
 	public static JLabel errTitle;
@@ -68,12 +68,12 @@ public class Frame_CSVExceptionDialog extends JDialog {
 	public static List<String> abstrExc;
 	public static int invalidEntries;
 	private static String filePath;
-	public static Frame_CSVExceptionDialog fExMsg;
+	public static FCSVExceptionDialogFrame fExMsg;
 
 	/**
 	 * Das Absturzprogramm Icon wird hier geladen.
 	 */
-	public Frame_CSVExceptionDialog() {
+	public FCSVExceptionDialogFrame() {
 		pathAppIcon = "/appIcon/taskViewerError.png";
 		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(pathAppIcon)));
 	}
@@ -85,9 +85,9 @@ public class Frame_CSVExceptionDialog extends JDialog {
 	 */
 	public static void showErrorMessageDialog(List<String> abstrExc, int invalidEntries) {
 		errorCode = 300;
-		fExMsg = new Frame_CSVExceptionDialog();
-		Frame_CSVExceptionDialog.invalidEntries = invalidEntries;
-		Frame_CSVExceptionDialog.abstrExc = abstrExc;
+		fExMsg = new FCSVExceptionDialogFrame();
+		FCSVExceptionDialogFrame.invalidEntries = invalidEntries;
+		FCSVExceptionDialogFrame.abstrExc = abstrExc;
 		BorderLayout bLayoutCONTENT = new BorderLayout();
 		MigLayout mlayoutTOP = new MigLayout("", "[][grow][]", "[]");
 		MigLayout mlayoutMIDDLE = new MigLayout("", "[][grow][]", "[]");
@@ -125,7 +125,7 @@ public class Frame_CSVExceptionDialog extends JDialog {
 		bottomPane = new JPanel();
 		bottomPane.setLayout(mlayoutBTTM);
 		bottomPane.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.GRAY));
-		fExMsg.expandBtn = new Pattern_Button("Weitere Details");
+		fExMsg.expandBtn = new PButtonPattern("Weitere Details");
 		fExMsg.expandBtn.addActionListener(btnCont);
 		fExMsg.expandBtn.setIcon(fExMsg.iconLoadScaled);
 		// ------------------------------------------------------

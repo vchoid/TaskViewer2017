@@ -9,13 +9,13 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.border.Border;
 
-import de.gokv.client.taskviewer.controller.FilterCriteriaPanel_DateContr;
+import de.gokv.client.taskviewer.controller.FilterCriteriaPanelDateContr;
 import de.gokv.client.taskviewer.utils.HexaToRGB;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
 import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
 
-public class Pattern_DatePickerField {
+public class PDatePickerFieldPattern {
 
 	public JLabel dateLabel;
 	private GridBagConstraints gbc_dateLabel;
@@ -24,7 +24,7 @@ public class Pattern_DatePickerField {
 	public JDatePanelImpl datePanelImpl = new JDatePanelImpl(dateModel);
 	public JDatePickerImpl datePickerImpl = new JDatePickerImpl(datePanelImpl, new DateLabelFormatter());
 	
-	private static FilterCriteriaPanel_DateContr filtTaskDateContr = new FilterCriteriaPanel_DateContr();
+	private static FilterCriteriaPanelDateContr filtTaskDateContr = new FilterCriteriaPanelDateContr();
 	
 	private static final Color colorLabelDateTxt = new HexaToRGB("color.label.date.text").parseHexToRGB();
 	private final Border emptyBorder = BorderFactory.createEmptyBorder();
@@ -46,11 +46,11 @@ public class Pattern_DatePickerField {
 		return datePickerImpl;
 	}
 
-	public Pattern_DatePickerField() {
+	public PDatePickerFieldPattern() {
 		
 	}
 	
-	public Pattern_DatePickerField(String labelTitle, int startPosCol, int startPosRow) {
+	public PDatePickerFieldPattern(String labelTitle, int startPosCol, int startPosRow) {
 		dateModel.addChangeListener(filtTaskDateContr);
 		datePanelImpl.setBorder(emptyBorder);
 		datePickerImpl.setTextEditable(true);

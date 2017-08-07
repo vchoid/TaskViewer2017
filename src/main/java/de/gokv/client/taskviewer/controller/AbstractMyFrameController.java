@@ -2,21 +2,21 @@ package de.gokv.client.taskviewer.controller;
 
 import de.gokv.client.taskviewer.CSVReader;
 import de.gokv.client.taskviewer.model.MyModel;
-import de.gokv.client.taskviewer.view.Frame_TaskViewer;
+import de.gokv.client.taskviewer.view.FTaskViewerFrame;
 
-public class Abstract_MyFrame_Controller {
+public class AbstractMyFrameController {
 	protected static MyModel model;
-	protected static Frame_TaskViewer frame;
+	protected static FTaskViewerFrame frame;
 	
 	
-	public Abstract_MyFrame_Controller(MyModel modelParam, Frame_TaskViewer frameParam) {
+	public AbstractMyFrameController(MyModel modelParam, FTaskViewerFrame frameParam) {
 		this();
 		model = modelParam;
 		frame = frameParam;
 		
 	}
 	
-	public Abstract_MyFrame_Controller() {
+	public AbstractMyFrameController() {
 	}
 	
 	/**

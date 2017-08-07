@@ -9,7 +9,7 @@ import javax.swing.JLabel;
 
 import de.gokv.client.taskviewer.utils.HexaToRGB;
 
-public class Pattern_InfoField extends JLabel{
+public class PInfoFieldPattern extends JLabel{
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -24,11 +24,11 @@ public class Pattern_InfoField extends JLabel{
 	private GridBagConstraints gbc_lTitle;
 	private GridBagConstraints gbc_lField;
 	
-	private Pattern_InfoField() {
+	private PInfoFieldPattern() {
 	}
 
-	public static Pattern_InfoField createInfoField(String title, int startTitlePosCol, int startTitlePosRow, int startFieldPosCol, int startFieldPosRow, int fieldWidth){
-		Pattern_InfoField field = new Pattern_InfoField();
+	public static PInfoFieldPattern createInfoField(String title, int startTitlePosCol, int startTitlePosRow, int startFieldPosCol, int startFieldPosRow, int fieldWidth){
+		PInfoFieldPattern field = new PInfoFieldPattern();
 		JLabel lTitle = new JLabel(title);
 		lTitle.setFont(fntTitle);
 		lTitle.setForeground(colorInfoTitleTxt);

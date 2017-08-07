@@ -18,11 +18,11 @@ import javax.swing.JTextArea;
 
 import org.oxbow.swingbits.util.Strings;
 
-import de.gokv.client.taskviewer.controller.FrameException_Controller;
+import de.gokv.client.taskviewer.controller.FrameExceptionController;
 import de.gokv.client.taskviewer.exceptions.AbstractException;
 import net.miginfocom.swing.MigLayout;
 
-public class Frame_ExceptionDialog extends JDialog {
+public class FExceptionDialogFrame extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 
@@ -31,8 +31,8 @@ public class Frame_ExceptionDialog extends JDialog {
 	public static JPanel midPane;
 	public static JPanel bottomPane;
 
-	public Pattern_Button expandBtn;
-	public static FrameException_Controller btnCont = new FrameException_Controller();
+	public PButtonPattern expandBtn;
+	public static FrameExceptionController btnCont = new FrameExceptionController();
 
 	public static JLabel errorIconLabel;
 	public static JLabel errTitle;
@@ -51,17 +51,17 @@ public class Frame_ExceptionDialog extends JDialog {
 
 	public static AbstractException ex;
 
-	public static Frame_ExceptionDialog fExMsg;
+	public static FExceptionDialogFrame fExMsg;
 
-	public Frame_ExceptionDialog() {
+	public FExceptionDialogFrame() {
 		pathAppIcon = "/appIcon/taskViewerError.png";
 		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(pathAppIcon)));
 	}
 
 	public static void showException(AbstractException ex) {
 		errorCode = ex.getErrChildCode() + ex.getErrSuperCode();
-		fExMsg = new Frame_ExceptionDialog();
-		Frame_ExceptionDialog.ex = ex;
+		fExMsg = new FExceptionDialogFrame();
+		FExceptionDialogFrame.ex = ex;
 		BorderLayout bLayoutCONTENT = new BorderLayout();
 		MigLayout mlayoutTOP = new MigLayout("", "[][grow][]", "[]");
 		MigLayout mlayoutMIDDLE = new MigLayout("", "[][grow][]", "[]");
@@ -97,7 +97,7 @@ public class Frame_ExceptionDialog extends JDialog {
 		bottomPane = new JPanel();
 		bottomPane.setLayout(mlayoutBTTM);
 		bottomPane.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.GRAY));
-		fExMsg.expandBtn = new Pattern_Button("Weitere Details");
+		fExMsg.expandBtn = new PButtonPattern("Weitere Details");
 		fExMsg.expandBtn.addActionListener(btnCont);
 		fExMsg.expandBtn.setIcon(fExMsg.iconLoadScaled);
 		// ------------------------------------------------------

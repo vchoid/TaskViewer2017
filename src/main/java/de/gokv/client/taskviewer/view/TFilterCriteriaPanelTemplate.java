@@ -8,24 +8,24 @@ import java.awt.Insets;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 
-import de.gokv.client.taskviewer.controller.FilterCriteriaPanel_ActionContr;
-import de.gokv.client.taskviewer.controller.FilterCriteriaPanel_KeyContr;
-import de.gokv.client.taskviewer.controller.FrameTaskViewer_Controller;
+import de.gokv.client.taskviewer.controller.FilterCriteriaPanelActionContr;
+import de.gokv.client.taskviewer.controller.FilterCriteriaPanelKeyContr;
+import de.gokv.client.taskviewer.controller.FrameTaskViewerController;
 
-public class Template_FilterCriteriaPanel extends Template_BlockPanel {
+public class TFilterCriteriaPanelTemplate extends TBlockPanelTemplate {
 	private static final long serialVersionUID = 1L;
 	
 	
-	public Pattern_PlaceholderTextField kvnrPh;
-	public Pattern_PlaceholderTextField namePh;
-	public Pattern_PlaceholderTextField vnamePh;
-	public Pattern_PlaceholderTextField taskIdPh;
+	public PPlaceholderTextFieldPattern kvnrPh;
+	public PPlaceholderTextFieldPattern namePh;
+	public PPlaceholderTextFieldPattern vnamePh;
+	public PPlaceholderTextFieldPattern taskIdPh;
 	
-	public Pattern_DatePickerField gebDatePickerField;
-	public Pattern_DatePickerField orderDatePickerField;
+	public PDatePickerFieldPattern gebDatePickerField;
+	public PDatePickerFieldPattern orderDatePickerField;
 	
-	public Pattern_GridBagButton clearAllBtn;
-	public Pattern_GridBagButton filterBtn;
+	public PGridBagButtonPattern clearAllBtn;
+	public PGridBagButtonPattern filterBtn;
 	public JTextField anzFiltEntriesTf;
 	public String valFiltMsg = "";
 	
@@ -33,7 +33,7 @@ public class Template_FilterCriteriaPanel extends Template_BlockPanel {
 	private String pathIconReload;
 	private ImageIcon iconReloadScaled;
 	
-	public Template_FilterCriteriaPanel(FrameTaskViewer_Controller controller) {
+	public TFilterCriteriaPanelTemplate(FrameTaskViewerController controller) {
 		super("Filter Maske", controller);
 	}
 
@@ -47,38 +47,38 @@ public class Template_FilterCriteriaPanel extends Template_BlockPanel {
 
 	@Override
 	public void init() {
-		FilterCriteriaPanel_ActionContr filtCPActContr = new FilterCriteriaPanel_ActionContr();
-		FilterCriteriaPanel_KeyContr filtCPKeyContr = new FilterCriteriaPanel_KeyContr();
+		FilterCriteriaPanelActionContr filtCPActContr = new FilterCriteriaPanelActionContr();
+		FilterCriteriaPanelKeyContr filtCPKeyContr = new FilterCriteriaPanelKeyContr();
 		
 		// << KVNR >>
-		kvnrPh = new Pattern_PlaceholderTextField("Krankenversichertennummer (laut eGk)", getLayout().columnWidths[1]*2, 1, 1, 2 );
+		kvnrPh = new PPlaceholderTextFieldPattern("Krankenversichertennummer (laut eGk)", getLayout().columnWidths[1]*2, 1, 1, 2 );
 		this.add(kvnrPh, kvnrPh.getGbc_placeholder());
 
 		// << Name >>
-		namePh = new Pattern_PlaceholderTextField("Name", getLayout().columnWidths[1]-5,1,2,1);
+		namePh = new PPlaceholderTextFieldPattern("Name", getLayout().columnWidths[1]-5,1,2,1);
 		this.add(namePh, namePh.getGbc_placeholder());
 
 		// << Vorname >>
-		vnamePh = new Pattern_PlaceholderTextField("Vorname", getLayout().columnWidths[2]-10,2,2,1);
+		vnamePh = new PPlaceholderTextFieldPattern("Vorname", getLayout().columnWidths[2]-10,2,2,1);
 		vnamePh.getGbc_placeholder().insets = new Insets(0, 10, 0, 0);
 		this.add(vnamePh, vnamePh.getGbc_placeholder());
 
 		// << Geburtsdatum >>
-		gebDatePickerField = new Pattern_DatePickerField("Geburtstag",1 ,3);
+		gebDatePickerField = new PDatePickerFieldPattern("Geburtstag",1 ,3);
 		this.add(gebDatePickerField.getDateLabel(), gebDatePickerField.getGbc_dateLabel());
 		this.add(gebDatePickerField.getDatePickerImpl(), gebDatePickerField.getGbc_date());
 
 		// << TaskID >>
-		taskIdPh = new Pattern_PlaceholderTextField("TaskID", getLayout().columnWidths[1]*2,1,4,2);
+		taskIdPh = new PPlaceholderTextFieldPattern("TaskID", getLayout().columnWidths[1]*2,1,4,2);
 		this.add(taskIdPh, taskIdPh.getGbc_placeholder());
 
 		// << OrderedDate >>
-		orderDatePickerField = new Pattern_DatePickerField("Order Date",1 ,5);
+		orderDatePickerField = new PDatePickerFieldPattern("Order Date",1 ,5);
 		this.add(orderDatePickerField.getDateLabel(), orderDatePickerField.getGbc_dateLabel());
 		this.add(orderDatePickerField.getDatePickerImpl(), orderDatePickerField.getGbc_date());
 
 		// << Button "Felder leeren" >>
-		clearAllBtn = new Pattern_GridBagButton(" Felder zurücksetzen ", 1, 6, 2, filtCPActContr);
+		clearAllBtn = new PGridBagButtonPattern(" Felder zurücksetzen ", 1, 6, 2, filtCPActContr);
 		clearAllBtn.getGbc_button().insets = new Insets(20, 0, 0, 0);
 		pathIconReload = "/deleteIcon/del_white.png";
 		iconReload = new ImageIcon(getClass().getResource(pathIconReload)).getImage();

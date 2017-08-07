@@ -3,17 +3,17 @@ package de.gokv.client.taskviewer.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import de.gokv.client.taskviewer.view.Template_TaskList;
+import de.gokv.client.taskviewer.view.TTaskListTemplate;
 
-public class TaskListPanel_ActionContr extends Abstract_MyFrame_Controller implements ActionListener {
+public class TaskListPanelActionContr extends AbstractMyFrameController implements ActionListener {
 
 	public int valEnt;
 	public String valEntMsg = "";
 	public int invalEnt;
 	public String invalEntMsg = "";
-	private Template_TaskList taskMask;
+	private TTaskListTemplate taskMask;
 	
-	public TaskListPanel_ActionContr() {
+	public TaskListPanelActionContr() {
 		super();
 		taskMask = frame.taskMask;
 	}

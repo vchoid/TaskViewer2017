@@ -3,18 +3,18 @@ package de.gokv.client.taskviewer.controller;
 import de.gokv.client.taskviewer.Criteria;
 import de.gokv.client.taskviewer.exceptions.InvalidDateException;
 import de.gokv.client.taskviewer.utils.DateUtil;
-import de.gokv.client.taskviewer.view.Frame_ExceptionDialog;
-import de.gokv.client.taskviewer.view.Template_FilterCriteriaPanel;
-import de.gokv.client.taskviewer.view.Template_InfoCSVPanel;
-import de.gokv.client.taskviewer.view.Template_InfoTaskPanel;
+import de.gokv.client.taskviewer.view.FExceptionDialogFrame;
+import de.gokv.client.taskviewer.view.TFilterCriteriaPanelTemplate;
+import de.gokv.client.taskviewer.view.TInfoCSVPanelTemplate;
+import de.gokv.client.taskviewer.view.TInfoTaskPanelTemplate;
 
-public class Abstract_FilterCriteria_Controller extends Abstract_MyFrame_Controller {
+public class AbstractFilterCriteriaController extends AbstractMyFrameController {
 
-	private Template_FilterCriteriaPanel criteriaTemplate;
-	private Template_InfoCSVPanel infoCSVTemplate;
-	private Template_InfoTaskPanel infoTaskTemplate;
+	private TFilterCriteriaPanelTemplate criteriaTemplate;
+	private TInfoCSVPanelTemplate infoCSVTemplate;
+	private TInfoTaskPanelTemplate infoTaskTemplate;
 
-	public Abstract_FilterCriteria_Controller() {
+	public AbstractFilterCriteriaController() {
 		super();
 		criteriaTemplate = frame.filterMask;
 		infoCSVTemplate = frame.infoCSV;

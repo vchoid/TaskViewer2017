@@ -10,34 +10,34 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import de.gokv.client.taskviewer.CSVReader;
-import de.gokv.client.taskviewer.controller.FrameTaskViewer_Controller;
+import de.gokv.client.taskviewer.controller.FrameTaskViewerController;
 import de.gokv.client.taskviewer.utils.HexaToRGB;
 
 /**
  * @author Christoph Kiank
  *
  */
-public class Frame_TaskViewer extends JFrame {
+public class FTaskViewerFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	// Content Panel ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	private JPanel contPanel;
-	private FrameTaskViewer_Controller controller;
+	private FrameTaskViewerController controller;
 	// Filter Panel ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	public Template_FilterCriteriaPanel filterMask;
+	public TFilterCriteriaPanelTemplate filterMask;
 	// Task Panel ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	public Template_TaskList taskMask;
+	public TTaskListTemplate taskMask;
 	// CSV Info Panel ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	public Template_InfoCSVPanel infoCSV;
+	public TInfoCSVPanelTemplate infoCSV;
 	// Task Info Panel ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	public Template_InfoTaskPanel infoTask;
+	public TInfoTaskPanelTemplate infoTask;
 
 	// Style ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	private String pathAppIcon;
 	private Color colorPanContBG;
 
-	public Frame_TaskViewer() {
-		controller = new FrameTaskViewer_Controller(this);
+	public FTaskViewerFrame() {
+		controller = new FrameTaskViewerController(this);
 		pathAppIcon = "/appIcon/taskViewer.png";
 		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(pathAppIcon)));
 		setTitle("bitGo_KV-TaskViewer");
@@ -60,10 +60,10 @@ public class Frame_TaskViewer extends JFrame {
 		getContentPane().setBackground(colorPanContBG);
 
 		// Dummy Objekte ------------------------------------
-		filterMask = new Template_FilterCriteriaPanel(controller);
-		taskMask = new Template_TaskList(controller);
-		infoCSV = new Template_InfoCSVPanel(controller);
-		infoTask = new Template_InfoTaskPanel(controller);
+		filterMask = new TFilterCriteriaPanelTemplate(controller);
+		taskMask = new TTaskListTemplate(controller);
+		infoCSV = new TInfoCSVPanelTemplate(controller);
+		infoTask = new TInfoTaskPanelTemplate(controller);
 
 		// Initialisierung ----------------------------------
 		filterMask.init();
@@ -86,7 +86,7 @@ public class Frame_TaskViewer extends JFrame {
 		}
 //		 Fehler in CSV Dateien
 		if(controller.getModel().countInvalidTasks > 0){
-			Frame_CSVExceptionDialog.showErrorMessageDialog(CSVReader.getAbstrExc(), controller.getModel().countInvalidTasks);
+			FCSVExceptionDialogFrame.showErrorMessageDialog(CSVReader.getAbstrExc(), controller.getModel().countInvalidTasks);
 		}
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -96,7 +96,7 @@ public class Frame_TaskViewer extends JFrame {
 		setVisible(true);
 	}
 
-	public FrameTaskViewer_Controller getController() {
+	public FrameTaskViewerController getController() {
 		return controller;
 	}
 

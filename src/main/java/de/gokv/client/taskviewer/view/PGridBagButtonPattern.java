@@ -11,7 +11,7 @@ import javax.swing.border.Border;
 
 import de.gokv.client.taskviewer.utils.HexaToRGB;
 
-public class Pattern_GridBagButton extends JButton{
+public class PGridBagButtonPattern extends JButton{
 
 	private static final long serialVersionUID = 1L;
 	private final Font fontTxt = new Font("Arial", Font.PLAIN, 15);
@@ -25,7 +25,7 @@ public class Pattern_GridBagButton extends JButton{
 	private GridBagConstraints gbc_button;
 	
 	
-	public Pattern_GridBagButton(String text, int startPosCol, int startPosRow, int gridWidth, ActionListener listener) {
+	public PGridBagButtonPattern(String text, int startPosCol, int startPosRow, int gridWidth, ActionListener listener) {
 		button = new JButton(text);
 		button.setBorder(btnBorder);
 		button.setBackground(colorBtnBG);

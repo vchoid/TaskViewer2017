@@ -11,17 +11,17 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
-import de.gokv.client.taskviewer.controller.FrameTaskViewer_Controller;
-import de.gokv.client.taskviewer.controller.TaskListPanel_ActionContr;
-import de.gokv.client.taskviewer.controller.TaskListPanel_ActionContr_ListSelectContr;
-import de.gokv.client.taskviewer.controller.TaskListPanel_KeyContr;
+import de.gokv.client.taskviewer.controller.FrameTaskViewerController;
+import de.gokv.client.taskviewer.controller.TaskListPanelActionContr;
+import de.gokv.client.taskviewer.controller.TaskListPanelActionContrListSelectContr;
+import de.gokv.client.taskviewer.controller.TaskListPanelKeyContr;
 import de.gokv.client.taskviewer.exceptions.ClientConfigurationExeception;
 
-public class Template_TaskList extends Template_BlockPanel {
+public class TTaskListTemplate extends TBlockPanelTemplate {
 	private static final long serialVersionUID = 1L;
 
-	public Pattern_GridBagButton taskLoadBtn;
-	public Pattern_GridBagButton reloadBtn;
+	public PGridBagButtonPattern taskLoadBtn;
+	public PGridBagButtonPattern reloadBtn;
 
 	public JList<String> taskList;
 	public JTextField anzTasks;
@@ -30,7 +30,7 @@ public class Template_TaskList extends Template_BlockPanel {
 	private String pathIconReload;
 	private ImageIcon iconReloadScaled;
 
-	protected Template_TaskList(FrameTaskViewer_Controller controller) {
+	protected TTaskListTemplate(FrameTaskViewerController controller) {
 		super("Tasks", controller);
 	}
 
@@ -44,14 +44,14 @@ public class Template_TaskList extends Template_BlockPanel {
 
 	@Override
 	public void init() {
-		TaskListPanel_ActionContr taskPanelContr = new TaskListPanel_ActionContr();
-		TaskListPanel_ActionContr_ListSelectContr taskListSelcContr = null;
-		TaskListPanel_KeyContr taskListKeyContr = null;
+		TaskListPanelActionContr taskPanelContr = new TaskListPanelActionContr();
+		TaskListPanelActionContrListSelectContr taskListSelcContr = null;
+		TaskListPanelKeyContr taskListKeyContr = null;
 		try {
-			taskListSelcContr = new TaskListPanel_ActionContr_ListSelectContr();
-			taskListKeyContr = new TaskListPanel_KeyContr();
+			taskListSelcContr = new TaskListPanelActionContrListSelectContr();
+			taskListKeyContr = new TaskListPanelKeyContr();
 		} catch (ClientConfigurationExeception e) {
-			Frame_ExceptionDialog.showException(e);
+			FExceptionDialogFrame.showException(e);
 		}
 
 		// << Task-Liste >>
@@ -71,7 +71,7 @@ public class Template_TaskList extends Template_BlockPanel {
 		this.add(scrollTask, gbc_scrollTask);
 
 		// << Tasks laden - Button >>
-		taskLoadBtn = new Pattern_GridBagButton(" Task laden ", 1,3,1, taskListSelcContr);
+		taskLoadBtn = new PGridBagButtonPattern(" Task laden ", 1,3,1, taskListSelcContr);
 		taskLoadBtn.getGbc_button().insets = new Insets(20, 0, 0, 5);
 		pathIconReload = "/reloadIcon/reload_white.png";
 		iconReload = new ImageIcon(getClass().getResource(pathIconReload)).getImage();
@@ -80,7 +80,7 @@ public class Template_TaskList extends Template_BlockPanel {
 		this.add(taskLoadBtn.getButton(), taskLoadBtn.getGbc_button());
 		
 		// << Tasksliste Neu Laden - Button >>
-		reloadBtn = new Pattern_GridBagButton(" Liste neu laden  ", 2, 3, 1, taskPanelContr);
+		reloadBtn = new PGridBagButtonPattern(" Liste neu laden  ", 2, 3, 1, taskPanelContr);
 		reloadBtn.getGbc_button().insets = new Insets(20, 10, 0, 0);
 		pathIconReload = "/downloadIcon/download_white.png";
 		iconReload = new ImageIcon(getClass().getResource(pathIconReload)).getImage();

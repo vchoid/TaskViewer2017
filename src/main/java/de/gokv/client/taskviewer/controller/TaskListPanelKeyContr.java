@@ -4,11 +4,11 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import de.gokv.client.taskviewer.exceptions.ClientConfigurationExeception;
-import de.gokv.client.taskviewer.view.Frame_ExceptionDialog;
+import de.gokv.client.taskviewer.view.FExceptionDialogFrame;
 
-public class TaskListPanel_KeyContr extends Abstract_TaskListPanel_Controller implements KeyListener{
+public class TaskListPanelKeyContr extends AbstractTaskListPanelController implements KeyListener{
 
-	public TaskListPanel_KeyContr() throws ClientConfigurationExeception {
+	public TaskListPanelKeyContr() throws ClientConfigurationExeception {
 		super();
 	}
 
@@ -18,7 +18,7 @@ public class TaskListPanel_KeyContr extends Abstract_TaskListPanel_Controller im
 			try {
 				loadTaskDetails();
 			} catch (ClientConfigurationExeception e1) {
-				Frame_ExceptionDialog.showException(e1);
+				FExceptionDialogFrame.showException(e1);
 			}
 		}
 	}

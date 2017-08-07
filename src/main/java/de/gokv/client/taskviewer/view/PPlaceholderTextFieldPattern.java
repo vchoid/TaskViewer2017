@@ -11,9 +11,9 @@ import javax.swing.BorderFactory;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 
-import de.gokv.client.taskviewer.controller.FilterCriteriaPanel_ActionContr;
-import de.gokv.client.taskviewer.controller.FilterCriteriaPanel_KeyContr;
-import de.gokv.client.taskviewer.controller.FilterCriteriaPanel_MouseContr;
+import de.gokv.client.taskviewer.controller.FilterCriteriaPanelActionContr;
+import de.gokv.client.taskviewer.controller.FilterCriteriaPanelKeyContr;
+import de.gokv.client.taskviewer.controller.FilterCriteriaPanelMouseContr;
 import de.gokv.client.taskviewer.utils.HexaToRGB;
 
 /**
@@ -21,7 +21,7 @@ import de.gokv.client.taskviewer.utils.HexaToRGB;
  * @author Christoph Kiank
  *
  */
-public class Pattern_PlaceholderTextField extends JTextField {
+public class PPlaceholderTextFieldPattern extends JTextField {
 
 	 
 	private static final long serialVersionUID = 1L;
@@ -30,9 +30,9 @@ public class Pattern_PlaceholderTextField extends JTextField {
 	private static final Font FONT_TEXT = new Font("Arial", Font.PLAIN, 15);
 	private final Border emptyBorder = BorderFactory.createEmptyBorder();
 	
-	private static FilterCriteriaPanel_ActionContr filtTaskContr = new FilterCriteriaPanel_ActionContr();
-	private static FilterCriteriaPanel_KeyContr filtTaskKeyContr = new FilterCriteriaPanel_KeyContr();
-	private static FilterCriteriaPanel_MouseContr filtTaskMouseContr = new FilterCriteriaPanel_MouseContr();
+	private static FilterCriteriaPanelActionContr filtTaskContr = new FilterCriteriaPanelActionContr();
+	private static FilterCriteriaPanelKeyContr filtTaskKeyContr = new FilterCriteriaPanelKeyContr();
+	private static FilterCriteriaPanelMouseContr filtTaskMouseContr = new FilterCriteriaPanelMouseContr();
 	
 	
 	private Graphics2D g;
@@ -40,10 +40,10 @@ public class Pattern_PlaceholderTextField extends JTextField {
 	private int textWidth;
 	private GridBagConstraints gbc_placeholder;
 
-	public Pattern_PlaceholderTextField() {
+	public PPlaceholderTextFieldPattern() {
 	}
 
-	public Pattern_PlaceholderTextField(String placeholderText, int textWidth, int startPosColumn, int startPosRow, int gridWidth) {
+	public PPlaceholderTextFieldPattern(String placeholderText, int textWidth, int startPosColumn, int startPosRow, int gridWidth) {
 		this.placeholderText = placeholderText;
 		this.textWidth = textWidth;
 		this.setBorder(emptyBorder);

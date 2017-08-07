@@ -7,7 +7,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.border.Border;
 
-public class Pattern_Button extends JButton{
+public class PButtonPattern extends JButton{
 	
 	private static final long serialVersionUID = 1L;
 	private final Font fontTxt = new Font("Arial", Font.BOLD, 12);
@@ -17,7 +17,7 @@ public class Pattern_Button extends JButton{
 	private final Color colorBtnTxt = Color.DARK_GRAY;
 
 	
-	public Pattern_Button(String title) {
+	public PButtonPattern(String title) {
 		setText(title);
 		setForeground(colorBtnTxt);
 		setBackground(colorBtnBG);

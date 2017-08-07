@@ -14,16 +14,16 @@ import de.gokv.client.taskviewer.module.http.proxy.ProxyAuthentication;
 import de.gokv.client.taskviewer.module.http.ssl.ClientCertificateException;
 import de.gokv.client.taskviewer.module.http.ssl.ServerException;
 import de.gokv.client.taskviewer.utils.DateUtil;
-import de.gokv.client.taskviewer.view.Template_InfoCSVPanel;
-import de.gokv.client.taskviewer.view.Template_InfoTaskPanel;
-import de.gokv.client.taskviewer.view.Template_TaskList;
+import de.gokv.client.taskviewer.view.TInfoCSVPanelTemplate;
+import de.gokv.client.taskviewer.view.TInfoTaskPanelTemplate;
+import de.gokv.client.taskviewer.view.TTaskListTemplate;
 
-public class Abstract_TaskListPanel_Controller extends Abstract_MyFrame_Controller {
+public class AbstractTaskListPanelController extends AbstractMyFrameController {
 	protected static HTTPSClient client;
 	protected String taskID;
-	protected final Template_TaskList taskMask;
-	protected final Template_InfoCSVPanel infoCSV;
-	protected final Template_InfoTaskPanel infoTask;
+	protected final TTaskListTemplate taskMask;
+	protected final TInfoCSVPanelTemplate infoCSV;
+	protected final TInfoTaskPanelTemplate infoTask;
 	
 	private LoadProperties loadProps;
 	protected static final String FILE_PROPS = "http.properties";
@@ -32,11 +32,11 @@ public class Abstract_TaskListPanel_Controller extends Abstract_MyFrame_Controll
 	protected final String valProps;
 	public String errMsg;
 
-	public Abstract_TaskListPanel_Controller() throws ClientConfigurationExeception {
+	public AbstractTaskListPanelController() throws ClientConfigurationExeception {
 		super();
 		loadProps = new LoadProperties(FILE_PROPS, TITLE_OF_VAL_PROPS);
 		valProps = loadProps.getPropertyStringVal();
-		InputStream stream = Abstract_TaskListPanel_Controller.class.getResourceAsStream("/proxyconfig.properties");
+		InputStream stream = AbstractTaskListPanelController.class.getResourceAsStream("/proxyconfig.properties");
 		if(stream != null){
 			try {
 				Properties properties = new Properties();
