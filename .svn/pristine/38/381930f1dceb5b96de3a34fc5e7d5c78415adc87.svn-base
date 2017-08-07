@@ -1,0 +1,67 @@
+package de.gokv.client.taskviewer.module.http;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.text.DateFormat;
+import java.text.FieldPosition;
+import java.text.ParsePosition;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.TimeZone;
+
+import javax.xml.bind.DatatypeConverter;
+
+import net.sf.json.JSONObject;
+
+public class JSONEntityUtil {
+
+	private static final TimeZone GMT = TimeZone.getTimeZone("GMT");
+
+	private static final ThreadLocal<DateFormat> FMT_TIMESTAMP_ISO = new ThreadLocal<DateFormat>() {
+		@Override
+		protected DateFormat initialValue() {
+			final DateFormat df = new DateFormat() {
+				private static final long serialVersionUID = 1L;
+
+				@Override
+				public Date parse(String str, ParsePosition pos) {
+					Calendar cal;
+					try {
+						cal = DatatypeConverter.parseDateTime(str);
+						if (cal == null)
+							return null;
+					} catch (IllegalArgumentException e) {
+						return null;
+					}
+
+					pos.setIndex(str.length());
+					return cal.getTime();
+				}
+
+				@Override
+				public StringBuffer format(Date date, StringBuffer toAppendTo, FieldPosition pos) {
+					Calendar cal = new GregorianCalendar();
+					cal.setTime(date);
+					cal.setTimeZone(GMT);
+					toAppendTo.append(DatatypeConverter.printDateTime(cal));
+					return toAppendTo;
+				}
+			};
+			return df;
+		}
+	};
+
+	public static DateFormat getISOTimestampFormat() {
+		return FMT_TIMESTAMP_ISO.get();
+	}
+
+	public static URI getLink(URI apiEntryPoint, JSONObject obj, String rel) {
+		try {
+			return apiEntryPoint.resolve(new URI(obj.getJSONObject("_links").getJSONObject(rel).getString("href")));
+		} catch (URISyntaxException e) {
+			throw new IllegalArgumentException(
+					String.format("href for link relation %s is not a proper URI in entity %s", rel, obj), e);
+		}
+	}
+}
