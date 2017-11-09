@@ -74,7 +74,6 @@
 			<artifactId>httpclient</artifactId>
 			<version>4.5.3</version>
 		</dependency>
-
 		<dependency>
 			<groupId>net.sf.json-lib</groupId>
 			<artifactId>json-lib</artifactId>
@@ -92,5 +91,12 @@
 			<artifactId>swingbits</artifactId>
 			<version>1.2.1</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.felix/maven-bundle-plugin -->
+		<dependency>
+			<groupId>org.apache.felix</groupId>
+			<artifactId>maven-bundle-plugin</artifactId>
+			<version>3.3.0</version>
+		</dependency>
+
 	</dependencies>
 </project>

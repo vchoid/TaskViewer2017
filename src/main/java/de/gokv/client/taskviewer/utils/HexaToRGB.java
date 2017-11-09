@@ -41,7 +41,7 @@ public class HexaToRGB {
 	private static final String HEX_PATTERN = "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$";
 
 	// Konstruktor
-	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+	// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 	/**
 	 * Verlangt ein Parameter, als String, den Titel aus der .properties-Datei.
 	 * 
@@ -59,7 +59,7 @@ public class HexaToRGB {
 	 * Variable ab. Wenn der Wert falsch oder leer (null) ist, werden die
 	 * default Einstellungen geladen zu den jeweiligen Wert. Ist ein Wert
 	 * vorhanden, wird dieser mittels eines Pattern auf eine korrekte Form
-	 * überprüft und wird anschließen mit einen true zurückgegeben.
+	 * überprüft und anschließen mit einen true zurückgegeben.
 	 * 
 	 * @return boolean
 	 */

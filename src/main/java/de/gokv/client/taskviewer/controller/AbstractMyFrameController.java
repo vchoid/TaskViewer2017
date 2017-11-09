@@ -1,6 +1,5 @@
 package de.gokv.client.taskviewer.controller;
 
-import de.gokv.client.taskviewer.CSVReader;
 import de.gokv.client.taskviewer.model.MyModel;
 import de.gokv.client.taskviewer.view.FTaskViewerFrame;
 

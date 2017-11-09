@@ -98,9 +98,9 @@ public class TTaskListTemplate extends TBlockPanelTemplate {
 		GridBagConstraints gbc_anzTask = new GridBagConstraints();
 		gbc_anzTask.anchor = GridBagConstraints.NORTH;
 		gbc_anzTask.fill = GridBagConstraints.HORIZONTAL;
-		gbc_anzTask.insets = new Insets(5, 10, 0, 0);
+		gbc_anzTask.insets = new Insets(5, 0, 0, 0);
 		gbc_anzTask.gridwidth = 2;
-		gbc_anzTask.gridx = 2;
+		gbc_anzTask.gridx = 1;
 		gbc_anzTask.gridy = 4;
 		this.add(anzTasks, gbc_anzTask);
 	}

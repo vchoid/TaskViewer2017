@@ -130,13 +130,11 @@ public class CSVReader {
 				}
 			}
 		} catch (FileNotFoundException e) {
-			TaskDialogs.showException(e);
-//			throw new ClientException(e, "Fehler beim Laden der Datei", "Datei " + filePath + " wurde nicht gefunden",
-//					1);
+			throw new ClientException(e, "Fehler beim Laden der Datei", "Datei " + filePath + " wurde nicht gefunden",
+					1);
 
 		} catch (IOException e) {
-			TaskDialogs.showException(e);
-//			throw new ClientException(e, "Ein/Ausgabe Fehler", "Es ist ein Fehler beim Lesen der Datei aufgetreten", 2);
+			throw new ClientException(e, "Ein/Ausgabe Fehler", "Es ist ein Fehler beim Lesen der Datei aufgetreten", 2);
 
 		} finally {
 			try {

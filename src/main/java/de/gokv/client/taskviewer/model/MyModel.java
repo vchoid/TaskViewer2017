@@ -5,9 +5,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.oxbow.swingbits.dialog.task.TaskDialogs;
+
 import de.gokv.client.taskviewer.CSVReader;
 import de.gokv.client.taskviewer.Criteria;
 import de.gokv.client.taskviewer.Task;
+import de.gokv.client.taskviewer.exceptions.ClientException;
 
 /**
  * 
@@ -44,13 +47,17 @@ public class MyModel {
 		File folder = new File(System.getProperty("user.dir") + "/orders");
 		folder.mkdirs();
 		countValidTasks = 0;
-		for (File file : folder.listFiles()) {
-			reader = new CSVReader(file.getAbsolutePath());
-			reader.readCSVFile();
-			tasks.addAll(reader.getValidEntries());
-			countValidTasks += reader.getValidEntries().size();
-			countInvalidTasks += reader.getInvalidEntries().size();
-			
+		try {
+			for (File file : folder.listFiles()) {
+				reader = new CSVReader(file.getAbsolutePath());
+				reader.readCSVFile();
+				tasks.addAll(reader.getValidEntries());
+				countValidTasks += reader.getValidEntries().size();
+				countInvalidTasks += reader.getInvalidEntries().size();
+				
+			}
+		} catch (ClientException e) {
+			TaskDialogs.showException(e);
 		}
 	}
 	public void reload(){

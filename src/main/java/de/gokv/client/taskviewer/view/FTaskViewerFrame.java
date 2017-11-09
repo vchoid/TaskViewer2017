@@ -86,7 +86,7 @@ public class FTaskViewerFrame extends JFrame {
 		}
 //		 Fehler in CSV Dateien
 		if(controller.getModel().countInvalidTasks > 0){
-			FCSVExceptionDialogFrame.showErrorMessageDialog(CSVReader.getAbstrExc(), controller.getModel().countInvalidTasks);
+			FcsvExceptionDialogFrame.showErrorMessageDialog(CSVReader.getAbstrExc(), controller.getModel().countInvalidTasks);
 		}
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);

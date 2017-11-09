@@ -36,7 +36,7 @@ import net.miginfocom.swing.MigLayout;
  * @author Christoph Kiank
  *
  */
-public class FCSVExceptionDialogFrame extends JDialog {
+public class FcsvExceptionDialogFrame extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	public static JPanel contentPane;
@@ -68,12 +68,12 @@ public class FCSVExceptionDialogFrame extends JDialog {
 	public static List<String> abstrExc;
 	public static int invalidEntries;
 	private static String filePath;
-	public static FCSVExceptionDialogFrame fExMsg;
+	public static FcsvExceptionDialogFrame fExMsg;
 
 	/**
 	 * Das Absturzprogramm Icon wird hier geladen.
 	 */
-	public FCSVExceptionDialogFrame() {
+	public FcsvExceptionDialogFrame() {
 		pathAppIcon = "/appIcon/taskViewerError.png";
 		setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource(pathAppIcon)));
 	}
@@ -85,9 +85,9 @@ public class FCSVExceptionDialogFrame extends JDialog {
 	 */
 	public static void showErrorMessageDialog(List<String> abstrExc, int invalidEntries) {
 		errorCode = 300;
-		fExMsg = new FCSVExceptionDialogFrame();
-		FCSVExceptionDialogFrame.invalidEntries = invalidEntries;
-		FCSVExceptionDialogFrame.abstrExc = abstrExc;
+		fExMsg = new FcsvExceptionDialogFrame();
+		FcsvExceptionDialogFrame.invalidEntries = invalidEntries;
+		FcsvExceptionDialogFrame.abstrExc = abstrExc;
 		BorderLayout bLayoutCONTENT = new BorderLayout();
 		MigLayout mlayoutTOP = new MigLayout("", "[][grow][]", "[]");
 		MigLayout mlayoutMIDDLE = new MigLayout("", "[][grow][]", "[]");
