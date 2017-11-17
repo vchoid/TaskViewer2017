@@ -167,14 +167,14 @@ public class TestCSVReader {
 	 */
 	@Test(expected = ClientException.class)
 	public void testCSVReaderWrongFileException() {
-		String wrongfile_wrongPath = System.getProperty("user.dir")
+		String wrongFileWrongPath = System.getProperty("user.dir")
 				+ "/falscher/test/Pfad/falsche_famv_direct_input_monitoring_20170515131131.csv";
-		reader = new CSVReader(wrongfile_wrongPath);
+		reader = new CSVReader(wrongFileWrongPath);
 		try {
 			reader.readCSVFile();
 		} catch (ClientException e) {
 			System.out.println(e);
-			Assert.assertEquals("Datei " + wrongfile_wrongPath + " wurde nicht gefunden",
+			Assert.assertEquals("Datei " + wrongFileWrongPath + " wurde nicht gefunden",
 					e.getMessage());
 			Assert.assertTrue(e.getCause() instanceof FileNotFoundException);
 			throw e;

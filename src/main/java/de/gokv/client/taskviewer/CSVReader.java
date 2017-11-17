@@ -134,7 +134,7 @@ public class CSVReader {
 					1);
 
 		} catch (IOException e) {
-			throw new ClientException(e, "Ein/Ausgabe Fehler", "Es ist ein Fehler beim Lesen der Datei aufgetreten", 2);
+			throw new ClientException(e, "Ein/Ausgabe Fehler", " Es ist ein Fehler beim Lesen der Datei aufgetreten", 2);
 
 		} finally {
 			try {
@@ -143,7 +143,7 @@ public class CSVReader {
 				if (csvFileParser != null)
 					csvFileParser.close();
 			} catch (IOException e) {
-				throw new ClientException(e, "Ein/Ausgabe Fehler", "Es ist ein Fehler beim Lesen der Datei aufgetreten",
+				throw new ClientException(e, "Ein/Ausgabe Fehler", " Es ist ein Fehler beim Lesen der Datei aufgetreten",
 						2);
 			}
 		}
