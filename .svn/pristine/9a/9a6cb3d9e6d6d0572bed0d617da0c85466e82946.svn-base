@@ -1,0 +1,30 @@
+package de.gokv.client.taskviewer.controller;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import de.gokv.client.taskviewer.view.TFilterCriteriaPanelTemplate;
+
+public class FilterCriteriaPanelActionContr extends AbstractFilterCriteriaController implements ActionListener {
+
+	
+	
+	public FilterCriteriaPanelActionContr() {
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		TFilterCriteriaPanelTemplate criteria = frame.filterMask;
+		 if (e.getSource() == criteria.clearAllBtn.getButton()) {
+			frame.repaint();
+			resetForm();
+			setFilteredTask();
+
+		}
+		setFilteredTask();
+		frame.filterMask.anzFiltEntriesTf.setText(null);
+		frame.repaint();
+
+	}
+}
