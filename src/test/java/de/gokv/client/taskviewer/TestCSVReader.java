@@ -75,7 +75,7 @@ import de.gokv.client.taskviewer.exceptions.InvalidCSVRecordException;
  * 
  * 
  * @author Christoph Kiank
- * @version 0.9.9
+ * @version 1.0.0
  *
  */
 public class TestCSVReader {
