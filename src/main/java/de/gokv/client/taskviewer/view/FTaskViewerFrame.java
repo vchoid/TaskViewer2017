@@ -45,7 +45,7 @@ public class FTaskViewerFrame extends JFrame {
 		// Properties
 		// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 		// Fenstergröße------------------
-		setSize(new Dimension(918, 728));
+		setSize(new Dimension(926, 736));
 		// Farben
 		// ----------------------------------------------------------------------
 		colorPanContBG = new HexaToRGB("color.panel.content.background").parseHexToRGB();

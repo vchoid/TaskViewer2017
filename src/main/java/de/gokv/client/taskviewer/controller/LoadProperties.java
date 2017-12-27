@@ -23,7 +23,7 @@ public class LoadProperties {
 	public LoadProperties(String propFileName, String propTitle) {
 		this.propTitle = propTitle;
 		try {
-			file = new File("C:/java/workspaces/BitgoKV/gokv-client-task-viewer/src/main/resources/" + propFileName);
+			file = new File(System.getProperty("user.dir") + "/src/main/resources/" + propFileName);
 			bis = new BufferedInputStream(new FileInputStream(file));
 		} catch (FileNotFoundException e) {
 			throw new ClientException(e, "Fehler beim Laden der Datei", "Der Wert mit der Bezeichung '" + propTitle
